@@ -51,26 +51,7 @@ struct MeetSplitView: View {
                     }
     
                 }
+            }
         }
     }
-}
-
-
-
-//ScrollView {
-//    VStack(alignment: .leading, spacing: 3) {
-//        Text(meetSplit.result.meetName)
-//            .foregroundColor(.primary)
-//            .font(.headline)
-//        HStack(spacing: 3) {
-//            Label(meetSplit.result.time, systemImage: "figure.run")
-//            Label(meetSplit.splits.mileOne, systemImage: "figure.run")
-//            Label(meetSplit.splits.mileTwo, systemImage: "figure.run")
-//            Label(meetSplit.splits.mileThree, systemImage: "figure.run")
-//            Label(meetSplit.splits.average, systemImage: "figure.run")
-//        }
-//        .foregroundColor(.secondary)
-//        .font(.subheadline)
-//    }
-//}
 }

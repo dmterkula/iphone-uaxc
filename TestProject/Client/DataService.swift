@@ -142,4 +142,48 @@ class DataService {
     }
     
     
+    func fetchMeetSumary(meetName: String, year: String, resultsPerCategory: String, completition: @escaping (Result<MeetSummaryResponse, Error>) -> Void) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "http"
+        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.path = "/xc/meetSummary"
+        
+        let runnerQueryItem = URLQueryItem(name: "filter.meet", value: meetName)
+        let seasonQueryItem = URLQueryItem(name: "season", value: year)
+        let pageQueryItem = URLQueryItem(name: "page.size", value: resultsPerCategory)
+        componentUrl.queryItems = [runnerQueryItem, seasonQueryItem, pageQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                //let json = try JSONSerialization.jsonObject(with: validData, options: [])
+                let meetSummaryResponse = try JSONDecoder().decode(MeetSummaryResponse.self, from: validData)
+                print(meetSummaryResponse)
+                completition(.success(meetSummaryResponse))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+        
+        
+    }
+    
 }

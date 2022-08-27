@@ -30,6 +30,13 @@
 		689734EF28B84BB600744B2E /* GetMeetSplitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689734EE28B84BB600744B2E /* GetMeetSplitsView.swift */; };
 		689734F128B84C7800744B2E /* MeetSplitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689734F028B84C7800744B2E /* MeetSplitView.swift */; };
 		689734F328B8CDE600744B2E /* MeetSplitsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689734F228B8CDE600744B2E /* MeetSplitsList.swift */; };
+		689734F628BA5B3F00744B2E /* ImprovedUpon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689734F528BA5B3F00744B2E /* ImprovedUpon.swift */; };
+		689734F928BA5EDB00744B2E /* MeetSumaryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689734F828BA5EDB00744B2E /* MeetSumaryResponse.swift */; };
+		689734FB28BA5F2800744B2E /* PRsCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689734FA28BA5F2800744B2E /* PRsCount.swift */; };
+		689734FE28BA60F400744B2E /* GetMeetSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689734FD28BA60F400744B2E /* GetMeetSummaryView.swift */; };
+		6897350028BA632D00744B2E /* MeetSummaryPRsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689734FF28BA632D00744B2E /* MeetSummaryPRsList.swift */; };
+		6897350228BA63EA00744B2E /* MeetSummaryPRsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6897350128BA63EA00744B2E /* MeetSummaryPRsView.swift */; };
+		6897350428BA64A900744B2E /* PRViewWithImprovement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6897350328BA64A900744B2E /* PRViewWithImprovement.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +65,13 @@
 		689734EE28B84BB600744B2E /* GetMeetSplitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMeetSplitsView.swift; sourceTree = "<group>"; };
 		689734F028B84C7800744B2E /* MeetSplitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetSplitView.swift; sourceTree = "<group>"; };
 		689734F228B8CDE600744B2E /* MeetSplitsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetSplitsList.swift; sourceTree = "<group>"; };
+		689734F528BA5B3F00744B2E /* ImprovedUpon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImprovedUpon.swift; sourceTree = "<group>"; };
+		689734F828BA5EDB00744B2E /* MeetSumaryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetSumaryResponse.swift; sourceTree = "<group>"; };
+		689734FA28BA5F2800744B2E /* PRsCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRsCount.swift; sourceTree = "<group>"; };
+		689734FD28BA60F400744B2E /* GetMeetSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMeetSummaryView.swift; sourceTree = "<group>"; };
+		689734FF28BA632D00744B2E /* MeetSummaryPRsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetSummaryPRsList.swift; sourceTree = "<group>"; };
+		6897350128BA63EA00744B2E /* MeetSummaryPRsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetSummaryPRsView.swift; sourceTree = "<group>"; };
+		6897350328BA64A900744B2E /* PRViewWithImprovement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRViewWithImprovement.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +126,7 @@
 		6895852B28B7FE5300AA4209 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				689734FC28BA60E100744B2E /* MeetSummaryView */,
 				689734ED28B84BA100744B2E /* MeetSplitsView */,
 				689734DD28B8071E00744B2E /* MeetResults */,
 				6895852D28B7FE7F00AA4209 /* PRs */,
@@ -141,6 +156,8 @@
 		6895852E28B7FE9D00AA4209 /* DTOs */ = {
 			isa = PBXGroup;
 			children = (
+				689734F728BA5EC400744B2E /* MeetSummary */,
+				689734F428BA5B2C00744B2E /* ImprovedUpon */,
 				689734E628B8490900744B2E /* MeetSplits */,
 				6895853128B7FFDA00AA4209 /* MeetPerformance */,
 				6895853028B7FFCB00AA4209 /* PRs */,
@@ -204,6 +221,34 @@
 				689734F228B8CDE600744B2E /* MeetSplitsList.swift */,
 			);
 			path = MeetSplitsView;
+			sourceTree = "<group>";
+		};
+		689734F428BA5B2C00744B2E /* ImprovedUpon */ = {
+			isa = PBXGroup;
+			children = (
+				689734F528BA5B3F00744B2E /* ImprovedUpon.swift */,
+			);
+			path = ImprovedUpon;
+			sourceTree = "<group>";
+		};
+		689734F728BA5EC400744B2E /* MeetSummary */ = {
+			isa = PBXGroup;
+			children = (
+				689734F828BA5EDB00744B2E /* MeetSumaryResponse.swift */,
+				689734FA28BA5F2800744B2E /* PRsCount.swift */,
+			);
+			path = MeetSummary;
+			sourceTree = "<group>";
+		};
+		689734FC28BA60E100744B2E /* MeetSummaryView */ = {
+			isa = PBXGroup;
+			children = (
+				689734FD28BA60F400744B2E /* GetMeetSummaryView.swift */,
+				689734FF28BA632D00744B2E /* MeetSummaryPRsList.swift */,
+				6897350128BA63EA00744B2E /* MeetSummaryPRsView.swift */,
+				6897350328BA64A900744B2E /* PRViewWithImprovement.swift */,
+			);
+			path = MeetSummaryView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,11 +322,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				689734F128B84C7800744B2E /* MeetSplitView.swift in Sources */,
+				6897350428BA64A900744B2E /* PRViewWithImprovement.swift in Sources */,
 				689734DF28B8073E00744B2E /* GetMeetResultsView.swift in Sources */,
 				689734E328B8400300744B2E /* MeetPerformanceList.swift in Sources */,
 				689734E828B8492000744B2E /* MeetSplitsForRunnerResponse.swift in Sources */,
 				682BF4F128B79EBD00A72AE1 /* MeetResult.swift in Sources */,
+				689734FE28BA60F400744B2E /* GetMeetSummaryView.swift in Sources */,
 				689734EC28B84A8B00744B2E /* Splits.swift in Sources */,
+				6897350028BA632D00744B2E /* MeetSummaryPRsList.swift in Sources */,
+				6897350228BA63EA00744B2E /* MeetSummaryPRsView.swift in Sources */,
 				688B77FE28B5A1C2008B90F3 /* DataService.swift in Sources */,
 				684C5EAF28A90B66000C0271 /* ContentView.swift in Sources */,
 				684C5EAD28A90B66000C0271 /* TestProjectApp.swift in Sources */,
@@ -289,6 +338,7 @@
 				682BF4EF28B79EA200A72AE1 /* Performance.swift in Sources */,
 				682BF4ED28B79E7100A72AE1 /* PRDTO.swift in Sources */,
 				6895853328B7FFFA00AA4209 /* MeetPerformanceResponse.swift in Sources */,
+				689734F628BA5B3F00744B2E /* ImprovedUpon.swift in Sources */,
 				689734E128B83F7E00744B2E /* MeetPerformance.swift in Sources */,
 				6895852628B7C6D000AA4209 /* PRList.swift in Sources */,
 				689734EF28B84BB600744B2E /* GetMeetSplitsView.swift in Sources */,
@@ -296,7 +346,9 @@
 				682BF4F328B79ED300A72AE1 /* Runner.swift in Sources */,
 				689734F328B8CDE600744B2E /* MeetSplitsList.swift in Sources */,
 				6895852A28B7F70700AA4209 /* GetPRsView.swift in Sources */,
+				689734F928BA5EDB00744B2E /* MeetSumaryResponse.swift in Sources */,
 				689734EA28B84A0800744B2E /* MeetSplit.swift in Sources */,
+				689734FB28BA5F2800744B2E /* PRsCount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
