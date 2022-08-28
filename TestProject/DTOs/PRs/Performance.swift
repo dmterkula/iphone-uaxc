@@ -11,12 +11,12 @@ struct Performance: Codable, Identifiable {
     var id = UUID().uuidString
     let result: [MeetResult]
     let runner: Runner
-    var improvedUpon: ImprovedUpon
+    var improvedUpon: ImprovedUpon?
     
     private enum CodingKeys: String, CodingKey {
-            case result = "pr"
+            case result
             case runner
-            case improvedUpon = "improvedUpon"
+            case improvedUpon
         }
     
 }

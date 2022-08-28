@@ -24,9 +24,11 @@ struct GetPRsView: View {
                     .keyboardType(.default)
             }
             .padding(.top, 20)
+            .onTapGesture {
+                hideKeyboard()
+            }
             
-            PRList(prs: prList)
-            
+            Spacer().frame(minHeight: 20, maxHeight: 30)
             
             Button("Get PRs") {
                
@@ -45,7 +47,8 @@ struct GetPRsView: View {
                 
             }
             
-            Spacer()
+            PerformanceList(performances: prList)
+            
         }
     }
 }

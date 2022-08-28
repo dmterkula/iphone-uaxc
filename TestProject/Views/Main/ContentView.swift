@@ -44,7 +44,7 @@ struct ContentView: View {
             GetMeetSummaryView()
                 .tabItem {
                     Image(systemName: "5.circle.fill")
-                    Text("5th Tab")
+                    Text("Meet Summary")
                 }
         }
         

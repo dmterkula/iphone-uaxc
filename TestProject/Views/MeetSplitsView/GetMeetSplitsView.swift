@@ -25,6 +25,9 @@ struct GetMeetSplitsView: View {
                     .keyboardType(.alphabet)
             }
             .padding(.top, 20)
+            .onTapGesture {
+                hideKeyboard()
+            }
             
             HStack {
                 Text("Season: ")
@@ -32,8 +35,11 @@ struct GetMeetSplitsView: View {
                     .keyboardType(.default)
             }
             .padding(.top, 20)
+            .onTapGesture {
+                hideKeyboard()
+            }
             
-            MeetSplitsList(meetSplits: meetSplits)
+            Spacer().frame(minHeight: 20, maxHeight: 30)
             
             Button("Get MeetSplits") {
                
@@ -52,7 +58,7 @@ struct GetMeetSplitsView: View {
                 
             }
             
-            Spacer()
+            MeetSplitsList(meetSplits: meetSplits)
         }
     }
 }
