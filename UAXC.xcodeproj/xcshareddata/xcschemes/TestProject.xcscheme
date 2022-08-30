@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "684C5EA828A90B66000C0271"
-               BuildableName = "TestProject.app"
+               BuildableName = "UAXC.app"
                BlueprintName = "UAXC"
                ReferencedContainer = "container:UAXC.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "684C5EA828A90B66000C0271"
-            BuildableName = "TestProject.app"
+            BuildableName = "UAXC.app"
             BlueprintName = "UAXC"
             ReferencedContainer = "container:UAXC.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "684C5EA828A90B66000C0271"
-            BuildableName = "TestProject.app"
+            BuildableName = "UAXC.app"
             BlueprintName = "UAXC"
             ReferencedContainer = "container:UAXC.xcodeproj">
          </BuildableReference>

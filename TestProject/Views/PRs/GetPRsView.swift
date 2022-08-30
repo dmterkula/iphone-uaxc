@@ -11,6 +11,7 @@ struct GetPRsView: View {
     
     @State var lastIncludedGradClass = ""
     @State var prList: [Performance] = []
+    @State var filter = ""
     
     var body: some View {
         VStack {
@@ -19,7 +20,7 @@ struct GetPRsView: View {
                 .foregroundColor(Color.blue)
             
             HStack {
-                Text("Runners Before Grad Class: ")
+                Text("Oldest grad class included: ")
                 TextField("2022", text: $lastIncludedGradClass)
                     .keyboardType(.default)
             }
@@ -28,12 +29,22 @@ struct GetPRsView: View {
                 hideKeyboard()
             }
             
+            HStack {
+                Text("Filter by name: ")
+                TextField("Maria", text: $filter)
+                    .keyboardType(.default)
+            }
+            
             Spacer().frame(minHeight: 20, maxHeight: 30)
+            
+            
             
             Button("Get PRs") {
                
                 let dataService = DataService()
-                dataService.fetchPRs(lastIncludedGradClass: lastIncludedGradClass) { (result) in
+                let intValue = Int(lastIncludedGradClass)! - 1
+                let test = String(intValue)
+                dataService.fetchPRs(lastIncludedGradClass: test) { (result) in
                     DispatchQueue.main.async {
                         switch result {
                         case .success(let prDTO):
@@ -47,7 +58,7 @@ struct GetPRsView: View {
                 
             }
             
-            PerformanceList(performances: prList)
+            PerformanceList(performances: prList, filter: $filter)
             
         }
     }
