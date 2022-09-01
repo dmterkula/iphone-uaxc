@@ -225,8 +225,49 @@ class DataService {
             }
             
         }.resume()
+    }
+    
+    func fetchMeetResultsByRunnerName(runnerName: String, startSeason: String, endSeason: String, completition: @escaping (Result<MeetResultsForRunnerResponse, Error>) -> Void) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "http"
+        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.path = "/xc/getMeetResultByName"
         
+        let runnerQueryItem = URLQueryItem(name: "filter.runner", value: runnerName)
+        let startSeasonQueryItem = URLQueryItem(name: "filter.startSeason", value: startSeason)
+        let endSeasonQueryItem = URLQueryItem(name: "filter.endSeason", value: endSeason)
+    
+        componentUrl.queryItems = [runnerQueryItem, startSeasonQueryItem, endSeasonQueryItem]
         
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                //let json = try JSONSerialization.jsonObject(with: validData, options: [])
+                let runnerProfileResponse = try JSONDecoder().decode(MeetResultsForRunnerResponse.self, from: validData)
+                print(runnerProfileResponse)
+                completition(.success(runnerProfileResponse))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
     }
     
 }

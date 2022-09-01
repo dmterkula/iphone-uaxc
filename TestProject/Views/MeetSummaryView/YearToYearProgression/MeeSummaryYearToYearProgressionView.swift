@@ -25,6 +25,8 @@ struct MeetSummaryYearToYearProgressionView: View {
                 
                 CustomDivider(color: .white, height: 2)
                 
+            } else {
+                Text("No Results Found").foregroundColor(.white)
             }
             
             ForEach(combinedList) { i in

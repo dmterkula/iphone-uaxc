@@ -30,6 +30,8 @@ struct GetMeetSplitsView: View {
                                 Text("Joanie").foregroundColor(.white)
                         }
                         .opacity(0.75)
+                        .foregroundColor(.white)
+                    
                 }
                 .padding(.top, 20)
                 .onTapGesture {
@@ -45,6 +47,7 @@ struct GetMeetSplitsView: View {
                                 Text("2022").foregroundColor(.white)
                         }
                         .opacity(0.75)
+                        .foregroundColor(.white)
                 }
                 .padding(.top, 20)
                 .onTapGesture {

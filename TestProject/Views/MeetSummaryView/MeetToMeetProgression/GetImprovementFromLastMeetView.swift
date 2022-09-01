@@ -19,7 +19,7 @@ struct GetImprovementFromLastMeetView: View {
         let slowerProgression = comparisonLastMeet?.slower ?? MeetToMeetProgressions(count: 0, improvementRateDTOs: [])
         
         if (averageDifference == "0:00.0" && medianDifference == "0:00.0") {
-            Text("No previous meet found within given sesaon")
+            Text("No previous meet found within given sesaon").foregroundColor(.white)
         } else {
             VStack(alignment: .center, spacing: 5) {
                 HStack(spacing: 3) {
