@@ -12,17 +12,19 @@ struct MeetSummaryPRsView: View {
     var prsCount: PRsCount
     
     var body: some View {
+
         VStack {
             
-            Text("PRs")
-                .font(.system(size: 36))
-                .foregroundColor(.blue)
+            Text("Count: " + String(prsCount.count))
+                .foregroundColor(.white)
             
-            Text("PR Count: " + String(prsCount.count))
+            ForEach(prsCount.PRs) { i in
+                PerformanceViewWithImprovement(performance: i)
+                CustomDivider(color: .white, height: 2)
+            }
             
-            MeetSummaryPerformanceList(performances: prsCount.PRs)
-            
-    }
+        }
+
 }
 
 //struct MeetSummaryPRsView_Previews: PreviewProvider {

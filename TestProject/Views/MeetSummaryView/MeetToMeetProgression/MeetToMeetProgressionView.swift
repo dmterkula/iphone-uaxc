@@ -13,11 +13,12 @@ struct MeetToMeetProgressionView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 3) {
+            VStack(alignment: .center, spacing: 3) {
                 Text(improvementRateDTO.runner.name)
-                    .foregroundColor(.primary)
+                    .foregroundColor(Color(red: 249/255, green: 229/255, blue: 0/255))
                     .font(.headline)
-                Label(improvementRateDTO.delta, systemImage: "figure.run" )
+                Text(improvementRateDTO.delta)
+                    .foregroundColor(.white)
                 
                 .foregroundColor(.secondary)
                 .font(.subheadline)

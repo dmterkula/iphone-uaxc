@@ -14,12 +14,17 @@ struct MeetYearToYearProgressionList: View {
     
     var body: some View {
         Text("Faster than same meet last year: " + String(fasterProgressions.count))
+            .foregroundColor(.white)
         
         Text("Slower than same meet last year: " + String(slowerProgressions.count))
+            .foregroundColor(.white)
         
-        List {
-            ForEach(fasterProgressions + slowerProgressions) { progression in
-                ProgressionView(progression: progression)
+        if (!(fasterProgressions + slowerProgressions).isEmpty) {
+            List {
+                ForEach(fasterProgressions + slowerProgressions) { progression in
+                    ProgressionView(progression: progression)
+                    CustomDivider(color: .white, height: 2)
+                }
             }
         }
     }

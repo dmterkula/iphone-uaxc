@@ -14,51 +14,67 @@ struct GetMeetSplitsView: View {
     @State var meetSplits: [MeetSplit] = []
     
     var body: some View {
-        VStack {
-            Text("UAXC Meet Splits")
-                .font(.largeTitle)
-                .foregroundColor(Color.blue)
-            
-            HStack {
-                Text("Runner Name: ")
-                TextField("Joanie", text: $runnerName)
-                    .keyboardType(.alphabet)
-            }
-            .padding(.top, 20)
-            .onTapGesture {
-                hideKeyboard()
-            }
-            
-            HStack {
-                Text("Season: ")
-                TextField("2021", text: $season)
-                    .keyboardType(.default)
-            }
-            .padding(.top, 20)
-            .onTapGesture {
-                hideKeyboard()
-            }
-            
-            Spacer().frame(minHeight: 20, maxHeight: 30)
-            
-            Button("Get MeetSplits") {
-               
-                let dataService = DataService()
-                dataService.fetchMeetSplitsForRunner(runnerName: runnerName, year: season) { (result) in
-                    DispatchQueue.main.async {
-                        switch result {
-                        case .success(let meetSplitsResponse):
-                            meetSplits = meetSplitsResponse.splits
-                            case .failure(let error):
-                                print(error)
+        ZStack {
+            Background().edgesIgnoringSafeArea(.all)
+            VStack {
+                Text("UAXC Meet Splits")
+                    .font(.largeTitle)
+                    .foregroundColor(Color.white)
+                
+                HStack {
+                    Text("Runner Name: ")
+                        .foregroundColor(.white)
+                    TextField("Joanie", text: $runnerName)
+                        .keyboardType(.alphabet)
+                        .placeholder(when: $runnerName.wrappedValue.isEmpty) {
+                                Text("Joanie").foregroundColor(.white)
                         }
+                        .opacity(0.75)
+                }
+                .padding(.top, 20)
+                .onTapGesture {
+                    hideKeyboard()
+                }
+                
+                HStack {
+                    Text("Season: ")
+                        .foregroundColor(.white)
+                    TextField("2022", text: $season)
+                        .keyboardType(.default)
+                        .placeholder(when: $season.wrappedValue.isEmpty) {
+                                Text("2022").foregroundColor(.white)
+                        }
+                        .opacity(0.75)
+                }
+                .padding(.top, 20)
+                .onTapGesture {
+                    hideKeyboard()
+                }
+                
+                Spacer().frame(minHeight: 20, maxHeight: 30)
+                
+                Button("Get MeetSplits") {
+                   
+                    let dataService = DataService()
+                    dataService.fetchMeetSplitsForRunner(runnerName: runnerName, year: season) { (result) in
+                        DispatchQueue.main.async {
+                            switch result {
+                            case .success(let meetSplitsResponse):
+                                meetSplits = meetSplitsResponse.splits
+                                case .failure(let error):
+                                    print(error)
+                            }
+                        }
+                        
                     }
                     
+                }.foregroundColor(.white)
+                
+                if (!meetSplits.isEmpty) {
+                    MeetSplitsList(meetSplits: meetSplits)
                 }
                 
             }
-            
-            MeetSplitsList(meetSplits: meetSplits)
         }
     }
 }
