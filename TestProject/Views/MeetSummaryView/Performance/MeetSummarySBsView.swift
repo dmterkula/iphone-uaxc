@@ -14,13 +14,13 @@ struct MeetSummarySBsView: View {
     var body: some View {
         VStack {
             
-            Text("Season Bests")
-                .font(.system(size: 36))
-                .foregroundColor(.blue)
+            Text("Count: " + String(sbsCount.count))
+                .foregroundColor(.white)
             
-            Text("SB Count: " + String(sbsCount.count))
-            
-            MeetSummaryPerformanceList(performances: sbsCount.seasonBests)
+            ForEach(sbsCount.seasonBests) { i in
+                PerformanceViewWithImprovement(performance: i)
+                CustomDivider(color: .white, height: 2)
+            }
         }
     }
 }

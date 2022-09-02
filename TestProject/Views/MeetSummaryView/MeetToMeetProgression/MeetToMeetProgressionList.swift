@@ -22,34 +22,42 @@ struct MeetToMeetProgressionList: View {
             VStack(alignment: .center, spacing: 5) {
                 HStack(spacing: 3) {
                     Text("Average Difference: ")
+                        .foregroundColor(.white)
                     Text(averageDifference)
+                        .foregroundColor(.white)
                 }
                 
                 HStack(spacing: 3) {
                     Text("Median Difference: ")
+                        .foregroundColor(.white)
                     Text(medianDifference)
+                        .foregroundColor(.white)
                 }
                 
                 HStack(spacing: 3) {
                     Text("Faster Count: ")
+                        .foregroundColor(.white)
                     Text(String(fasterProgressions.count))
+                        .foregroundColor(.white)
                 }
                 
                 HStack(spacing: 3) {
                     Text("Slower Count: ")
+                        .foregroundColor(.white)
                     Text(String(slowerProgression.count))
+                        .foregroundColor(.white)
                 }
                 
-                List {
-                    ForEach(fasterProgressions.improvementRateDTOs + slowerProgression.improvementRateDTOs) { improvementRateDTO in
-                        MeetToMeetProgressionView(improvementRateDTO: improvementRateDTO)
+                if (!(fasterProgressions.improvementRateDTOs + slowerProgression.improvementRateDTOs).isEmpty) {
+                    List {
+                        ForEach(fasterProgressions.improvementRateDTOs + slowerProgression.improvementRateDTOs) { improvementRateDTO in
+                            MeetToMeetProgressionView(improvementRateDTO: improvementRateDTO)
+                        }
                     }
                 }
                 
             }
         }
-        
-        
     }
 }
 

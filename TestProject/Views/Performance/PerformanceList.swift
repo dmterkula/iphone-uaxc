@@ -26,6 +26,8 @@ struct PerformanceList: View {
             ForEach(filteredPerformances) { perf in
                 PerformanceView(perf: perf)
             }
+        }.onTapGesture {
+            hideKeyboard()
         }
     }
 }

@@ -17,27 +17,30 @@ struct ProgressionView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 3) {
                 Text(progression.runner.name)
-                    .foregroundColor(.primary)
+                    .foregroundColor(Color(red: 249/255, green: 229/255, blue: 0/255))
                     .font(.headline)
                 
                 VStack(alignment: .leading) {
                     HStack(spacing: 3) {
                         Text("This Years Time:")
                             .bold()
-                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                            .foregroundColor(Color.white)
                         Text(progression.meetResults[0].time)
+                            .foregroundColor(.white)
                     }
                     HStack(spacing: 3) {
                         Text("Previous Years Time:")
                             .bold()
-                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                            .foregroundColor(Color.white)
                         Text(progression.meetResults[1].time)
+                            .foregroundColor(.white)
                     }
                     HStack(spacing: 3) {
                         Text("Difference:")
                             .bold()
-                            .foregroundColor(colorScheme == .dark ? Color.white : Color.black)
+                            .foregroundColor(Color.white)
                         Text(progression.progressions[0])
+                            .foregroundColor(.white)
                     }
                 }
                 

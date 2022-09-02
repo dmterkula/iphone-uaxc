@@ -11,14 +11,28 @@ struct MeetSummaryYearToYearProgressionView: View {
     var progressionData: ProgressionData?
     
     var body: some View {
-        VStack {
-            
-            Text("Results Compared to Last Year")
-                .font(.system(size: 36))
-                .foregroundColor(.blue)
         
-            MeetYearToYearProgressionList(fasterProgressions: progressionData?.fasterProgressions.results ?? [], slowerProgressions: progressionData?.slowerProgressions.results ?? [])
+        VStack {
+            let combinedList = progressionData?.fasterProgressions.results ?? [] + (progressionData?.slowerProgressions.results ?? [])
             
+            if (!combinedList.isEmpty) {
+               
+                Text("Faster than same meet last year: " + String((progressionData?.fasterProgressions.results.count)!))
+                    .foregroundColor(.white)
+                
+                Text("Slower than same meet last year: " + String((progressionData?.slowerProgressions.results.count)!))
+                    .foregroundColor(.white)
+                
+                CustomDivider(color: .white, height: 2)
+                
+            } else {
+                Text("No Results Found").foregroundColor(.white)
+            }
+            
+            ForEach(combinedList) { i in
+                ProgressionView(progression: i)
+                CustomDivider(color: .white, height: 2)
+            }
         }
     }
 }

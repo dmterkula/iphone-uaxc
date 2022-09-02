@@ -11,10 +11,12 @@ struct MeetSummaryPerformanceList: View {
     var performances: [Performance]
     
     var body: some View {
-        List {
-            ForEach(performances) { pr in
-                PerformanceViewWithImprovement(performance: pr)
-            }
+        if (!performances.isEmpty) {
+            List {
+                ForEach(performances) { pr in
+                    PerformanceViewWithImprovement(performance: pr)
+                }
+            }.listStyle(SidebarListStyle())
         }
     }
 }

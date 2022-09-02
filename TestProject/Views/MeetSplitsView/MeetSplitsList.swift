@@ -16,6 +16,8 @@ struct MeetSplitsList: View {
             ForEach(meetSplits) { split in
                 MeetSplitView(meetSplit: split)
             }
+        }.onTapGesture {
+            hideKeyboard()
         }
     }
 }
