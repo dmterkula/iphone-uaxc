@@ -145,6 +145,8 @@ struct MainMenuView: View {
     @Binding var showMenu: Bool
     @State var runnerDisclosureIsExpanded: Bool = false
     @State var meetDisclosureIsExpanded: Bool = false
+    @State var timeTrialDisclosureIsExpanded: Bool = false
+    
     @State private var viewSelection: String? = nil
     
     var body: some View {
@@ -152,22 +154,6 @@ struct MainMenuView: View {
         ScrollView {
             VStack(alignment: .leading) {
                 
-    //            TabButton(title: "PRs", image: "person")
-    //                .padding(.top, 120)
-    //
-    //            TabButton(title: "Meet Results", image: "person.3")
-    //                .padding(.top, 30)
-    //
-    //
-    //
-    //
-    //            TabButton(title: "Meet Summary", image: "book")
-    //                .padding(.top, 30)
-    //
-    //            TabButton(title: "Home", image: "house")
-    //                .padding(.top, 30)
-                    
-                    
                 DisclosureGroup(isExpanded: $runnerDisclosureIsExpanded) {
                         
                     VStack {
@@ -186,17 +172,18 @@ struct MainMenuView: View {
                 } label: {
                     Text("Runner Stats")
                     .onTapGesture {
-                    withAnimation {
-                        self.runnerDisclosureIsExpanded.toggle()
+                        withAnimation {
+                            self.runnerDisclosureIsExpanded.toggle()
+                            }
+                        }
                     }
-                }
-            }.accentColor(.white)
-                    .font(.title3)
-                    .padding(.all)
-                    .background(Color(red: 4/255, green: 130/255, blue: 0/255))
-                    .cornerRadius(8)
-                    .padding(.top, 200)
-                
+                .accentColor(.white)
+                .font(.title3)
+                .padding(.all)
+                .background(Color(red: 4/255, green: 130/255, blue: 0/255))
+                .cornerRadius(8)
+                .padding(.top, 200)
+            
                 DisclosureGroup(isExpanded: $meetDisclosureIsExpanded) {
                         
                     VStack {
@@ -215,18 +202,38 @@ struct MainMenuView: View {
                 } label: {
                     Text("Meet Stats")
                     .onTapGesture {
-                    withAnimation {
-                        self.meetDisclosureIsExpanded.toggle()
+                        withAnimation {
+                            self.meetDisclosureIsExpanded.toggle()
+                            }
+                        }
                     }
+                .accentColor(.white)
+                .font(.title3)
+                .padding(.all)
+                .background(Color(red: 4/255, green: 130/255, blue: 0/255))
+                .cornerRadius(8)
+                .padding(.top)
                 
-                }
-            }
-            .accentColor(.white)
-            .font(.title3)
-            .padding(.all)
-            .background(Color(red: 4/255, green: 130/255, blue: 0/255))
-            .cornerRadius(8)
-            .padding(.top)
+                DisclosureGroup(isExpanded: $timeTrialDisclosureIsExpanded) {
+                        
+                    VStack {
+                        TabButton(title: "Time Trial Results", image: "stopwatch")
+                            .padding(.top, 30)
+                        
+                    }
+                } label: {
+                    Text("Time Trial Stats")
+                    .onTapGesture {
+                        withAnimation {
+                            self.timeTrialDisclosureIsExpanded.toggle()
+                            }
+                        }
+                    }.accentColor(.white)
+                    .font(.title3)
+                    .padding(.all)
+                    .background(Color(red: 4/255, green: 130/255, blue: 0/255))
+                    .cornerRadius(8)
+                    .padding(.top)
                 
                 
                 Spacer()
@@ -238,6 +245,22 @@ struct MainMenuView: View {
             .background(Color(red: 107/255, green: 107/255, blue: 107/255))
             .edgesIgnoringSafeArea(.all)
 
+        
+        //            TabButton(title: "PRs", image: "person")
+        //                .padding(.top, 120)
+        //
+        //            TabButton(title: "Meet Results", image: "person.3")
+        //                .padding(.top, 30)
+        //
+        //
+        //
+        //
+        //            TabButton(title: "Meet Summary", image: "book")
+        //                .padding(.top, 30)
+        //
+        //            TabButton(title: "Home", image: "house")
+        //                .padding(.top, 30)
+                        
         
     }
     
@@ -257,6 +280,9 @@ struct MainMenuView: View {
                 GetRunnerProfileView()
             } else if (title == "Historical Meet Comparisons") {
                 GetHistoricalMeetComparisonView()
+            }
+            else if (title == "Time Trial Results") {
+                TimeTrialResultsView()
             }
             else {
                 HomePageView(showMenu: $showMenu)
