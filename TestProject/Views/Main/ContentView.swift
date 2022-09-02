@@ -156,7 +156,7 @@ struct MainMenuView: View {
                 
                 DisclosureGroup(isExpanded: $runnerDisclosureIsExpanded) {
                         
-                    VStack {
+                    VStack(alignment: .leading) {
                         TabButton(title: "PRs", image: "stopwatch")
                             .padding(.top, 30)
                         
@@ -186,7 +186,7 @@ struct MainMenuView: View {
             
                 DisclosureGroup(isExpanded: $meetDisclosureIsExpanded) {
                         
-                    VStack {
+                    VStack(alignment: .leading) {
                         TabButton(title: "Meet Results", image: "stopwatch")
                             .padding(.top, 30)
                         
@@ -216,7 +216,7 @@ struct MainMenuView: View {
                 
                 DisclosureGroup(isExpanded: $timeTrialDisclosureIsExpanded) {
                         
-                    VStack {
+                    VStack(alignment: .leading) {
                         TabButton(title: "Time Trial Results", image: "stopwatch")
                             .padding(.top, 30)
                         
