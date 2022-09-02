@@ -72,11 +72,14 @@ struct GetPRsView: View {
                         
                     }
                     
-                }.foregroundColor(.white)
+                }.foregroundColor(Color(red: 249/255, green: 229/255, blue: 0/255))
+                    .font(.title2)
                 
                 if (!prList.isEmpty) {
                     PerformanceList(performances: prList, filter: $filter)
                 }
+                
+                Spacer().frame(minHeight: 20, maxHeight: 450)
                 
             }
         }

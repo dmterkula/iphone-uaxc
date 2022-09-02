@@ -69,12 +69,15 @@ struct TimeTrialResultsView: View{
                     }
                     
                 }.foregroundColor(Color(red: 249/255, green: 229/255, blue: 0/255))
+                    .font(.title2)
                 
                 if (timeTrialResultsDTOs != nil && !timeTrialResultsDTOs!.isEmpty) {
                     List {
                         ForEach(timeTrialResultsDTOs!) { result in
                             TimeTrialDTOView(timeTrialDTO: result)
                         }
+                    }.onTapGesture {
+                        hideKeyboard()
                     }
                 }
                 

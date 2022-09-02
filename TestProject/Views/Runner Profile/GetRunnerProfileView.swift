@@ -72,7 +72,7 @@ struct GetRunnerProfileView: View {
                     }
                     .onTapGesture {
                         hideKeyboard()
-                    }.foregroundColor(.white)
+                    }.foregroundColor(Color(red: 249/255, green: 229/255, blue: 0/255))
                         .font(.title2)
                         .padding(.bottom,40.0)
                     
