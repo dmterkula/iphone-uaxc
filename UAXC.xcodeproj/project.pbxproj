@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		682255F428C17F160080B935 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682255F328C17F160080B935 /* LoadingView.swift */; };
+		682255F728C180BB0080B935 /* AggregateStatsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682255F628C180BB0080B935 /* AggregateStatsResponse.swift */; };
+		682255F928C181540080B935 /* AggregatePRStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682255F828C181540080B935 /* AggregatePRStats.swift */; };
+		682255FC28C1884D0080B935 /* AggregateStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682255FB28C1884D0080B935 /* AggregateStatsView.swift */; };
+		682255FE28C188E30080B935 /* Statistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682255FD28C188E30080B935 /* Statistic.swift */; };
+		6822560128C245470080B935 /* HistoricalMeetComparisonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6822560028C245470080B935 /* HistoricalMeetComparisonResponse.swift */; };
+		6822560428C2474C0080B935 /* GetHistoricalMeetComparisonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6822560328C2474C0080B935 /* GetHistoricalMeetComparisonView.swift */; };
 		682BF4ED28B79E7100A72AE1 /* PRDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682BF4EC28B79E7100A72AE1 /* PRDTO.swift */; };
 		682BF4EF28B79EA200A72AE1 /* Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682BF4EE28B79EA200A72AE1 /* Performance.swift */; };
 		682BF4F128B79EBD00A72AE1 /* MeetResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682BF4F028B79EBC00A72AE1 /* MeetResult.swift */; };
@@ -79,6 +86,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		682255F328C17F160080B935 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		682255F628C180BB0080B935 /* AggregateStatsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AggregateStatsResponse.swift; sourceTree = "<group>"; };
+		682255F828C181540080B935 /* AggregatePRStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AggregatePRStats.swift; sourceTree = "<group>"; };
+		682255FB28C1884D0080B935 /* AggregateStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AggregateStatsView.swift; sourceTree = "<group>"; };
+		682255FD28C188E30080B935 /* Statistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistic.swift; sourceTree = "<group>"; };
+		6822560028C245470080B935 /* HistoricalMeetComparisonResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricalMeetComparisonResponse.swift; sourceTree = "<group>"; };
+		6822560328C2474C0080B935 /* GetHistoricalMeetComparisonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHistoricalMeetComparisonView.swift; sourceTree = "<group>"; };
 		682BF4EC28B79E7100A72AE1 /* PRDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRDTO.swift; sourceTree = "<group>"; };
 		682BF4EE28B79EA200A72AE1 /* Performance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Performance.swift; sourceTree = "<group>"; };
 		682BF4F028B79EBC00A72AE1 /* MeetResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetResult.swift; sourceTree = "<group>"; };
@@ -163,6 +177,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		682255F228C17F070080B935 /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				682255F328C17F160080B935 /* LoadingView.swift */,
+			);
+			path = Loading;
+			sourceTree = "<group>";
+		};
+		682255F528C180A10080B935 /* AggregateStats */ = {
+			isa = PBXGroup;
+			children = (
+				682255F628C180BB0080B935 /* AggregateStatsResponse.swift */,
+				682255F828C181540080B935 /* AggregatePRStats.swift */,
+			);
+			path = AggregateStats;
+			sourceTree = "<group>";
+		};
+		682255FA28C1882F0080B935 /* AggregateStats */ = {
+			isa = PBXGroup;
+			children = (
+				682255FB28C1884D0080B935 /* AggregateStatsView.swift */,
+				682255FD28C188E30080B935 /* Statistic.swift */,
+			);
+			path = AggregateStats;
+			sourceTree = "<group>";
+		};
+		682255FF28C245020080B935 /* HistoricallyCompareMeets */ = {
+			isa = PBXGroup;
+			children = (
+				6822560028C245470080B935 /* HistoricalMeetComparisonResponse.swift */,
+			);
+			path = HistoricallyCompareMeets;
+			sourceTree = "<group>";
+		};
+		6822560228C247260080B935 /* HistoricalMeetComparison */ = {
+			isa = PBXGroup;
+			children = (
+				6822560328C2474C0080B935 /* GetHistoricalMeetComparisonView.swift */,
+			);
+			path = HistoricalMeetComparison;
+			sourceTree = "<group>";
+		};
 		684C5EA028A90B66000C0271 = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +261,9 @@
 		6895852B28B7FE5300AA4209 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6822560228C247260080B935 /* HistoricalMeetComparison */,
+				682255FA28C1882F0080B935 /* AggregateStats */,
+				682255F228C17F070080B935 /* Loading */,
 				6897355B28BFA8C300744B2E /* Dividers */,
 				6897354028BED6EA00744B2E /* Runner Profile */,
 				6897350928BA985B00744B2E /* SBs */,
@@ -237,6 +296,8 @@
 		6895852E28B7FE9D00AA4209 /* DTOs */ = {
 			isa = PBXGroup;
 			children = (
+				682255FF28C245020080B935 /* HistoricallyCompareMeets */,
+				682255F528C180A10080B935 /* AggregateStats */,
 				6897353C28BED55200744B2E /* RunnerProfile */,
 				689734F728BA5EC400744B2E /* MeetSummary */,
 				689734F428BA5B2C00744B2E /* ImprovedUpon */,
@@ -546,10 +607,12 @@
 				6897352328BBB46300744B2E /* MeetSplitSummaryView.swift in Sources */,
 				6897353B28BC00DA00744B2E /* Extension.swift in Sources */,
 				689734F128B84C7800744B2E /* MeetSplitView.swift in Sources */,
+				6822560128C245470080B935 /* HistoricalMeetComparisonResponse.swift in Sources */,
 				6897350428BA64A900744B2E /* PerformanceViewWithImprovement.swift in Sources */,
 				689734DF28B8073E00744B2E /* GetMeetResultsView.swift in Sources */,
 				689734E328B8400300744B2E /* MeetPerformanceList.swift in Sources */,
 				6897354428BEDE6900744B2E /* RunnerProfile.swift in Sources */,
+				682255F728C180BB0080B935 /* AggregateStatsResponse.swift in Sources */,
 				6897354E28BEE78F00744B2E /* RunnerProfilePR.swift in Sources */,
 				6897351928BAADA200744B2E /* ProgressionView.swift in Sources */,
 				6897352928BBE9A300744B2E /* ImprovementRateDTO.swift in Sources */,
@@ -559,10 +622,12 @@
 				682BF4F128B79EBD00A72AE1 /* MeetResult.swift in Sources */,
 				68B4C42A28C0C46E00C38553 /* RunnerMeetPerformanceDTO.swift in Sources */,
 				689734FE28BA60F400744B2E /* GetMeetSummaryView.swift in Sources */,
+				682255FE28C188E30080B935 /* Statistic.swift in Sources */,
 				6897355628BF890500744B2E /* RunnerProfileSplitsView.swift in Sources */,
 				6897352B28BBF0D500744B2E /* GetImprovementFromLastMeetView.swift in Sources */,
 				689734EC28B84A8B00744B2E /* Splits.swift in Sources */,
 				6897354628BEE03500744B2E /* RunnerProfileSeasonBestDTO.swift in Sources */,
+				682255F428C17F160080B935 /* LoadingView.swift in Sources */,
 				6897350028BA632D00744B2E /* MeetSummaryPerformanceList.swift in Sources */,
 				6897350228BA63EA00744B2E /* MeetSummaryPRsView.swift in Sources */,
 				6897353E28BED56C00744B2E /* RunnerProfileResponse.swift in Sources */,
@@ -582,10 +647,12 @@
 				6897351128BAA34100744B2E /* ProgressionData.swift in Sources */,
 				6897350F28BAA28500744B2E /* FasterProgression.swift in Sources */,
 				6895853328B7FFFA00AA4209 /* MeetPerformanceResponse.swift in Sources */,
+				682255FC28C1884D0080B935 /* AggregateStatsView.swift in Sources */,
 				6897352528BBE61000744B2E /* SummaryImprovementLastMeet.swift in Sources */,
 				6897350728BA956000744B2E /* SBsCount.swift in Sources */,
 				6897351328BAA5D600744B2E /* MeeSummaryYearToYearProgressionView.swift in Sources */,
 				6897354C28BEE50300744B2E /* ProgressionRankDTO.swift in Sources */,
+				6822560428C2474C0080B935 /* GetHistoricalMeetComparisonView.swift in Sources */,
 				689734F628BA5B3F00744B2E /* ImprovedUpon.swift in Sources */,
 				6897356328BFB2D900744B2E /* RaceConsistencyRankView.swift in Sources */,
 				689734E128B83F7E00744B2E /* MeetPerformance.swift in Sources */,
@@ -603,6 +670,7 @@
 				6897351528BAA68100744B2E /* MeetYearToYearProgressionList.swift in Sources */,
 				689734F928BA5EDB00744B2E /* MeetSumaryResponse.swift in Sources */,
 				6897352F28BBF8B400744B2E /* MeetToMeetProgressionView.swift in Sources */,
+				682255F928C181540080B935 /* AggregatePRStats.swift in Sources */,
 				689734EA28B84A0800744B2E /* MeetSplit.swift in Sources */,
 				689734FB28BA5F2800744B2E /* PRsCount.swift in Sources */,
 				6897355028BF752600744B2E /* MeetResultList.swift in Sources */,

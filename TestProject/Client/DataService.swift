@@ -270,4 +270,87 @@ class DataService {
         }.resume()
     }
     
+    func fetchAggregateStats(completition: @escaping (Result<AggregateStatsResponse, Error>) -> Void) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "http"
+        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.path = "/xc/aggregateStats"
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                //let json = try JSONSerialization.jsonObject(with: validData, options: [])
+                let aggregateStatsResponse = try JSONDecoder().decode(AggregateStatsResponse.self, from: validData)
+                print(aggregateStatsResponse)
+                completition(.success(aggregateStatsResponse))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+        
+        
+    }
+    
+    func fetchHistoricalMeetComparison(baseMeet: String, comparisonMeet: String, completition: @escaping (Result<HistoricalMeetComparisonResponse, Error>) -> Void) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "http"
+        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.path = "/xc/historicallyCompareMeets"
+        
+        let baseMeetQueryItem = URLQueryItem(name: "baseMeetName", value: baseMeet)
+        let comparisonMeetQueryItem = URLQueryItem(name: "compareMeetName", value: comparisonMeet)
+    
+        componentUrl.queryItems = [baseMeetQueryItem, comparisonMeetQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                //let json = try JSONSerialization.jsonObject(with: validData, options: [])
+                let aggregateStatsResponse = try JSONDecoder().decode(HistoricalMeetComparisonResponse.self, from: validData)
+                print(aggregateStatsResponse)
+                completition(.success(aggregateStatsResponse))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+        
+        
+    }
+    
 }

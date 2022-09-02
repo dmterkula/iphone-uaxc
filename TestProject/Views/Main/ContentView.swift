@@ -122,18 +122,23 @@ struct BaseView: View {
 struct HomePageView: View {
     
     @Binding var showMenu: Bool
+    @State var aggregateStatsResponse: AggregateStatsResponse?
     var body: some View {
         
         VStack {
             Text("UAXC Stats")
-                .font(.largeTitle)
+                .font(.system(size: 36, weight: .semibold))
                 .foregroundColor(Color.white)
+                .padding(.bottom, 50)
             
+            AggregateStatsView(aggregateStatsResponse: $aggregateStatsResponse)
             
-            Spacer().frame(minHeight:100, maxHeight: 600)
+            Spacer().frame(minHeight:50, maxHeight: 150)
         }
     }
 }
+
+
 
 struct MainMenuView: View {
     
@@ -163,7 +168,7 @@ struct MainMenuView: View {
     //                .padding(.top, 30)
                     
                     
-                DisclosureGroup("Runner Stats", isExpanded: $runnerDisclosureIsExpanded) {
+                DisclosureGroup(isExpanded: $runnerDisclosureIsExpanded) {
                         
                     VStack {
                         TabButton(title: "PRs", image: "stopwatch")
@@ -178,14 +183,21 @@ struct MainMenuView: View {
                         Spacer()
                         
                     }
-                }.accentColor(.white)
+                } label: {
+                    Text("Runner Stats")
+                    .onTapGesture {
+                    withAnimation {
+                        self.runnerDisclosureIsExpanded.toggle()
+                    }
+                }
+            }.accentColor(.white)
                     .font(.title3)
                     .padding(.all)
                     .background(Color(red: 4/255, green: 130/255, blue: 0/255))
                     .cornerRadius(8)
                     .padding(.top, 200)
                 
-                DisclosureGroup("Meet Stats", isExpanded: $meetDisclosureIsExpanded) {
+                DisclosureGroup(isExpanded: $meetDisclosureIsExpanded) {
                         
                     VStack {
                         TabButton(title: "Meet Results", image: "stopwatch")
@@ -194,18 +206,27 @@ struct MainMenuView: View {
                         TabButton(title: "Meet Summary", image: "book")
                             .padding(.top, 30)
                         
+                        TabButton(title: "Historical Meet Comparisons", image: "gearshape.2")
+                            .padding(.top, 30)
+                        
                         Spacer()
                         
                     }
-                }.accentColor(.white)
-                    .font(.title3)
-                    .padding(.all)
-                    .background(Color(red: 4/255, green: 130/255, blue: 0/255))
-                    .cornerRadius(8)
-                    .padding(.top)
+                } label: {
+                    Text("Meet Stats")
+                    .onTapGesture {
+                    withAnimation {
+                        self.meetDisclosureIsExpanded.toggle()
+                    }
                 
-                
-                
+                }
+            }
+            .accentColor(.white)
+            .font(.title3)
+            .padding(.all)
+            .background(Color(red: 4/255, green: 130/255, blue: 0/255))
+            .cornerRadius(8)
+            .padding(.top)
                 
                 
                 Spacer()
@@ -234,6 +255,8 @@ struct MainMenuView: View {
                 GetMeetSummaryView()
             } else if (title == "Runner Profile") {
                 GetRunnerProfileView()
+            } else if (title == "Historical Meet Comparisons") {
+                GetHistoricalMeetComparisonView()
             }
             else {
                 HomePageView(showMenu: $showMenu)

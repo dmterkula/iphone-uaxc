@@ -20,13 +20,17 @@ struct GetMeetSummaryView: View {
     @State var lastMeetDisclosureGroupExpanded: Bool = false
     @State var meetSplitsSummaryDisclosureGroupExpanded: Bool = false
     
-    
     var body: some View {
-        NavigationView {
             ZStack {
                 Background().edgesIgnoringSafeArea(.all)
                 ScrollView {
                 VStack {
+                    
+                    Text("Meet Summaries")
+                        .font(.largeTitle)
+                        .foregroundColor(Color.white)
+                        .padding(.bottom, 15)
+                    
                     Group {
                         HStack {
                             Text("Meet Name: ")
@@ -95,7 +99,8 @@ struct GetMeetSummaryView: View {
                         hideKeyboard()
                     }
                     .padding(.vertical).frame(width: 100.0, height: 75.0)
-                        .foregroundColor(.white)
+                    .foregroundColor(Color(red: 249/255, green: 229/255, blue: 0/255))
+                    .font(.title2)
                 
                     NavigationLink(destination: MeetSplitSummaryView(meetSplitStats: meetSummaryResponse?.meetSplitsSummaryResponse.meetSplitsStats), tag: "MeetSplitsSummary", selection: $viewSelection) { EmptyView() }
                         .onTapGesture {
@@ -108,43 +113,82 @@ struct GetMeetSummaryView: View {
 //                                viewSelection = "PRs"
 //                            }.foregroundColor(.white)
                             
-                            DisclosureGroup("PRs", isExpanded: $prDisclosureGroupExpanded) {
+                            DisclosureGroup(isExpanded: $prDisclosureGroupExpanded) {
                                  MeetSummaryPRsView(prsCount: meetSummaryResponse?.prs ?? PRsCount(count: 0, PRs: []))
+                                } label: {
+                                    Text("PRs")
+                                    .onTapGesture {
+                                    withAnimation {
+                                        self.prDisclosureGroupExpanded.toggle()
+                                    }
+                                
                                 }
+                            }
                             .background(Color(red: 107/255, green: 107/255, blue: 107/255))
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .accentColor(.white)
                             
-                            DisclosureGroup("SBs", isExpanded: $sbDisclosureGroupExpanded) {
+                            DisclosureGroup(isExpanded: $sbDisclosureGroupExpanded) {
                                 
                                 MeetSummarySBsView(sbsCount: meetSummaryResponse?.seasonBests ?? SBsCount(count: 0, seasonBests: []))
                                 
-                            }.background(Color(red: 107/255, green: 107/255, blue: 107/255))
+                            } label: {
+                                Text("SBs")
+                                .onTapGesture {
+                                withAnimation {
+                                    self.sbDisclosureGroupExpanded.toggle()
+                                }
+                            
+                            }
+                        }.background(Color(red: 107/255, green: 107/255, blue: 107/255))
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .accentColor(.white)
                            
                         
-                            DisclosureGroup("Compare to last year", isExpanded: $yearToYearDisclosureGroupExpanded) {
+                            DisclosureGroup(isExpanded: $yearToYearDisclosureGroupExpanded) {
                                 
                                 MeetSummaryYearToYearProgressionView(progressionData: meetSummaryResponse?.comparisonFromLastYear)
                                 
-                            }.background(Color(red: 107/255, green: 107/255, blue: 107/255))
+                            } label: {
+                                Text("Compare to last year")
+                                .onTapGesture {
+                                withAnimation {
+                                    self.yearToYearDisclosureGroupExpanded.toggle()
+                                }
+                            }
+                        }.background(Color(red: 107/255, green: 107/255, blue: 107/255))
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .accentColor(.white)
                             
-                            DisclosureGroup("Compare to previous meet", isExpanded: $lastMeetDisclosureGroupExpanded) {
+                            DisclosureGroup(isExpanded: $lastMeetDisclosureGroupExpanded) {
                                 
                                 GetImprovementFromLastMeetView(comparisonLastMeet: meetSummaryResponse?.comparisonLastMeet)
                                 
-                            }.background(Color(red: 107/255, green: 107/255, blue: 107/255))
+                            } label: {
+                                Text("Compare to previous meet")
+                                .onTapGesture {
+                                withAnimation {
+                                    self.lastMeetDisclosureGroupExpanded.toggle()
+                                }
+                            
+                            }
+                        }.background(Color(red: 107/255, green: 107/255, blue: 107/255))
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .accentColor(.white)
                             
-                            DisclosureGroup("Show Meet Splits Summary", isExpanded: $meetSplitsSummaryDisclosureGroupExpanded) {
+                            DisclosureGroup(isExpanded: $meetSplitsSummaryDisclosureGroupExpanded) {
                                 
                                 MeetSplitSummaryView(meetSplitStats: meetSummaryResponse?.meetSplitsSummaryResponse.meetSplitsStats)
                                 
-                            }.background(Color(red: 107/255, green: 107/255, blue: 107/255))
+                            } label: {
+                                Text("Show Meet Splits Summary")
+                                .onTapGesture {
+                                withAnimation {
+                                    self.meetSplitsSummaryDisclosureGroupExpanded.toggle()
+                                }
+                            
+                            }
+                        }.background(Color(red: 107/255, green: 107/255, blue: 107/255))
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .accentColor(.white)
                         }
@@ -152,8 +196,6 @@ struct GetMeetSummaryView: View {
                 }
             }
         }
-           
-        }.navigationTitle("Meet Summary Page")
     }
 }
 

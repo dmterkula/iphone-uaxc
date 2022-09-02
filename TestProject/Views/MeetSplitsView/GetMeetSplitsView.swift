@@ -52,9 +52,9 @@ struct GetMeetSplitsView: View {
                 .padding(.top, 20)
                 .onTapGesture {
                     hideKeyboard()
-                }
+                }.padding(.bottom, 15)
                 
-                Spacer().frame(minHeight: 20, maxHeight: 30)
+            
                 
                 Button("Get MeetSplits") {
                    
@@ -71,11 +71,14 @@ struct GetMeetSplitsView: View {
                         
                     }
                     
-                }.foregroundColor(.white)
+                }.foregroundColor(Color(red: 249/255, green: 229/255, blue: 0/255))
+                    .font(.title2)
                 
                 if (!meetSplits.isEmpty) {
                     MeetSplitsList(meetSplits: meetSplits)
                 }
+                
+                Spacer().frame(minHeight: 20, maxHeight: 500)
                 
             }
         }
