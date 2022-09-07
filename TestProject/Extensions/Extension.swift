@@ -32,6 +32,18 @@ extension View {
     }
 }
 
+//extension Array {
+// 
+//    func anySatisfy(condition: Bool) -> Bool {
+//        
+//        ForEach(self) { elem in
+//            if
+//        }
+//        
+//    }
+//    
+//}
+
 //struct Extension_Previews: PreviewProvider {
 //    static var previews: some View {
 //        Extension()

@@ -9,51 +9,46 @@ import SwiftUI
 
 struct GetMeetResultsView: View {
     
+    @State var meets: [MeetDTO] = []
     @State var season = ""
+    @State var seasons = ["Select Season"]
     @State var meetName = ""
+
     @State var performanceList: [MeetPerformance] = []
+    
+    let dataService = DataService()
+    
+    func fetchMeetNames() {
+        dataService.fetchMeetInfo() { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let meetInfoResponse):
+                    
+                    seasons = Array(Set(meetInfoResponse.meets.flatMap { $0.dates.map{$0.components(separatedBy: "-")[0]} })).sorted().reversed()
+                    
+                    meets = meetInfoResponse.meets
+                    
+                    case .failure(let error):
+                        print(error)
+                }
+            }
+        }
+    }
     
     var body: some View {
         ZStack {
             Background().edgesIgnoringSafeArea(.all)
+                .onAppear {
+                    self.fetchMeetNames()
+                }
             VStack {
                 Text("UAXC Meet Results")
                     .font(.largeTitle)
                     .foregroundColor(Color.white)
                 
-                HStack {
-                    Text("Meet Name: ")
-                        .foregroundColor(.white)
-                    TextField("Mason", text: $meetName)
-                        .keyboardType(.alphabet)
-                        .foregroundColor(.white)
-                        .placeholder(when: $meetName.wrappedValue.isEmpty) {
-                                Text("Mason").foregroundColor(.white)
-                        }
-                        .opacity(0.25)
-                }
-                .padding(.top, 20)
-                .onTapGesture {
-                    hideKeyboard()
-                }
+                SeasonAndMeetPickerView(season: $season, seasons: $seasons, meets: $meets, meetName: $meetName)
                 
-                HStack {
-                    Text("Season: ")
-                        .foregroundColor(.white)
-                    TextField("2021", text: $season)
-                        .keyboardType(.default)
-                        .foregroundColor(.white)
-                        .placeholder(when: $season.wrappedValue.isEmpty) {
-                                Text("2021").foregroundColor(.white)
-                        }
-                        .opacity(0.25)
-                }
-                .padding(.top, 20)
-                .onTapGesture {
-                    hideKeyboard()
-                }
-            
-                Spacer().frame(minHeight: 20, maxHeight: 30)
+                Spacer().frame(minHeight: 20, maxHeight: 50)
             
                 Button("Get MeetResults") {
                    
@@ -75,9 +70,9 @@ struct GetMeetResultsView: View {
                 
                 if (!performanceList.isEmpty) {
                     MeetPerformanceList(performances: performanceList)
+                } else {
+                    Spacer().frame(minHeight: 20, maxHeight: 500)
                 }
-                
-                Spacer().frame(minHeight: 20, maxHeight: 500)
                
             }
         }

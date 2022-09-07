@@ -13,7 +13,7 @@ struct MeetSummaryYearToYearProgressionView: View {
     var body: some View {
         
         VStack {
-            let combinedList = progressionData?.fasterProgressions.results ?? [] + (progressionData?.slowerProgressions.results ?? [])
+            let combinedList = (progressionData?.fasterProgressions.results ?? []) + (progressionData?.slowerProgressions.results ?? [])
             
             if (!combinedList.isEmpty) {
                

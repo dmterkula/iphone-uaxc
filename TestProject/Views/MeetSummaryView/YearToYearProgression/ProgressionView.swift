@@ -25,14 +25,14 @@ struct ProgressionView: View {
                         Text("This Years Time:")
                             .bold()
                             .foregroundColor(Color.white)
-                        Text(progression.meetResults[0].time)
+                        Text(progression.meetResults[1].time)
                             .foregroundColor(.white)
                     }
                     HStack(spacing: 3) {
                         Text("Previous Years Time:")
                             .bold()
                             .foregroundColor(Color.white)
-                        Text(progression.meetResults[1].time)
+                        Text(progression.meetResults[0].time)
                             .foregroundColor(.white)
                     }
                     HStack(spacing: 3) {

@@ -10,56 +10,89 @@ import SwiftUI
 struct GetMeetSplitsView: View {
     
     @State var season = ""
+    @State var seasons: [String] = ["Select Season"]
+    @State var runners: [Runner] = []
     @State var runnerName = ""
     @State var meetSplits: [MeetSplit] = []
+    
+    let dataService = DataService()
+    
+    func fetchSeasons() {
+        dataService.fetchMeetInfo() { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let meetInfoResponse):
+                    seasons = Array(Set(meetInfoResponse.meets.flatMap { $0.dates.map{$0.components(separatedBy: "-")[0]} })).sorted().reversed()
+                    case .failure(let error):
+                        print(error)
+                }
+            }
+        }
+    }
+    
+    func fetchRunners() {
+        
+        dataService.fetchPossibleRunners(season: season) { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let runnersResponse):
+                    runners = runnersResponse
+                    case .failure(let error):
+                        print(error)
+                }
+            }
+        }
+    }
     
     var body: some View {
         ZStack {
             Background().edgesIgnoringSafeArea(.all)
-            VStack {
+                .onAppear{
+                    self.fetchSeasons()
+                }
+            
+            VStack() {
                 Text("UAXC Meet Splits")
                     .font(.largeTitle)
                     .foregroundColor(Color.white)
                 
-                HStack {
-                    Text("Runner Name: ")
-                        .foregroundColor(.white)
-                    TextField("Joanie", text: $runnerName)
-                        .keyboardType(.alphabet)
-                        .placeholder(when: $runnerName.wrappedValue.isEmpty) {
-                                Text("Joanie").foregroundColor(.white)
-                        }
-                        .opacity(0.75)
-                        .foregroundColor(.white)
-                    
-                }
-                .padding(.top, 20)
-                .onTapGesture {
-                    hideKeyboard()
-                }
+//                HStack {
+//                    Text("Runner Name: ")
+//                        .foregroundColor(.white)
+//                    TextField("Joanie", text: $runnerName)
+//                        .keyboardType(.alphabet)
+//                        .placeholder(when: $runnerName.wrappedValue.isEmpty) {
+//                                Text("Joanie").foregroundColor(.white)
+//                        }
+//                        .opacity(0.75)
+//                        .foregroundColor(.white)
+//
+//                }
+////                .padding(.top, 20)
+//                .onTapGesture {
+//                    hideKeyboard()
+//                }
                 
                 HStack {
-                    Text("Season: ")
-                        .foregroundColor(.white)
-                    TextField("2022", text: $season)
-                        .keyboardType(.default)
-                        .placeholder(when: $season.wrappedValue.isEmpty) {
-                                Text("2022").foregroundColor(.white)
-                        }
-                        .opacity(0.75)
-                        .foregroundColor(.white)
+                    SeasonPickerView(seasons: $seasons, season: $season)
                 }
-                .padding(.top, 20)
-                .onTapGesture {
-                    hideKeyboard()
-                }.padding(.bottom, 15)
+                .onChange(of: season) { newSeason in
+                    fetchRunners()
+                }
+                .padding(.bottom, 15)
                 
-            
+                if (!season.isEmpty) {
+                    HStack {
+                        RunnerPickerView(runners: $runners, runnerLabel: $runnerName)
+                    }
+                }
+                
                 
                 Button("Get MeetSplits") {
                    
                     let dataService = DataService()
-                    dataService.fetchMeetSplitsForRunner(runnerName: runnerName, year: season) { (result) in
+                    let name = runnerName.components(separatedBy: ":")[0]
+                    dataService.fetchMeetSplitsForRunner(runnerName: name, year: season) { (result) in
                         DispatchQueue.main.async {
                             switch result {
                             case .success(let meetSplitsResponse):
@@ -76,9 +109,9 @@ struct GetMeetSplitsView: View {
                 
                 if (!meetSplits.isEmpty) {
                     MeetSplitsList(meetSplits: meetSplits)
+                } else {
+                    Spacer().frame(minHeight: 20, maxHeight: 500)
                 }
-                
-                Spacer().frame(minHeight: 20, maxHeight: 500)
                 
             }
         }

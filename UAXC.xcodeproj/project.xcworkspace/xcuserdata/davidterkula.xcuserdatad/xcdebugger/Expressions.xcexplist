@@ -3,7 +3,12 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "closure #1 in MeetSummaryPerformanceList.body.getter:MeetSummaryPerformanceList.swift">
+         contextName = "closure #1 in closure #4 in closure #1 in closure #1 in closure #1 in GetRunnerProfileView.body.getter:GetRunnerProfileView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "runnerProfileResponse?.runnerProfile.pr!">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "MeetSummaryPerformanceList.body.getter:MeetSummaryPerformanceList.swift">
@@ -20,10 +25,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #4 in closure #1 in closure #1 in closure #1 in GetRunnerProfileView.body.getter:GetRunnerProfileView.swift">
+         contextName = "closure #1 in closure #2 in closure #2 in closure #1 in GetMeetResultsView.body.getter:GetMeetResultsView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "runnerProfileResponse?.runnerProfile.pr!">
+               value = "meets.filter{$0.dates.map{$0.components(separatedBy: &quot;-&quot;)[0]}.contains(season)}">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in MeetSummaryYearToYearProgressionView.body.getter:MeeSummaryYearToYearProgressionView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "progressionData?.slowerProgressions.results">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #3 in closure #2 in closure #1 in GetMeetResultsView.body.getter:GetMeetResultsView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "meets.filter{$0.dates.map{$0.components(separatedBy: &quot;-&quot;)[0]}.contains(season)}">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -48,6 +69,9 @@
                value = "prsCount.PRs">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in MeetSummaryPerformanceList.body.getter:MeetSummaryPerformanceList.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>
