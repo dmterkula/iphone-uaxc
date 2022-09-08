@@ -11,9 +11,10 @@ struct SeasonPickerView: View {
     
     @Binding var seasons: [String]
     @Binding var season: String
+    var label: String = "Selected Season: "
     
     var body: some View {
-        Picker("Selected Season: " + season, selection: $season, content: {
+        Picker(label + season, selection: $season, content: {
             ForEach(seasons, id: \.self, content: { season in
                 Text(season).foregroundColor(.white)
             })

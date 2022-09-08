@@ -475,4 +475,47 @@ class DataService {
         }.resume()
     }
     
+    func fetchTimeTrialProgressions(season: String, adjustMeetDistance: String, completition: @escaping (Result<TimeTrialProgressionResponse, Error>) -> Void) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "http"
+        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.path = "/xc/timeTrial/progression"
+        
+        
+        let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
+        let adjustQueryItem = URLQueryItem(name: "adjustForMeetDistance", value: adjustMeetDistance)
+    
+        componentUrl.queryItems = [seasonQueryItem, adjustQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                //let json = try JSONSerialization.jsonObject(with: validData, options: [])
+                let response = try JSONDecoder().decode(TimeTrialProgressionResponse.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
 }
