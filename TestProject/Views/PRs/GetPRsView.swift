@@ -9,29 +9,38 @@ import SwiftUI
 
 struct GetPRsView: View {
     
-    @State var lastIncludedGradClass = ""
     @State var prList: [Performance] = []
     @State var filter = ""
+    @State var seasons: [String] = []
+    @State var season: String = ""
+    
+    let dataService = DataService()
+    
+    func fetchSeasons() {
+        dataService.fetchMeetInfo() { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let meetInfoResponse):
+                    seasons = Array(Set(meetInfoResponse.meets.flatMap { $0.dates.map{$0.components(separatedBy: "-")[0]} })).sorted().reversed()
+                    case .failure(let error):
+                        print(error)
+                }
+            }
+        }
+    }
     
     var body: some View {
         ZStack {
-            Background().edgesIgnoringSafeArea(.all)
+            Background().edgesIgnoringSafeArea(.all).onAppear {
+                fetchSeasons()
+            }
             VStack {
                 Text("UAXC PRs")
                     .font(.largeTitle)
                     .foregroundColor(Color.white)
                 
                 HStack {
-                    Text("Oldest grad class included: ")
-                        .foregroundColor(.white)
-                        .font(.title2)
-                    TextField("2023", text: $lastIncludedGradClass)
-                        .keyboardType(.default)
-                        .foregroundColor(.white)
-                        .placeholder(when: $lastIncludedGradClass.wrappedValue.isEmpty) {
-                                Text("2023").foregroundColor(.white)
-                        }
-                        .opacity(0.75)
+                    SeasonPickerView(seasons: $seasons, season: $season, label: "First Included Season: ")
                 }
                 .padding(.top, 20)
                 .onTapGesture {
@@ -53,33 +62,34 @@ struct GetPRsView: View {
                 
                 Spacer().frame(minHeight: 20, maxHeight: 30)
                 
-                
-                
-                Button("Get PRs") {
-                   
-                    let dataService = DataService()
-                    let intValue = Int(lastIncludedGradClass)! - 1
-                    let test = String(intValue)
-                    dataService.fetchPRs(lastIncludedGradClass: test) { (result) in
-                        DispatchQueue.main.async {
-                            switch result {
-                            case .success(let prDTO):
-                                prList = prDTO.PRs
-                                case .failure(let error):
-                                    print(error)
+                if (!season.isEmpty) {
+                    Button("Get PRs") {
+                       
+                        let dataService = DataService()
+                        let firstIncludedGradClass = String(Int(season)! + 1)
+                        dataService.fetchPRs(lastIncludedGradClass: firstIncludedGradClass) { (result) in
+                            DispatchQueue.main.async {
+                                switch result {
+                                case .success(let prDTO):
+                                    prList = prDTO.PRs
+                                    case .failure(let error):
+                                        print(error)
+                                }
                             }
+                            
                         }
                         
-                    }
-                    
-                }.foregroundColor(Color(red: 249/255, green: 229/255, blue: 0/255))
-                    .font(.title2)
+                    }.foregroundColor(Color(red: 249/255, green: 229/255, blue: 0/255))
+                        .font(.title2)
+                }
+                
+             
                 
                 if (!prList.isEmpty) {
                     PerformanceList(performances: prList, filter: $filter)
+                } else {
+                    Spacer().frame(minHeight: 20, maxHeight: 450)
                 }
-                
-                Spacer().frame(minHeight: 20, maxHeight: 450)
                 
             }
         }
