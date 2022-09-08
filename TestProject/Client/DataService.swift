@@ -354,7 +354,6 @@ class DataService {
     }
     
     
-    
     func fetchTimeTrialResults(season: String, scaleTo5k: String, completition: @escaping (Result<[TimeTrialResultsDTO], Error>) -> Void) {
         var componentUrl = URLComponents()
         componentUrl.scheme = "http"
@@ -395,8 +394,85 @@ class DataService {
             }
             
         }.resume()
+    }
+    
+    func fetchMeetInfo(completition: @escaping (Result<MeetInfoResponse, Error>) -> Void) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "http"
+        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.path = "/xc/getMeetNames"
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                //let json = try JSONSerialization.jsonObject(with: validData, options: [])
+                let response = try JSONDecoder().decode(MeetInfoResponse.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    func fetchPossibleRunners(season: String, completition: @escaping (Result<[Runner], Error>) -> Void) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "http"
+        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.path = "/xc/runners"
         
         
+        let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
+    
+        componentUrl.queryItems = [seasonQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                //let json = try JSONSerialization.jsonObject(with: validData, options: [])
+                let response = try JSONDecoder().decode([Runner].self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
     }
     
 }

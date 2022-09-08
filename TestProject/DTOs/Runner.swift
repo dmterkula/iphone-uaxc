@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct Runner: Codable {
+struct Runner: Codable, Identifiable {
+    var id = UUID()
     let name: String
     let graduatingClass: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case name, graduatingClass
+    }
 }

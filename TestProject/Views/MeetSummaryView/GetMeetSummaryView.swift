@@ -9,9 +9,11 @@ import SwiftUI
 
 struct GetMeetSummaryView: View {
     
+    @State var meets: [MeetDTO] = []
     @State var season = ""
+    @State var seasons = ["Select Season"]
     @State var meetName = ""
-    @State var resultsPerCategory = ""
+    let resultsPerCategory = "50"
     @State private var viewSelection: String? = nil
     @State var meetSummaryResponse: MeetSummaryResponse?
     @State var prDisclosureGroupExpanded: Bool = false
@@ -19,71 +21,42 @@ struct GetMeetSummaryView: View {
     @State var yearToYearDisclosureGroupExpanded: Bool = false
     @State var lastMeetDisclosureGroupExpanded: Bool = false
     @State var meetSplitsSummaryDisclosureGroupExpanded: Bool = false
+    let dataService = DataService()
+    
+    func fetchMeetNames() {
+        dataService.fetchMeetInfo() { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let meetInfoResponse):
+                    
+                    seasons = Array(Set(meetInfoResponse.meets.flatMap { $0.dates.map{$0.components(separatedBy: "-")[0]} })).sorted().reversed()
+                    
+                    meets = meetInfoResponse.meets
+                    
+                    case .failure(let error):
+                        print(error)
+                }
+            }
+        }
+    }
     
     var body: some View {
             ZStack {
-                Background().edgesIgnoringSafeArea(.all)
+                Background().edgesIgnoringSafeArea(.all).onAppear{
+                    self.fetchMeetNames()
+                }
                 ScrollView {
-                VStack {
+                    VStack {
                     
                     Text("Meet Summaries")
                         .font(.largeTitle)
                         .foregroundColor(Color.white)
                         .padding(.bottom, 15)
                     
-                    Group {
-                        HStack {
-                            Text("Meet Name: ")
-                                .foregroundColor(.white)
-                            TextField("Moeller", text: $meetName)
-                                .keyboardType(.alphabet)
-                                .foregroundColor(.white)
-                                .placeholder(when: $meetName.wrappedValue.isEmpty) {
-                                        Text("Moeller").foregroundColor(.white)
-                                }
-                                .opacity(0.75)
-                        }
-                        .padding(.top, 20)
-                        .onTapGesture {
-                            hideKeyboard()
-                        }
-                        
-                        HStack {
-                            Text("Season: ")
-                                .foregroundColor(.white)
-                            TextField("2021", text: $season)
-                                .keyboardType(.default)
-                                .foregroundColor(.white)
-                                .placeholder(when: $season.wrappedValue.isEmpty) {
-                                        Text("2021").foregroundColor(.white)
-                                }
-                                .opacity(0.75)
-                        }
-                        .padding(.top, 20)
-                        .onTapGesture {
-                            hideKeyboard()
-                        }
-                        
-                        HStack {
-                            Text("Results Per Category: ")
-                                .foregroundColor(.white)
-                            TextField("50", text: $resultsPerCategory)
-                                .keyboardType(.numberPad)
-                                .foregroundColor(.white)
-                                .placeholder(when: $resultsPerCategory.wrappedValue.isEmpty) {
-                                        Text("50").foregroundColor(.white)
-                                }
-                                .opacity(0.75)
-                        }
-                        .padding(.top, 20)
-                        .onTapGesture {
-                            hideKeyboard()
-                        }
-                        
-                    }
+
+                    SeasonAndMeetPickerView(season: $season, seasons: $seasons, meets: $meets, meetName: $meetName)
                     
                     Button("Calculate") {
-                        let dataService = DataService()
                         dataService.fetchMeetSumary(meetName: meetName, year: season, resultsPerCategory: resultsPerCategory) { (result) in
                             DispatchQueue.main.async {
                                 switch result {
@@ -109,9 +82,6 @@ struct GetMeetSummaryView: View {
                     
                     Group {
                         VStack(alignment: .leading, spacing: 0) {
-//                            Button("Show PRs") {
-//                                viewSelection = "PRs"
-//                            }.foregroundColor(.white)
                             
                             DisclosureGroup(isExpanded: $prDisclosureGroupExpanded) {
                                  MeetSummaryPRsView(prsCount: meetSummaryResponse?.prs ?? PRsCount(count: 0, PRs: []))
@@ -121,12 +91,12 @@ struct GetMeetSummaryView: View {
                                     withAnimation {
                                         self.prDisclosureGroupExpanded.toggle()
                                     }
-                                
                                 }
                             }
                             .background(Color(red: 107/255, green: 107/255, blue: 107/255))
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .accentColor(.white)
+                                .font(.title2)
                             
                             DisclosureGroup(isExpanded: $sbDisclosureGroupExpanded) {
                                 
@@ -143,6 +113,7 @@ struct GetMeetSummaryView: View {
                         }.background(Color(red: 107/255, green: 107/255, blue: 107/255))
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .accentColor(.white)
+                                .font(.title2)
                            
                         
                             DisclosureGroup(isExpanded: $yearToYearDisclosureGroupExpanded) {
@@ -159,6 +130,7 @@ struct GetMeetSummaryView: View {
                         }.background(Color(red: 107/255, green: 107/255, blue: 107/255))
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .accentColor(.white)
+                                .font(.title2)
                             
                             DisclosureGroup(isExpanded: $lastMeetDisclosureGroupExpanded) {
                                 
@@ -175,6 +147,7 @@ struct GetMeetSummaryView: View {
                         }.background(Color(red: 107/255, green: 107/255, blue: 107/255))
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .accentColor(.white)
+                                .font(.title2)
                             
                             DisclosureGroup(isExpanded: $meetSplitsSummaryDisclosureGroupExpanded) {
                                 
@@ -191,6 +164,7 @@ struct GetMeetSummaryView: View {
                         }.background(Color(red: 107/255, green: 107/255, blue: 107/255))
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .accentColor(.white)
+                                .font(.title2)
                         }
                     }
                 }

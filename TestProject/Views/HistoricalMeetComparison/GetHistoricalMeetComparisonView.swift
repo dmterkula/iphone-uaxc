@@ -13,13 +13,32 @@ struct GetHistoricalMeetComparisonView: View {
     var targetMeet: String = ""
     @State
     var comparisonMeet: String = ""
+    @State var season = ""
     
     @State
     var historicalComparisonResponse: HistoricalMeetComparisonResponse? = nil
     
+    @State var meets: [MeetDTO] = []
+    let dataService = DataService()
+    
+    func fetchMeetNames() {
+        dataService.fetchMeetInfo() { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let meetInfoResponse):
+                    meets = meetInfoResponse.meets.sorted(by: {$0.name < $1.name})
+                    case .failure(let error):
+                        print(error)
+                }
+            }
+        }
+    }
+    
     var body: some View {
         ZStack {
-            Background().edgesIgnoringSafeArea(.all)
+            Background().edgesIgnoringSafeArea(.all).onAppear {
+                self.fetchMeetNames()
+            }
             
             VStack(spacing: 5) {
                 Text("Meet Comparisons")
@@ -33,33 +52,12 @@ struct GetHistoricalMeetComparisonView: View {
                 
                 
                 HStack {
-                    Text("Target Meet: ")
-                        .foregroundColor(.white)
-                        .font(.title2)
-                    TextField("Lebanon", text: $targetMeet)
-                        .keyboardType(.default)
-                        .foregroundColor(.white)
-                        .placeholder(when: $targetMeet.wrappedValue.isEmpty) {
-                                Text("Lebanon").foregroundColor(.white)
-                        }
-                        .opacity(0.75)
+                    MeetPickerView(meets: $meets, meetName: $targetMeet, season: $season, pickerLabel: "Target Meet: ")
                 }
                 .padding(.top, 15)
-                .onTapGesture {
-                    hideKeyboard()
-                }
                 
                 HStack {
-                    Text("Meet to compare to: ")
-                        .foregroundColor(.white)
-                        .font(.title2)
-                    TextField("Moeller", text: $comparisonMeet)
-                        .keyboardType(.default)
-                        .foregroundColor(.white)
-                        .placeholder(when: $comparisonMeet.wrappedValue.isEmpty) {
-                                Text("Moeller").foregroundColor(.white)
-                        }
-                        .opacity(0.75)
+                    MeetPickerView(meets: $meets, meetName: $comparisonMeet, season: $season, pickerLabel: "Meet to compare to: ")
                 }
                 .padding(.top, 15)
                 .onTapGesture {
