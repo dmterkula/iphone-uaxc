@@ -60,7 +60,7 @@ struct GetMeetSplitsView: View {
                     SeasonPickerView(seasons: $seasons, season: $season)
                 }
                 .onChange(of: season) { newSeason in
-                    fetchRunners()
+                    self.fetchRunners()
                 }
                 .padding(.bottom, 15)
                 

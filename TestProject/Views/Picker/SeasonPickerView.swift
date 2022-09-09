@@ -14,14 +14,21 @@ struct SeasonPickerView: View {
     var label: String = "Selected Season: "
     
     var body: some View {
-        Picker(label + season, selection: $season, content: {
-            ForEach(seasons, id: \.self, content: { season in
-                Text(season).foregroundColor(.white)
+        Menu {
+            Picker(label + season, selection: $season, content: {
+                ForEach(seasons, id: \.self, content: { season in
+                    Text(season).foregroundColor(.white)
+                })
             })
-        })
-        .pickerStyle(MenuPickerStyle())
-        .accentColor(.white)
-        .labelsHidden()
+            .pickerStyle(MenuPickerStyle())
+            .accentColor(.white)
+            .labelsHidden()
+        } label: {
+            Text(label + season)
+                .foregroundColor(.white)
+                .font(.title2)
+        }
+        
         
     }
 }

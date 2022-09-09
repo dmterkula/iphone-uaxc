@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		680C194028CBB046006D1CD2 /* TimeTrialComparisonListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C193F28CBB046006D1CD2 /* TimeTrialComparisonListView.swift */; };
 		682255F428C17F160080B935 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682255F328C17F160080B935 /* LoadingView.swift */; };
 		682255F728C180BB0080B935 /* AggregateStatsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682255F628C180BB0080B935 /* AggregateStatsResponse.swift */; };
 		682255F928C181540080B935 /* AggregatePRStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682255F828C181540080B935 /* AggregatePRStats.swift */; };
@@ -26,6 +27,9 @@
 		684C5EAF28A90B66000C0271 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 684C5EAE28A90B66000C0271 /* ContentView.swift */; };
 		684C5EB128A90B6A000C0271 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 684C5EB028A90B6A000C0271 /* Assets.xcassets */; };
 		684C5EB428A90B6A000C0271 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 684C5EB328A90B6A000C0271 /* Preview Assets.xcassets */; };
+		6852C89328CABE04001851E1 /* TimeTrialResultComparedToPreviousYearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6852C89228CABE04001851E1 /* TimeTrialResultComparedToPreviousYearView.swift */; };
+		6852C89E28CB7FEE001851E1 /* Bar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6852C89D28CB7FEE001851E1 /* Bar.swift */; };
+		6852C8A028CB839F001851E1 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6852C89F28CB839F001851E1 /* BarChartView.swift */; };
 		688B77FE28B5A1C2008B90F3 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688B77FD28B5A1C2008B90F3 /* DataService.swift */; };
 		688DA4C928C520770056C1B8 /* MeetInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688DA4C828C520770056C1B8 /* MeetInfoResponse.swift */; };
 		688DA4CD28C542FB0056C1B8 /* MeetsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688DA4CC28C542FB0056C1B8 /* MeetsDTO.swift */; };
@@ -38,6 +42,9 @@
 		688DA4E228C922800056C1B8 /* TimeTrialToSBProgressionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688DA4E128C9227F0056C1B8 /* TimeTrialToSBProgressionView.swift */; };
 		688DA4E428C924B70056C1B8 /* TimeTrialToSBResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688DA4E328C924B70056C1B8 /* TimeTrialToSBResultView.swift */; };
 		688DA4E628C9286B0056C1B8 /* TimeTrialProgressions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688DA4E528C9286B0056C1B8 /* TimeTrialProgressions.swift */; };
+		688DA4EB28CA78E60056C1B8 /* TimeTrialCompareRunnersToPreviousearResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688DA4EA28CA78E60056C1B8 /* TimeTrialCompareRunnersToPreviousearResponse.swift */; };
+		688DA4ED28CA79280056C1B8 /* RunnerTimeTrialComparisonToPreviousYearDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688DA4EC28CA79280056C1B8 /* RunnerTimeTrialComparisonToPreviousYearDTO.swift */; };
+		688DA4F028CA7B130056C1B8 /* TimeTrialReturningRunnersComparisonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688DA4EF28CA7B130056C1B8 /* TimeTrialReturningRunnersComparisonView.swift */; };
 		6895852428B7C3FA00AA4209 /* PerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6895852328B7C3FA00AA4209 /* PerformanceView.swift */; };
 		6895852628B7C6D000AA4209 /* PerformanceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6895852528B7C6D000AA4209 /* PerformanceList.swift */; };
 		6895852A28B7F70700AA4209 /* GetPRsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6895852928B7F70700AA4209 /* GetPRsView.swift */; };
@@ -101,6 +108,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		680C193F28CBB046006D1CD2 /* TimeTrialComparisonListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrialComparisonListView.swift; sourceTree = "<group>"; };
 		682255F328C17F160080B935 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		682255F628C180BB0080B935 /* AggregateStatsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AggregateStatsResponse.swift; sourceTree = "<group>"; };
 		682255F828C181540080B935 /* AggregatePRStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AggregatePRStats.swift; sourceTree = "<group>"; };
@@ -121,6 +129,9 @@
 		684C5EAE28A90B66000C0271 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		684C5EB028A90B6A000C0271 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		684C5EB328A90B6A000C0271 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6852C89228CABE04001851E1 /* TimeTrialResultComparedToPreviousYearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrialResultComparedToPreviousYearView.swift; sourceTree = "<group>"; };
+		6852C89D28CB7FEE001851E1 /* Bar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bar.swift; sourceTree = "<group>"; };
+		6852C89F28CB839F001851E1 /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
 		688B77FD28B5A1C2008B90F3 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		688DA4C828C520770056C1B8 /* MeetInfoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetInfoResponse.swift; sourceTree = "<group>"; };
 		688DA4CC28C542FB0056C1B8 /* MeetsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetsDTO.swift; sourceTree = "<group>"; };
@@ -133,6 +144,9 @@
 		688DA4E128C9227F0056C1B8 /* TimeTrialToSBProgressionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrialToSBProgressionView.swift; sourceTree = "<group>"; };
 		688DA4E328C924B70056C1B8 /* TimeTrialToSBResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrialToSBResultView.swift; sourceTree = "<group>"; };
 		688DA4E528C9286B0056C1B8 /* TimeTrialProgressions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrialProgressions.swift; sourceTree = "<group>"; };
+		688DA4EA28CA78E60056C1B8 /* TimeTrialCompareRunnersToPreviousearResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrialCompareRunnersToPreviousearResponse.swift; sourceTree = "<group>"; };
+		688DA4EC28CA79280056C1B8 /* RunnerTimeTrialComparisonToPreviousYearDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTimeTrialComparisonToPreviousYearDTO.swift; sourceTree = "<group>"; };
+		688DA4EF28CA7B130056C1B8 /* TimeTrialReturningRunnersComparisonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrialReturningRunnersComparisonView.swift; sourceTree = "<group>"; };
 		6895852228B7AD4E00AA4209 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6895852328B7C3FA00AA4209 /* PerformanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceView.swift; sourceTree = "<group>"; };
 		6895852528B7C6D000AA4209 /* PerformanceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceList.swift; sourceTree = "<group>"; };
@@ -252,11 +266,9 @@
 		6822560528C26FE50080B935 /* TimeTrial */ = {
 			isa = PBXGroup;
 			children = (
-				6822560628C270110080B935 /* TimeTrialResultsResponse.swift */,
-				6822560828C270200080B935 /* TimeTrialResultsDTO.swift */,
-				688DA4D928C91D230056C1B8 /* TimeTrialProgressionResponse.swift */,
-				688DA4DB28C91D610056C1B8 /* TimeTrialProgression.swift */,
-				688DA4E528C9286B0056C1B8 /* TimeTrialProgressions.swift */,
+				688DA4E928CA78B80056C1B8 /* CompareRunnersToPreviousYear */,
+				688DA4E828CA78A00056C1B8 /* Progression */,
+				688DA4E728CA788F0056C1B8 /* results */,
 			);
 			path = TimeTrial;
 			sourceTree = "<group>";
@@ -264,6 +276,7 @@
 		6822560A28C2714F0080B935 /* TimeTrialResults */ = {
 			isa = PBXGroup;
 			children = (
+				688DA4EE28CA7ADD0056C1B8 /* TimeTrialCompareRunnersToPreviousYear */,
 				688DA4DE28C91F360056C1B8 /* TimeTrialProgression */,
 				688DA4DD28C91F2A0056C1B8 /* TimeTrial */,
 			);
@@ -289,6 +302,7 @@
 		684C5EAB28A90B66000C0271 /* TestProject */ = {
 			isa = PBXGroup;
 			children = (
+				6852C89B28CB7FD8001851E1 /* GraphModels */,
 				6897353728BC006100744B2E /* Extensions */,
 				6895852F28B7FEC600AA4209 /* Client */,
 				6895852E28B7FE9D00AA4209 /* DTOs */,
@@ -307,6 +321,38 @@
 				684C5EB328A90B6A000C0271 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6852C89728CB7FA0001851E1 /* Graphs */ = {
+			isa = PBXGroup;
+			children = (
+				6852C89828CB7FA8001851E1 /* BarCharts */,
+			);
+			path = Graphs;
+			sourceTree = "<group>";
+		};
+		6852C89828CB7FA8001851E1 /* BarCharts */ = {
+			isa = PBXGroup;
+			children = (
+				6852C89F28CB839F001851E1 /* BarChartView.swift */,
+			);
+			path = BarCharts;
+			sourceTree = "<group>";
+		};
+		6852C89B28CB7FD8001851E1 /* GraphModels */ = {
+			isa = PBXGroup;
+			children = (
+				6852C89C28CB7FE3001851E1 /* BarChart */,
+			);
+			path = GraphModels;
+			sourceTree = "<group>";
+		};
+		6852C89C28CB7FE3001851E1 /* BarChart */ = {
+			isa = PBXGroup;
+			children = (
+				6852C89D28CB7FEE001851E1 /* Bar.swift */,
+			);
+			path = BarChart;
 			sourceTree = "<group>";
 		};
 		688DA4C728C520690056C1B8 /* MeetInfo */ = {
@@ -347,9 +393,48 @@
 			path = TimeTrialProgression;
 			sourceTree = "<group>";
 		};
+		688DA4E728CA788F0056C1B8 /* results */ = {
+			isa = PBXGroup;
+			children = (
+				6822560628C270110080B935 /* TimeTrialResultsResponse.swift */,
+				6822560828C270200080B935 /* TimeTrialResultsDTO.swift */,
+			);
+			path = results;
+			sourceTree = "<group>";
+		};
+		688DA4E828CA78A00056C1B8 /* Progression */ = {
+			isa = PBXGroup;
+			children = (
+				688DA4D928C91D230056C1B8 /* TimeTrialProgressionResponse.swift */,
+				688DA4E528C9286B0056C1B8 /* TimeTrialProgressions.swift */,
+				688DA4DB28C91D610056C1B8 /* TimeTrialProgression.swift */,
+			);
+			path = Progression;
+			sourceTree = "<group>";
+		};
+		688DA4E928CA78B80056C1B8 /* CompareRunnersToPreviousYear */ = {
+			isa = PBXGroup;
+			children = (
+				688DA4EA28CA78E60056C1B8 /* TimeTrialCompareRunnersToPreviousearResponse.swift */,
+				688DA4EC28CA79280056C1B8 /* RunnerTimeTrialComparisonToPreviousYearDTO.swift */,
+			);
+			path = CompareRunnersToPreviousYear;
+			sourceTree = "<group>";
+		};
+		688DA4EE28CA7ADD0056C1B8 /* TimeTrialCompareRunnersToPreviousYear */ = {
+			isa = PBXGroup;
+			children = (
+				688DA4EF28CA7B130056C1B8 /* TimeTrialReturningRunnersComparisonView.swift */,
+				6852C89228CABE04001851E1 /* TimeTrialResultComparedToPreviousYearView.swift */,
+				680C193F28CBB046006D1CD2 /* TimeTrialComparisonListView.swift */,
+			);
+			path = TimeTrialCompareRunnersToPreviousYear;
+			sourceTree = "<group>";
+		};
 		6895852B28B7FE5300AA4209 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6852C89728CB7FA0001851E1 /* Graphs */,
 				6822560A28C2714F0080B935 /* TimeTrialResults */,
 				688DA4CE28C7A3A50056C1B8 /* Picker */,
 				6822560228C247260080B935 /* HistoricalMeetComparison */,
@@ -716,6 +801,7 @@
 				689734E828B8492000744B2E /* MeetSplitsForRunnerResponse.swift in Sources */,
 				6897356128BFB20A00744B2E /* AdjustedTimeTrialView.swift in Sources */,
 				682BF4F128B79EBD00A72AE1 /* MeetResult.swift in Sources */,
+				688DA4F028CA7B130056C1B8 /* TimeTrialReturningRunnersComparisonView.swift in Sources */,
 				68B4C42A28C0C46E00C38553 /* RunnerMeetPerformanceDTO.swift in Sources */,
 				689734FE28BA60F400744B2E /* GetMeetSummaryView.swift in Sources */,
 				682255FE28C188E30080B935 /* Statistic.swift in Sources */,
@@ -727,6 +813,7 @@
 				682255F428C17F160080B935 /* LoadingView.swift in Sources */,
 				6897350028BA632D00744B2E /* MeetSummaryPerformanceList.swift in Sources */,
 				688DA4D228C7A4AB0056C1B8 /* MeetPickerView.swift in Sources */,
+				688DA4ED28CA79280056C1B8 /* RunnerTimeTrialComparisonToPreviousYearDTO.swift in Sources */,
 				6897350228BA63EA00744B2E /* MeetSummaryPRsView.swift in Sources */,
 				6897353E28BED56C00744B2E /* RunnerProfileResponse.swift in Sources */,
 				688B77FE28B5A1C2008B90F3 /* DataService.swift in Sources */,
@@ -741,6 +828,7 @@
 				682BF4EF28B79EA200A72AE1 /* Performance.swift in Sources */,
 				682BF4ED28B79E7100A72AE1 /* PRDTO.swift in Sources */,
 				6897355A28BFA37800744B2E /* PRRunnerProfileView.swift in Sources */,
+				6852C89E28CB7FEE001851E1 /* Bar.swift in Sources */,
 				6897352D28BBF1A400744B2E /* MeetToMeetProgressionList.swift in Sources */,
 				6897351128BAA34100744B2E /* ProgressionData.swift in Sources */,
 				688DA4C928C520770056C1B8 /* MeetInfoResponse.swift in Sources */,
@@ -768,8 +856,10 @@
 				6822560C28C2715C0080B935 /* TimeTrialResultsView.swift in Sources */,
 				689734E528B8404300744B2E /* MeetPerformanceView.swift in Sources */,
 				682BF4F328B79ED300A72AE1 /* Runner.swift in Sources */,
+				680C194028CBB046006D1CD2 /* TimeTrialComparisonListView.swift in Sources */,
 				68B4C42828C0C43C00C38553 /* MeetResultsForRunnerResponse.swift in Sources */,
 				6897355428BF876E00744B2E /* SeasonBestProfileView.swift in Sources */,
+				6852C8A028CB839F001851E1 /* BarChartView.swift in Sources */,
 				6897355228BF755F00744B2E /* MeetResultView.swift in Sources */,
 				689734F328B8CDE600744B2E /* MeetSplitsList.swift in Sources */,
 				6895852A28B7F70700AA4209 /* GetPRsView.swift in Sources */,
@@ -777,8 +867,10 @@
 				6897351D28BBB28100744B2E /* MeetSplitStatisticResponse.swift in Sources */,
 				6897351528BAA68100744B2E /* MeetYearToYearProgressionList.swift in Sources */,
 				689734F928BA5EDB00744B2E /* MeetSumaryResponse.swift in Sources */,
+				688DA4EB28CA78E60056C1B8 /* TimeTrialCompareRunnersToPreviousearResponse.swift in Sources */,
 				6897352F28BBF8B400744B2E /* MeetToMeetProgressionView.swift in Sources */,
 				682255F928C181540080B935 /* AggregatePRStats.swift in Sources */,
+				6852C89328CABE04001851E1 /* TimeTrialResultComparedToPreviousYearView.swift in Sources */,
 				689734EA28B84A0800744B2E /* MeetSplit.swift in Sources */,
 				689734FB28BA5F2800744B2E /* PRsCount.swift in Sources */,
 				6897355028BF752600744B2E /* MeetResultList.swift in Sources */,
@@ -841,7 +933,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -895,7 +987,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -923,7 +1015,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -955,7 +1047,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

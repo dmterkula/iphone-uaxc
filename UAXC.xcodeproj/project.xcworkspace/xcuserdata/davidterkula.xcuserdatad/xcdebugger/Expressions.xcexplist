@@ -49,10 +49,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in closure #2 in closure #1 in TimeTrialReturningRunnersComparisonView.body.getter:TimeTrialReturningRunnersComparisonView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "seasons">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #1 in closure #13 in closure #1 in closure #1 in closure #1 in closure #1 in GetMeetSummaryView.body.getter:GetMeetSummaryView.swift">
          <PersistentStrings>
             <PersistentString
                value = "meetSummaryResponse">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in TimeTrialReturningRunnersComparisonView.fetchSeasons():TimeTrialReturningRunnersComparisonView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Array(Set(meetInfoResponse.meets.flatMap { $0.dates.map{$0.components(separatedBy: &quot;-&quot;)[0]} })).sorted()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -13,9 +13,10 @@ struct TimeTrialResultsDTO: Codable, Identifiable {
     var runner: Runner
     var time: String
     var place: Int
+    var season: String
     
     private enum CodingKeys: String, CodingKey {
-        case runner, time, place
+        case runner, time, place, season
     }
     
 }
