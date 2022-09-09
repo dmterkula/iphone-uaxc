@@ -223,6 +223,9 @@ struct MainMenuView: View {
                         TabButton(title: "Time Trial Progression", image: "gearshape.2")
                             .padding(.top, 30)
                         
+                        TabButton(title: "Compare Returning Runners To Last Year", image: "gearshape.2")
+                            .padding(.top, 30)
+                        
                     }
                 } label: {
                     Text("Time Trial Stats")
@@ -288,6 +291,8 @@ struct MainMenuView: View {
                 TimeTrialResultsView()
             } else if (title == "Time Trial Progression") {
                 TimeTrialToSBProgressionView()
+            } else if(title == "Compare Returning Runners To Last Year") {
+                TimeTrialReturningRunnersComparisonView()
             }
             else {
                 HomePageView(showMenu: $showMenu)

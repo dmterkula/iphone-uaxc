@@ -12,13 +12,20 @@ struct RunnerPickerView: View {
     @Binding var runnerLabel: String
     
     var body: some View {
-        Picker("Selected Runner: " + (runnerLabel.components(separatedBy: ":").first ?? ""), selection: $runnerLabel, content: {
-            ForEach(runners.map { $0.name + ": " + $0.graduatingClass }, id: \.self, content: { runnerLabel in
-                Text(runnerLabel).foregroundColor(.white)
+        Menu {
+            Picker("Selected Runner: " + (runnerLabel.components(separatedBy: ":").first ?? ""), selection: $runnerLabel, content: {
+                ForEach(runners.map { $0.name + ": " + $0.graduatingClass }, id: \.self, content: { runnerLabel in
+                    Text(runnerLabel).foregroundColor(.white)
+                })
             })
-        })
-        .pickerStyle(MenuPickerStyle())
-        .accentColor(.white)
+            .pickerStyle(MenuPickerStyle())
+            .accentColor(.white)
+        } label : {
+            Text("Selected Runner: " + (runnerLabel.components(separatedBy: ":").first ?? ""))
+                .foregroundColor(.white)
+                .font(.title2)
+        }
+        
         
     }
 }

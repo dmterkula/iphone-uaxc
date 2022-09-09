@@ -11,7 +11,7 @@ struct GetPRsView: View {
     
     @State var prList: [Performance] = []
     @State var filter = ""
-    @State var seasons: [String] = []
+    @State var seasons: [String] = ["Select Season"]
     @State var season: String = ""
     
     let dataService = DataService()
