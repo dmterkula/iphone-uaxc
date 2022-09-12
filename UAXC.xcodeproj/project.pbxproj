@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		680C194028CBB046006D1CD2 /* TimeTrialComparisonListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C193F28CBB046006D1CD2 /* TimeTrialComparisonListView.swift */; };
+		680C194328CD49D4006D1CD2 /* TTestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C194228CD49D4006D1CD2 /* TTestDTO.swift */; };
+		680C194628CD4A0E006D1CD2 /* StatisticalComparisonDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C194528CD4A0E006D1CD2 /* StatisticalComparisonDTO.swift */; };
+		680C194928CD4B09006D1CD2 /* TTestResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C194828CD4B09006D1CD2 /* TTestResult.swift */; };
+		680C194E28CD4F0B006D1CD2 /* MeetSplitsComparisonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C194D28CD4F0B006D1CD2 /* MeetSplitsComparisonView.swift */; };
+		680C195128CE4F94006D1CD2 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 680C195028CE4F94006D1CD2 /* SwiftUICharts */; };
+		680C195328CE50AA006D1CD2 /* SideBySideBarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C195228CE50AA006D1CD2 /* SideBySideBarChart.swift */; };
+		680C195528CE94EF006D1CD2 /* BarComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C195428CE94EF006D1CD2 /* BarComparison.swift */; };
+		680C195728CE9588006D1CD2 /* MeetSplitBarComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C195628CE9588006D1CD2 /* MeetSplitBarComparison.swift */; };
 		682255F428C17F160080B935 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682255F328C17F160080B935 /* LoadingView.swift */; };
 		682255F728C180BB0080B935 /* AggregateStatsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682255F628C180BB0080B935 /* AggregateStatsResponse.swift */; };
 		682255F928C181540080B935 /* AggregatePRStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682255F828C181540080B935 /* AggregatePRStats.swift */; };
@@ -109,6 +117,13 @@
 
 /* Begin PBXFileReference section */
 		680C193F28CBB046006D1CD2 /* TimeTrialComparisonListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrialComparisonListView.swift; sourceTree = "<group>"; };
+		680C194228CD49D4006D1CD2 /* TTestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTestDTO.swift; sourceTree = "<group>"; };
+		680C194528CD4A0E006D1CD2 /* StatisticalComparisonDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticalComparisonDTO.swift; sourceTree = "<group>"; };
+		680C194828CD4B09006D1CD2 /* TTestResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TTestResult.swift; sourceTree = "<group>"; };
+		680C194D28CD4F0B006D1CD2 /* MeetSplitsComparisonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetSplitsComparisonView.swift; sourceTree = "<group>"; };
+		680C195228CE50AA006D1CD2 /* SideBySideBarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBySideBarChart.swift; sourceTree = "<group>"; };
+		680C195428CE94EF006D1CD2 /* BarComparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarComparison.swift; sourceTree = "<group>"; };
+		680C195628CE9588006D1CD2 /* MeetSplitBarComparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetSplitBarComparison.swift; sourceTree = "<group>"; };
 		682255F328C17F160080B935 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		682255F628C180BB0080B935 /* AggregateStatsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AggregateStatsResponse.swift; sourceTree = "<group>"; };
 		682255F828C181540080B935 /* AggregatePRStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AggregatePRStats.swift; sourceTree = "<group>"; };
@@ -215,12 +230,46 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				680C195128CE4F94006D1CD2 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		680C194128CD4963006D1CD2 /* MeetSplitsTTest */ = {
+			isa = PBXGroup;
+			children = (
+				680C194228CD49D4006D1CD2 /* TTestDTO.swift */,
+			);
+			path = MeetSplitsTTest;
+			sourceTree = "<group>";
+		};
+		680C194428CD49F2006D1CD2 /* StatisticalComparison */ = {
+			isa = PBXGroup;
+			children = (
+				680C194528CD4A0E006D1CD2 /* StatisticalComparisonDTO.swift */,
+				680C194828CD4B09006D1CD2 /* TTestResult.swift */,
+			);
+			path = StatisticalComparison;
+			sourceTree = "<group>";
+		};
+		680C194B28CD4EBE006D1CD2 /* SeasonComparisonView */ = {
+			isa = PBXGroup;
+			children = (
+				680C194C28CD4EF7006D1CD2 /* MeetSplitsComparisonView */,
+			);
+			path = SeasonComparisonView;
+			sourceTree = "<group>";
+		};
+		680C194C28CD4EF7006D1CD2 /* MeetSplitsComparisonView */ = {
+			isa = PBXGroup;
+			children = (
+				680C194D28CD4F0B006D1CD2 /* MeetSplitsComparisonView.swift */,
+			);
+			path = MeetSplitsComparisonView;
+			sourceTree = "<group>";
+		};
 		682255F228C17F070080B935 /* Loading */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,6 +384,7 @@
 			isa = PBXGroup;
 			children = (
 				6852C89F28CB839F001851E1 /* BarChartView.swift */,
+				680C195228CE50AA006D1CD2 /* SideBySideBarChart.swift */,
 			);
 			path = BarCharts;
 			sourceTree = "<group>";
@@ -351,6 +401,8 @@
 			isa = PBXGroup;
 			children = (
 				6852C89D28CB7FEE001851E1 /* Bar.swift */,
+				680C195428CE94EF006D1CD2 /* BarComparison.swift */,
+				680C195628CE9588006D1CD2 /* MeetSplitBarComparison.swift */,
 			);
 			path = BarChart;
 			sourceTree = "<group>";
@@ -434,6 +486,7 @@
 		6895852B28B7FE5300AA4209 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				680C194B28CD4EBE006D1CD2 /* SeasonComparisonView */,
 				6852C89728CB7FA0001851E1 /* Graphs */,
 				6822560A28C2714F0080B935 /* TimeTrialResults */,
 				688DA4CE28C7A3A50056C1B8 /* Picker */,
@@ -472,6 +525,7 @@
 		6895852E28B7FE9D00AA4209 /* DTOs */ = {
 			isa = PBXGroup;
 			children = (
+				680C194428CD49F2006D1CD2 /* StatisticalComparison */,
 				688DA4C728C520690056C1B8 /* MeetInfo */,
 				6822560528C26FE50080B935 /* TimeTrial */,
 				682255FF28C245020080B935 /* HistoricallyCompareMeets */,
@@ -532,6 +586,7 @@
 		689734E628B8490900744B2E /* MeetSplits */ = {
 			isa = PBXGroup;
 			children = (
+				680C194128CD4963006D1CD2 /* MeetSplitsTTest */,
 				689734E728B8492000744B2E /* MeetSplitsForRunnerResponse.swift */,
 				689734E928B84A0800744B2E /* MeetSplit.swift */,
 				689734EB28B84A8B00744B2E /* Splits.swift */,
@@ -727,6 +782,9 @@
 			dependencies = (
 			);
 			name = UAXC;
+			packageProductDependencies = (
+				680C195028CE4F94006D1CD2 /* SwiftUICharts */,
+			);
 			productName = TestProject;
 			productReference = 684C5EA928A90B66000C0271 /* UAXC.app */;
 			productType = "com.apple.product-type.application";
@@ -755,6 +813,9 @@
 				Base,
 			);
 			mainGroup = 684C5EA028A90B66000C0271;
+			packageReferences = (
+				680C194F28CE4F94006D1CD2 /* XCRemoteSwiftPackageReference "ChartView" */,
+			);
 			productRefGroup = 684C5EAA28A90B66000C0271 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -787,6 +848,7 @@
 				689734F128B84C7800744B2E /* MeetSplitView.swift in Sources */,
 				6822560128C245470080B935 /* HistoricalMeetComparisonResponse.swift in Sources */,
 				6822560728C270110080B935 /* TimeTrialResultsResponse.swift in Sources */,
+				680C194628CD4A0E006D1CD2 /* StatisticalComparisonDTO.swift in Sources */,
 				6897350428BA64A900744B2E /* PerformanceViewWithImprovement.swift in Sources */,
 				688DA4E628C9286B0056C1B8 /* TimeTrialProgressions.swift in Sources */,
 				689734DF28B8073E00744B2E /* GetMeetResultsView.swift in Sources */,
@@ -795,6 +857,7 @@
 				6897354428BEDE6900744B2E /* RunnerProfile.swift in Sources */,
 				682255F728C180BB0080B935 /* AggregateStatsResponse.swift in Sources */,
 				6897354E28BEE78F00744B2E /* RunnerProfilePR.swift in Sources */,
+				680C195728CE9588006D1CD2 /* MeetSplitBarComparison.swift in Sources */,
 				6897351928BAADA200744B2E /* ProgressionView.swift in Sources */,
 				6897352928BBE9A300744B2E /* ImprovementRateDTO.swift in Sources */,
 				6897354228BED70E00744B2E /* GetRunnerProfileView.swift in Sources */,
@@ -810,10 +873,12 @@
 				689734EC28B84A8B00744B2E /* Splits.swift in Sources */,
 				6822560E28C2742A0080B935 /* TimeTrialDTOView.swift in Sources */,
 				6897354628BEE03500744B2E /* RunnerProfileSeasonBestDTO.swift in Sources */,
+				680C194928CD4B09006D1CD2 /* TTestResult.swift in Sources */,
 				682255F428C17F160080B935 /* LoadingView.swift in Sources */,
 				6897350028BA632D00744B2E /* MeetSummaryPerformanceList.swift in Sources */,
 				688DA4D228C7A4AB0056C1B8 /* MeetPickerView.swift in Sources */,
 				688DA4ED28CA79280056C1B8 /* RunnerTimeTrialComparisonToPreviousYearDTO.swift in Sources */,
+				680C194328CD49D4006D1CD2 /* TTestDTO.swift in Sources */,
 				6897350228BA63EA00744B2E /* MeetSummaryPRsView.swift in Sources */,
 				6897353E28BED56C00744B2E /* RunnerProfileResponse.swift in Sources */,
 				688B77FE28B5A1C2008B90F3 /* DataService.swift in Sources */,
@@ -834,7 +899,9 @@
 				688DA4C928C520770056C1B8 /* MeetInfoResponse.swift in Sources */,
 				688DA4DC28C91D610056C1B8 /* TimeTrialProgression.swift in Sources */,
 				6897350F28BAA28500744B2E /* FasterProgression.swift in Sources */,
+				680C195528CE94EF006D1CD2 /* BarComparison.swift in Sources */,
 				688DA4CD28C542FB0056C1B8 /* MeetsDTO.swift in Sources */,
+				680C194E28CD4F0B006D1CD2 /* MeetSplitsComparisonView.swift in Sources */,
 				6895853328B7FFFA00AA4209 /* MeetPerformanceResponse.swift in Sources */,
 				682255FC28C1884D0080B935 /* AggregateStatsView.swift in Sources */,
 				6897352528BBE61000744B2E /* SummaryImprovementLastMeet.swift in Sources */,
@@ -865,6 +932,7 @@
 				6895852A28B7F70700AA4209 /* GetPRsView.swift in Sources */,
 				6822560928C270200080B935 /* TimeTrialResultsDTO.swift in Sources */,
 				6897351D28BBB28100744B2E /* MeetSplitStatisticResponse.swift in Sources */,
+				680C195328CE50AA006D1CD2 /* SideBySideBarChart.swift in Sources */,
 				6897351528BAA68100744B2E /* MeetYearToYearProgressionList.swift in Sources */,
 				689734F928BA5EDB00744B2E /* MeetSumaryResponse.swift in Sources */,
 				688DA4EB28CA78E60056C1B8 /* TimeTrialCompareRunnersToPreviousearResponse.swift in Sources */,
@@ -1083,6 +1151,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		680C194F28CE4F94006D1CD2 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		680C195028CE4F94006D1CD2 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 680C194F28CE4F94006D1CD2 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 684C5EA128A90B66000C0271 /* Project object */;
 }

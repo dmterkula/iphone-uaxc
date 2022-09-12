@@ -146,6 +146,7 @@ struct MainMenuView: View {
     @State var runnerDisclosureIsExpanded: Bool = false
     @State var meetDisclosureIsExpanded: Bool = false
     @State var timeTrialDisclosureIsExpanded: Bool = false
+    @State var seasonComparisonDisclosureIsExpanded: Bool = false
     
     @State private var viewSelection: String? = nil
     
@@ -241,6 +242,26 @@ struct MainMenuView: View {
                     .cornerRadius(8)
                     .padding(.top)
                 
+                DisclosureGroup(isExpanded: $seasonComparisonDisclosureIsExpanded) {
+                        
+                    VStack(alignment: .leading) {
+                        TabButton(title: "Meet Splits Comparisons", image: "stopwatch")
+                            .padding(.top, 30)
+                    }
+                } label: {
+                    Text("Season Comparison")
+                    .onTapGesture {
+                        withAnimation {
+                            self.seasonComparisonDisclosureIsExpanded.toggle()
+                            }
+                        }
+                    }.accentColor(.white)
+                    .font(.title3)
+                    .padding(.all)
+                    .background(Color(red: 4/255, green: 130/255, blue: 0/255))
+                    .cornerRadius(8)
+                    .padding(.top)
+                
                 
                 Spacer()
             }
@@ -293,6 +314,8 @@ struct MainMenuView: View {
                 TimeTrialToSBProgressionView()
             } else if(title == "Compare Returning Runners To Last Year") {
                 TimeTrialReturningRunnersComparisonView()
+            } else if (title == "Meet Splits Comparisons") {
+                MeetSplitsComparisonView()
             }
             else {
                 HomePageView(showMenu: $showMenu)

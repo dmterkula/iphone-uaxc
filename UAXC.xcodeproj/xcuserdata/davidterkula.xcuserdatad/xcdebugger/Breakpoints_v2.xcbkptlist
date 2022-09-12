@@ -44,8 +44,8 @@
             filePath = "TestProject/Views/Main/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "302"
-            endingLineNumber = "302"
+            startingLineNumber = "325"
+            endingLineNumber = "325"
             landmarkName = "TabButton(title:image:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -214,7 +214,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "0894E9B4-1BA9-467C-BB48-5D85980635FA"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TestProject/Views/MeetSummaryView/YearToYearProgression/MeeSummaryYearToYearProgressionView.swift"
@@ -230,7 +230,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "4BCE2AB7-6BB3-41E7-8A9F-D5A705677892"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TestProject/Views/MeetSummaryView/YearToYearProgression/MeeSummaryYearToYearProgressionView.swift"
@@ -336,6 +336,118 @@
             endingLineNumber = "31"
             landmarkName = "body"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "601D7D3D-CBA7-4055-A8FC-0B8E1F9B516A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TestProject/Views/SeasonComparisonView/MeetSplitsComparisonView/MeetSplitsComparisonView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "601D7D3D-CBA7-4055-A8FC-0B8E1F9B516A - 5380ea91c0db0407"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 (UAXC.MeetSplitBarComparison) -&gt; SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart)&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.font(Swift.Optional&lt;SwiftUI.Font&gt;) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;UAXC.MeetSplitBarComparison&gt;, Foundation.UUID, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart)&gt;&gt;&gt;&gt;)&gt; in closure #1 () -&gt; SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.font(Swift.Optional&lt;SwiftUI.Font&gt;) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;UAXC.MeetSplitBarComparison&gt;, Foundation.UUID, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart)&gt;&gt;&gt;&gt;)&gt;&gt; in closure #2 (SwiftUI.GeometryProxy) -&gt; SwiftUI.ScrollView&lt;SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.font(Swift.Optional&lt;SwiftUI.Font&gt;) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;UAXC.MeetSplitBarComparison&gt;, Foundation.UUID, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart)&gt;&gt;&gt;&gt;)&gt;&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0, SwiftUI.GeometryReader&lt;SwiftUI.ScrollView&lt;SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.font(Swift.Optional&lt;SwiftUI.Font&gt;) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;UAXC.MeetSplitBarComparison&gt;, Foundation.UUID, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart)&gt;&gt;&gt;&gt;)&gt;&gt;&gt;&gt;)&gt; in UAXC.MeetSplitsComparisonView.body.getter : some"
+                  moduleName = "UAXC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/davidterkula/Desktop/XCode/TestProject/TestProject/Views/SeasonComparisonView/MeetSplitsComparisonView/MeetSplitsComparisonView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "138"
+                  endingLineNumber = "138"
+                  offsetFromSymbolStart = "464">
+               </Location>
+               <Location
+                  uuid = "601D7D3D-CBA7-4055-A8FC-0B8E1F9B516A - 6a6ffe95d27cfa9c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Text, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart)&gt; in closure #4 (UAXC.MeetSplitBarComparison) -&gt; SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart)&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.font(Swift.Optional&lt;SwiftUI.Font&gt;) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;UAXC.MeetSplitBarComparison&gt;, Foundation.UUID, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart)&gt;&gt;&gt;&gt;)&gt; in closure #1 () -&gt; SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.font(Swift.Optional&lt;SwiftUI.Font&gt;) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;UAXC.MeetSplitBarComparison&gt;, Foundation.UUID, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart)&gt;&gt;&gt;&gt;)&gt;&gt; in closure #2 (SwiftUI.GeometryProxy) -&gt; SwiftUI.ScrollView&lt;SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.font(Swift.Optional&lt;SwiftUI.Font&gt;) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;UAXC.MeetSplitBarComparison&gt;, Foundation.UUID, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart)&gt;&gt;&gt;&gt;)&gt;&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0, SwiftUI.GeometryReader&lt;SwiftUI.ScrollView&lt;SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.font(Swift.Optional&lt;SwiftUI.Font&gt;) -&gt; some&gt;&gt;.0&gt;, Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;UAXC.MeetSplitBarComparison&gt;, Foundation.UUID, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart, UAXC.SideBySideBarChart)&gt;&gt;&gt;&gt;)&gt;&gt;&gt;&gt;)&gt; in UAXC.MeetSplitsComparisonView.body.getter : some"
+                  moduleName = "UAXC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/davidterkula/Desktop/XCode/TestProject/TestProject/Views/SeasonComparisonView/MeetSplitsComparisonView/MeetSplitsComparisonView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "138"
+                  endingLineNumber = "138"
+                  offsetFromSymbolStart = "3140">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "41B01973-250F-4A16-B673-6F13A34CACBC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TestProject/Views/SeasonComparisonView/MeetSplitsComparisonView/MeetSplitsComparisonView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "03FF862B-8140-42F5-9841-D2E1F11D1B45"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TestProject/Views/SeasonComparisonView/MeetSplitsComparisonView/MeetSplitsComparisonView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6CFCEBB0-D38F-4D9F-AD51-17A0414195B9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TestProject/Views/SeasonComparisonView/MeetSplitsComparisonView/MeetSplitsComparisonView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "initialzeBars()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "82C9F576-4C5D-461C-A28E-6EE8E5B07C45"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TestProject/Views/SeasonComparisonView/MeetSplitsComparisonView/MeetSplitsComparisonView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "initialzeBars()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

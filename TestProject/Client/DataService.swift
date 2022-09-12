@@ -560,4 +560,49 @@ class DataService {
         }.resume()
     }
     
+    
+    func fetchMeetSplitsTTestForAllMeetsInSeasons(baseSeason: String, comparisonSeason: String, comparisonPace: String, completition: @escaping (Result<[TTestDTO], Error>) -> Void) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "http"
+        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.path = "/xc/meetSplit/YearComparisonTTest/allMeets"
+        
+        
+        let baseSeasonQueryItem = URLQueryItem(name: "filter.baseSeason", value: baseSeason)
+        let comparisonSeasonQueryItem = URLQueryItem(name: "filter.comparisonSeason", value: comparisonSeason)
+        let comparisonPaceQueryItem = URLQueryItem(name: "comparisonPace", value: comparisonPace)
+    
+        componentUrl.queryItems = [baseSeasonQueryItem, comparisonSeasonQueryItem, comparisonPaceQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                //let json = try JSONSerialization.jsonObject(with: validData, options: [])
+                let response = try JSONDecoder().decode([TTestDTO].self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
 }
