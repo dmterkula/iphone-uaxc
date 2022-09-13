@@ -19,6 +19,36 @@ struct SideBySideBarChart: View {
     var barDifferentiatingScaleFactor: Double = 1.0
     
     
+    func determineScaling(scaleDataSet1: Bool, dataSet1Value: Double, dataset2Value: Double) -> Double {
+        
+        var difference = dataSet1Value - dataset2Value
+        
+        if (difference <= 0) {
+            // dataSet2Larger
+            if (scaleDataSet1) {
+                if (dataSet1Value / dataset2Value >= 0.985) {
+                    return 1.0
+                } else {
+                    return barDifferentiatingScaleFactor
+                }
+            } else {
+                return 1.0
+            }
+            
+            } else {
+                // dataset 1 value is larger
+                if (!scaleDataSet1) {
+                    if (dataset2Value / dataSet1Value >= 0.985) {
+                        return 1.0
+                    } else {
+                        return barDifferentiatingScaleFactor
+                    }
+                } else {
+                    return 1.0
+                }
+        }
+    }
+    
     var body: some View {
         
         VStack {
@@ -62,7 +92,7 @@ struct SideBySideBarChart: View {
                                             Rectangle()
                                                 .foregroundColor(dataSet1[i].color)
                                                 //.frame(width: width, height: (pow(dataSet1[i].value/max, 5)) * height * 1.25, alignment: .bottom)
-                                                .frame(width: width, height: (dataSet1[i].value/max) * height * bar1ScaleFactor, alignment: .bottom)
+                                                .frame(width: width, height: (dataSet1[i].value/max) * height * determineScaling(scaleDataSet1: true, dataSet1Value: dataSet1[i].value, dataset2Value: dataSet2[i].value), alignment: .bottom)
                                                 .cornerRadius(6)
                                                 .opacity(selectedUUID == dataSet1[i].id ? 0.5 : 1.0)
                                                 .onTapGesture {
@@ -82,7 +112,7 @@ struct SideBySideBarChart: View {
                                             Rectangle()
                                                 .foregroundColor(dataSet2[i].color)
                                                 //.frame(width: width, height: (pow(dataSet2[i].value/max, 5)) * height * 1.125, alignment: .bottom)
-                                                .frame(width: width, height: (dataSet2[i].value/max) * height * bar2ScaleFactor, alignment: .bottom)
+                                                .frame(width: width, height: (dataSet2[i].value/max) * height * determineScaling(scaleDataSet1: false, dataSet1Value: dataSet1[i].value, dataset2Value: dataSet2[i].value), alignment: .bottom)
                                                 .cornerRadius(6)
                                                 .opacity(selectedUUID == dataSet2[i].id ? 0.5 : 1.0)
                                                 .onTapGesture {
