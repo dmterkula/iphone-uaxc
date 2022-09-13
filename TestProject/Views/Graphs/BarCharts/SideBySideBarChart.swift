@@ -57,7 +57,8 @@ struct SideBySideBarChart: View {
                                         ZStack {
                                             Rectangle()
                                                 .foregroundColor(dataSet1[i].color)
-                                                .frame(width: width, height: (pow(dataSet1[i].value/max, 5)) * height * 1.25, alignment: .bottom)
+                                                //.frame(width: width, height: (pow(dataSet1[i].value/max, 5)) * height * 1.25, alignment: .bottom)
+                                                .frame(width: width, height: (dataSet1[i].value/max) * height, alignment: .bottom)
                                                 .cornerRadius(6)
                                                 .opacity(selectedUUID == dataSet1[i].id ? 0.5 : 1.0)
                                                 .onTapGesture {
@@ -76,7 +77,8 @@ struct SideBySideBarChart: View {
                                         ZStack {
                                             Rectangle()
                                                 .foregroundColor(dataSet2[i].color)
-                                                .frame(width: width, height: (pow(dataSet2[i].value/max, 5)) * height * 1.125, alignment: .bottom)
+                                                //.frame(width: width, height: (pow(dataSet2[i].value/max, 5)) * height * 1.125, alignment: .bottom)
+                                                .frame(width: width, height: (dataSet2[i].value/max) * height, alignment: .bottom)
                                                 .cornerRadius(6)
                                                 .opacity(selectedUUID == dataSet2[i].id ? 0.5 : 1.0)
                                                 .onTapGesture {

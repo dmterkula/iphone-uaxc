@@ -14,6 +14,22 @@ struct MeetSplitsComparisonView: View {
     @State var comparisonSeason: String = ""
     @State var tTestDTOs: [TTestDTO] = []
     @State var meetSplitBarComparisons: [MeetSplitBarComparison] = []
+    @State var meetsDisclosureGroupDict: [String: Binding<Bool>] = [:]
+    
+    
+    @State var meet1Bool = false
+    @State var meet2Bool = false
+    @State var meet3Bool = false
+    @State var meet4Bool = false
+    @State var meet5Bool = false
+    @State var meet6Bool = false
+    @State var meet7Bool = false
+    @State var meet8Bool = false
+    @State var meet9Bool = false
+    @State var meet10Bool = false
+    @State var bindingBools: [Binding<Bool>] = []
+    
+    
     
     // each meet has milesplits and each ile splits has bars
     
@@ -21,6 +37,7 @@ struct MeetSplitsComparisonView: View {
     let dataService = DataService()
     
     func fetchSeasons() {
+        bindingBools =  [$meet1Bool, $meet2Bool, $meet3Bool, $meet4Bool, $meet5Bool, $meet6Bool, $meet7Bool, $meet8Bool, $meet9Bool, $meet10Bool]
         dataService.fetchMeetInfo() { (result) in
             DispatchQueue.main.async {
                 switch result {
@@ -34,11 +51,15 @@ struct MeetSplitsComparisonView: View {
     }
     
     func initialzeBars() {
+        
         if(!tTestDTOs.isEmpty) {
                         
+            var i = 0
             for tTestDTO in tTestDTOs {
                 
                 let meetName = tTestDTO.distributionSummaryComparisonYear[0].label.components(separatedBy: " ")[0]
+                meetsDisclosureGroupDict[meetName] = bindingBools[i]
+                i = i + 1
                 var barComparisons: [BarComparison] = []
                 
                 for i in 0..<(tTestDTO.distributionSummaryComparisonYear.count) {
@@ -82,12 +103,6 @@ struct MeetSplitsComparisonView: View {
             }
             
         }
-    }
-    
-    func createPValueInterpretation(tTestResult: TTestResult) -> String {
-        
-        let percent = (tTestResult.pvalue * 100).rounded(toPlaces: 2)
-        return "There is a " + String(percent) + " percent chance that the differnce in Avg. splits times compared to PR pace is due to chance/expected variation"
     }
     
     var body: some View {
@@ -141,25 +156,30 @@ struct MeetSplitsComparisonView: View {
                         
                         if (!meetSplitBarComparisons.isEmpty) {
                             
-                            ForEach(meetSplitBarComparisons) { meetSplitBarComparison in
+                            ForEach($meetSplitBarComparisons) { meetSplitBarComparison in
                                 
-                                VStack(spacing: 20) {
-                                    
-                                    Text(meetSplitBarComparison.meetName + " Splits Comparisons").font(.title2)
-                                    
-                                    let mile1ComparisonDescriptor = createPValueInterpretation(tTestResult: meetSplitBarComparison.tTestResults[0])
-                                    let mile2ComparisonDescriptor = createPValueInterpretation(tTestResult: meetSplitBarComparison.tTestResults[1])
-                                    let mile3ComparisonDescriptor = createPValueInterpretation(tTestResult: meetSplitBarComparison.tTestResults[2])
-                                    
-                                    SideBySideBarChart(barComparison: meetSplitBarComparison.mile1BarComparison, title: "Mile 1 Pace as a Percent of PR Pace", descriptor: mile1ComparisonDescriptor, height: geometry.size.height / 3, width: (geometry.size.width / ( 1.5 * Double(meetSplitBarComparison.mile1BarComparison.barsDataSet1.count))))
-                                    
-                                    SideBySideBarChart(barComparison: meetSplitBarComparison.mile2BarComparison, title: "Mile 2 Pace as a percent of PR Pace", descriptor: mile2ComparisonDescriptor, height: geometry.size.height / 3, width: (geometry.size.width / ( 1.5 * Double(meetSplitBarComparison.mile2BarComparison.barsDataSet1.count))))
-                                    
-                                    SideBySideBarChart(barComparison: meetSplitBarComparison.mile3BarComparison, title: "Mile 3 Pace as a Percent of PR Pace", descriptor: mile3ComparisonDescriptor, height: geometry.size.height / 3, width: (geometry.size.width / ( 1.5 * Double(meetSplitBarComparison.mile3BarComparison.barsDataSet1.count))))
-                                    
-                                }.background(.thinMaterial)
+                                let meetName: String = meetSplitBarComparison.meetName.wrappedValue
                                 
-                            }.padding(.bottom, 40)
+                                DisclosureGroup(isExpanded: self.meetsDisclosureGroupDict[meetName]!) {
+                                    MeetSplitsComparisonChart(meetSplitBarComparison: meetSplitBarComparison, geometry: geometry)
+                                
+                                } label: {
+                                    Text(meetName)
+                                    .onTapGesture {
+                                        withAnimation {
+                                            self.meetsDisclosureGroupDict[meetName]!.wrappedValue.toggle()
+                                            }
+                                        }
+                                    }
+                                .accentColor(.white)
+                                .font(.title3)
+                                .padding(.all)
+                                .background(.thinMaterial)
+                                .cornerRadius(8)
+                                .padding(.top, 20)
+                               
+                                
+                            }.padding(.bottom, 20)
                             
                         }
                       
