@@ -16,6 +16,7 @@ struct SideBySideBarChart: View {
     var descriptor: String = ""
     var height: Double
     var width: Double
+    var barDifferentiatingScaleFactor: Double = 1.0
     
     
     var body: some View {
@@ -49,7 +50,10 @@ struct SideBySideBarChart: View {
                     if(!dataSet1.isEmpty && !dataSet2.isEmpty) {
                         let max = (dataSet1 + dataSet2).sorted(by: { $0.value > $1.value })[0].value
                         ForEach(Array(dataSet1.enumerated()), id: \.offset) { i, element in
-                        
+                            
+                            let bar1ScaleFactor = (dataSet1[i].value < dataSet2[i].value) ? barDifferentiatingScaleFactor : 1.0
+                            let bar2ScaleFactor = (dataSet2[i].value < dataSet1[i].value) ? barDifferentiatingScaleFactor : 1.0
+                            
                             VStack { // side by side bars and group label
                                 HStack(alignment: .bottom, spacing: 0) { // 2 bars side by side
                                     
@@ -58,7 +62,7 @@ struct SideBySideBarChart: View {
                                             Rectangle()
                                                 .foregroundColor(dataSet1[i].color)
                                                 //.frame(width: width, height: (pow(dataSet1[i].value/max, 5)) * height * 1.25, alignment: .bottom)
-                                                .frame(width: width, height: (dataSet1[i].value/max) * height, alignment: .bottom)
+                                                .frame(width: width, height: (dataSet1[i].value/max) * height * bar1ScaleFactor, alignment: .bottom)
                                                 .cornerRadius(6)
                                                 .opacity(selectedUUID == dataSet1[i].id ? 0.5 : 1.0)
                                                 .onTapGesture {
@@ -78,7 +82,7 @@ struct SideBySideBarChart: View {
                                             Rectangle()
                                                 .foregroundColor(dataSet2[i].color)
                                                 //.frame(width: width, height: (pow(dataSet2[i].value/max, 5)) * height * 1.125, alignment: .bottom)
-                                                .frame(width: width, height: (dataSet2[i].value/max) * height, alignment: .bottom)
+                                                .frame(width: width, height: (dataSet2[i].value/max) * height * bar2ScaleFactor, alignment: .bottom)
                                                 .cornerRadius(6)
                                                 .opacity(selectedUUID == dataSet2[i].id ? 0.5 : 1.0)
                                                 .onTapGesture {

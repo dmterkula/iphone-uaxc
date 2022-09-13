@@ -26,11 +26,11 @@ struct MeetSplitsComparisonChart: View {
             let mile2ComparisonDescriptor = createPValueInterpretation(tTestResult: meetSplitBarComparison.tTestResults[1])
             let mile3ComparisonDescriptor = createPValueInterpretation(tTestResult: meetSplitBarComparison.tTestResults[2])
             
-            SideBySideBarChart(barComparison: meetSplitBarComparison.mile1BarComparison, title: "Mile 1 Pace as a Percent of PR Pace", descriptor: mile1ComparisonDescriptor, height: geometry.size.height / 3, width: (geometry.size.width / ( 1.33 * Double(meetSplitBarComparison.mile1BarComparison.barsDataSet1.count))))
+            SideBySideBarChart(barComparison: meetSplitBarComparison.mile1BarComparison, title: "Mile 1 Pace as a Percent of PR Pace", descriptor: mile1ComparisonDescriptor, height: geometry.size.height / 3, width: (geometry.size.width / ( 1.33 * Double(meetSplitBarComparison.mile1BarComparison.barsDataSet1.count))), barDifferentiatingScaleFactor: 0.9)
             
-            SideBySideBarChart(barComparison: meetSplitBarComparison.mile2BarComparison, title: "Mile 2 Pace as a percent of PR Pace", descriptor: mile2ComparisonDescriptor, height: geometry.size.height / 3, width: (geometry.size.width / ( 1.33 * Double(meetSplitBarComparison.mile2BarComparison.barsDataSet1.count))))
+            SideBySideBarChart(barComparison: meetSplitBarComparison.mile2BarComparison, title: "Mile 2 Pace as a percent of PR Pace", descriptor: mile2ComparisonDescriptor, height: geometry.size.height / 3, width: (geometry.size.width / ( 1.33 * Double(meetSplitBarComparison.mile2BarComparison.barsDataSet1.count))), barDifferentiatingScaleFactor: 0.9)
             
-            SideBySideBarChart(barComparison: meetSplitBarComparison.mile3BarComparison, title: "Mile 3 Pace as a Percent of PR Pace", descriptor: mile3ComparisonDescriptor, height: geometry.size.height / 3, width: (geometry.size.width / ( 1.33 * Double(meetSplitBarComparison.mile3BarComparison.barsDataSet1.count))))
+            SideBySideBarChart(barComparison: meetSplitBarComparison.mile3BarComparison, title: "Mile 3 Pace as a Percent of PR Pace", descriptor: mile3ComparisonDescriptor, height: geometry.size.height / 3, width: (geometry.size.width / ( 1.33 * Double(meetSplitBarComparison.mile3BarComparison.barsDataSet1.count))), barDifferentiatingScaleFactor: 0.9)
         }
     }
 }
