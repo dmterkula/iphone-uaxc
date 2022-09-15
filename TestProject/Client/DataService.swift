@@ -9,12 +9,12 @@ import Foundation
 
 class DataService {
     static let dataService = DataService()
-    fileprivate let baseUrlString = "http://ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+    fileprivate let baseUrlString = "7uyfdpbnyj.execute-api.us-east-2.amazonaws.com"
     
     func fetchPRs(lastIncludedGradClass: String, completition: @escaping (Result<PRDTO, Error>) -> Void) {
         var componentUrl = URLComponents()
-        componentUrl.scheme = "http"
-        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
         componentUrl.path = "/xc/PRs/forAll"
         
         let queryItem = URLQueryItem(name: "filter.gradClassAfter", value: lastIncludedGradClass)
@@ -56,8 +56,8 @@ class DataService {
     
     func fetchMeetResults(meetName: String, year: String, completition: @escaping (Result<MeetPerformanceResponse, Error>) -> Void) {
         var componentUrl = URLComponents()
-        componentUrl.scheme = "http"
-        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
         componentUrl.path = "/xc/getMeetResultByMeetName"
         
         let meetQueryItem = URLQueryItem(name: "filter.meetName", value: meetName)
@@ -100,8 +100,8 @@ class DataService {
     
     func fetchMeetSplitsForRunner(runnerName: String, year: String, completition: @escaping (Result<MeetSplitsResponse, Error>) -> Void) {
         var componentUrl = URLComponents()
-        componentUrl.scheme = "http"
-        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
         componentUrl.path = "/xc/meetMileSplits/forRunner"
         
         let runnerQueryItem = URLQueryItem(name: "filter.runner", value: runnerName)
@@ -144,8 +144,8 @@ class DataService {
     
     func fetchMeetSumary(meetName: String, year: String, resultsPerCategory: String, completition: @escaping (Result<MeetSummaryResponse, Error>) -> Void) {
         var componentUrl = URLComponents()
-        componentUrl.scheme = "http"
-        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
         componentUrl.path = "/xc/meetSummary"
         
         let runnerQueryItem = URLQueryItem(name: "filter.meet", value: meetName)
@@ -188,8 +188,8 @@ class DataService {
     
     func fetchRunnerProfile(runnerName: String, completition: @escaping (Result<RunnerProfileResponse, Error>) -> Void) {
         var componentUrl = URLComponents()
-        componentUrl.scheme = "http"
-        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
         componentUrl.path = "/xc/runnerProfile/"
         
         let runnerQueryItem = URLQueryItem(name: "filter.name", value: runnerName)
@@ -229,8 +229,8 @@ class DataService {
     
     func fetchMeetResultsByRunnerName(runnerName: String, startSeason: String, endSeason: String, completition: @escaping (Result<MeetResultsForRunnerResponse, Error>) -> Void) {
         var componentUrl = URLComponents()
-        componentUrl.scheme = "http"
-        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
         componentUrl.path = "/xc/getMeetResultByName"
         
         let runnerQueryItem = URLQueryItem(name: "filter.runner", value: runnerName)
@@ -272,8 +272,8 @@ class DataService {
     
     func fetchAggregateStats(completition: @escaping (Result<AggregateStatsResponse, Error>) -> Void) {
         var componentUrl = URLComponents()
-        componentUrl.scheme = "http"
-        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
         componentUrl.path = "/xc/aggregateStats"
         
         guard let validURL = componentUrl.url else {
@@ -311,8 +311,8 @@ class DataService {
     
     func fetchHistoricalMeetComparison(baseMeet: String, comparisonMeet: String, completition: @escaping (Result<HistoricalMeetComparisonResponse, Error>) -> Void) {
         var componentUrl = URLComponents()
-        componentUrl.scheme = "http"
-        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
         componentUrl.path = "/xc/historicallyCompareMeets"
         
         let baseMeetQueryItem = URLQueryItem(name: "baseMeetName", value: baseMeet)
@@ -356,8 +356,8 @@ class DataService {
     
     func fetchTimeTrialResults(season: String, scaleTo5k: String, completition: @escaping (Result<[TimeTrialResultsDTO], Error>) -> Void) {
         var componentUrl = URLComponents()
-        componentUrl.scheme = "http"
-        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
         componentUrl.path = "/xc/timeTrialResults"
         
         let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
@@ -398,8 +398,8 @@ class DataService {
     
     func fetchMeetInfo(completition: @escaping (Result<MeetInfoResponse, Error>) -> Void) {
         var componentUrl = URLComponents()
-        componentUrl.scheme = "http"
-        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
         componentUrl.path = "/xc/getMeetNames"
         
         guard let validURL = componentUrl.url else {
@@ -435,8 +435,8 @@ class DataService {
     
     func fetchPossibleRunners(season: String, completition: @escaping (Result<[Runner], Error>) -> Void) {
         var componentUrl = URLComponents()
-        componentUrl.scheme = "http"
-        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
         componentUrl.path = "/xc/runners"
         
         
@@ -477,8 +477,8 @@ class DataService {
     
     func fetchTimeTrialProgressions(season: String, adjustMeetDistance: String, completition: @escaping (Result<TimeTrialProgressionResponse, Error>) -> Void) {
         var componentUrl = URLComponents()
-        componentUrl.scheme = "http"
-        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
         componentUrl.path = "/xc/timeTrial/progression"
         
         
@@ -520,8 +520,8 @@ class DataService {
     
     func fetchTimeTrialComparisonsForRunners(season: String, completition: @escaping (Result<[RunnerTimeTrialComparisonToPreviousYearDTO], Error>) -> Void) {
         var componentUrl = URLComponents()
-        componentUrl.scheme = "http"
-        componentUrl.host = "ec2-3-14-8-216.us-east-2.compute.amazonaws.com"
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
         componentUrl.path = "/xc/timeTrialResults/compareRunnersBetweenYears"
         
         
@@ -551,6 +551,51 @@ class DataService {
             do {
                 //let json = try JSONSerialization.jsonObject(with: validData, options: [])
                 let response = try JSONDecoder().decode([RunnerTimeTrialComparisonToPreviousYearDTO].self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    
+    func fetchMeetSplitsTTestForAllMeetsInSeasons(baseSeason: String, comparisonSeason: String, comparisonPace: String, completition: @escaping (Result<[TTestDTO], Error>) -> Void) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/meetSplit/YearComparisonTTest/allMeets"
+        
+        
+        let baseSeasonQueryItem = URLQueryItem(name: "filter.baseSeason", value: baseSeason)
+        let comparisonSeasonQueryItem = URLQueryItem(name: "filter.comparisonSeason", value: comparisonSeason)
+        let comparisonPaceQueryItem = URLQueryItem(name: "comparisonPace", value: comparisonPace)
+    
+        componentUrl.queryItems = [baseSeasonQueryItem, comparisonSeasonQueryItem, comparisonPaceQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                //let json = try JSONSerialization.jsonObject(with: validData, options: [])
+                let response = try JSONDecoder().decode([TTestDTO].self, from: validData)
                 print(response)
                 completition(.success(response))
             } catch let serializationError {

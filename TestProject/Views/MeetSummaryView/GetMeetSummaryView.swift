@@ -81,7 +81,7 @@ struct GetMeetSummaryView: View {
                         }
                     
                     Group {
-                        VStack(alignment: .leading, spacing: 0) {
+                        VStack(alignment: .leading, spacing: 10) {
                             
                             DisclosureGroup(isExpanded: $prDisclosureGroupExpanded) {
                                  MeetSummaryPRsView(prsCount: meetSummaryResponse?.prs ?? PRsCount(count: 0, PRs: []))
@@ -93,7 +93,7 @@ struct GetMeetSummaryView: View {
                                     }
                                 }
                             }
-                            .background(Color(red: 107/255, green: 107/255, blue: 107/255))
+                                .background(.thinMaterial)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .accentColor(.white)
                                 .font(.title2)
@@ -110,7 +110,7 @@ struct GetMeetSummaryView: View {
                                 }
                             
                             }
-                        }.background(Color(red: 107/255, green: 107/255, blue: 107/255))
+                            }.background(.thinMaterial)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .accentColor(.white)
                                 .font(.title2)
@@ -127,7 +127,7 @@ struct GetMeetSummaryView: View {
                                     self.yearToYearDisclosureGroupExpanded.toggle()
                                 }
                             }
-                        }.background(Color(red: 107/255, green: 107/255, blue: 107/255))
+                            }.background(.thinMaterial)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .accentColor(.white)
                                 .font(.title2)
@@ -144,7 +144,7 @@ struct GetMeetSummaryView: View {
                                 }
                             
                             }
-                        }.background(Color(red: 107/255, green: 107/255, blue: 107/255))
+                            }.background(.thinMaterial)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .accentColor(.white)
                                 .font(.title2)
@@ -161,7 +161,7 @@ struct GetMeetSummaryView: View {
                                 }
                             
                             }
-                        }.background(Color(red: 107/255, green: 107/255, blue: 107/255))
+                            }.background(.thinMaterial)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .accentColor(.white)
                                 .font(.title2)
