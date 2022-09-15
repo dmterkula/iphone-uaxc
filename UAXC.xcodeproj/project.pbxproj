@@ -17,6 +17,7 @@
 		680C195528CE94EF006D1CD2 /* BarComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C195428CE94EF006D1CD2 /* BarComparison.swift */; };
 		680C195728CE9588006D1CD2 /* MeetSplitBarComparison.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C195628CE9588006D1CD2 /* MeetSplitBarComparison.swift */; };
 		680C195928CF6237006D1CD2 /* MeetSplitsComparisonChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 680C195828CF6237006D1CD2 /* MeetSplitsComparisonChart.swift */; };
+		680C195B28D10D44006D1CD2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 680C195A28D10D43006D1CD2 /* LaunchScreen.storyboard */; };
 		682255F428C17F160080B935 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682255F328C17F160080B935 /* LoadingView.swift */; };
 		682255F728C180BB0080B935 /* AggregateStatsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682255F628C180BB0080B935 /* AggregateStatsResponse.swift */; };
 		682255F928C181540080B935 /* AggregatePRStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 682255F828C181540080B935 /* AggregatePRStats.swift */; };
@@ -126,6 +127,7 @@
 		680C195428CE94EF006D1CD2 /* BarComparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarComparison.swift; sourceTree = "<group>"; };
 		680C195628CE9588006D1CD2 /* MeetSplitBarComparison.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetSplitBarComparison.swift; sourceTree = "<group>"; };
 		680C195828CF6237006D1CD2 /* MeetSplitsComparisonChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetSplitsComparisonChart.swift; sourceTree = "<group>"; };
+		680C195A28D10D43006D1CD2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		682255F328C17F160080B935 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		682255F628C180BB0080B935 /* AggregateStatsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AggregateStatsResponse.swift; sourceTree = "<group>"; };
 		682255F828C181540080B935 /* AggregatePRStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AggregatePRStats.swift; sourceTree = "<group>"; };
@@ -513,6 +515,7 @@
 			isa = PBXGroup;
 			children = (
 				684C5EAE28A90B66000C0271 /* ContentView.swift */,
+				680C195A28D10D43006D1CD2 /* LaunchScreen.storyboard */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -833,6 +836,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				680C195B28D10D44006D1CD2 /* LaunchScreen.storyboard in Resources */,
 				684C5EB428A90B6A000C0271 /* Preview Assets.xcassets in Resources */,
 				684C5EB128A90B6A000C0271 /* Assets.xcassets in Resources */,
 			);
@@ -1085,6 +1089,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -1092,8 +1097,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.terk.TestProject;
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.uaxc.uaxc-stats";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1117,6 +1122,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -1124,8 +1130,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.terk.TestProject;
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.uaxc.uaxc-stats";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

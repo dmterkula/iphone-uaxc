@@ -161,7 +161,7 @@ struct MeetSplitsComparisonView: View {
                                 let meetName: String = meetSplitBarComparison.meetName.wrappedValue
                                 
                                 DisclosureGroup(isExpanded: self.meetsDisclosureGroupDict[meetName]!) {
-                                    MeetSplitsComparisonChart(meetSplitBarComparison: meetSplitBarComparison, geometry: geometry)
+                                    MeetSplitsComparisonChart(meetSplitBarComparison: meetSplitBarComparison, geometry: geometry).background(.thinMaterial)
                                 
                                 } label: {
                                     Text(meetName)
@@ -176,10 +176,10 @@ struct MeetSplitsComparisonView: View {
                                 .padding(.all)
                                 .background(.thinMaterial)
                                 .cornerRadius(8)
-                                .padding(.top, 20)
+                                .padding(.top, 10)
                                
                                 
-                            }.padding(.bottom, 20)
+                            }.padding(.bottom, 10)
                             
                         }
                       

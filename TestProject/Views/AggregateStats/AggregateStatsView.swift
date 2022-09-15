@@ -46,6 +46,7 @@ struct AggregateStatsView: View {
                         }
                     }
                 }
+                .background(.thinMaterial)
                 .scaleEffect(0.90)
                 //.listStyle(GroupedListStyle())
             }
