@@ -167,6 +167,9 @@ struct MainMenuView: View {
                         TabButton(title: "Runner Profile", image: "person")
                             .padding(.top, 30)
                         
+                        TabButton(title: "Goals", image: "pencil")
+                            .padding(.top, 30)
+                        
                         Spacer()
                         
                     }
@@ -316,6 +319,8 @@ struct MainMenuView: View {
                 TimeTrialReturningRunnersComparisonView()
             } else if (title == "Meet Splits Comparisons") {
                 MeetSplitsComparisonView()
+            } else if (title == "Goals") {
+                GoalsView()
             }
             else {
                 HomePageView(showMenu: $showMenu)

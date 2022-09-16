@@ -25,13 +25,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #2 in closure #1 in GetPRsView.body.getter:GetPRsView.swift">
-      </ContextState>
-      <ContextState
          contextName = "closure #1 in MeetSummaryYearToYearProgressionView.body.getter:MeeSummaryYearToYearProgressionView.swift">
          <PersistentStrings>
             <PersistentString
                value = "progressionData?.slowerProgressions.results">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #2 in closure #1 in GetPRsView.body.getter:GetPRsView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DataService.createGoalForRunner(runner:season:goalElements:completition:):DataService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "String(json)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -55,6 +63,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in closure #1 in SideBySideBarChart.body.getter:SideBySideBarChart.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #1 in closure #13 in closure #1 in closure #1 in closure #1 in closure #1 in GetMeetSummaryView.body.getter:GetMeetSummaryView.swift">
          <PersistentStrings>
             <PersistentString
@@ -63,15 +74,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in SideBySideBarChart.body.getter:SideBySideBarChart.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #2 in closure #1 in TimeTrialReturningRunnersComparisonView.body.getter:TimeTrialReturningRunnersComparisonView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "seasons">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "SeasonPickerView.body.getter:SeasonPickerView.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in closure #2 in closure #2 in closure #1 in GetMeetResultsView.body.getter:GetMeetResultsView.swift">
@@ -82,7 +85,12 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "SeasonPickerView.body.getter:SeasonPickerView.swift">
+         contextName = "closure #1 in closure #2 in closure #1 in TimeTrialReturningRunnersComparisonView.body.getter:TimeTrialReturningRunnersComparisonView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "seasons">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "MeetSummaryPerformanceList.body.getter:MeetSummaryPerformanceList.swift">
@@ -116,6 +124,9 @@
                value = "tTestDTOs">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #3 in closure #1 in closure #1 in closure #1 in GoalsListView.body.getter:GoalsListView.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>
