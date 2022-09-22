@@ -605,4 +605,341 @@ class DataService {
         }.resume()
     }
     
+    func fetchGoalsForRunners(runner: String, season: String, completition: @escaping (Result<RunnersGoals, Error>) -> Void) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/goals/forRunner"
+        
+        
+        let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
+        let runnerQueryItem = URLQueryItem(name: "filter.runner", value: runner)
+    
+        componentUrl.queryItems = [seasonQueryItem, runnerQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let response = try JSONDecoder().decode(RunnersGoals.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    func createGoalForRunner(runner: String, season: String, goalElements: [GoalElement], completition: @escaping (Result<RunnersGoals, Error>) -> Void) {
+        
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/goals/create"
+        
+
+        let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
+        let runnerQueryItem = URLQueryItem(name: "filter.runner", value: runner)
+    
+        componentUrl.queryItems = [seasonQueryItem, runnerQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        var request = URLRequest(url: validURL)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        do {
+           
+            let json = try JSONEncoder().encode(GoalsPostBody(goals: goalElements))
+            request.httpBody = json
+        } catch {
+            print("unable to serialize json body")
+        }
+       
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let response = try JSONDecoder().decode(RunnersGoals.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    func deleteGoalForRunner(runner: String, season: String, goalElements: [GoalElement], completition: @escaping (Result<RunnersGoals, Error>) -> Void) {
+        
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/goals/delete"
+        
+
+        let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
+        let runnerQueryItem = URLQueryItem(name: "filter.runner", value: runner)
+    
+        componentUrl.queryItems = [seasonQueryItem, runnerQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        var request = URLRequest(url: validURL)
+        request.httpMethod = "DELETE"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        do {
+           
+            let json = try JSONEncoder().encode(GoalsPostBody(goals: goalElements))
+            request.httpBody = json
+        } catch {
+            print("unable to serialize json body")
+        }
+       
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let response = try JSONDecoder().decode(RunnersGoals.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    
+    func updateGoalForRunner(
+        runner: String,
+        season: String,
+        existingGoal: GoalElement,
+        updatedGoal: GoalElement,
+        completition: @escaping (Result<RunnersGoals, Error>) -> Void
+    ) {
+        
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/goals/update"
+        
+
+        let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
+        let runnerQueryItem = URLQueryItem(name: "filter.runner", value: runner)
+    
+        componentUrl.queryItems = [seasonQueryItem, runnerQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        var request = URLRequest(url: validURL)
+        request.httpMethod = "PUT"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        do {
+           
+            let json = try JSONEncoder().encode(UpdateGoalsPostBody(existingGoal: existingGoal, updatedGoal: updatedGoal))
+            request.httpBody = json
+        } catch {
+            print("unable to serialize json body")
+        }
+       
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let response = try JSONDecoder().decode(RunnersGoals.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    func fetchMetTimeGoals(season: String, completition: @escaping (Result<NewlyMetGoalsResponse, Error>) -> Void) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/goals/metThisSeason"
+        
+        
+        let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
+    
+        componentUrl.queryItems = [seasonQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let response = try JSONDecoder().decode(NewlyMetGoalsResponse.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    func fetchUnmetTimeGoals(season: String, completition: @escaping (Result<RunnerToUnmetGoalsResponse, Error>) -> Void) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/goals/notMetThisSeason"
+        
+        
+        let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
+    
+        componentUrl.queryItems = [seasonQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let response = try JSONDecoder().decode(RunnerToUnmetGoalsResponse.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    func fetchAllGoals(season: String, completition: @escaping (Result<GoalsForSeason, Error>) -> Void) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/goals/forSeason"
+        
+        
+        let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
+    
+        componentUrl.queryItems = [seasonQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let response = try JSONDecoder().decode(GoalsForSeason.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
 }

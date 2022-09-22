@@ -21,6 +21,7 @@ struct GetMeetSummaryView: View {
     @State var yearToYearDisclosureGroupExpanded: Bool = false
     @State var lastMeetDisclosureGroupExpanded: Bool = false
     @State var meetSplitsSummaryDisclosureGroupExpanded: Bool = false
+    @State var newlyMetGoalsDisclosureGroupExpanded: Bool = false
     let dataService = DataService()
     
     func fetchMeetNames() {
@@ -121,7 +122,7 @@ struct GetMeetSummaryView: View {
                                 MeetSummaryYearToYearProgressionView(progressionData: meetSummaryResponse?.comparisonFromLastYear)
                                 
                             } label: {
-                                Text("Compare to last year")
+                                Text("Compare to Last Year")
                                 .onTapGesture {
                                 withAnimation {
                                     self.yearToYearDisclosureGroupExpanded.toggle()
@@ -137,7 +138,7 @@ struct GetMeetSummaryView: View {
                                 GetImprovementFromLastMeetView(comparisonLastMeet: meetSummaryResponse?.comparisonLastMeet)
                                 
                             } label: {
-                                Text("Compare to previous meet")
+                                Text("Compare to Previous Meet")
                                 .onTapGesture {
                                 withAnimation {
                                     self.lastMeetDisclosureGroupExpanded.toggle()
@@ -158,6 +159,23 @@ struct GetMeetSummaryView: View {
                                 .onTapGesture {
                                 withAnimation {
                                     self.meetSplitsSummaryDisclosureGroupExpanded.toggle()
+                                }
+                            
+                            }
+                            }.background(.thinMaterial)
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .accentColor(.white)
+                                .font(.title2)
+                            
+                            DisclosureGroup(isExpanded: $newlyMetGoalsDisclosureGroupExpanded) {
+                                
+                                MetGoalsView(metGoals: meetSummaryResponse?.newlyMetGoals.metGoals ?? [])
+                                
+                            } label: {
+                                Text("Show Newly Met Goals")
+                                .onTapGesture {
+                                withAnimation {
+                                    self.newlyMetGoalsDisclosureGroupExpanded.toggle()
                                 }
                             
                             }

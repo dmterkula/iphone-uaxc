@@ -13,9 +13,10 @@ struct MeetSummaryResponse: Codable {
     var comparisonFromLastYear: ProgressionData
     var meetSplitsSummaryResponse: MeetSplitStatisticResponse
     var comparisonLastMeet: SummaryImprovementLastMeet
+    var newlyMetGoals: NewlyMetGoalsResponse
     
     private enum CodingKeys: String, CodingKey {
-        case prs, seasonBests, comparisonFromLastYear
+        case prs, seasonBests, comparisonFromLastYear, newlyMetGoals
         case meetSplitsSummaryResponse = "meetSplitStatisticResponse"
         case comparisonLastMeet = "summaryImprovementFromLastMeet"
     }

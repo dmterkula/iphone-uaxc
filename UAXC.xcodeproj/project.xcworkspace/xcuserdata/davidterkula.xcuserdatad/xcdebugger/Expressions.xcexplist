@@ -17,17 +17,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #4 in closure #1 in closure #1 in closure #1 in GetRunnerProfileView.body.getter:GetRunnerProfileView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "runnerProfileResponse?.runnerProfile.pr!">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #2 in closure #1 in GetPRsView.body.getter:GetPRsView.swift">
-      </ContextState>
-      <ContextState
          contextName = "closure #1 in MeetSummaryYearToYearProgressionView.body.getter:MeeSummaryYearToYearProgressionView.swift">
          <PersistentStrings>
             <PersistentString
@@ -39,18 +28,40 @@
          contextName = "closure #1 in SeasonPickerView.body.getter:SeasonPickerView.swift">
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in TimeTrialReturningRunnersComparisonView.fetchSeasons():TimeTrialReturningRunnersComparisonView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "Array(Set(meetInfoResponse.meets.flatMap { $0.dates.map{$0.components(separatedBy: &quot;-&quot;)[0]} })).sorted()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "closure #1 in closure #3 in closure #2 in closure #1 in GetMeetResultsView.body.getter:GetMeetResultsView.swift">
          <PersistentStrings>
             <PersistentString
                value = "meets.filter{$0.dates.map{$0.components(separatedBy: &quot;-&quot;)[0]}.contains(season)}">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MeetSplitsComparisonView.initialzeBars():MeetSplitsComparisonView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tTestDTOs">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SeasonPickerView.body.getter:SeasonPickerView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #3 in closure #1 in closure #1 in closure #1 in GoalsListView.body.getter:GoalsListView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #2 in closure #2 in closure #1 in GetMeetResultsView.body.getter:GetMeetResultsView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "meets.filter{$0.dates.map{$0.components(separatedBy: &quot;-&quot;)[0]}.contains(season)}">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "RunnerUnmetGoalsDisclosureGroup.sortUnMetGoals():RunnerUnmetGoalsDisclosureGroup.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "unMetGoals.sorted{$1.difference &gt; $0.difference}">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -63,26 +74,12 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in SideBySideBarChart.body.getter:SideBySideBarChart.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #2 in closure #1 in TimeTrialReturningRunnersComparisonView.body.getter:TimeTrialReturningRunnersComparisonView.swift">
+         contextName = "DataService.updateGoalForRunner(runner:season:existingGoal:updatedGoal:completition:):DataService.swift">
          <PersistentStrings>
             <PersistentString
-               value = "seasons">
+               value = "String(json)">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #2 in closure #2 in closure #1 in GetMeetResultsView.body.getter:GetMeetResultsView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "meets.filter{$0.dates.map{$0.components(separatedBy: &quot;-&quot;)[0]}.contains(season)}">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "SeasonPickerView.body.getter:SeasonPickerView.swift">
       </ContextState>
       <ContextState
          contextName = "MeetSummaryPerformanceList.body.getter:MeetSummaryPerformanceList.swift">
@@ -99,6 +96,28 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in NewlyMetGoalsView.body.getter:NewlyMetGoalsView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #3 in closure #1 in GoalsListView.body.getter:GoalsListView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #2 in closure #1 in TimeTrialReturningRunnersComparisonView.body.getter:TimeTrialReturningRunnersComparisonView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "seasons">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in TimeTrialReturningRunnersComparisonView.fetchSeasons():TimeTrialReturningRunnersComparisonView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Array(Set(meetInfoResponse.meets.flatMap { $0.dates.map{$0.components(separatedBy: &quot;-&quot;)[0]} })).sorted()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #2 in closure #1 in closure #2 in closure #1 in closure #1 in SideBySideBarChart.body.getter:SideBySideBarChart.swift">
          <PersistentStrings>
             <PersistentString
@@ -107,13 +126,27 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in closure #1 in SideBySideBarChart.body.getter:SideBySideBarChart.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in MeetSummaryPerformanceList.body.getter:MeetSummaryPerformanceList.swift">
       </ContextState>
       <ContextState
-         contextName = "MeetSplitsComparisonView.initialzeBars():MeetSplitsComparisonView.swift">
+         contextName = "DataService.createGoalForRunner(runner:season:goalElements:completition:):DataService.swift">
          <PersistentStrings>
             <PersistentString
-               value = "tTestDTOs">
+               value = "String(json)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #2 in closure #1 in GetPRsView.body.getter:GetPRsView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #4 in closure #1 in closure #1 in closure #1 in GetRunnerProfileView.body.getter:GetRunnerProfileView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "runnerProfileResponse?.runnerProfile.pr!">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
