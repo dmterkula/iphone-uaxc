@@ -20,9 +20,15 @@ struct ViewAllGoals: View {
     @State var metGoalsIsExpanded = false
     @State var unMetGoalsIsExpanded = false
     
+    @State var allGoalsRequestCompleted = false
+    @State var metGoalsRequestCompleted = false
+    @State var unMetGoalsRequestCompleted = false
+    
     @State var allGoalsNameFilter = ""
     @State var metGoalsNameFilter = ""
     @State var unMetGoalsNameFilter = ""
+    
+    @State var getDataButtonPushed = false
     
     @State var bars: [Bar] = []
     
@@ -69,16 +75,21 @@ struct ViewAllGoals: View {
                             SeasonPickerView(seasons: $seasons, season: $season)
                         }
                         .padding(.bottom, 15)
-                        
-                        
+                       
                         if (!season.isEmpty) {
                             Button("Get Goals") {
                                
+                                allGoalsRequestCompleted = false
+                                metGoalsRequestCompleted = false
+                                unMetGoalsRequestCompleted = false
+                                
+                                getDataButtonPushed = true
                                 dataService.fetchAllGoals(season: season) { (result) in
                                     DispatchQueue.main.async {
                                         switch result {
                                         case .success(let response):
                                             runnerGoals = response.runnerGoals
+                                            allGoalsRequestCompleted = true
                                         case .failure(let error):
                                             print(error)
                                         }
@@ -90,6 +101,7 @@ struct ViewAllGoals: View {
                                         switch result {
                                         case .success(let response):
                                             metGoals = response.metGoals
+                                            metGoalsRequestCompleted = true
                                             initializeBars()
                                         case .failure(let error):
                                             print(error)
@@ -104,6 +116,7 @@ struct ViewAllGoals: View {
                                         switch result {
                                         case .success(let response):
                                             unMetGoals = response.unMetGoals
+                                            unMetGoalsRequestCompleted = true
                                             initializeBars()
                                         case .failure(let error):
                                             print(error)
@@ -116,28 +129,43 @@ struct ViewAllGoals: View {
                                 .font(.title2)
                         }
                         
-                        if (!unMetGoals.isEmpty && !metGoals.isEmpty) {
+                        if ((!allGoalsRequestCompleted || !metGoalsRequestCompleted || !metGoalsRequestCompleted) && getDataButtonPushed) {
+                            ProgressView()
+                                 .progressViewStyle(CircularProgressViewStyle(tint: .black))
+                                 .scaleEffect(3)
+                                 .padding(.top, 20)
+                        } else {
                             
-                            MetVsUnmetGoalsBarChart(bars: $bars, height: geometry.size.height * 0.25, width: geometry.size.width * 0.33, title: "Met Vs Unmet Goals")
-                                .padding(.bottom, 20)
+                            if (runnerGoals.isEmpty && unMetGoals.isEmpty && metGoals.isEmpty && getDataButtonPushed) {
+                                Text("No goals data for the given year")
+                                    .padding(.top, 20)
+                            }
+                            // display the data all at once
                             
+                            if (!unMetGoals.isEmpty && !metGoals.isEmpty) {
+                                
+                                MetVsUnmetGoalsBarChart(bars: $bars, height: geometry.size.height * 0.25, width: geometry.size.width * 0.33, title: "Met Vs Unmet Goals")
+                                    .padding(.bottom, 20)
+                            }
+                            
+                            if (!runnerGoals.isEmpty) {
+                                
+                                ViewAllGoalsDisclosureGroup(allGoalsIsExpanded: $allGoalsIsExpanded, allGoalsNameFilter: $allGoalsNameFilter, geometry: geometry, runnerGoals: $runnerGoals)
+                            }
+                            
+                            if (!metGoals.isEmpty) {
+                                RunnerMetGoalsDisclosureGroup(metGoalsNameFilter: $metGoalsNameFilter, metGoals: $metGoals, metGoalsIsExpanded: $metGoalsIsExpanded, geometry: geometry)
+                            }
+                            if (!unMetGoals.isEmpty) {
+                                RunnerUnmetGoalsDisclosureGroup(unMetGoalsNameFilter: $unMetGoalsNameFilter, unMetGoals: $unMetGoals, unMetGoalsIsExpanded: $unMetGoalsIsExpanded, geometry: geometry)
+                            }
+                            
+                            else {
+                                Spacer().frame(minHeight: 20, maxHeight: 500)
+                            }
                         }
                         
-                        if (!runnerGoals.isEmpty) {
-                            
-                            ViewAllGoalsDisclosureGroup(allGoalsIsExpanded: $allGoalsIsExpanded, allGoalsNameFilter: $allGoalsNameFilter, geometry: geometry, runnerGoals: $runnerGoals)
-                        }
                         
-                        if (!metGoals.isEmpty) {
-                            RunnerMetGoalsDisclosureGroup(metGoalsNameFilter: $metGoalsNameFilter, metGoals: $metGoals, metGoalsIsExpanded: $metGoalsIsExpanded, geometry: geometry)
-                        }
-                        if (!unMetGoals.isEmpty) {
-                            RunnerUnmetGoalsDisclosureGroup(unMetGoalsNameFilter: $unMetGoalsNameFilter, unMetGoals: $unMetGoals, unMetGoalsIsExpanded: $unMetGoalsIsExpanded, geometry: geometry)
-                        }
-                        
-                        else {
-                            Spacer().frame(minHeight: 20, maxHeight: 500)
-                        }
 
                     } // end top vstack
                 
@@ -150,9 +178,6 @@ struct ViewAllGoals: View {
         } // end top geometry
     }
 }
-
-
-
 
 
 //struct ViewAllGoals_Previews: PreviewProvider {
