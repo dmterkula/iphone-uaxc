@@ -144,6 +144,7 @@ struct MainMenuView: View {
     
     @Binding var showMenu: Bool
     @State var runnerDisclosureIsExpanded: Bool = false
+    @State var goalsDisclosureGroupIsExpanded: Bool = false
     @State var meetDisclosureIsExpanded: Bool = false
     @State var timeTrialDisclosureIsExpanded: Bool = false
     @State var seasonComparisonDisclosureIsExpanded: Bool = false
@@ -167,9 +168,6 @@ struct MainMenuView: View {
                         TabButton(title: "Runner Profile", image: "person")
                             .padding(.top, 30)
                         
-                        TabButton(title: "Goals", image: "pencil")
-                            .padding(.top, 30)
-                        
                         Spacer()
                         
                     }
@@ -187,6 +185,35 @@ struct MainMenuView: View {
                 .background(Color(red: 4/255, green: 130/255, blue: 0/255))
                 .cornerRadius(8)
                 .padding(.top, 200)
+                
+                
+                DisclosureGroup(isExpanded: $goalsDisclosureGroupIsExpanded) {
+                        
+                    VStack(alignment: .leading) {
+                        TabButton(title: "Goal Management", image: "pencil")
+                            .padding(.top, 30)
+                        
+                        TabButton(title: "View All Goals", image: "book")
+                            .padding(.top, 30)
+                        
+                        Spacer()
+                        
+                    }
+                } label: {
+                    Text("Goals")
+                    .onTapGesture {
+                        withAnimation {
+                            self.goalsDisclosureGroupIsExpanded.toggle()
+                            }
+                        }
+                    }
+                .accentColor(.white)
+                .font(.title3)
+                .padding(.all)
+                .background(Color(red: 4/255, green: 130/255, blue: 0/255))
+                .cornerRadius(8)
+                .padding(.top)
+                
             
                 DisclosureGroup(isExpanded: $meetDisclosureIsExpanded) {
                         
@@ -319,8 +346,10 @@ struct MainMenuView: View {
                 TimeTrialReturningRunnersComparisonView()
             } else if (title == "Meet Splits Comparisons") {
                 MeetSplitsComparisonView()
-            } else if (title == "Goals") {
-                GoalsView()
+            } else if (title == "Goal Management") {
+                RunnersGoalsView()
+            } else if (title == "View All Goals") {
+                ViewAllGoals()
             }
             else {
                 HomePageView(showMenu: $showMenu)

@@ -21,32 +21,58 @@ struct GetRunnerProfileView: View {
     @State
     var meetResultForRunnerResponse: MeetResultsForRunnerResponse?
     
+    let dataService = DataService()
+    
+    @State var season: String = ""
+    @State var runners: [Runner] = []
+    
+    
+    func fetchSeasons() {
+        dataService.fetchMeetInfo() { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let meetInfoResponse):
+                    season = Array(Set(meetInfoResponse.meets.flatMap { $0.dates.map{$0.components(separatedBy: "-")[0]} })).sorted().reversed()[0]
+                    case .failure(let error):
+                        print(error)
+                }
+            }
+        }
+    }
+    
+    func fetchRunners() {
+        
+        dataService.fetchPossibleRunners(season: season) { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let runnersResponse):
+                    runners = runnersResponse
+                    case .failure(let error):
+                        print(error)
+                }
+            }
+        }
+    }
+    
     var body: some View {
         ZStack {
-            Background().edgesIgnoringSafeArea(.all)
+            Background().edgesIgnoringSafeArea(.all).onAppear {
+                self.fetchSeasons()
+            }
+            .onChange(of: season) { newSeason in
+                self.fetchRunners()
+            }
             ScrollView {
                 VStack {
                     Text("Runner Profile")
                         .font(.largeTitle)
                         .foregroundColor(Color.white)
                     
-                    HStack {
-                        Text("Runner Name: ")
-                            .foregroundColor(.white)
-                            .font(.title2)
-                        
-                        TextField("Maria Rumely", text: $runnerName)
-                            .keyboardType(.default)
-                            .foregroundColor(.white)
-                            .placeholder(when: $runnerName.wrappedValue.isEmpty) {
-                                    Text("Maria Rumely").foregroundColor(.white)
-                            }
-                    }
-                    .padding(.top, 40)
+                    RunnerPickerView(runners: $runners, runnerLabel: $runnerName)
                     
                     Button("Get Profile") {
                         let dataService = DataService()
-                        dataService.fetchRunnerProfile(runnerName: runnerName) { (result) in
+                        dataService.fetchRunnerProfile(runnerName: runnerName.components(separatedBy: ":")[0]) { (result) in
                             DispatchQueue.main.async {
                                 switch result {
                                 case .success(let response):

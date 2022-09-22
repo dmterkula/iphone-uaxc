@@ -7,9 +7,14 @@
 
 import Foundation
 
-struct GoalsResponse: Codable {
+struct RunnersGoals: Codable, Identifiable {
     
+    var id = UUID()
     var runner: Runner
     var goals: [GoalsDTO]
+    
+    private enum CodingKeys: String, CodingKey {
+        case runner, goals
+    }
     
 }

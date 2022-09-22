@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct GoalsView: View {
+struct RunnersGoalsView: View {
     @State var season = ""
     @State var seasons: [String] = ["Select Season"]
     @State var runners: [Runner] = []
     @State var runnerName = ""
-    @State var goalsResponse: GoalsResponse?
+    @State var goalsResponse: RunnersGoals?
     @State var goalsViewModel = GoalsViewModel()
     
     let dataService = DataService()
