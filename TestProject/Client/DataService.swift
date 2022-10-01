@@ -942,4 +942,297 @@ class DataService {
         }.resume()
     }
     
+    
+    func fetchAllWorkouts(startDate: String, endDate: String, completition: @escaping (Result<[Workout], Error>) -> Void) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/workout/get"
+        
+        
+        let startDateQueryItem = URLQueryItem(name: "startDate", value: startDate)
+        let endDateQueryItem = URLQueryItem(name: "endDate", value: endDate)
+    
+        componentUrl.queryItems = [startDateQueryItem, endDateQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let decoder = JSONDecoder()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let response = try decoder.decode([Workout].self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    
+    
+    func updateWorkout(
+        date: Date,
+        title: String,
+        description: String,
+        type: String,
+        pace: String,
+        distance: Int,
+        duration: String,
+        targetCount: Int,
+        uuid: UUID,
+        icon: String,
+        completition: @escaping (Result<Workout?, Error>) -> Void
+    ) {
+        
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/workout/update"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFormatter.string(from: date)
+        
+        let dateQueryItem = URLQueryItem(name: "date", value: dateString)
+        let titleQueryItem = URLQueryItem(name: "title", value: title)
+        let descriptionQueryItem = URLQueryItem(name: "description", value: description)
+        let typeQueryItem = URLQueryItem(name: "type", value: type)
+        let durationQueryItem = URLQueryItem(name: "duration", value: duration)
+        let paceQueryItem = URLQueryItem(name: "pace", value: pace)
+        let targetCountQueryItem = URLQueryItem(name: "count", value: String(targetCount))
+        let distanceQueryItem = URLQueryItem(name: "distance", value: String(distance))
+        let iconQueryItem = URLQueryItem(name: "icon", value: icon)
+        let uuidQueryItem = URLQueryItem(name: "uuid", value: uuid.uuidString)
+    
+        componentUrl.queryItems = [dateQueryItem, titleQueryItem, descriptionQueryItem, typeQueryItem, durationQueryItem, paceQueryItem, targetCountQueryItem, distanceQueryItem, iconQueryItem, uuidQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        var request = URLRequest(url: validURL)
+        request.httpMethod = "POST"
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let decoder = JSONDecoder()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let response = try decoder.decode(Workout?.self, from: validData)
+                if (response != nil) {
+                    print(response!)
+                }
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    func createWorkout(
+        workout: Workout,
+        completition: @escaping (Result<WorkoutResponse, Error>) -> Void
+    ) {
+        
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/workout/create"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFormatter.string(from: workout.date)
+        
+        let dateQueryItem = URLQueryItem(name: "date", value: dateString)
+        let titleQueryItem = URLQueryItem(name: "title", value: workout.title)
+        let descriptionQueryItem = URLQueryItem(name: "description", value: workout.description)
+        let typeQueryItem = URLQueryItem(name: "type", value: workout.type)
+        let durationQueryItem = URLQueryItem(name: "duration", value: workout.duration)
+        let paceQueryItem = URLQueryItem(name: "pace", value: workout.pace)
+        let targetCountQueryItem = URLQueryItem(name: "count", value: String(workout.targetCount))
+        let distanceQueryItem = URLQueryItem(name: "distance", value: String(workout.targetDistance))
+        let iconQueryItem = URLQueryItem(name: "icon", value: workout.icon)
+        let uuidQueryItem = URLQueryItem(name: "uuid", value: workout.uuid.uuidString)
+        
+    
+        componentUrl.queryItems = [dateQueryItem, titleQueryItem, typeQueryItem, durationQueryItem, paceQueryItem, descriptionQueryItem, targetCountQueryItem, distanceQueryItem, iconQueryItem, uuidQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        var request = URLRequest(url: validURL)
+        request.httpMethod = "POST"
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let decoder = JSONDecoder()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let response = try decoder.decode(WorkoutResponse.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    
+    func deleteWorkout(
+        workout: Workout,
+        completition: @escaping (Result<Workout, Error>) -> Void
+    ) {
+        
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/workout/delete"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFormatter.string(from: workout.date)
+        
+        let uuidQueryItem = URLQueryItem(name: "uuid", value: workout.uuid.uuidString)
+        
+        componentUrl.queryItems = [uuidQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        var request = URLRequest(url: validURL)
+        request.httpMethod = "DELETE"
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let decoder = JSONDecoder()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let response = try decoder.decode(Workout.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    
+    func getWorkoutPlan(
+        workout: Workout,
+        completition: @escaping (Result<WorkoutPlanResponse, Error>) -> Void
+    ) {
+        
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/workout/plan"
+        
+        let uuidQueryItem = URLQueryItem(name: "uuid", value: workout.uuid.uuidString)
+        
+        componentUrl.queryItems = [uuidQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        var request = URLRequest(url: validURL)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let response = try JSONDecoder().decode(WorkoutPlanResponse.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
 }

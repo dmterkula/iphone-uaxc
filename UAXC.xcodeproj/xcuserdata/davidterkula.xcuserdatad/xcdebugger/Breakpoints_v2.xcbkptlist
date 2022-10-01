@@ -44,8 +44,8 @@
             filePath = "TestProject/Views/Main/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "332"
-            endingLineNumber = "332"
+            startingLineNumber = "358"
+            endingLineNumber = "358"
             landmarkName = "TabButton(title:image:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -224,6 +224,38 @@
             endingLineNumber = "20"
             landmarkName = "body"
             landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "0894E9B4-1BA9-467C-BB48-5D85980635FA - 9621511912a7ea14"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI._ConditionalContent&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text, UAXC.CustomDivider)&gt;, SwiftUI.Text&gt;, SwiftUI.ForEach&lt;Swift.Array&lt;UAXC.Progression&gt;, Swift.String, SwiftUI.TupleView&lt;(UAXC.ProgressionView, UAXC.CustomDivider)&gt;&gt;)&gt; in UAXC.MeetSummaryYearToYearProgressionView.body.getter : some"
+                  moduleName = "UAXC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/davidterkula/Desktop/XCode/TestProject/TestProject/Views/MeetSummaryView/YearToYearProgression/MeeSummaryYearToYearProgressionView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "1203">
+               </Location>
+               <Location
+                  uuid = "0894E9B4-1BA9-467C-BB48-5D85980635FA - 9621511912a7ea14"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI._ConditionalContent&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Text, UAXC.CustomDivider)&gt;, SwiftUI.Text&gt;, SwiftUI.ForEach&lt;Swift.Array&lt;UAXC.Progression&gt;, Swift.String, SwiftUI.TupleView&lt;(UAXC.ProgressionView, UAXC.CustomDivider)&gt;&gt;)&gt; in UAXC.MeetSummaryYearToYearProgressionView.body.getter : some"
+                  moduleName = "UAXC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/davidterkula/Desktop/XCode/TestProject/TestProject/Views/MeetSummaryView/YearToYearProgression/MeeSummaryYearToYearProgressionView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "1332">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
