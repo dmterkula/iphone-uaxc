@@ -142,9 +142,11 @@ struct HomePageView: View {
 
 struct MainMenuView: View {
     
+    @StateObject var myEvents = WorkoutStore(preview: false)
     @Binding var showMenu: Bool
     @State var runnerDisclosureIsExpanded: Bool = false
     @State var goalsDisclosureGroupIsExpanded: Bool = false
+    @State var workoutsDisclosureGroupIsExpanded: Bool = false
     @State var meetDisclosureIsExpanded: Bool = false
     @State var timeTrialDisclosureIsExpanded: Bool = false
     @State var seasonComparisonDisclosureIsExpanded: Bool = false
@@ -204,6 +206,30 @@ struct MainMenuView: View {
                     .onTapGesture {
                         withAnimation {
                             self.goalsDisclosureGroupIsExpanded.toggle()
+                            }
+                        }
+                    }
+                .accentColor(.white)
+                .font(.title3)
+                .padding(.all)
+                .background(Color(red: 4/255, green: 130/255, blue: 0/255))
+                .cornerRadius(8)
+                .padding(.top)
+                
+                DisclosureGroup(isExpanded: $workoutsDisclosureGroupIsExpanded) {
+                        
+                    VStack(alignment: .leading) {
+                        TabButton(title: "View Workouts", image: "figure.run")
+                            .padding(.top, 30)
+                        
+                        Spacer()
+                        
+                    }
+                } label: {
+                    Text("Workouts")
+                    .onTapGesture {
+                        withAnimation {
+                            self.workoutsDisclosureGroupIsExpanded.toggle()
                             }
                         }
                     }
@@ -350,6 +376,9 @@ struct MainMenuView: View {
                 RunnersGoalsView()
             } else if (title == "View All Goals") {
                 ViewAllGoals()
+            } else if (title == "View Workouts") {
+                WorkoutTabView()
+                    .environmentObject(myEvents)
             }
             else {
                 HomePageView(showMenu: $showMenu)
