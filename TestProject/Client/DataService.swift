@@ -1002,6 +1002,7 @@ class DataService {
         targetCount: Int,
         uuid: UUID,
         icon: String,
+        paceAdjustment: String,
         completition: @escaping (Result<Workout?, Error>) -> Void
     ) {
         
@@ -1024,8 +1025,9 @@ class DataService {
         let distanceQueryItem = URLQueryItem(name: "distance", value: String(distance))
         let iconQueryItem = URLQueryItem(name: "icon", value: icon)
         let uuidQueryItem = URLQueryItem(name: "uuid", value: uuid.uuidString)
+        let paceAdjustmentQueryItem = URLQueryItem(name: "paceAdjustment", value: paceAdjustment)
     
-        componentUrl.queryItems = [dateQueryItem, titleQueryItem, descriptionQueryItem, typeQueryItem, durationQueryItem, paceQueryItem, targetCountQueryItem, distanceQueryItem, iconQueryItem, uuidQueryItem]
+        componentUrl.queryItems = [dateQueryItem, titleQueryItem, descriptionQueryItem, typeQueryItem, durationQueryItem, paceQueryItem, targetCountQueryItem, distanceQueryItem, iconQueryItem, uuidQueryItem, paceAdjustmentQueryItem]
         
         guard let validURL = componentUrl.url else {
             print("failed to create url")
@@ -1090,9 +1092,10 @@ class DataService {
         let distanceQueryItem = URLQueryItem(name: "distance", value: String(workout.targetDistance))
         let iconQueryItem = URLQueryItem(name: "icon", value: workout.icon)
         let uuidQueryItem = URLQueryItem(name: "uuid", value: workout.uuid.uuidString)
+        let paceAdjustmentQueryItem = URLQueryItem(name: "paceAdjustment", value: workout.paceAdjustment)
         
     
-        componentUrl.queryItems = [dateQueryItem, titleQueryItem, typeQueryItem, durationQueryItem, paceQueryItem, descriptionQueryItem, targetCountQueryItem, distanceQueryItem, iconQueryItem, uuidQueryItem]
+        componentUrl.queryItems = [dateQueryItem, titleQueryItem, typeQueryItem, durationQueryItem, paceQueryItem, descriptionQueryItem, targetCountQueryItem, distanceQueryItem, iconQueryItem, uuidQueryItem, paceAdjustmentQueryItem]
         
         guard let validURL = componentUrl.url else {
             print("failed to create url")
@@ -1141,10 +1144,6 @@ class DataService {
         componentUrl.scheme = "https"
         componentUrl.host = baseUrlString
         componentUrl.path = "/xc/workout/delete"
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let dateString = dateFormatter.string(from: workout.date)
         
         let uuidQueryItem = URLQueryItem(name: "uuid", value: workout.uuid.uuidString)
         
