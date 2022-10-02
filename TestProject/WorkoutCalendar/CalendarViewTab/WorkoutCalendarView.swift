@@ -31,7 +31,7 @@ struct WorkoutCalendarView: View {
                         formType = .new
                     } label: {
                         Image(systemName: "plus.circle.fill")
-                            .imageScale(.medium)
+                            .imageScale(.large)
                     }
                 }
             }
