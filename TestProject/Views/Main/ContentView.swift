@@ -7,10 +7,23 @@
 
 import SwiftUI
 
+
+let lightGreyColor = Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0)
+
 struct ContentView: View {
     
+    @StateObject var authentication = Authentication()
+    
     var body: some View {
-        BaseView()
+        if (authentication.isValdiated) {
+            BaseView()
+                .environmentObject(authentication)
+        } else {
+            LoginView()
+                .environmentObject(authentication)
+        }
+        
+        
     }
     
 }
@@ -38,6 +51,7 @@ struct Background : View {
 struct BaseView: View {
     
     @State var showMenu = false
+    @EnvironmentObject var authentication: Authentication
     
     var body: some View {
         
@@ -55,7 +69,6 @@ struct BaseView: View {
                 ZStack(alignment: .leading) {
                     
                     Background().edgesIgnoringSafeArea(.all)
-                    
                     HomePageView(showMenu: self.$showMenu).preferredColorScheme(.dark)
                         .frame(width: geometry.size.width, height: geometry.size.height)
                         .offset(x: self.showMenu ? geometry.size.width/2 : 0)
@@ -79,43 +92,16 @@ struct BaseView: View {
                             .foregroundColor(.white)
                     }
                 ))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Log Out") {
+                        authentication.updateValidation(success: AuthenticationResponse(authenticated: false))
+                    }
+                    .buttonStyle(.bordered)
+                    .foregroundColor(.white)
+                }
+            }
         }
-//        TabView {
-//
-//            Text("UAXC Stats")
-//                .font(.largeTitle)
-//                .foregroundColor(Color.blue)
-//                .padding()
-//                .tabItem {
-//                    Image(systemName: "1.circle.fill")
-//                    Text("Main Page")
-//                }
-//
-//            GetPRsView()
-//            .padding(.leading, 20.0)
-//            .tabItem {
-//                Image(systemName: "2.circle.fill")
-//                Text("PRs")
-//            }
-//
-//            GetMeetResultsView()
-//                .tabItem {
-//                    Image(systemName: "3.circle.fill")
-//                    Text("Meet Results")
-//                }
-//
-//            GetMeetSplitsView()
-//                .tabItem {
-//                    Image(systemName: "4.circle.fill")
-//                    Text("Meet Splits")
-//                }
-//
-//            GetMeetSummaryView()
-//                .tabItem {
-//                    Image(systemName: "5.circle.fill")
-//                    Text("Meet Summary")
-//                }
-//        }
     }
 }
 
