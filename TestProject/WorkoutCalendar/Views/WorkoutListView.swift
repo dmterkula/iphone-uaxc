@@ -11,14 +11,25 @@ struct WorkoutListView: View {
     @EnvironmentObject var myWorkouts: WorkoutStore
     @State private var formType: WorkoutFormType?
     var body: some View {
-        NavigationStack {
             VStack {
                 
-                Text("Workouts")
-                    .font(.system(.largeTitle, design: .rounded))
-                    .padding(.top, -50)
+                HStack {
+                    Spacer()
+                    Text("Workouts")
+                        .font(.system(.largeTitle, design: .rounded))
+                        .padding(.top, -1)
                     
+                    .sheet(item: $formType) { $0 }
+                    Spacer()
+                    Button {
+                        formType = .new
+                    } label: {
+                        Image(systemName: "plus.circle.fill")
+                            .imageScale(.large)
+                    }.padding(.trailing, 10)
+                }
                 
+               
                 List {
                     ForEach(myWorkouts.workouts.sorted {$0.date < $1.date }) { workout in
                         WorkoutViewRow(workout: workout, formType: $formType)
@@ -32,19 +43,7 @@ struct WorkoutListView: View {
                     }
                 }
                 .sheet(item: $formType) { $0 }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            formType = .new
-                        } label: {
-                            Image(systemName: "plus.circle.fill")
-                                .imageScale(.large)
-                        }
-                    }
-                }
-            }
-        }
-
+             }
     }
 }
 
