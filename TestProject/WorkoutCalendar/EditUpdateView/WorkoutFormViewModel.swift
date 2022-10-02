@@ -18,6 +18,9 @@ class WorkoutFormViewModel: ObservableObject {
     @Published var targetCount: Int = 0
     @Published var uuid: UUID = UUID()
     @Published var icon: String = "📌"
+    @Published var paceAdjustmentRaw: Double = 0.0
+    @Published var paceAdjustment: String = "0"
+    
 
     var id: String?
     var updating: Bool { id != nil }
@@ -36,6 +39,8 @@ class WorkoutFormViewModel: ObservableObject {
         self.pace = workout.pace
         self.uuid = workout.uuid
         self.icon = workout.icon
+        self.paceAdjustment = workout.paceAdjustment
+        self.paceAdjustmentRaw = workout.paceAdjustment.calculateSecondsFrom()
     }
 
     var incomplete: Bool {

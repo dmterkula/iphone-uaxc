@@ -49,7 +49,7 @@ struct WorkoutViewRow: View {
 }
 
  struct WorkoutViewRow_Previews: PreviewProvider {
-     static let workout = Workout(date: Date().diff(numDays: 0), type: "Interval", title: "800m repeats", description: "800m repeats @ goal pace", targetDistance: 800, targetCount: 6, pace: "Goal", duration: "", icon: "🦁", uuid: UUID.init(uuidString: "962c7f4c-2079-40c9-ada1-02b45e3dcbee")!)
+     static let workout = Workout(date: Date().diff(numDays: 0), type: "Interval", title: "800m repeats", description: "800m repeats @ goal pace", targetDistance: 800, targetCount: 6, pace: "Goal", duration: "", icon: "🦁", uuid: UUID.init(uuidString: "962c7f4c-2079-40c9-ada1-02b45e3dcbee")!, paceAdjustment: "")
     static var previews: some View {
         WorkoutViewRow(workout: workout, formType: .constant(.new))
     }

@@ -129,7 +129,8 @@ class WorkoutStore: ObservableObject {
                     duration: workout.duration,
                     targetCount: workout.targetCount,
                     uuid: workout.uuid,
-                    icon: workout.icon) { (result) in
+                    icon: workout.icon,
+                    paceAdjustment: workout.paceAdjustment) { (result) in
                         DispatchQueue.main.async {
                             switch result {
                             case .success(let response):
