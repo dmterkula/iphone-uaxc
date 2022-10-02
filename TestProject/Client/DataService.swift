@@ -11,6 +11,10 @@ class DataService {
     static let dataService = DataService()
     fileprivate let baseUrlString = "7uyfdpbnyj.execute-api.us-east-2.amazonaws.com"
     
+    enum APIError: Error {
+        case error
+    }
+    
     func fetchPRs(lastIncludedGradClass: String, completition: @escaping (Result<PRDTO, Error>) -> Void) {
         var componentUrl = URLComponents()
         componentUrl.scheme = "https"
@@ -1229,6 +1233,61 @@ class DataService {
                 completition(.success(response))
             } catch let serializationError {
                 completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    func authenticateUser(
+        credentials: Credentials,
+        completition: @escaping (Result<AuthenticationResponse, Authentication.AuthenticationError>) -> Void
+    ) {
+        
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/authenticate"
+        
+        let usernameQueryItem = URLQueryItem(name: "username", value: credentials.username)
+        let passwordQueryItem = URLQueryItem(name: "password", value: credentials.password)
+        
+        componentUrl.queryItems = [usernameQueryItem, passwordQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        var request = URLRequest(url: validURL)
+        request.httpMethod = "GET"
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(.invalidCredentials))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let response = try JSONDecoder().decode(AuthenticationResponse.self, from: validData)
+                print(response)
+
+                if (response.authenticated) {
+                    completition(.success(response))
+                } else {
+                    completition(.failure(.invalidCredentials))
+                }
+                
+               
+            } catch _ {
+                completition(.failure(.invalidCredentials))
             }
             
         }.resume()
