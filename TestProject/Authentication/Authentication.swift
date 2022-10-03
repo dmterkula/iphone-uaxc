@@ -10,6 +10,8 @@ import SwiftUI
 class Authentication: ObservableObject {
     @Published var isValdiated = false
     @Published var user: AppUser? = nil
+    @Published var runner: Runner? = nil
+    
     
     enum AuthenticationError: Error, LocalizedError, Identifiable {
         case invalidCredentials
@@ -30,6 +32,7 @@ class Authentication: ObservableObject {
         withAnimation {
             isValdiated = success.authenticated
             user = success.user
+            runner = success.runner
         }
     }
     

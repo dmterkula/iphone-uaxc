@@ -9,6 +9,8 @@ import SwiftUI
 
 struct WorkoutViewRow: View {
     let workout: Workout
+    @EnvironmentObject var authentication: Authentication
+    
     @Binding var formType: WorkoutFormType?
     var body: some View {
         HStack {
@@ -30,12 +32,15 @@ struct WorkoutViewRow: View {
             }
             Spacer()
             VStack {
-                Button {
-                    formType = .update(workout)
-                } label: {
-                    Text("Edit")
+                
+                if (authentication.user != nil && authentication.user!.role == "coach") {
+                    Button {
+                        formType = .update(workout)
+                    } label: {
+                        Text("Edit")
+                    }
+                    .buttonStyle(.bordered)
                 }
-                .buttonStyle(.bordered)
                 
                 NavigationLink(destination: WorkoutPlanView(workout: workout).environment(\.colorScheme, .light)) {
                     EmptyView()
