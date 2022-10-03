@@ -11,6 +11,7 @@ struct AuthenticationResponse: Codable {
     
     var authenticated: Bool
     var user: AppUser?
+    var runner: Runner?
     
 }
 

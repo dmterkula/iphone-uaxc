@@ -69,14 +69,18 @@ struct BaseView: View {
                 ZStack(alignment: .leading) {
                     
                     Background().edgesIgnoringSafeArea(.all)
-                    HomePageView(showMenu: self.$showMenu).preferredColorScheme(.dark)
+                    HomePageView(showMenu: self.$showMenu)
+                        .preferredColorScheme(.dark)
                         .frame(width: geometry.size.width, height: geometry.size.height)
                         .offset(x: self.showMenu ? geometry.size.width/2 : 0)
                         .disabled(self.showMenu ? true : false)
+                        .environmentObject(authentication)
+                    
                     if self.showMenu {
                         MainMenuView(showMenu: $showMenu)
                             .frame(width: geometry.size.width / 1.33)
                             .transition(.move(edge: .leading))
+                            .environmentObject(authentication)
                     }
                 }
                 .gesture(drag)
@@ -109,6 +113,7 @@ struct HomePageView: View {
     
     @Binding var showMenu: Bool
     @State var aggregateStatsResponse: AggregateStatsResponse?
+    @EnvironmentObject var authentication: Authentication
     var body: some View {
         
         VStack {
@@ -118,6 +123,7 @@ struct HomePageView: View {
                 .padding(.bottom, 50)
             
             AggregateStatsView(aggregateStatsResponse: $aggregateStatsResponse)
+                .environmentObject(authentication)
             
             Spacer().frame(minHeight:50, maxHeight: 150)
         }
@@ -136,6 +142,8 @@ struct MainMenuView: View {
     @State var meetDisclosureIsExpanded: Bool = false
     @State var timeTrialDisclosureIsExpanded: Bool = false
     @State var seasonComparisonDisclosureIsExpanded: Bool = false
+    
+    @EnvironmentObject var authentication: Authentication
     
     @State private var viewSelection: String? = nil
     
@@ -181,8 +189,10 @@ struct MainMenuView: View {
                         TabButton(title: "Goal Management", image: "pencil")
                             .padding(.top, 30)
                         
-                        TabButton(title: "View All Goals", image: "book")
-                            .padding(.top, 30)
+                        if (authentication.user != nil && authentication.user!.role == "coach") {
+                            TabButton(title: "View All Goals", image: "book")
+                                .padding(.top, 30)
+                        }
                         
                         Spacer()
                         
@@ -236,8 +246,10 @@ struct MainMenuView: View {
                         TabButton(title: "Meet Summary", image: "book")
                             .padding(.top, 30)
                         
-                        TabButton(title: "Historical Meet Comparisons", image: "gearshape.2")
-                            .padding(.top, 30)
+                        if (authentication.user != nil && authentication.user!.role == "coach") {
+                            TabButton(title: "Historical Meet Comparisons", image: "gearshape.2")
+                                .padding(.top, 30)
+                        }
                         
                         Spacer()
                         
@@ -266,8 +278,11 @@ struct MainMenuView: View {
                         TabButton(title: "Time Trial Progression", image: "gearshape.2")
                             .padding(.top, 30)
                         
-                        TabButton(title: "Compare Returning Runners To Last Year", image: "gearshape.2")
-                            .padding(.top, 30)
+                        if (authentication.user != nil && authentication.user!.role == "coach") {
+                            TabButton(title: "Compare Returning Runners To Last Year", image: "gearshape.2")
+                                .padding(.top, 30)
+                        }
+                        
                         
                     }
                 } label: {
@@ -284,26 +299,28 @@ struct MainMenuView: View {
                     .cornerRadius(8)
                     .padding(.top)
                 
-                DisclosureGroup(isExpanded: $seasonComparisonDisclosureIsExpanded) {
-                        
-                    VStack(alignment: .leading) {
-                        TabButton(title: "Meet Splits Comparisons", image: "stopwatch")
-                            .padding(.top, 30)
-                    }
-                } label: {
-                    Text("Season Comparison")
-                    .onTapGesture {
-                        withAnimation {
-                            self.seasonComparisonDisclosureIsExpanded.toggle()
-                            }
-                        }
-                    }.accentColor(.white)
-                    .font(.title3)
-                    .padding(.all)
-                    .background(Color(red: 4/255, green: 130/255, blue: 0/255))
-                    .cornerRadius(8)
-                    .padding(.top)
                 
+                if (authentication.user != nil && authentication.user!.role == "coach") {
+                    DisclosureGroup(isExpanded: $seasonComparisonDisclosureIsExpanded) {
+                            
+                        VStack(alignment: .leading) {
+                            TabButton(title: "Meet Splits Comparisons", image: "stopwatch")
+                                .padding(.top, 30)
+                        }
+                    } label: {
+                        Text("Season Comparison")
+                        .onTapGesture {
+                            withAnimation {
+                                self.seasonComparisonDisclosureIsExpanded.toggle()
+                                }
+                            }
+                        }.accentColor(.white)
+                        .font(.title3)
+                        .padding(.all)
+                        .background(Color(red: 4/255, green: 130/255, blue: 0/255))
+                        .cornerRadius(8)
+                        .padding(.top)
+                }
                 
                 Spacer()
             }
@@ -313,22 +330,6 @@ struct MainMenuView: View {
 //            .background(Color(red: 32/255, green: 32/255, blue: 32/255))
             .background(Color(red: 107/255, green: 107/255, blue: 107/255))
             .edgesIgnoringSafeArea(.all)
-
-        
-        //            TabButton(title: "PRs", image: "person")
-        //                .padding(.top, 120)
-        //
-        //            TabButton(title: "Meet Results", image: "person.3")
-        //                .padding(.top, 30)
-        //
-        //
-        //
-        //
-        //            TabButton(title: "Meet Summary", image: "book")
-        //                .padding(.top, 30)
-        //
-        //            TabButton(title: "Home", image: "house")
-        //                .padding(.top, 30)
                         
         
     }
@@ -360,6 +361,7 @@ struct MainMenuView: View {
                 MeetSplitsComparisonView()
             } else if (title == "Goal Management") {
                 RunnersGoalsView()
+                    .environmentObject(authentication)
             } else if (title == "View All Goals") {
                 ViewAllGoals()
             } else if (title == "View Workouts") {
