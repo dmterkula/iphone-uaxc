@@ -42,7 +42,7 @@ struct GetRunnerProfileView: View {
     
     func fetchRunners() {
         
-        dataService.fetchPossibleRunners(season: season) { (result) in
+        dataService.fetchPossibleRunners(season: season, filterForIsActive: true) { (result) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let runnersResponse):
@@ -84,7 +84,7 @@ struct GetRunnerProfileView: View {
                             }
                         }
                         
-                        dataService.fetchMeetResultsByRunnerName(runnerName: runnerName, startSeason: "", endSeason: "") { (result) in
+                        dataService.fetchMeetResultsByRunnerName(runnerName: runnerName.components(separatedBy: ":")[0], startSeason: "", endSeason: "") { (result) in
                             DispatchQueue.main.async {
                                 switch result {
                                 case .success(let response):

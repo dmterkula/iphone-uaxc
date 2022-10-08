@@ -9,10 +9,14 @@ import Foundation
 
 struct Runner: Codable, Identifiable {
     var id = UUID()
-    let name: String
-    let graduatingClass: String
+    var name: String
+    var graduatingClass: String
+    var runnerId: Int = -1
+    var isActive: Bool
     
     private enum CodingKeys: String, CodingKey {
         case name, graduatingClass
+        case runnerId = "id"
+        case isActive = "active"
     }
 }

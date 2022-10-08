@@ -437,7 +437,7 @@ class DataService {
         }.resume()
     }
     
-    func fetchPossibleRunners(season: String, completition: @escaping (Result<[Runner], Error>) -> Void) {
+    func fetchPossibleRunners(season: String, filterForIsActive: Bool, completition: @escaping (Result<[Runner], Error>) -> Void) {
         var componentUrl = URLComponents()
         componentUrl.scheme = "https"
         componentUrl.host = baseUrlString
@@ -445,8 +445,9 @@ class DataService {
         
         
         let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
+        let isActiveQueryItem = URLQueryItem(name: "filter.active", value: String(filterForIsActive))
     
-        componentUrl.queryItems = [seasonQueryItem]
+        componentUrl.queryItems = [seasonQueryItem, isActiveQueryItem]
         
         guard let validURL = componentUrl.url else {
             print("failed to create url")
@@ -1292,5 +1293,128 @@ class DataService {
             
         }.resume()
     }
+    
+    func updateRunner(
+        name: String,
+        runnerId: Int,
+        graduatingClass: String,
+        isActive: Bool,
+        completition: @escaping (Result<Runner?, Error>) -> Void
+    ) {
+        
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/runners/update"
+        
+        let runnerIdQueryItem = URLQueryItem(name: "runnerId", value: String(runnerId))
+       
+    
+        componentUrl.queryItems = [runnerIdQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        var request = URLRequest(url: validURL)
+        request.httpMethod = "PUT"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        do {
+           
+            let json = try JSONEncoder().encode(RunnerRequestBody(name: name, graduatingClass: graduatingClass, active: isActive))
+            request.httpBody = json
+        } catch {
+            print("unable to serialize json body")
+        }
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+       
+                let response = try JSONDecoder().decode(Runner?.self, from: validData)
+                if (response != nil) {
+                    print(response!)
+                }
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    
+    func createRunner(
+        name: String,
+        graduatingClass: String,
+        isActive: Bool,
+        completition: @escaping (Result<Runner?, Error>) -> Void
+    ) {
+        
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/runners/create"
+        
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        var request = URLRequest(url: validURL)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        do {
+           
+            let json = try JSONEncoder().encode(RunnerRequestBody(name: name, graduatingClass: graduatingClass, active: isActive))
+            request.httpBody = json
+        } catch {
+            print("unable to serialize json body")
+        }
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+       
+                let response = try JSONDecoder().decode(Runner?.self, from: validData)
+                if (response != nil) {
+                    print(response!)
+                }
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
     
 }

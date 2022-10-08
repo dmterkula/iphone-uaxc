@@ -32,7 +32,7 @@ struct GetMeetSplitsView: View {
     
     func fetchRunners() {
         
-        dataService.fetchPossibleRunners(season: season) { (result) in
+        dataService.fetchPossibleRunners(season: season, filterForIsActive: true) { (result) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let runnersResponse):

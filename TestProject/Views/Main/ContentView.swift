@@ -135,6 +135,7 @@ struct HomePageView: View {
 struct MainMenuView: View {
     
     @StateObject var myEvents = WorkoutStore(preview: false)
+    @StateObject var roster = RunnerStore(preview: false)
     @Binding var showMenu: Bool
     @State var runnerDisclosureIsExpanded: Bool = false
     @State var goalsDisclosureGroupIsExpanded: Bool = false
@@ -142,6 +143,7 @@ struct MainMenuView: View {
     @State var meetDisclosureIsExpanded: Bool = false
     @State var timeTrialDisclosureIsExpanded: Bool = false
     @State var seasonComparisonDisclosureIsExpanded: Bool = false
+    @State var rosterDisclosureGroupIsExpanded: Bool = false
     
     @EnvironmentObject var authentication: Authentication
     
@@ -301,6 +303,28 @@ struct MainMenuView: View {
                 
                 
                 if (authentication.user != nil && authentication.user!.role == "coach") {
+                    DisclosureGroup(isExpanded: $rosterDisclosureGroupIsExpanded) {
+                            
+                        VStack(alignment: .leading) {
+                            TabButton(title: "Roster", image: "person.3")
+                                .padding(.top, 30)
+                        }
+                    } label: {
+                        Text("Roster")
+                        .onTapGesture {
+                            withAnimation {
+                                self.rosterDisclosureGroupIsExpanded.toggle()
+                                }
+                            }
+                        }.accentColor(.white)
+                        .font(.title3)
+                        .padding(.all)
+                        .background(Color(red: 4/255, green: 130/255, blue: 0/255))
+                        .cornerRadius(8)
+                        .padding(.top)
+                }
+                
+                if (authentication.user != nil && authentication.user!.role == "coach") {
                     DisclosureGroup(isExpanded: $seasonComparisonDisclosureIsExpanded) {
                             
                         VStack(alignment: .leading) {
@@ -367,8 +391,10 @@ struct MainMenuView: View {
             } else if (title == "View Workouts") {
                 WorkoutTabView()
                     .environmentObject(myEvents)
-            }
-            else {
+            } else if (title == "Roster") {
+                RosterManagementView()
+                    .environmentObject(roster)
+            } else {
                 HomePageView(showMenu: $showMenu)
             }
     
