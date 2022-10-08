@@ -164,7 +164,7 @@ struct WorkoutFormButtonSection: View {
                 }
                 dismiss()
             } label: {
-                Text(viewModel.updating ? "Update Event" : "Add Event")
+                Text(viewModel.updating ? "Update Workout" : "Add Workut")
             }
             .buttonStyle(.borderedProminent)
             .disabled(viewModel.incomplete)

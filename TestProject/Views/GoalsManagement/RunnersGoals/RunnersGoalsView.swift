@@ -38,7 +38,7 @@ struct RunnersGoalsView: View {
             runnerName = authentication.runner!.name
         } else {
             if (!season.isEmpty) {
-                dataService.fetchPossibleRunners(season: season) { (result) in
+                dataService.fetchPossibleRunners(season: season, filterForIsActive: true) { (result) in
                     DispatchQueue.main.async {
                         switch result {
                         case .success(let runnersResponse):
