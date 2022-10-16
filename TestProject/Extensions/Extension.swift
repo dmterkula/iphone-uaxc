@@ -106,6 +106,14 @@ extension String {
     }
 }
 
+extension Int {
+    
+    func convertToMilesString() -> String {
+        return String((Double(self) / 1609.0).rounded(toPlaces: 2))
+    }
+    
+}
+
 //extension View {
 //    func hideKeyboard() {
 //        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)

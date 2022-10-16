@@ -25,16 +25,16 @@ struct WorkoutSplitRow: View {
                         HStack(spacing: 3) {
                             Text("Target Time: ")
                                 .font(.system(size: 20))
-                            Text(runnerWorkoutSplit.targetedPaces.first!.pace)
-                                .font(.system(size: 20))
+//                            Text(runnerWorkoutSplit.targetedPaces.first!.pace)
+//                                .font(.system(size: 20))
 
                         }
                         
                         HStack(spacing: 3) {
                             Text("Target 5k Time: ")
                                 .font(.system(size: 20))
-                            Text(runnerWorkoutSplit.baseTime)
-                                .font(.system(size: 20))
+//                            Text(runnerWorkoutSplit.baseTime)
+//                                .font(.system(size: 20))
                         }
                     }
                     

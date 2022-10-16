@@ -9,12 +9,11 @@ import SwiftUI
 
 struct WorkoutFormView: View {
     @EnvironmentObject var workoutStore: WorkoutStore
-    @StateObject var viewModel: WorkoutFormViewModel
+    @ObservedObject var viewModel: WorkoutFormViewModel
     @Environment(\.dismiss) var dismiss
     @FocusState private var focus: Bool?
     @State var sliderValue: Int = 0
-    
-    
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -33,16 +32,6 @@ struct WorkoutFormView: View {
                         TextField("Description: ", text: $viewModel.description, axis: .vertical)
                             .focused($focus, equals: true)
                     }
-                   
-                   WorkoutTypeFormView(viewModel: viewModel)
-                    
-                    Picker("Target Pace", selection: $viewModel.pace) {
-                        ForEach(Workout.targetPaces, id: \.self) {pace in
-                            Text(pace)
-                        }
-                    }
-                    
-                    WorkoutFormViewSlider(viewModel: viewModel)
                     
                     Picker("Icon", selection: $viewModel.icon) {
                         ForEach(Workout.icons, id: \.self) {icon in
@@ -50,13 +39,55 @@ struct WorkoutFormView: View {
                                 .tag(icon)
                         }
                     }
+                   
+                    List {
+                        ForEach(viewModel.components) { component in
+                            Section {
+                               
+                                HStack {
+                                    
+                                    Spacer()
+                                    
+                                    Button {
+                                        viewModel.components.removeAll { $0.uuid == component.uuid }
+                                    } label: {
+                                        Image(systemName: "minus")
+                                            .imageScale(.large)
+                                    }.padding(.trailing, 5)
+                                }
+                                
+                                WorkoutComponentFormView(viewModel: component)
+                                
+                            }
+                        }
+                    }
                     
-                    WorkoutFormButtonSection(viewModel: viewModel)
+                    VStack {
+                        HStack {
+                            
+                            Spacer()
+                            
+                            Button() {
+                                viewModel.addComponent()
+                            } label: {
+                                Text("Add another component")
+                            }
+                            .buttonStyle(.borderedProminent)
+                            
+                            Spacer()
+                        }.padding(.bottom, 5)
+                        
+                        
+                        WorkoutFormButtonSection(viewModel: viewModel)
+                    }
+                    
+                  
                 } // end form
             } // end navigation
             .navigationTitle(viewModel.updating ? "Update" : "New Workout")
             .onAppear {
                 focus = true
+                // initializeComponents()
             }
         }
     }
@@ -69,23 +100,20 @@ struct WorkoutFormView_Previews: PreviewProvider {
     }
 }
 
-struct WorkoutFormViewSlider: View {
+struct WorkoutComponentFormView: View {
     
-    @ObservedObject var viewModel: WorkoutFormViewModel
-    
-    var body: some View {
-        Slider(value: $viewModel.paceAdjustmentRaw, in: -120...120, step: 1)
-        Text("Target Pace Adjusted By: " + $viewModel.paceAdjustmentRaw.wrappedValue.toMinuteSecondString())
-    }
-    
-}
-
-struct WorkoutTypeFormView: View {
-    
-    @ObservedObject var viewModel: WorkoutFormViewModel
+    @ObservedObject var viewModel: WorkoutComponentFormViewModel
+    @FocusState private var focus: Bool?
+    @State var displayInMiles: Bool = false
     
     var body: some View {
         
+        HStack {
+            Text("Description")
+            TextField("Description: ", text: $viewModel.description, axis: .vertical)
+                .focused($focus, equals: true)
+        }
+
         Picker("Workout Type", selection: $viewModel.workoutType) {
             ForEach(Workout.workoutTypes, id: \.self) {workoutType in
                 Text(workoutType)
@@ -93,9 +121,29 @@ struct WorkoutTypeFormView: View {
             }
         }
         if (viewModel.workoutType == "Interval") {
-            Picker("Interval Distance in meters", selection: $viewModel.targetDistance) {
-                ForEach(Workout.intervalDistances, id: \.self) {intDistance in
-                    Text(String(intDistance))
+            VStack {
+                Slider(value: IntDoubleBinding($viewModel.targetDistance).doubleValue, in: 100...5000, step: 1)
+                
+                HStack {
+                    let buttonTextMi = "(Miles)"
+                    let buttonTextMeter = "(Meters)"
+                    Button() {
+                        displayInMiles.toggle()
+                    } label : {
+                        if (displayInMiles) {
+                            Text(buttonTextMi)
+                        } else {
+                            Text(buttonTextMeter)
+                        }
+                    }
+                    .padding(.trailing, 10)
+                    
+                    if (displayInMiles) {
+                        Text("Target Distance: " + String((Double(viewModel.targetDistance) / 1609.0).rounded(toPlaces: 2)) + " Mi")
+                    } else {
+                        Text("Target Distance: " + String(viewModel.targetDistance) + "m")
+                    }
+                        
                 }
             }
             
@@ -107,6 +155,12 @@ struct WorkoutTypeFormView: View {
             
         
         } else if (viewModel.workoutType == "Tempo") {
+            
+            VStack {
+                Slider(value: IntDoubleBinding($viewModel.targetDistance).doubleValue, in: 1609...11263, step: 402)
+                Text("Target Distance: " + String((Double(viewModel.targetDistance) / 1609.0).rounded(toPlaces: 2)) + " Mi")
+            }
+            
             Picker("Tempo Duration (m)", selection: $viewModel.duration) {
                 ForEach(Workout.mintues, id: \.self) {minute in
                     Text(minute)
@@ -114,6 +168,17 @@ struct WorkoutTypeFormView: View {
             }
         }
         
+        Picker("Target Pace", selection: $viewModel.pace) {
+            ForEach(Workout.targetPaces, id: \.self) {pace in
+                Text(pace)
+            }
+        }
+        
+        VStack {
+            Slider(value: $viewModel.paceAdjustmentRaw, in: -120...120, step: 1)
+            Text("Target Pace Adjusted By: " + $viewModel.paceAdjustmentRaw.wrappedValue.toMinuteSecondString())
+        }
+    
     }
     
 }
@@ -121,6 +186,7 @@ struct WorkoutTypeFormView: View {
 struct WorkoutFormButtonSection: View {
     
     @ObservedObject var viewModel: WorkoutFormViewModel
+    // @Binding var workoutComponents: [WorkoutComponentFormViewModel]
     @EnvironmentObject var workoutStore: WorkoutStore
     @Environment(\.dismiss) var dismiss
     
@@ -133,32 +199,38 @@ struct WorkoutFormButtonSection: View {
                     // update this event
                     let workout = Workout(
                         date: viewModel.date,
-                        type: viewModel.workoutType,
                         title: viewModel.title,
                         description: viewModel.description,
-                        targetDistance: viewModel.targetDistance,
-                        targetCount: viewModel.targetCount,
-                        pace: viewModel.pace,
-                        duration: viewModel.duration,
                         icon: viewModel.icon,
                         uuid: viewModel.uuid,
-                        paceAdjustment: viewModel.paceAdjustmentRaw.toMinuteSecondString()
+                        components: viewModel.components.map { WorkoutComponent (
+                            description: $0.description,
+                            type: $0.workoutType,
+                            pace: $0.pace,
+                            targetDistance: $0.targetDistance,
+                            targetCount: $0.targetCount,
+                            duration: $0.duration,
+                            targetPaceAdjustment: $0.paceAdjustmentRaw.toMinuteSecondString(),
+                            uuid: $0.uuid) }
                     )
                     workoutStore.update(workout)
                 } else {
                     // create new event
                     let newWorkout =  Workout(
                         date: viewModel.date,
-                        type: viewModel.workoutType,
                         title: viewModel.title,
                         description: viewModel.description,
-                        targetDistance: viewModel.targetDistance,
-                        targetCount: viewModel.targetCount,
-                        pace: viewModel.pace,
-                        duration: viewModel.duration,
                         icon: viewModel.icon,
                         uuid: viewModel.uuid,
-                        paceAdjustment: viewModel.paceAdjustmentRaw.toMinuteSecondString()
+                        components: viewModel.components.map { WorkoutComponent (
+                            description: $0.description,
+                            type: $0.workoutType,
+                            pace: $0.pace,
+                            targetDistance: $0.targetDistance,
+                            targetCount: $0.targetCount,
+                            duration: $0.duration,
+                            targetPaceAdjustment: $0.paceAdjustmentRaw.toMinuteSecondString(),
+                            uuid: $0.uuid) }
                     )
                     workoutStore.add(newWorkout)
                 }

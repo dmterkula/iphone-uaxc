@@ -61,7 +61,7 @@ class WorkoutStore: ObservableObject {
                 dataService.deleteWorkout(workout: workout) { (result) in
                     DispatchQueue.main.async {
                         switch result {
-                        case .success(let response):
+                        case .success(_):
                             self.workouts = self.workouts.sorted(by: {
                                 $0.date.compare($1.date) == .orderedDescending
                             })
@@ -85,8 +85,8 @@ class WorkoutStore: ObservableObject {
                     DispatchQueue.main.async {
                         switch result {
                         case .success(let response):
-                            self.workouts.append(response.workout)
-                            self.changedWorkout = response.workout
+                            self.workouts.append(response)
+                            self.changedWorkout = response
                             self.workouts = self.workouts.sorted(by: {
                                 $0.date.compare($1.date) == .orderedDescending
                             })
@@ -108,7 +108,6 @@ class WorkoutStore: ObservableObject {
                 movedWorkout = workouts[index]
                 workouts[index].date = workout.date
                 workouts[index].title = workout.title
-                workouts[index].type = workout.type
                 changedWorkout = workout
             }
             
@@ -120,23 +119,11 @@ class WorkoutStore: ObservableObject {
                 changedWorkout = workout
                 
                 dataService.updateWorkout(
-                    date: workout.date,
-                    title: workout.title,
-                    description: workout.description,
-                    type: workout.type,
-                    pace: workout.pace,
-                    distance: workout.targetDistance,
-                    duration: workout.duration,
-                    targetCount: workout.targetCount,
-                    uuid: workout.uuid,
-                    icon: workout.icon,
-                    paceAdjustment: workout.paceAdjustment) { (result) in
+                    workout: workout) { (result) in
                         DispatchQueue.main.async {
                             switch result {
                             case .success(let response):
-                                if (response != nil) {
-                                    print(response)
-                                }
+                                print(response)
                                 case .failure(let error):
                                     print(error)
                             }

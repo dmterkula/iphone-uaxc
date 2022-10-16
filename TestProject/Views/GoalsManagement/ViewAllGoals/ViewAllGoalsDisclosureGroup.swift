@@ -32,7 +32,7 @@ struct ViewAllGoalsDisclosureGroup: View {
                     .frame(maxWidth: geometry.size.width * 0.95)
                 } else {
                     ForEach(runnerGoals.filter { $0.runner.name.contains(allGoalsNameFilter) }) { goal in
-                        //StaticRunnerGoalsRow(runner: goal.runner.name, goals: goal.goals)
+                        StaticRunnerGoalsRow(runner: goal.runner.name, goals: goal.goals)
                         CustomDivider(color: .white, height: 2)
                     }
                     .padding(.top, 20)
