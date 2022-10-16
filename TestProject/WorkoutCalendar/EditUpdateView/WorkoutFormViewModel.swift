@@ -10,17 +10,10 @@ import Foundation
 class WorkoutFormViewModel: ObservableObject {
     @Published var date = Date()
     @Published var title = ""
-    @Published var workoutType: String = "Interval"
     @Published var description: String = ""
-    @Published var pace: String = "Goal"
-    @Published var duration: String = "1"
-    @Published var targetDistance: Int = 400
-    @Published var targetCount: Int = 0
     @Published var uuid: UUID = UUID()
     @Published var icon: String = "📌"
-    @Published var paceAdjustmentRaw: Double = 0.0
-    @Published var paceAdjustment: String = "0"
-    
+    @Published var components: [WorkoutComponentFormViewModel] = []
 
     var id: String?
     var updating: Bool { id != nil }
@@ -30,20 +23,18 @@ class WorkoutFormViewModel: ObservableObject {
     init(_ workout: Workout) {
         self.date = workout.date
         self.title = workout.title
-        self.workoutType = workout.type
         self.id = workout.id.uuidString
         self.description = workout.description
-        self.duration = workout.duration
-        self.targetCount = workout.targetCount
-        self.targetDistance = workout.targetDistance
-        self.pace = workout.pace
         self.uuid = workout.uuid
         self.icon = workout.icon
-        self.paceAdjustment = workout.paceAdjustment
-        self.paceAdjustmentRaw = workout.paceAdjustment.calculateSecondsFrom()
+        self.components = workout.components.map { WorkoutComponentFormViewModel($0) }
+    }
+    
+    func addComponent() {
+        self.components.append(WorkoutComponentFormViewModel(WorkoutComponent(description: "", type: "Interval", pace: "Goal", targetDistance: 400, targetCount: 1, targetPaceAdjustment: "0:00", uuid: UUID())))
     }
 
     var incomplete: Bool {
-        title.isEmpty
+        title.isEmpty || components.isEmpty
     }
 }

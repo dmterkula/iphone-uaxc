@@ -3,6 +3,9 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #1 in closure #1 in WorkoutFormButtonSection.body.getter:WorkoutFormView.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #1 in closure #1 in MeetSummaryPRsView.body.getter:MeetSummaryPRsView.swift">
          <PersistentStrings>
             <PersistentString
@@ -13,6 +16,25 @@
             </PersistentString>
             <PersistentString
                value = "prsCount.PRs">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #4 in closure #1 in closure #1 in closure #1 in GetRunnerProfileView.body.getter:GetRunnerProfileView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "runnerProfileResponse?.runnerProfile.pr!">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #6 in closure #1 in closure #1 in closure #1 in WorkoutFormView.body.getter:WorkoutFormView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "viewModel.components">
+            </PersistentString>
+            <PersistentString
+               value = "WorkoutComponentFormViewModel()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -28,22 +50,6 @@
          contextName = "closure #1 in SeasonPickerView.body.getter:SeasonPickerView.swift">
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #3 in closure #2 in closure #1 in GetMeetResultsView.body.getter:GetMeetResultsView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "meets.filter{$0.dates.map{$0.components(separatedBy: &quot;-&quot;)[0]}.contains(season)}">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "MeetSplitsComparisonView.initialzeBars():MeetSplitsComparisonView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "tTestDTOs">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "closure #2 in closure #1 in closure #1 in closure #1 in LoginPage.body.getter:ContentView.swift">
          <PersistentStrings>
             <PersistentString
@@ -52,10 +58,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in closure #3 in closure #2 in closure #1 in GetMeetResultsView.body.getter:GetMeetResultsView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "meets.filter{$0.dates.map{$0.components(separatedBy: &quot;-&quot;)[0]}.contains(season)}">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #1 in closure #2 in BaseView.body.getter:ContentView.swift">
          <PersistentStrings>
             <PersistentString
                value = "authentication.authenticationResponse.user.role">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MeetSplitsComparisonView.initialzeBars():MeetSplitsComparisonView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tTestDTOs">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -134,6 +156,20 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "WorkoutStore.update(_:):WorkoutStore.swift">
+      </ContextState>
+      <ContextState
+         contextName = "WorkoutComponentFormView.body.getter:WorkoutFormView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "WorkoutComponentFormViewModel.init(_:):WorkoutComponentFormViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "workoutComponent.targetPaceAdjustment.calculateSecondsFrom()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #2 in closure #1 in closure #2 in closure #1 in closure #1 in SideBySideBarChart.body.getter:SideBySideBarChart.swift">
          <PersistentStrings>
             <PersistentString
@@ -159,12 +195,10 @@
          contextName = "closure #1 in closure #2 in closure #1 in GetPRsView.body.getter:GetPRsView.swift">
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #4 in closure #1 in closure #1 in closure #1 in GetRunnerProfileView.body.getter:GetRunnerProfileView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "runnerProfileResponse?.runnerProfile.pr!">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "WorkoutComponentFormViewModel.paceAdjustmentRaw.getter:WorkoutComponentFormViewModel.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DataService.updateWorkout(workout:completition:):DataService.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

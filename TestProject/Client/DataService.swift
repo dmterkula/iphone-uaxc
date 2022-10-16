@@ -994,21 +994,9 @@ class DataService {
         }.resume()
     }
     
-    
-    
     func updateWorkout(
-        date: Date,
-        title: String,
-        description: String,
-        type: String,
-        pace: String,
-        distance: Int,
-        duration: String,
-        targetCount: Int,
-        uuid: UUID,
-        icon: String,
-        paceAdjustment: String,
-        completition: @escaping (Result<Workout?, Error>) -> Void
+        workout: Workout,
+        completition: @escaping (Result<Workout, Error>) -> Void
     ) {
         
         var componentUrl = URLComponents()
@@ -1018,89 +1006,12 @@ class DataService {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        let dateString = dateFormatter.string(from: date)
-        
-        let dateQueryItem = URLQueryItem(name: "date", value: dateString)
-        let titleQueryItem = URLQueryItem(name: "title", value: title)
-        let descriptionQueryItem = URLQueryItem(name: "description", value: description)
-        let typeQueryItem = URLQueryItem(name: "type", value: type)
-        let durationQueryItem = URLQueryItem(name: "duration", value: duration)
-        let paceQueryItem = URLQueryItem(name: "pace", value: pace)
-        let targetCountQueryItem = URLQueryItem(name: "count", value: String(targetCount))
-        let distanceQueryItem = URLQueryItem(name: "distance", value: String(distance))
-        let iconQueryItem = URLQueryItem(name: "icon", value: icon)
-        let uuidQueryItem = URLQueryItem(name: "uuid", value: uuid.uuidString)
-        let paceAdjustmentQueryItem = URLQueryItem(name: "paceAdjustment", value: paceAdjustment)
-    
-        componentUrl.queryItems = [dateQueryItem, titleQueryItem, descriptionQueryItem, typeQueryItem, durationQueryItem, paceQueryItem, targetCountQueryItem, distanceQueryItem, iconQueryItem, uuidQueryItem, paceAdjustmentQueryItem]
-        
-        guard let validURL = componentUrl.url else {
-            print("failed to create url")
-            return
-        }
-        
-        print(validURL)
-        
-        var request = URLRequest(url: validURL)
-        request.httpMethod = "POST"
-        
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let httpResponse = response as? HTTPURLResponse {
-                print("API status: \(httpResponse.statusCode)")
-            }
-            
-            guard let validData = data, error == nil else {
-                completition(.failure(error!))
-                return
-            }
-            
-            print(validData)
-            
-            do {
-                let decoder = JSONDecoder()
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy-MM-dd"
-                decoder.dateDecodingStrategy = .formatted(formatter)
-                let response = try decoder.decode(Workout?.self, from: validData)
-                if (response != nil) {
-                    print(response!)
-                }
-                completition(.success(response))
-            } catch let serializationError {
-                completition(.failure(serializationError))
-            }
-            
-        }.resume()
-    }
-    
-    func createWorkout(
-        workout: Workout,
-        completition: @escaping (Result<WorkoutResponse, Error>) -> Void
-    ) {
-        
-        var componentUrl = URLComponents()
-        componentUrl.scheme = "https"
-        componentUrl.host = baseUrlString
-        componentUrl.path = "/xc/workout/create"
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateString = dateFormatter.string(from: workout.date)
         
-        let dateQueryItem = URLQueryItem(name: "date", value: dateString)
-        let titleQueryItem = URLQueryItem(name: "title", value: workout.title)
-        let descriptionQueryItem = URLQueryItem(name: "description", value: workout.description)
-        let typeQueryItem = URLQueryItem(name: "type", value: workout.type)
-        let durationQueryItem = URLQueryItem(name: "duration", value: workout.duration)
-        let paceQueryItem = URLQueryItem(name: "pace", value: workout.pace)
-        let targetCountQueryItem = URLQueryItem(name: "count", value: String(workout.targetCount))
-        let distanceQueryItem = URLQueryItem(name: "distance", value: String(workout.targetDistance))
-        let iconQueryItem = URLQueryItem(name: "icon", value: workout.icon)
-        let uuidQueryItem = URLQueryItem(name: "uuid", value: workout.uuid.uuidString)
-        let paceAdjustmentQueryItem = URLQueryItem(name: "paceAdjustment", value: workout.paceAdjustment)
-        
+        let idQueryItem = URLQueryItem(name: "workoutUUID", value: workout.uuid.uuidString)
+      
     
-        componentUrl.queryItems = [dateQueryItem, titleQueryItem, typeQueryItem, durationQueryItem, paceQueryItem, descriptionQueryItem, targetCountQueryItem, distanceQueryItem, iconQueryItem, uuidQueryItem, paceAdjustmentQueryItem]
+        componentUrl.queryItems = [idQueryItem]
         
         guard let validURL = componentUrl.url else {
             print("failed to create url")
@@ -1110,7 +1021,19 @@ class DataService {
         print(validURL)
         
         var request = URLRequest(url: validURL)
-        request.httpMethod = "POST"
+        request.httpMethod = "PUT"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        do {
+           
+            let requestBody = CreateWorkoutRequest(date: dateString, title: workout.title, description: workout.description, icon: workout.icon, uuid: workout.uuid.uuidString, components: workout.components.map{ ComponentCreationElement(description: $0.description, type: $0.type, pace: $0.pace, targetDistance: $0.targetDistance, targetCount: $0.targetCount, targetPaceAdjustment: $0.targetPaceAdjustment, uuid: $0.uuid.uuidString) })
+            
+            let json = try JSONEncoder().encode(requestBody)
+            request.httpBody = json
+            print(json)
+        } catch {
+            print("unable to serialize json body")
+        }
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
@@ -1129,7 +1052,7 @@ class DataService {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "yyyy-MM-dd"
                 decoder.dateDecodingStrategy = .formatted(formatter)
-                let response = try decoder.decode(WorkoutResponse.self, from: validData)
+                let response = try decoder.decode(Workout.self, from: validData)
                 print(response)
                 completition(.success(response))
             } catch let serializationError {
@@ -1140,9 +1063,73 @@ class DataService {
     }
     
     
-    func deleteWorkout(
+    func createWorkout(
         workout: Workout,
         completition: @escaping (Result<Workout, Error>) -> Void
+    ) {
+        
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/workout/create"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateString = dateFormatter.string(from: workout.date)
+              
+    
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        var request = URLRequest(url: validURL)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        do {
+           
+            let requestBody = CreateWorkoutRequest(date: dateString, title: workout.title, description: workout.description, icon: workout.icon, uuid: workout.uuid.uuidString, components: workout.components.map{ ComponentCreationElement(description: $0.description, type: $0.type, pace: $0.pace, targetDistance: $0.targetDistance, targetCount: $0.targetCount, targetPaceAdjustment: $0.targetPaceAdjustment, uuid: $0.uuid.uuidString) })
+            
+            let json = try JSONEncoder().encode(requestBody)
+            request.httpBody = json
+        } catch {
+            print("unable to serialize json body")
+        }
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let decoder = JSONDecoder()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let response = try decoder.decode(Workout.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    func deleteWorkout(
+        workout: Workout,
+        completition: @escaping (Result<WorkoutResponse, Error>) -> Void
     ) {
         
         var componentUrl = URLComponents()
@@ -1181,7 +1168,7 @@ class DataService {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "yyyy-MM-dd"
                 decoder.dateDecodingStrategy = .formatted(formatter)
-                let response = try decoder.decode(Workout.self, from: validData)
+                let response = try decoder.decode(WorkoutResponse.self, from: validData)
                 print(response)
                 completition(.success(response))
             } catch let serializationError {

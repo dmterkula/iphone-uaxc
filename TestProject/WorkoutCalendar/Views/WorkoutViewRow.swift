@@ -22,7 +22,6 @@ struct WorkoutViewRow: View {
                     VStack(alignment: .leading) {
                         Text(workout.title)
                             .font(.system(size: 30))
-                        Text("Pace: " + workout.pace)
                         Text(
                             workout.date.formatted(date: .abbreviated,
                                                    time: .omitted))
@@ -54,7 +53,7 @@ struct WorkoutViewRow: View {
 }
 
  struct WorkoutViewRow_Previews: PreviewProvider {
-     static let workout = Workout(date: Date().diff(numDays: 0), type: "Interval", title: "800m repeats", description: "800m repeats @ goal pace", targetDistance: 800, targetCount: 6, pace: "Goal", duration: "", icon: "🦁", uuid: UUID.init(uuidString: "962c7f4c-2079-40c9-ada1-02b45e3dcbee")!, paceAdjustment: "")
+     static let workout =  Workout(date: Date().diff(numDays: 4), title: "800m repeats", description: "6-7x 800s at goal pace",  icon: "🦁", uuid: UUID.init(uuidString: "962c7f4c-2079-40c9-ada1-02b45e3dcbee")!, components:  [WorkoutComponent(description: "6-7x 800s at goal pace", type: "Interval", pace: "goal", targetDistance: 800, targetCount: 6, duration: "", targetPaceAdjustment: "", uuid: UUID.init(uuidString: "259a8fc3-0ae7-42fd-b141-0c13f840651c")!)])
     static var previews: some View {
         WorkoutViewRow(workout: workout, formType: .constant(.new))
     }
