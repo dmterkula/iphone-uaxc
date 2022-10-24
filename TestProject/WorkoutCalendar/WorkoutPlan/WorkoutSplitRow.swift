@@ -17,20 +17,24 @@ struct WorkoutSplitRow: View {
             VStack(alignment: .leading, spacing: 3) {
                 Text(runnerWorkoutSplit.runner.name)
                     .foregroundColor(Color(red: 249/255, green: 229/255, blue: 0/255))
-                    .font(.headline)
                     .padding(.leading, 8)
+                    .font(.system(size: 20))
                 
                 HStack {
                     VStack(alignment: .leading, spacing: 3) {
                         HStack(spacing: 3) {
                             Text("Target Time: ")
-                            Text(runnerWorkoutSplit.targetedPaces.first!.pace)
+                                .font(.system(size: 20))
+//                            Text(runnerWorkoutSplit.targetedPaces.first!.pace)
+//                                .font(.system(size: 20))
 
                         }
                         
                         HStack(spacing: 3) {
                             Text("Target 5k Time: ")
-                            Text(runnerWorkoutSplit.baseTime)
+                                .font(.system(size: 20))
+//                            Text(runnerWorkoutSplit.baseTime)
+//                                .font(.system(size: 20))
                         }
                     }
                     

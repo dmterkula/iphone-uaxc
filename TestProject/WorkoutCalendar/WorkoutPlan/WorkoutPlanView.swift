@@ -16,119 +16,108 @@ struct WorkoutPlanView: View {
     
     @State var workoutPlanResponse: WorkoutPlanResponse?
     
-    var body: some View {
+    @State var showRunnerPlans: Bool = true
+    
+    func fetchWorkoutPlan() {
         
-        ZStack {
-            Background().edgesIgnoringSafeArea(.all)
-            ScrollView {
-                VStack {
-                    Section {
-                        VStack {
-
-                            Text(workout.date.formatted(date: .abbreviated,
-                                                        time: .omitted))
-                            .font(.system(.largeTitle, design: .rounded))
-                            .foregroundColor(Color(red: 14/255, green: 99/255, blue: 0/255))
-
-                            Text(workout.title)
-                                .font(.system(.largeTitle, design: .rounded))
-                                .foregroundColor(Color(red: 14/255, green: 99/255, blue: 0/255))
-                                .padding(.bottom, 10)
-
-                            HStack {
-                                Spacer()
-                                HStack {
-                                    Text("Type: ")
-                                        .foregroundColor(.white)
-                                        .font(.system(.headline, design: .rounded))
-                                    Text(workout.type)
-                                        .foregroundColor(.white).bold()
-                                        .font(.system(.headline, design: .rounded))
-                                }
-                                
-                                Spacer()
-                                
-                                if (workout.type == "Interval") {
-                                    HStack {
-                                        Text("Reps: ")
-                                            .foregroundColor(.white)
-                                            .font(.system(.headline, design: .rounded))
-                                        Text(String(workout.targetCount))
-                                            .foregroundColor(.white).bold()
-                                            .font(.system(.headline, design: .rounded))
-                                    }
-                                } else {
-                                    HStack {
-                                        Text("Duration: ")
-                                            .foregroundColor(.white)
-                                            .font(.system(.headline, design: .rounded))
-                                        Text(String(workout.duration))
-                                            .foregroundColor(.white).bold()
-                                            .font(.system(.headline, design: .rounded))
-                                    }
-                                }
-                                
-                                Spacer()
-                                
-                                HStack {
-                                    Text("Pace: ")
-                                        .foregroundColor(.white)
-                                        .font(.system(.headline, design: .rounded))
-                                    Text(workout.pace)
-                                        .foregroundColor(.white).bold()
-                                        .font(.system(.headline, design: .rounded))
-                                }
-                                
-                                Spacer()
-                                
-                            }
-                        }
-                    }.padding(.bottom, 15)
-                   
+        dataService.getWorkoutPlan(workout: workout) { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    workoutPlanResponse = response
                     
-                    Button("Get Workout Plan") {
-                        
-                        dataService.getWorkoutPlan(workout: workout) { (result) in
-                            DispatchQueue.main.async {
-                                switch result {
-                                case .success(let response):
-                                    workoutPlanResponse = response
-                                    case .failure(let error):
-                                        print(error)
-                                }
-                            }
-                        }
-                        
-                    }
-                    .foregroundColor(Color(red: 249/255, green: 229/255, blue: 0/255))
-                    .font(.system(.title2, design: .rounded))
-                    .buttonStyle(.bordered)
-                    .tint(.white)
-                    
-                    
-                    if (workoutPlanResponse != nil) {
-                        DisclosureGroup(isExpanded: $workoutPlanDisclosureGroupisExpanded) {
-                            WorkoutPlanSplitsView(runnerWorkoutPlans: workoutPlanResponse!.workoutPlans)
-                        } label: {
-                            Text("Workout Plan")
-                            .onTapGesture {
-                            withAnimation {
-                                self.workoutPlanDisclosureGroupisExpanded.toggle()
-                            }
-                        }
-                    }
-                        .background(.thinMaterial)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .accentColor(.white)
-                        .font(.system(.title, design: .rounded))
-                    }
-                    
+                case .failure(let error):
+                    print(error)
                 }
             }
-        }.environment(\.colorScheme, .dark)
-        // end zstack
+        }
         
     }
+    
+    var body: some View {
+        
+        GeometryReader { geometry in
+            ZStack {
+                Background().edgesIgnoringSafeArea(.all)
+                    .onAppear {
+                        fetchWorkoutPlan()
+                    }
+                    VStack {
+                        VStack {
+                            Text(workout.date.formatted(date: .abbreviated,
+                                                        time: .omitted))
+                            .foregroundColor(.white)
+                            Text(workout.title)
+                                .font(.title)
+                                .foregroundColor(.white)
+                            
+                            Text(workout.title)
+                                .font(.title3)
+                                .foregroundColor(.white)
+                          
+                        }.padding(.bottom, 10)
+                       
+                        HStack {
+                            
+                            Spacer()
+                            
+                            Button() {
+                                showRunnerPlans.toggle()
+                            } label: {
+                                if (showRunnerPlans) {
+                                    Text("Show By Component")
+                                        .foregroundColor(Color(red: 249/255, green: 229/255, blue: 0/255))
+                                } else {
+                                    Text("Show By Runner")
+                                        .foregroundColor(Color(red: 249/255, green: 229/255, blue: 0/255))
+                                }
+                            }
+                            
+                            Spacer()
+                            
+                        }.padding(.bottom, 10)
+                        
+                        if (workoutPlanResponse != nil) {
+                            
+                            HStack {
+                                Spacer()
+                                
+                                if (showRunnerPlans) {
+                                    List {
+                                        ForEach(workoutPlanResponse!.runnerWorkoutPlans) { runnerPlan in
+                                            RunnerWorkoutPlanRow(runnerWorkoutPlan: runnerPlan)
+                                                .listRowBackground(Color(red: 196/255, green: 207/255, blue: 209/255))
+                                        }
+                                    }
+                                    .listStyle(.plain)
+                                    .scrollContentBackground(.hidden)
+                                    .frame(width: geometry.size.width * 0.90)
+                                } else {
+            
+                                    List {
+                                        ForEach(workoutPlanResponse!.componentsToWorkoutPlans) { compPlan in
+                                            WorkoutComponentPlanRowView(workoutComponentPlan: compPlan)
+                                                .listRowBackground(Color(red: 196/255, green: 207/255, blue: 209/255))
+                                        }
+                                    }
+                                    .frame(width: geometry.size.width * 0.90)
+                                    .listStyle(.plain)
+                                    .scrollContentBackground(.hidden)
+            
+                                    
+                                }
+                                
+                                Spacer()
+                            }
+                        }
+                        
+                    }
+            }
+            // end zstack
+
+            }// end geometry
+    }
+        
 }
 
 struct WorkoutPlanView_Previews: PreviewProvider {

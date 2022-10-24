@@ -7,10 +7,23 @@
 
 import SwiftUI
 
+
+let lightGreyColor = Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0)
+
 struct ContentView: View {
     
+    @StateObject var authentication = Authentication()
+    
     var body: some View {
-        BaseView()
+        if (authentication.isValdiated) {
+            BaseView()
+                .environmentObject(authentication)
+        } else {
+            LoginView()
+                .environmentObject(authentication)
+        }
+        
+        
     }
     
 }
@@ -38,6 +51,7 @@ struct Background : View {
 struct BaseView: View {
     
     @State var showMenu = false
+    @EnvironmentObject var authentication: Authentication
     
     var body: some View {
         
@@ -55,15 +69,18 @@ struct BaseView: View {
                 ZStack(alignment: .leading) {
                     
                     Background().edgesIgnoringSafeArea(.all)
-                    
-                    HomePageView(showMenu: self.$showMenu).preferredColorScheme(.dark)
+                    HomePageView(showMenu: self.$showMenu)
+                        .preferredColorScheme(.dark)
                         .frame(width: geometry.size.width, height: geometry.size.height)
                         .offset(x: self.showMenu ? geometry.size.width/2 : 0)
                         .disabled(self.showMenu ? true : false)
+                        .environmentObject(authentication)
+                    
                     if self.showMenu {
                         MainMenuView(showMenu: $showMenu)
                             .frame(width: geometry.size.width / 1.33)
                             .transition(.move(edge: .leading))
+                            .environmentObject(authentication)
                     }
                 }
                 .gesture(drag)
@@ -79,43 +96,16 @@ struct BaseView: View {
                             .foregroundColor(.white)
                     }
                 ))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Log Out") {
+                        authentication.updateValidation(success: AuthenticationResponse(authenticated: false))
+                    }
+                    .buttonStyle(.bordered)
+                    .foregroundColor(.white)
+                }
+            }
         }
-//        TabView {
-//
-//            Text("UAXC Stats")
-//                .font(.largeTitle)
-//                .foregroundColor(Color.blue)
-//                .padding()
-//                .tabItem {
-//                    Image(systemName: "1.circle.fill")
-//                    Text("Main Page")
-//                }
-//
-//            GetPRsView()
-//            .padding(.leading, 20.0)
-//            .tabItem {
-//                Image(systemName: "2.circle.fill")
-//                Text("PRs")
-//            }
-//
-//            GetMeetResultsView()
-//                .tabItem {
-//                    Image(systemName: "3.circle.fill")
-//                    Text("Meet Results")
-//                }
-//
-//            GetMeetSplitsView()
-//                .tabItem {
-//                    Image(systemName: "4.circle.fill")
-//                    Text("Meet Splits")
-//                }
-//
-//            GetMeetSummaryView()
-//                .tabItem {
-//                    Image(systemName: "5.circle.fill")
-//                    Text("Meet Summary")
-//                }
-//        }
     }
 }
 
@@ -123,6 +113,7 @@ struct HomePageView: View {
     
     @Binding var showMenu: Bool
     @State var aggregateStatsResponse: AggregateStatsResponse?
+    @EnvironmentObject var authentication: Authentication
     var body: some View {
         
         VStack {
@@ -132,6 +123,7 @@ struct HomePageView: View {
                 .padding(.bottom, 50)
             
             AggregateStatsView(aggregateStatsResponse: $aggregateStatsResponse)
+                .environmentObject(authentication)
             
             Spacer().frame(minHeight:50, maxHeight: 150)
         }
@@ -143,6 +135,7 @@ struct HomePageView: View {
 struct MainMenuView: View {
     
     @StateObject var myEvents = WorkoutStore(preview: false)
+    @StateObject var roster = RunnerStore(preview: false)
     @Binding var showMenu: Bool
     @State var runnerDisclosureIsExpanded: Bool = false
     @State var goalsDisclosureGroupIsExpanded: Bool = false
@@ -150,6 +143,9 @@ struct MainMenuView: View {
     @State var meetDisclosureIsExpanded: Bool = false
     @State var timeTrialDisclosureIsExpanded: Bool = false
     @State var seasonComparisonDisclosureIsExpanded: Bool = false
+    @State var rosterDisclosureGroupIsExpanded: Bool = false
+    
+    @EnvironmentObject var authentication: Authentication
     
     @State private var viewSelection: String? = nil
     
@@ -195,8 +191,10 @@ struct MainMenuView: View {
                         TabButton(title: "Goal Management", image: "pencil")
                             .padding(.top, 30)
                         
-                        TabButton(title: "View All Goals", image: "book")
-                            .padding(.top, 30)
+                        if (authentication.user != nil && authentication.user!.role == "coach") {
+                            TabButton(title: "View All Goals", image: "book")
+                                .padding(.top, 30)
+                        }
                         
                         Spacer()
                         
@@ -250,8 +248,10 @@ struct MainMenuView: View {
                         TabButton(title: "Meet Summary", image: "book")
                             .padding(.top, 30)
                         
-                        TabButton(title: "Historical Meet Comparisons", image: "gearshape.2")
-                            .padding(.top, 30)
+                        if (authentication.user != nil && authentication.user!.role == "coach") {
+                            TabButton(title: "Historical Meet Comparisons", image: "gearshape.2")
+                                .padding(.top, 30)
+                        }
                         
                         Spacer()
                         
@@ -280,8 +280,11 @@ struct MainMenuView: View {
                         TabButton(title: "Time Trial Progression", image: "gearshape.2")
                             .padding(.top, 30)
                         
-                        TabButton(title: "Compare Returning Runners To Last Year", image: "gearshape.2")
-                            .padding(.top, 30)
+                        if (authentication.user != nil && authentication.user!.role == "coach") {
+                            TabButton(title: "Compare Returning Runners To Last Year", image: "gearshape.2")
+                                .padding(.top, 30)
+                        }
+                        
                         
                     }
                 } label: {
@@ -298,26 +301,50 @@ struct MainMenuView: View {
                     .cornerRadius(8)
                     .padding(.top)
                 
-                DisclosureGroup(isExpanded: $seasonComparisonDisclosureIsExpanded) {
-                        
-                    VStack(alignment: .leading) {
-                        TabButton(title: "Meet Splits Comparisons", image: "stopwatch")
-                            .padding(.top, 30)
-                    }
-                } label: {
-                    Text("Season Comparison")
-                    .onTapGesture {
-                        withAnimation {
-                            self.seasonComparisonDisclosureIsExpanded.toggle()
-                            }
-                        }
-                    }.accentColor(.white)
-                    .font(.title3)
-                    .padding(.all)
-                    .background(Color(red: 4/255, green: 130/255, blue: 0/255))
-                    .cornerRadius(8)
-                    .padding(.top)
                 
+                if (authentication.user != nil && authentication.user!.role == "coach") {
+                    DisclosureGroup(isExpanded: $rosterDisclosureGroupIsExpanded) {
+                            
+                        VStack(alignment: .leading) {
+                            TabButton(title: "Roster", image: "person.3")
+                                .padding(.top, 30)
+                        }
+                    } label: {
+                        Text("Roster")
+                        .onTapGesture {
+                            withAnimation {
+                                self.rosterDisclosureGroupIsExpanded.toggle()
+                                }
+                            }
+                        }.accentColor(.white)
+                        .font(.title3)
+                        .padding(.all)
+                        .background(Color(red: 4/255, green: 130/255, blue: 0/255))
+                        .cornerRadius(8)
+                        .padding(.top)
+                }
+                
+                if (authentication.user != nil && authentication.user!.role == "coach") {
+                    DisclosureGroup(isExpanded: $seasonComparisonDisclosureIsExpanded) {
+                            
+                        VStack(alignment: .leading) {
+                            TabButton(title: "Meet Splits Comparisons", image: "stopwatch")
+                                .padding(.top, 30)
+                        }
+                    } label: {
+                        Text("Season Comparison")
+                        .onTapGesture {
+                            withAnimation {
+                                self.seasonComparisonDisclosureIsExpanded.toggle()
+                                }
+                            }
+                        }.accentColor(.white)
+                        .font(.title3)
+                        .padding(.all)
+                        .background(Color(red: 4/255, green: 130/255, blue: 0/255))
+                        .cornerRadius(8)
+                        .padding(.top)
+                }
                 
                 Spacer()
             }
@@ -327,22 +354,6 @@ struct MainMenuView: View {
 //            .background(Color(red: 32/255, green: 32/255, blue: 32/255))
             .background(Color(red: 107/255, green: 107/255, blue: 107/255))
             .edgesIgnoringSafeArea(.all)
-
-        
-        //            TabButton(title: "PRs", image: "person")
-        //                .padding(.top, 120)
-        //
-        //            TabButton(title: "Meet Results", image: "person.3")
-        //                .padding(.top, 30)
-        //
-        //
-        //
-        //
-        //            TabButton(title: "Meet Summary", image: "book")
-        //                .padding(.top, 30)
-        //
-        //            TabButton(title: "Home", image: "house")
-        //                .padding(.top, 30)
                         
         
     }
@@ -374,13 +385,16 @@ struct MainMenuView: View {
                 MeetSplitsComparisonView()
             } else if (title == "Goal Management") {
                 RunnersGoalsView()
+                    .environmentObject(authentication)
             } else if (title == "View All Goals") {
                 ViewAllGoals()
             } else if (title == "View Workouts") {
                 WorkoutTabView()
                     .environmentObject(myEvents)
-            }
-            else {
+            } else if (title == "Roster") {
+                RosterManagementView()
+                    .environmentObject(roster)
+            } else {
                 HomePageView(showMenu: $showMenu)
             }
     

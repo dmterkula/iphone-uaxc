@@ -64,6 +64,55 @@ extension Date {
     
 }
 
+extension Double {
+    
+    func toPaddedString() -> String {
+        if (self < 10) {
+            return "0" + String(self)
+        } else {
+            return String(self)
+        }
+    }
+    
+    func toMinuteSecondString() -> String {
+        let minutes: Int = Int((self / 60))
+        var seconds = (self.truncatingRemainder(dividingBy: 60)).rounded(toPlaces: 1)
+            if (self < 0) {
+                seconds *= -1
+                let secondsString = seconds.toPaddedString()
+                return "-" + String(minutes * -1) + ":" + secondsString
+            } else {
+                return String(minutes) + ":" + seconds.toPaddedString()
+            }
+    }
+    
+    
+}
+
+extension String {
+    
+    func calculateSecondsFrom() -> Double {
+        
+        if (self.isEmpty) {
+            return 0.0
+        }
+        
+        let splitTime: [String] = self.components(separatedBy: ":")
+        if (self.contains("-")) {
+            return (Double(splitTime[0]) ?? 0.0) * 60 + (Double(splitTime[1]) ?? 0.0) * -1
+        } else {
+            return (Double(splitTime[0]) ?? 0.0) * 60 + (Double(splitTime[1]) ?? 0.0)
+        }
+    }
+}
+
+extension Int {
+    
+    func convertToMilesString() -> String {
+        return String((Double(self) / 1609.0).rounded(toPlaces: 2))
+    }
+    
+}
 
 //extension View {
 //    func hideKeyboard() {

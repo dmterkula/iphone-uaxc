@@ -14,6 +14,7 @@ struct RunnersGoalsView: View {
     @State var runnerName = ""
     @State var goalsResponse: RunnersGoals?
     @State var goalsViewModel = GoalsViewModel()
+    @EnvironmentObject var authentication: Authentication
     
     let dataService = DataService()
     
@@ -32,16 +33,25 @@ struct RunnersGoalsView: View {
     
     func fetchRunners() {
         
-        dataService.fetchPossibleRunners(season: season) { (result) in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let runnersResponse):
-                    runners = runnersResponse
-                    case .failure(let error):
-                        print(error)
+        if (authentication.user?.role == "runner" && authentication.runner != nil) {
+            runners = [ authentication.runner! ]
+            runnerName = authentication.runner!.name
+        } else {
+            if (!season.isEmpty) {
+                dataService.fetchPossibleRunners(season: season, filterForIsActive: true) { (result) in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success(let runnersResponse):
+                            runners = runnersResponse
+                            case .failure(let error):
+                                print(error)
+                        }
+                    }
                 }
             }
+
         }
+
     }
     
     var body: some View {
@@ -51,9 +61,20 @@ struct RunnersGoalsView: View {
                 Background().edgesIgnoringSafeArea(.all)
                     .onAppear{
                         self.fetchSeasons()
+                        self.fetchRunners()
                     }
             
-                    VStack() {
+                VStack() {
+                    if (authentication.user != nil && authentication.user!.role == "runner" && authentication.runner != nil) {
+                        Text(authentication.runner!.name + "'s Goals")
+                            .font(.largeTitle)
+                            .foregroundColor(Color.white)
+                        
+                        HStack {
+                            SeasonPickerView(seasons: $seasons, season: $season)
+                        }.padding(.bottom, 15)
+                        
+                    } else { // coaches view
                         Text("Runner's Goals")
                             .font(.largeTitle)
                             .foregroundColor(Color.white)
@@ -72,49 +93,52 @@ struct RunnersGoalsView: View {
                                 
                             }.padding(.bottom, 15)
                         }
-                        
-                        if (!runnerName.isEmpty && !season.isEmpty) {
-                            Button("Get Goals") {
-                               
-                                let dataService = DataService()
-                                let name = runnerName.components(separatedBy: ":")[0]
-                                dataService.fetchGoalsForRunners(runner: name, season: season) { (result) in
-                                    DispatchQueue.main.async {
-                                        switch result {
-                                        case .success(let goals):
-                                            goalsResponse = goals
-                                            if (goalsResponse != nil) {
-                                                goalsViewModel.goals.removeAll()
-                                                goalsViewModel.goals.append(contentsOf: goalsResponse!.goals)
-                                            }
-                                            case .failure(let error):
-                                                print(error)
+                    }
+                    
+                    
+                    
+                    if (!runnerName.isEmpty && !season.isEmpty) {
+                        Button("Get Goals") {
+                           
+                            let dataService = DataService()
+                            let name = runnerName.components(separatedBy: ":")[0]
+                            dataService.fetchGoalsForRunners(runner: name, season: season) { (result) in
+                                DispatchQueue.main.async {
+                                    switch result {
+                                    case .success(let goals):
+                                        goalsResponse = goals
+                                        if (goalsResponse != nil) {
+                                            goalsViewModel.goals.removeAll()
+                                            goalsViewModel.goals.append(contentsOf: goalsResponse!.goals)
                                         }
+                                        case .failure(let error):
+                                            print(error)
                                     }
-                                    
                                 }
                                 
-                            }.foregroundColor(Color(red: 249/255, green: 229/255, blue: 0/255))
-                                .font(.title2)
-                        }
-                        
-                        if (goalsResponse != nil) {
-                            ScrollView {
-                                HStack {
-                                    Spacer()
-                                    GoalsListView(runnerName: $runnerName, season: $season, goalsViewModel: goalsViewModel)
-                                        .frame(width: geometry.size.width * 0.95, height: geometry.size.height, alignment: .center)
-                                        .background(.thinMaterial)
-                                    Spacer()
-                                }
-                               
                             }
                             
-                        } else {
-                            Spacer().frame(minHeight: 20, maxHeight: 500)
+                        }.foregroundColor(Color(red: 249/255, green: 229/255, blue: 0/255))
+                            .font(.title2)
+                    }
+                    
+                    if (goalsResponse != nil) {
+                        ScrollView {
+                            HStack {
+                                Spacer()
+                                GoalsListView(runnerName: $runnerName, season: $season, goalsViewModel: goalsViewModel)
+                                    .frame(width: geometry.size.width * 0.95, height: geometry.size.height, alignment: .center)
+                                    .background(.thinMaterial)
+                                Spacer()
+                            }
+                           
                         }
+                        
+                    } else {
+                        Spacer().frame(minHeight: 20, maxHeight: 500)
+                    }
 
-                    } // end top vstack
+                } // end top vstack
                 
 
             } // end zstack

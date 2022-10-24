@@ -13,6 +13,7 @@ struct AggregateStatsView: View {
     var isLoading = false
     @Binding
     var aggregateStatsResponse: AggregateStatsResponse?
+    @EnvironmentObject var authentication: Authentication
     
     var body: some View {
         if (aggregateStatsResponse == nil) {
