@@ -13,6 +13,7 @@ let lightGreyColor = Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255
 struct ContentView: View {
     
     @StateObject var authentication = Authentication()
+    @StateObject var appInfo = AppVersionChecker()
     
     var body: some View {
         if (authentication.isValdiated) {
@@ -21,6 +22,7 @@ struct ContentView: View {
         } else {
             LoginView()
                 .environmentObject(authentication)
+                .environmentObject(appInfo)
         }
         
         
