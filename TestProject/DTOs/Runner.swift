@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Runner: Codable, Identifiable {
+struct Runner: Codable, Identifiable, Equatable {
     var id = UUID()
     var name: String
     var graduatingClass: String

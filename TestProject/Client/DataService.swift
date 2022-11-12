@@ -197,7 +197,7 @@ class DataService {
         componentUrl.path = "/xc/runnerProfile/"
         
         let runnerQueryItem = URLQueryItem(name: "filter.name", value: runnerName)
-    
+        
         componentUrl.queryItems = [runnerQueryItem]
         
         guard let validURL = componentUrl.url else {
@@ -240,7 +240,7 @@ class DataService {
         let runnerQueryItem = URLQueryItem(name: "filter.runner", value: runnerName)
         let startSeasonQueryItem = URLQueryItem(name: "filter.startSeason", value: startSeason)
         let endSeasonQueryItem = URLQueryItem(name: "filter.endSeason", value: endSeason)
-    
+        
         componentUrl.queryItems = [runnerQueryItem, startSeasonQueryItem, endSeasonQueryItem]
         
         guard let validURL = componentUrl.url else {
@@ -321,7 +321,7 @@ class DataService {
         
         let baseMeetQueryItem = URLQueryItem(name: "baseMeetName", value: baseMeet)
         let comparisonMeetQueryItem = URLQueryItem(name: "compareMeetName", value: comparisonMeet)
-    
+        
         componentUrl.queryItems = [baseMeetQueryItem, comparisonMeetQueryItem]
         
         guard let validURL = componentUrl.url else {
@@ -366,7 +366,7 @@ class DataService {
         
         let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
         let scaleTo5kQueryItem = URLQueryItem(name: "filter.scaleTo5k", value: scaleTo5k)
-    
+        
         componentUrl.queryItems = [seasonQueryItem, scaleTo5kQueryItem]
         
         guard let validURL = componentUrl.url else {
@@ -446,7 +446,7 @@ class DataService {
         
         let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
         let isActiveQueryItem = URLQueryItem(name: "filter.active", value: String(filterForIsActive))
-    
+        
         componentUrl.queryItems = [seasonQueryItem, isActiveQueryItem]
         
         guard let validURL = componentUrl.url else {
@@ -489,7 +489,7 @@ class DataService {
         
         let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
         let adjustQueryItem = URLQueryItem(name: "adjustForMeetDistance", value: adjustMeetDistance)
-    
+        
         componentUrl.queryItems = [seasonQueryItem, adjustQueryItem]
         
         guard let validURL = componentUrl.url else {
@@ -531,7 +531,7 @@ class DataService {
         
         
         let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
-    
+        
         componentUrl.queryItems = [seasonQueryItem]
         
         guard let validURL = componentUrl.url else {
@@ -576,7 +576,7 @@ class DataService {
         let baseSeasonQueryItem = URLQueryItem(name: "filter.baseSeason", value: baseSeason)
         let comparisonSeasonQueryItem = URLQueryItem(name: "filter.comparisonSeason", value: comparisonSeason)
         let comparisonPaceQueryItem = URLQueryItem(name: "comparisonPace", value: comparisonPace)
-    
+        
         componentUrl.queryItems = [baseSeasonQueryItem, comparisonSeasonQueryItem, comparisonPaceQueryItem]
         
         guard let validURL = componentUrl.url else {
@@ -619,7 +619,7 @@ class DataService {
         
         let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
         let runnerQueryItem = URLQueryItem(name: "filter.runner", value: runner)
-    
+        
         componentUrl.queryItems = [seasonQueryItem, runnerQueryItem]
         
         guard let validURL = componentUrl.url else {
@@ -659,10 +659,10 @@ class DataService {
         componentUrl.host = baseUrlString
         componentUrl.path = "/xc/goals/create"
         
-
+        
         let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
         let runnerQueryItem = URLQueryItem(name: "filter.runner", value: runner)
-    
+        
         componentUrl.queryItems = [seasonQueryItem, runnerQueryItem]
         
         guard let validURL = componentUrl.url else {
@@ -677,13 +677,13 @@ class DataService {
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         do {
-           
+            
             let json = try JSONEncoder().encode(GoalsPostBody(goals: goalElements))
             request.httpBody = json
         } catch {
             print("unable to serialize json body")
         }
-       
+        
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
                 print("API status: \(httpResponse.statusCode)")
@@ -714,10 +714,10 @@ class DataService {
         componentUrl.host = baseUrlString
         componentUrl.path = "/xc/goals/delete"
         
-
+        
         let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
         let runnerQueryItem = URLQueryItem(name: "filter.runner", value: runner)
-    
+        
         componentUrl.queryItems = [seasonQueryItem, runnerQueryItem]
         
         guard let validURL = componentUrl.url else {
@@ -732,13 +732,13 @@ class DataService {
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         do {
-           
+            
             let json = try JSONEncoder().encode(GoalsPostBody(goals: goalElements))
             request.httpBody = json
         } catch {
             print("unable to serialize json body")
         }
-       
+        
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
                 print("API status: \(httpResponse.statusCode)")
@@ -776,10 +776,10 @@ class DataService {
         componentUrl.host = baseUrlString
         componentUrl.path = "/xc/goals/update"
         
-
+        
         let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
         let runnerQueryItem = URLQueryItem(name: "filter.runner", value: runner)
-    
+        
         componentUrl.queryItems = [seasonQueryItem, runnerQueryItem]
         
         guard let validURL = componentUrl.url else {
@@ -794,13 +794,13 @@ class DataService {
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         do {
-           
+            
             let json = try JSONEncoder().encode(UpdateGoalsPostBody(existingGoal: existingGoal, updatedGoal: updatedGoal))
             request.httpBody = json
         } catch {
             print("unable to serialize json body")
         }
-       
+        
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let httpResponse = response as? HTTPURLResponse {
                 print("API status: \(httpResponse.statusCode)")
@@ -832,7 +832,7 @@ class DataService {
         
         
         let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
-    
+        
         componentUrl.queryItems = [seasonQueryItem]
         
         guard let validURL = componentUrl.url else {
@@ -873,7 +873,7 @@ class DataService {
         
         
         let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
-    
+        
         componentUrl.queryItems = [seasonQueryItem]
         
         guard let validURL = componentUrl.url else {
@@ -914,7 +914,7 @@ class DataService {
         
         
         let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
-    
+        
         componentUrl.queryItems = [seasonQueryItem]
         
         guard let validURL = componentUrl.url else {
@@ -957,7 +957,7 @@ class DataService {
         
         let startDateQueryItem = URLQueryItem(name: "startDate", value: startDate)
         let endDateQueryItem = URLQueryItem(name: "endDate", value: endDate)
-    
+        
         componentUrl.queryItems = [startDateQueryItem, endDateQueryItem]
         
         guard let validURL = componentUrl.url else {
@@ -1009,8 +1009,8 @@ class DataService {
         let dateString = dateFormatter.string(from: workout.date)
         
         let idQueryItem = URLQueryItem(name: "workoutUUID", value: workout.uuid.uuidString)
-      
-    
+        
+        
         componentUrl.queryItems = [idQueryItem]
         
         guard let validURL = componentUrl.url else {
@@ -1025,7 +1025,7 @@ class DataService {
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         do {
-           
+            
             let requestBody = CreateWorkoutRequest(date: dateString, title: workout.title, description: workout.description, icon: workout.icon, uuid: workout.uuid.uuidString, components: workout.components.map{ ComponentCreationElement(description: $0.description, type: $0.type, pace: $0.pace, targetDistance: $0.targetDistance, targetCount: $0.targetCount, targetPaceAdjustment: $0.targetPaceAdjustment, uuid: $0.uuid.uuidString) })
             
             let json = try JSONEncoder().encode(requestBody)
@@ -1076,8 +1076,8 @@ class DataService {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateString = dateFormatter.string(from: workout.date)
-              
-    
+        
+        
         
         guard let validURL = componentUrl.url else {
             print("failed to create url")
@@ -1091,7 +1091,7 @@ class DataService {
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         do {
-           
+            
             let requestBody = CreateWorkoutRequest(date: dateString, title: workout.title, description: workout.description, icon: workout.icon, uuid: workout.uuid.uuidString, components: workout.components.map{ ComponentCreationElement(description: $0.description, type: $0.type, pace: $0.pace, targetDistance: $0.targetDistance, targetCount: $0.targetCount, targetPaceAdjustment: $0.targetPaceAdjustment, uuid: $0.uuid.uuidString) })
             
             let json = try JSONEncoder().encode(requestBody)
@@ -1266,14 +1266,14 @@ class DataService {
             do {
                 let response = try JSONDecoder().decode(AuthenticationResponse.self, from: validData)
                 print(response)
-
+                
                 if (response.authenticated) {
                     completition(.success(response))
                 } else {
                     completition(.failure(.invalidCredentials))
                 }
                 
-               
+                
             } catch _ {
                 completition(.failure(.invalidCredentials))
             }
@@ -1295,8 +1295,8 @@ class DataService {
         componentUrl.path = "/xc/runners/update"
         
         let runnerIdQueryItem = URLQueryItem(name: "runnerId", value: String(runnerId))
-       
-    
+        
+        
         componentUrl.queryItems = [runnerIdQueryItem]
         
         guard let validURL = componentUrl.url else {
@@ -1311,7 +1311,7 @@ class DataService {
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         do {
-           
+            
             let json = try JSONEncoder().encode(RunnerRequestBody(name: name, graduatingClass: graduatingClass, active: isActive))
             request.httpBody = json
         } catch {
@@ -1331,7 +1331,7 @@ class DataService {
             print(validData)
             
             do {
-       
+                
                 let response = try JSONDecoder().decode(Runner?.self, from: validData)
                 if (response != nil) {
                     print(response!)
@@ -1370,7 +1370,7 @@ class DataService {
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         do {
-           
+            
             let json = try JSONEncoder().encode(RunnerRequestBody(name: name, graduatingClass: graduatingClass, active: isActive))
             request.httpBody = json
         } catch {
@@ -1390,7 +1390,7 @@ class DataService {
             print(validData)
             
             do {
-       
+                
                 let response = try JSONDecoder().decode(Runner?.self, from: validData)
                 if (response != nil) {
                     print(response!)
@@ -1404,4 +1404,200 @@ class DataService {
     }
     
     
+    func createSplit(
+        runnerId: Int,
+        componentUUID: String,
+        splits: [Split],
+        completition: @escaping (Result<SplitsResponse, Error>) -> Void
+    ) {
+        
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/workout/split/create"
+        
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        var request = URLRequest(url: validURL)
+        request.httpMethod = "PUT"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        do {
+            let json = try JSONEncoder().encode(CreateSplitsRequest(runnerId: runnerId, componentUUID: componentUUID, splits: splits))
+            request.httpBody = json
+        } catch {
+            print("unable to serialize json body")
+        }
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                
+                let response = try JSONDecoder().decode(SplitsResponse.self, from: validData)
+                print(response)
+                
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    func getSplits(
+        runnerId: Int,
+        componentUUID: String,
+        completition: @escaping (Result<SplitsResponse, Error>) -> Void
+    ) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/workout/splits/get"
+        
+        
+        let runnerIdQueryItem = URLQueryItem(name: "runnerId", value: String(runnerId))
+        let componentUUIDQueryItem = URLQueryItem(name: "componentUuid", value: String(componentUUID))
+        
+        componentUrl.queryItems = [runnerIdQueryItem, componentUUIDQueryItem]
+        
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let response = try JSONDecoder().decode(SplitsResponse.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    
+    func deleteSplit(
+        split: SplitElement,
+        completition: @escaping (Result<SplitsResponse, Error>) -> Void
+    ) {
+        
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/workout/split/delete"
+        
+        let uuidQueryItem = URLQueryItem(name: "uuid", value: split.uuid)
+        
+        componentUrl.queryItems = [uuidQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        var request = URLRequest(url: validURL)
+        request.httpMethod = "DELETE"
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let response = try JSONDecoder().decode(SplitsResponse.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    
+    func getWorkoutComponentResults(
+        componentUUID: String,
+        completition: @escaping (Result<WorkoutComponentSplitsResponse, Error>) -> Void
+    ) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/workout/componentResults/get"
+        
+        
+        let componentUUIDQueryItem = URLQueryItem(name: "componentUuid", value: String(componentUUID))
+        
+        componentUrl.queryItems = [componentUUIDQueryItem]
+        
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let response = try JSONDecoder().decode(WorkoutComponentSplitsResponse.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
 }

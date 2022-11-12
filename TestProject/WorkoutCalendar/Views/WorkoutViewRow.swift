@@ -41,7 +41,7 @@ struct WorkoutViewRow: View {
                     .buttonStyle(.bordered)
                 }
                 
-                NavigationLink(destination: WorkoutPlanView(workout: workout).environment(\.colorScheme, .light)) {
+                NavigationLink(destination: WorkoutLandingPageView(workout: workout).environment(\.colorScheme, .light)) {
                     EmptyView()
                 }
                 .opacity(0.0)

@@ -50,6 +50,45 @@ struct TimePicker: View {
     }
 }
 
+struct SplitTimePicker: View {
+    
+    @Binding var minutesValue: Int
+    @Binding var secondsValue: Int
+    
+    let minutes = [Int](0..<59)
+    let seconds = [Int](0..<60)
+    
+    
+    var body: some View {
+        
+        GeometryReader { geometry in
+                HStack {
+                    Spacer()
+                    
+                    Picker(selection: $minutesValue, label: Text("")) {
+                        ForEach(minutes, id: \.self) { minutesValue in
+                            Text("\(minutesValue) m")
+                        }
+                    }
+                    .frame(width: geometry.size.width / 3 , height: 100, alignment: .center)
+                    .accentColor(.white)
+                    .font(.title3)
+                    
+                    Picker(selection: $secondsValue, label: Text("")) {
+                        ForEach(seconds, id: \.self) { secondsValue in
+                            Text("\(secondsValue) s")
+                        }
+                    }
+                    .frame(width: geometry.size.width / 3 , height: 100, alignment: .center)
+                    .accentColor(.white)
+                    .font(.title3)
+                    
+                    Spacer()
+            }
+        }
+    }
+}
+
 //struct TimePicker_Previews: PreviewProvider {
 //    static var previews: some View {
 //        TimePicker()

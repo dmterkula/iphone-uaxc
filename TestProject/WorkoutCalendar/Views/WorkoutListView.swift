@@ -13,46 +13,53 @@ struct WorkoutListView: View {
     
     @State private var formType: WorkoutFormType?
     var body: some View {
-            VStack {
-                
-                HStack {
-                    Spacer()
-                    Text("Workouts")
-                        .font(.system(.largeTitle, design: .rounded))
-                        .padding(.top, -1)
-                    
-                    .sheet(item: $formType) { $0 }
-                    Spacer()
-                    
-                    if (authentication.user != nil && authentication.user!.role == "coach") {
-                        Button {
-                            formType = .new
-                        } label: {
-                            Image(systemName: "plus.circle.fill")
-                                .imageScale(.large)
-                        }.padding(.trailing, 10)
-                    }
-                }
-                
-               
-                List {
-                    ForEach(myWorkouts.workouts.sorted {$0.date < $1.date }) { workout in
-                        WorkoutViewRow(workout: workout, formType: $formType)
-                        .environmentObject(authentication)
-                        .swipeActions {
-                            
-                            if (authentication.user != nil && authentication.user!.role == "coach") {
-                                Button(role: .destructive) {
-                                    myWorkouts.delete(workout)
-                                } label: {
-                                    Image(systemName: "trash")
-                                }
-                            }
+        
+        GeometryReader { geometry in
+            ZStack(alignment: .center) {
+                Background().edgesIgnoringSafeArea(.all)
+                VStack {
+                    HStack {
+                        Spacer()
+                        Text("Workouts")
+                            .font(.system(.largeTitle, design: .rounded))
+                            .foregroundColor(.white)
+                            .padding(.top, -1)
+                        
+                            .sheet(item: $formType) { $0 }
+                        Spacer()
+                        
+                        if (authentication.user != nil && authentication.user!.role == "coach") {
+                            Button {
+                                formType = .new
+                            } label: {
+                                Image(systemName: "plus.circle.fill")
+                                    .imageScale(.large)
+                            }.padding(.trailing, 10)
                         }
                     }
+                    
+                    
+                    List {
+                        ForEach(myWorkouts.workouts.sorted {$0.date < $1.date }) { workout in
+                            WorkoutViewRow(workout: workout, formType: $formType)
+                                .environmentObject(authentication)
+                                .swipeActions {
+                                    
+                                    if (authentication.user != nil && authentication.user!.role == "coach") {
+                                        Button(role: .destructive) {
+                                            myWorkouts.delete(workout)
+                                        } label: {
+                                            Image(systemName: "trash")
+                                        }
+                                    }
+                                }
+                        }
+                    }
+                    .frame(maxWidth: geometry.size.width * 0.95)
+                    .sheet(item: $formType) { $0 }
                 }
-                .sheet(item: $formType) { $0 }
-             }
+            }
+        }
     }
 }
 
