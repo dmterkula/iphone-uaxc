@@ -19,6 +19,10 @@ extension View {
         let resign = #selector(UIResponder.resignFirstResponder)
         UIApplication.shared.sendAction(resign, to: nil, from: nil, for: nil)
     }
+    
+    func hidden(_ shouldHide: Bool) -> some View {
+           opacity(shouldHide ? 0 : 1)
+       }
 }
 
 extension View {
@@ -104,6 +108,20 @@ extension String {
             return (Double(splitTime[0]) ?? 0.0) * 60 + (Double(splitTime[1]) ?? 0.0)
         }
     }
+    
+    func matches(_ regex: String) -> Bool {
+        return self.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
+    }
+    
+    func isValidTime() -> Bool {
+        
+        if (self.matches("[0-9][0-9:[0-9][0-9].[0-9]+") || self.matches("[0-9:[0-9][0-9].[0-9]+") || self.matches("[0-9][0-9:[0-9][0-9]") || self.matches("[0-9]:[0-9][0-9]")) {
+            return true
+        } else {
+            return false
+        }
+        
+    }
 }
 
 extension Int {
@@ -113,6 +131,13 @@ extension Int {
     }
     
 }
+
+extension Array {
+
+ public func mapWithIndex<T> (f: (Int, Element) -> T) -> [T] {
+     return zip((self.startIndex ..< self.endIndex), self).map(f)
+   }
+ }
 
 //extension View {
 //    func hideKeyboard() {

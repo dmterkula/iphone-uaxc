@@ -75,7 +75,7 @@ struct WorkoutPaceElement: Codable, Identifiable {
     
 }
 
-struct WorkoutComponent: Codable, Identifiable {
+struct WorkoutComponent: Codable, Identifiable, Hashable {
     
     var id = UUID()
    
@@ -90,6 +90,18 @@ struct WorkoutComponent: Codable, Identifiable {
     
     private enum CodingKeys: String, CodingKey {
         case description, type, pace, targetDistance, targetCount, duration, uuid, targetPaceAdjustment
+    }
+    
+    func isPaceAdjustmentFaster() -> Bool {
+        return targetPaceAdjustment.contains("-")
+    }
+    
+    func isPaceAdjustment0() -> Bool {
+        return targetPaceAdjustment == "0:00.0"
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
     }
     
 }

@@ -89,8 +89,6 @@ struct WorkoutPlanView: View {
                                                 .listRowBackground(Color(red: 196/255, green: 207/255, blue: 209/255))
                                         }
                                     }
-                                    .listStyle(.plain)
-                                    .scrollContentBackground(.hidden)
                                     .frame(width: geometry.size.width * 0.90)
                                 } else {
             
@@ -101,8 +99,6 @@ struct WorkoutPlanView: View {
                                         }
                                     }
                                     .frame(width: geometry.size.width * 0.90)
-                                    .listStyle(.plain)
-                                    .scrollContentBackground(.hidden)
             
                                     
                                 }
