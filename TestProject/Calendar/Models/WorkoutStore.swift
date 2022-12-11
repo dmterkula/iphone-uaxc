@@ -58,7 +58,7 @@ class WorkoutStore: ObservableObject {
                 self.changedWorkout = self.workouts.remove(at: index)
             }
             
-                dataService.deleteWorkout(workout: workout) { (result) in
+            dataService.deleteWorkout(uuid: workout.uuid.uuidString) { (result) in
                     DispatchQueue.main.async {
                         switch result {
                         case .success(_):

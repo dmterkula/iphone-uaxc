@@ -66,6 +66,18 @@ extension Date {
         Calendar.current.startOfDay(for: self)
     }
     
+    func getYear() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy"
+        return  dateFormatter.string(from: self)
+    }
+    
+    func getDateNoTimeString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: self)
+    }
+    
 }
 
 extension Double {
@@ -90,7 +102,25 @@ extension Double {
             }
     }
     
+    func minutesToMinuteString() -> String {
+        return String(Int(self)) + ":00"
+    }
     
+    
+}
+
+extension Int {
+    func toMinuteSecondString() -> String {
+        let minutes: Int = Int((self / 60))
+        var seconds = (Double(self).truncatingRemainder(dividingBy: 60)).rounded(toPlaces: 1)
+            if (self < 0) {
+                seconds *= -1
+                let secondsString = seconds.toPaddedString()
+                return "-" + String(minutes * -1) + ":" + secondsString
+            } else {
+                return String(minutes) + ":" + seconds.toPaddedString()
+            }
+    }
 }
 
 extension String {
@@ -134,9 +164,26 @@ extension Int {
 
 extension Array {
 
- public func mapWithIndex<T> (f: (Int, Element) -> T) -> [T] {
-     return zip((self.startIndex ..< self.endIndex), self).map(f)
+     public func mapWithIndex<T> (f: (Int, Element) -> T) -> [T] {
+         return zip((self.startIndex ..< self.endIndex), self).map(f)
    }
+    
+
+    public func unique<T:Hashable>(by: ((Element) -> (T)))  -> [Element] {
+        var set = Set<T>() //the unique list kept in a Set for fast retrieval
+        var arrayOrdered = [Element]() //keeping the unique list of elements but ordered
+        for value in self {
+            if !set.contains(by(value)) {
+                set.insert(by(value))
+                arrayOrdered.append(value)
+            }
+        }
+
+        return arrayOrdered
+    }
+
+    
+    
  }
 
 //extension View {
@@ -151,5 +198,33 @@ extension Array {
 //        Extension()
 //    }
 //}
+
+public extension Dictionary {
+    
+    func printAsJSON() {
+        if let theJSONData = try? JSONSerialization.data(withJSONObject: self, options: .prettyPrinted),
+            let theJSONText = String(data: theJSONData, encoding: String.Encoding.ascii) {
+            print("\(theJSONText)")
+        }
+    }
+}
+
+
+public extension Data {
+    
+    func printAsJSON() {
+        if let theJSONData = try? JSONSerialization.jsonObject(with: self, options: []) as? NSDictionary {
+            var swiftDict: [String: Any] = [:]
+            for key in theJSONData.allKeys {
+                let stringKey = key as? String
+                if let key = stringKey, let keyValue = theJSONData.value(forKey: key) {
+                    swiftDict[key] = keyValue
+                }
+            }
+            swiftDict.printAsJSON()
+        }
+    }
+}
+
 
 

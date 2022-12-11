@@ -136,12 +136,12 @@ struct HomePageView: View {
 
 struct MainMenuView: View {
     
-    @StateObject var myEvents = WorkoutStore(preview: false)
+    @StateObject var myEvents = EventStore(preview: false)
     @StateObject var roster = RunnerStore(preview: false)
     @Binding var showMenu: Bool
     @State var runnerDisclosureIsExpanded: Bool = false
     @State var goalsDisclosureGroupIsExpanded: Bool = false
-    @State var workoutsDisclosureGroupIsExpanded: Bool = false
+    @State var calendarDisclosureGroupIsExpanded: Bool = false
     @State var meetDisclosureIsExpanded: Bool = false
     @State var timeTrialDisclosureIsExpanded: Bool = false
     @State var seasonComparisonDisclosureIsExpanded: Bool = false
@@ -155,6 +155,30 @@ struct MainMenuView: View {
             
         ScrollView {
             VStack(alignment: .leading) {
+                
+                DisclosureGroup(isExpanded: $calendarDisclosureGroupIsExpanded) {
+                        
+                    VStack(alignment: .leading) {
+                        TabButton(title: "View Calendar", image: "figure.run")
+                            .padding(.top, 30)
+                        
+                        Spacer()
+                        
+                    }
+                } label: {
+                    Text("Calendar and Training")
+                    .onTapGesture {
+                        withAnimation {
+                            self.calendarDisclosureGroupIsExpanded.toggle()
+                            }
+                        }
+                    }
+                .accentColor(.white)
+                .font(.title3)
+                .padding(.all)
+                .background(Color(red: 4/255, green: 130/255, blue: 0/255))
+                .cornerRadius(8)
+                .padding(.top, 200)
                 
                 DisclosureGroup(isExpanded: $runnerDisclosureIsExpanded) {
                         
@@ -184,7 +208,7 @@ struct MainMenuView: View {
                 .padding(.all)
                 .background(Color(red: 4/255, green: 130/255, blue: 0/255))
                 .cornerRadius(8)
-                .padding(.top, 200)
+                .padding(.top)
                 
                 
                 DisclosureGroup(isExpanded: $goalsDisclosureGroupIsExpanded) {
@@ -215,31 +239,7 @@ struct MainMenuView: View {
                 .background(Color(red: 4/255, green: 130/255, blue: 0/255))
                 .cornerRadius(8)
                 .padding(.top)
-                
-                DisclosureGroup(isExpanded: $workoutsDisclosureGroupIsExpanded) {
-                        
-                    VStack(alignment: .leading) {
-                        TabButton(title: "View Workouts", image: "figure.run")
-                            .padding(.top, 30)
-                        
-                        Spacer()
-                        
-                    }
-                } label: {
-                    Text("Workouts")
-                    .onTapGesture {
-                        withAnimation {
-                            self.workoutsDisclosureGroupIsExpanded.toggle()
-                            }
-                        }
-                    }
-                .accentColor(.white)
-                .font(.title3)
-                .padding(.all)
-                .background(Color(red: 4/255, green: 130/255, blue: 0/255))
-                .cornerRadius(8)
-                .padding(.top)
-                
+
             
                 DisclosureGroup(isExpanded: $meetDisclosureIsExpanded) {
                         
@@ -390,8 +390,8 @@ struct MainMenuView: View {
                     .environmentObject(authentication)
             } else if (title == "View All Goals") {
                 ViewAllGoals()
-            } else if (title == "View Workouts") {
-                WorkoutTabView()
+            } else if (title == "View Calendar") {
+                EventTabView()
                     .environmentObject(myEvents)
             } else if (title == "Roster") {
                 RosterManagementView()

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WorkoutFormView: View {
-    @EnvironmentObject var workoutStore: WorkoutStore
+    @EnvironmentObject var eventStore: EventStore
     @ObservedObject var viewModel: WorkoutFormViewModel
     @Environment(\.dismiss) var dismiss
     @FocusState private var focus: Bool?
@@ -96,7 +96,7 @@ struct WorkoutFormView: View {
 struct WorkoutFormView_Previews: PreviewProvider {
     static var previews: some View {
         WorkoutFormView(viewModel: WorkoutFormViewModel())
-            .environmentObject(WorkoutStore())
+            .environmentObject(EventStore())
     }
 }
 
@@ -187,7 +187,7 @@ struct WorkoutFormButtonSection: View {
     
     @ObservedObject var viewModel: WorkoutFormViewModel
     // @Binding var workoutComponents: [WorkoutComponentFormViewModel]
-    @EnvironmentObject var workoutStore: WorkoutStore
+    @EnvironmentObject var eventStore: EventStore
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -213,7 +213,7 @@ struct WorkoutFormButtonSection: View {
                             targetPaceAdjustment: $0.paceAdjustmentRaw.toMinuteSecondString(),
                             uuid: $0.uuid) }
                     )
-                    workoutStore.update(workout)
+                    eventStore.update(WorkoutEvent(workout: workout))
                 } else {
                     // create new event
                     let newWorkout =  Workout(
@@ -232,7 +232,7 @@ struct WorkoutFormButtonSection: View {
                             targetPaceAdjustment: $0.paceAdjustmentRaw.toMinuteSecondString(),
                             uuid: $0.uuid) }
                     )
-                    workoutStore.add(newWorkout)
+                    eventStore.add(WorkoutEvent(workout: newWorkout))
                 }
                 dismiss()
             } label: {

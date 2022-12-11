@@ -22,7 +22,7 @@ class RunnerStore: ObservableObject {
     
     func fetchRoster(getActiveOnly: Bool) -> Void {
         
-        var currentYearString: String = String(Date().formatted(date: .abbreviated,
+        let currentYearString: String = String(Date().formatted(date: .abbreviated,
                                                                 time: .omitted).suffix(4))
         
         dataService.fetchPossibleRunners(season: currentYearString, filterForIsActive: getActiveOnly) { (result) in

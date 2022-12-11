@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-struct WorkoutTabView: View {
-    @EnvironmentObject var myEvents: WorkoutStore
+struct EventTabView: View {
+    @EnvironmentObject var myEvents: EventStore
     @EnvironmentObject var authentication: Authentication
     
     var body: some View {
         TabView{
-            WorkoutListView()
+            EventListView()
                 .tabItem {
                     Label("List", systemImage: "list.triangle")
                 }
                 .environmentObject(authentication)
                 
-            WorkoutCalendarView()
+            EventCalendarView()
                 .tabItem {
                     Label("Calendar", systemImage: "calendar")
                 }
@@ -30,10 +30,10 @@ struct WorkoutTabView: View {
     }
 }
 
-struct WorkoutTabView_Previews: PreviewProvider {
+struct EventTabView_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutTabView()
-            .environmentObject(WorkoutStore(preview: true))
+        EventTabView()
+            .environmentObject(EventStore(preview: true))
     }
 }
 

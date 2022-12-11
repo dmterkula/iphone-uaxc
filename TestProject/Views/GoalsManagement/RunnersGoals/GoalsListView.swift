@@ -130,7 +130,7 @@ struct GoalsListView: View {
                 }
                 
                 if (goalType == "Time") {
-                    TimePicker(minutesValue: $minutesValue, secondsValue: $secondsValue)
+                    RaceTimePicker(minutesValue: $minutesValue, secondsValue: $secondsValue)
                         .frame(height: 20)
                 } else {
                     TextField("Goal: ", text: $goalValue)
