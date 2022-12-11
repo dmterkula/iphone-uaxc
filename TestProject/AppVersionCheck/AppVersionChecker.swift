@@ -22,7 +22,7 @@ class AppVersionChecker: ObservableObject {
                     print(appInfoResponse)
                     let backEndVersion = appInfoResponse.app.version
                     
-                    if (backEndVersion != "1.0.0") {
+                    if (backEndVersion != "1.0.1") {
                         self.needsUpdate = true
                     }
                     

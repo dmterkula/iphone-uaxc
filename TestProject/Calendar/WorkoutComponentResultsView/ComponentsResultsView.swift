@@ -13,6 +13,16 @@ struct ComponentsResultsView: View {
     
     let dataService = DataService()
     
+    func calcListHeight() -> Double {
+        if (workout.components.count <= 1) {
+            return 0.33
+        } else if (workout.components.count == 2) {
+            return 0.50
+        } else {
+            return 0.60
+        }
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .center) {
@@ -36,7 +46,7 @@ struct ComponentsResultsView: View {
                         }
                     }
                     .frame(width: geometry.size.width * 0.90)
-                    .frame(maxHeight: geometry.size.height * 0.50)
+                    .frame(maxHeight: geometry.size.height * calcListHeight())
                     
                 }
             }

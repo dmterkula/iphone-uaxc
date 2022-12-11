@@ -1167,7 +1167,7 @@ class DataService {
     }
     
     func deleteWorkout(
-        workout: Workout,
+        uuid: String,
         completition: @escaping (Result<WorkoutResponse, Error>) -> Void
     ) {
         
@@ -1176,7 +1176,7 @@ class DataService {
         componentUrl.host = baseUrlString
         componentUrl.path = "/xc/workout/delete"
         
-        let uuidQueryItem = URLQueryItem(name: "uuid", value: workout.uuid.uuidString)
+        let uuidQueryItem = URLQueryItem(name: "uuid", value: uuid)
         
         componentUrl.queryItems = [uuidQueryItem]
         
@@ -1639,4 +1639,618 @@ class DataService {
             
         }.resume()
     }
+    
+    func getMeetsForSeason(
+        season: String,
+        completition: @escaping (Result<[Meet], Error>) -> Void
+    ) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/meets/getBySeason"
+        
+        
+        let seasonQueryItem = URLQueryItem(name: "season", value: String(season))
+        
+        componentUrl.queryItems = [seasonQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let response = try JSONDecoder().decode([Meet].self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    func getMeetsBetweenDates(
+        startDate: Date,
+        endDate: Date,
+        completition: @escaping (Result<[Meet], Error>) -> Void
+    ) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/meets/getByDates"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let startDateString = dateFormatter.string(from: startDate)
+        let endDateString = dateFormatter.string(from: endDate)
+        
+        let startDateQueryItem = URLQueryItem(name: "startDate", value: startDateString)
+        let endDateQueryItem = URLQueryItem(name: "endDate", value: endDateString)
+        
+        componentUrl.queryItems = [startDateQueryItem, endDateQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let decoder = JSONDecoder()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let response = try decoder.decode([Meet].self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    
+    func createMeet(
+        meetEvent: MeetEvent,
+        completition: @escaping (Result<Meet, Error>) -> Void
+    ) {
+        
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/meets/create"
+        
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        var request = URLRequest(url: validURL)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        do {
+            let json = try JSONEncoder().encode(CreateMeetRequest(name: meetEvent.title, date: meetEvent.date.getDateNoTimeString(), uuid: meetEvent.uuid, icon: meetEvent.icon))
+            request.httpBody = json
+        } catch {
+            print("unable to serialize json body")
+        }
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                
+                let decoder = JSONDecoder()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let response = try decoder.decode(Meet.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    func updateMeet(
+        meetEvent: MeetEvent,
+        completition: @escaping (Result<Meet, Error>) -> Void
+    ) {
+        
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/meets/update"
+        
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        var request = URLRequest(url: validURL)
+        request.httpMethod = "PUT"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        do {
+            let json = try JSONEncoder().encode(CreateMeetRequest(name: meetEvent.title, date: meetEvent.date.getDateNoTimeString(), uuid: meetEvent.uuid, icon: meetEvent.icon))
+            request.httpBody = json
+        } catch {
+            print("unable to serialize json body")
+        }
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let decoder = JSONDecoder()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let response = try decoder.decode(Meet.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    
+    func getTrainingRunsBetweenDates(
+        startDate: Date,
+        endDate: Date,
+        completition: @escaping (Result<TrainingRunResponse, Error>) -> Void
+    ) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/training-run/get"
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let startDateString = dateFormatter.string(from: startDate)
+        let endDateString = dateFormatter.string(from: endDate)
+        
+        let startDateQueryItem = URLQueryItem(name: "startDate", value: startDateString)
+        let endDateQueryItem = URLQueryItem(name: "endDate", value: endDateString)
+        
+        componentUrl.queryItems = [startDateQueryItem, endDateQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let decoder = JSONDecoder()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let response = try decoder.decode(TrainingRunResponse.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    func createTrainingRun(
+        trainingRunEvent: TrainingRunEvent,
+        completition: @escaping (Result<TrainingRunResponse, Error>) -> Void
+    ) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/training-run/create"
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        var request = URLRequest(url: validURL)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        var timeValue: String? = nil
+        var distanceValue: Double? = nil
+        
+        
+        if (trainingRunEvent.time != nil && trainingRunEvent.time != "00:00") {
+            timeValue = trainingRunEvent.time
+        }
+        
+        if (trainingRunEvent.distance != nil && trainingRunEvent.distance != 0.0) {
+            distanceValue = trainingRunEvent.distance
+        }
+        
+        do {
+            let json = try JSONEncoder().encode(CreateTrainingRunRequest(uuid: trainingRunEvent.uuid, date: trainingRunEvent.date.getDateNoTimeString(), time: timeValue, distance: distanceValue, icon: trainingRunEvent.icon, name: trainingRunEvent.title))
+            request.httpBody = json
+        } catch {
+            print("unable to serialize json body")
+        }
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let decoder = JSONDecoder()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let response = try decoder.decode(TrainingRunResponse.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    func updateTrainingRun(
+        trainingRunEvent: TrainingRunEvent,
+        completition: @escaping (Result<TrainingRunResponse, Error>) -> Void
+    ) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/training-run/update"
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        var request = URLRequest(url: validURL)
+        request.httpMethod = "PUT"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        var timeValue: String? = nil
+        var distanceValue: Double? = nil
+        
+        if (trainingRunEvent.time != nil && trainingRunEvent.time != "00:00") {
+            timeValue = trainingRunEvent.time
+        }
+        
+        if (trainingRunEvent.distance != nil && trainingRunEvent.distance != 0.0) {
+            distanceValue = trainingRunEvent.distance
+        }
+        
+        do {
+            let json = try JSONEncoder().encode(CreateTrainingRunRequest(uuid: trainingRunEvent.uuid, date: trainingRunEvent.date.getDateNoTimeString(), time: timeValue, distance: distanceValue, icon: trainingRunEvent.icon, name: trainingRunEvent.title))
+            request.httpBody = json
+            request.httpBody?.printAsJSON()
+            request.allHTTPHeaderFields?.printAsJSON()
+            print(request.httpMethod)
+        } catch {
+            print("unable to serialize json body")
+        }
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                data?.printAsJSON()
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                data?.printAsJSON()
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let decoder = JSONDecoder()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let response = try decoder.decode(TrainingRunResponse.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    func deleteTrainingRun(
+        uuid: String,
+        completition: @escaping (Result<TrainingRunResponse, Error>) -> Void
+    ) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/training-run/delete"
+        
+        let uuidComponent = URLQueryItem(name: "uuid", value: uuid)
+        componentUrl.queryItems = [uuidComponent]
+        
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        var request = URLRequest(url: validURL)
+        request.httpMethod = "DELETE"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let decoder = JSONDecoder()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let response = try decoder.decode(TrainingRunResponse.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    func getRunnersTrainingRun(
+        runnerId: Int,
+        trainingRunUUID: String,
+        completition: @escaping (Result<RunnerTrainingRunResponse, Error>) -> Void
+    ) {
+        
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/runners-training-run-result"
+        
+        let runnerIdQueryItem = URLQueryItem(name: "runnerId", value: String(runnerId))
+        let trainingRunUUIDQueryItem = URLQueryItem(name: "trainingRunUUID", value: trainingRunUUID)
+        
+        componentUrl.queryItems = [runnerIdQueryItem, trainingRunUUIDQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let decoder = JSONDecoder()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let response = try decoder.decode(RunnerTrainingRunResponse.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+            
+    }
+    
+    func getAllTrainingRunResultsForGivenPractice(
+        trainingRunUUID: String,
+        completition: @escaping (Result<RunnerTrainingRunResponse, Error>) -> Void
+    ) {
+        
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/all-runners-training-run-results/get"
+        
+        let trainingRunUUIDQueryItem = URLQueryItem(name: "trainingRunUUID", value: trainingRunUUID)
+        
+        componentUrl.queryItems = [trainingRunUUIDQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let decoder = JSONDecoder()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let response = try decoder.decode(RunnerTrainingRunResponse.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+            
+    }
+    
+    func logTrainingRun(
+        viewModel: RunnersTrainingRunFormViewModel,
+        completition: @escaping (Result<RunnerTrainingRunResponse, Error>) -> Void
+    ) {
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/runners-training-run/create"
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        var request = URLRequest(url: validURL)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+       
+        do {
+            let json = try JSONEncoder().encode(CreateRunnersTrainingRunRequest(uuid: viewModel.uuid, trainingRunUUID: viewModel.trainingRunUuid, runnerId: viewModel.runner.runnerId, time: viewModel.getTimeString(), distance: viewModel.calcDistance(), avgPace: viewModel.calcAveragePace()))
+            request.httpBody = json
+        } catch {
+            print("unable to serialize json body")
+        }
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let decoder = JSONDecoder()
+                let response = try decoder.decode(RunnerTrainingRunResponse.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+    }
+    
+    
+    
 }

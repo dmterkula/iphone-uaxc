@@ -38,9 +38,9 @@ struct RosterManagementView: View {
             }
         }
         
-        var currentYearString: String = String(Date().formatted(date: .abbreviated,
+        let currentYearString: String = String(Date().formatted(date: .abbreviated,
                                                                 time: .omitted).suffix(4))
-        var nextYearString: String = String(Int(currentYearString)! + 1)
+        let nextYearString: String = String(Int(currentYearString)! + 1)
         print(nextYearString)
         seasons.append(nextYearString)
         
@@ -140,7 +140,7 @@ struct RosterManagementView: View {
                         }.padding(.trailing, 10)
                     }
                     
-                    var rosterList: [Runner] = filterRosterByName(filterFor: nameFilter)
+                    let rosterList: [Runner] = filterRosterByName(filterFor: nameFilter)
                     
                     List {
                         ForEach(rosterList) { runner in

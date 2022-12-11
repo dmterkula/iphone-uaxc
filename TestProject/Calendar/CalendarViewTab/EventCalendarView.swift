@@ -7,24 +7,23 @@
 
 import SwiftUI
 
-struct WorkoutCalendarView: View {
+struct EventCalendarView: View {
     
-    @EnvironmentObject var workoutStore: WorkoutStore
+    @EnvironmentObject var eventStore: EventStore
     @EnvironmentObject var authentication: Authentication
     @State private var dateSelected: DateComponents?
-    @State private var displayWorkouts = false
-    @State private var formType: WorkoutFormType?
+    @State private var displayEvents = false
+    @State private var formType: EventFormType?
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 CalendarView(interval: DateInterval(start: .distantPast, end: .distantFuture),
-                             workoutStore: workoutStore,
+                             eventStore: eventStore,
                              dateSelected: $dateSelected,
-                             displayWorkouts: $displayWorkouts)
+                             displayEvents: $displayEvents)
                 .environmentObject(authentication)
                 .navigationTitle("Calendar View")
-                
             }
             
             .toolbar {
@@ -43,9 +42,9 @@ struct WorkoutCalendarView: View {
             }
             
             .sheet(item: $formType) { $0 }
-            .sheet(isPresented: $displayWorkouts) {
+            .sheet(isPresented: $displayEvents) {
                 NavigationStack {
-                    DaysWorkoutsListView(dateSelected: $dateSelected)
+                    DaysEventsListView(dateSelected: $dateSelected)
                         .environmentObject(authentication)
                         .presentationDetents([.medium, .large])
                 }
@@ -57,7 +56,7 @@ struct WorkoutCalendarView: View {
 
 struct WorkoutCalendarView_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutCalendarView()
-            .environmentObject(WorkoutStore(preview: true))
+        EventCalendarView()
+            .environmentObject(EventStore(preview: true))
     }
 }

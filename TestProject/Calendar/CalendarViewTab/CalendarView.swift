@@ -5,9 +5,9 @@ import SwiftUI
 struct CalendarView: UIViewRepresentable {
     
     let interval: DateInterval
-    @ObservedObject var workoutStore: WorkoutStore
+    @ObservedObject var eventStore: EventStore
     @Binding var dateSelected: DateComponents?
-    @Binding var displayWorkouts: Bool
+    @Binding var displayEvents: Bool
     
     func makeUIView(context: Context) -> UICalendarView {
         let view = UICalendarView()
@@ -21,30 +21,30 @@ struct CalendarView: UIViewRepresentable {
     
     func updateUIView(_ uiView: UICalendarView, context: Context) {
         
-        if let changedWorkout = workoutStore.changedWorkout{
-            uiView.reloadDecorations(forDateComponents: [changedWorkout.dateComponents], animated: true)
-            workoutStore.changedWorkout = nil
+        if let changedEvent = eventStore.changedEvent{
+            uiView.reloadDecorations(forDateComponents: [changedEvent.dateComponents], animated: true)
+            eventStore.changedEvent = nil
         }
         
-        if let movedWorkout = workoutStore.movedWorkout{
-            uiView.reloadDecorations(forDateComponents: [movedWorkout.dateComponents], animated: true)
-            workoutStore.movedWorkout = nil
+        if let movedEvent = eventStore.movedEvent{
+            uiView.reloadDecorations(forDateComponents: [movedEvent.dateComponents], animated: true)
+            eventStore.movedEvent = nil
         }
         
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator(parent: self, workoutStore: _workoutStore)
+        return Coordinator(parent: self, eventStore: _eventStore)
     }
     
     class Coordinator: NSObject, UICalendarViewDelegate, UICalendarSelectionSingleDateDelegate {
         
         var parent: CalendarView
-        @ObservedObject var workoutStore: WorkoutStore
+        @ObservedObject var eventStore: EventStore
         
-        init(parent: CalendarView, workoutStore: ObservedObject<WorkoutStore>) {
+        init(parent: CalendarView, eventStore: ObservedObject<EventStore>) {
             self.parent = parent
-            self._workoutStore = workoutStore
+            self._eventStore = eventStore
         }
         
         func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
@@ -53,12 +53,12 @@ struct CalendarView: UIViewRepresentable {
             
             guard let dateComponents else { return }
             
-            let foundWorkouts = workoutStore.workouts.filter {
+            let foundEvents = eventStore.events.filter {
                 $0.date.startOfDay == dateComponents.date?.startOfDay
             }
             
-            if (!foundWorkouts.isEmpty) {
-                parent.displayWorkouts.toggle()
+            if (!foundEvents.isEmpty) {
+                parent.displayEvents.toggle()
             }
 
         }
@@ -70,23 +70,23 @@ struct CalendarView: UIViewRepresentable {
         // used to add or decorate Calendar with icons, needs to happen on main thread so add @MainActor
         @MainActor
         func calendarView(_ calendarView: UICalendarView, decorationFor dateComponents: DateComponents) -> UICalendarView.Decoration? {
-            let foundWorkouts = workoutStore.workouts.filter {
+            let foundEvents = eventStore.events.filter {
                 $0.date.startOfDay == dateComponents.date?.startOfDay
             }
             
-            if foundWorkouts.isEmpty { return nil }
+            if foundEvents.isEmpty { return nil }
             
-            if foundWorkouts.count > 1 {
+            if foundEvents.count > 1 {
                 return .image(UIImage(systemName: "doc.on.doc.fill"),
                               color: .red,
                               size: .large)
             }
             
-            let singleWorkout: Workout = foundWorkouts.first!
+            let singleEvent: Event = foundEvents.first!
             
             return .customView {
                 let icon = UILabel()
-                icon.text = singleWorkout.icon
+                icon.text = singleEvent.icon
                 return icon
             }
             
