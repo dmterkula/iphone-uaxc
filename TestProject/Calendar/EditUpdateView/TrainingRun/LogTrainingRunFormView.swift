@@ -20,7 +20,7 @@ struct LogTrainingRunFormView: View {
                 .padding(.top, 10)
                 .padding(.bottom, 20)
             
-            MilesPicker(miles: $viewModel.wholeMiles, fractionOfMiles: $viewModel.fractionMiles)
+            MilesPicker(miles: $viewModel.wholeMiles, fractionOfMiles: $viewModel.fractionMiles, label: "Miles: ")
             
             TrainingRunTimePicker(minutes: $viewModel.minutes, seconds: $viewModel.seconds)
         

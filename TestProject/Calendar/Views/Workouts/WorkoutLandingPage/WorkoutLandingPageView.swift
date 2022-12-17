@@ -40,12 +40,20 @@ struct WorkoutLandingPageView: View {
                            Text("Workout Plan")
                     }
                 
-                AddSplitsView(workout: workout)
-                    .tabItem {
-                        Label("Add Splits", systemImage: "pencil.circle")
-                           Text("Splits")
-                    }
-                
+                if (authentication.user!.role == "coach") {
+                    AddSplitsView(workout: workout)
+                        .tabItem {
+                            Label("Add Splits", systemImage: "pencil.circle")
+                               Text("Splits")
+                        }
+                } else {
+                    AddSplitsRunnersView(workout: workout)
+                        .tabItem {
+                            Label("Add Splits", systemImage: "pencil.circle")
+                               Text("Splits")
+                        }
+                }
+
                 ComponentsResultsView(workout: workout)
                     .tabItem {
                         Label("Team Results", systemImage: "figure.run.circle")

@@ -146,6 +146,7 @@ struct MainMenuView: View {
     @State var timeTrialDisclosureIsExpanded: Bool = false
     @State var seasonComparisonDisclosureIsExpanded: Bool = false
     @State var rosterDisclosureGroupIsExpanded: Bool = false
+    @State var leaderboardsDiscloureGroupIsExapnded: Bool = false
     
     @EnvironmentObject var authentication: Authentication
     
@@ -210,6 +211,40 @@ struct MainMenuView: View {
                 .cornerRadius(8)
                 .padding(.top)
                 
+                
+                DisclosureGroup(isExpanded: $leaderboardsDiscloureGroupIsExapnded) {
+                        
+                    VStack(alignment: .leading) {
+                        TabButton(title: "PR Leaders", image: "medal")
+                            .padding(.top, 30)
+                        
+                        TabButton(title: "SB Leaders", image: "star")
+                            .padding(.top, 30)
+                        
+                        TabButton(title: "Race Split Consistency", image: "stopwatch")
+                            .padding(.top, 30)
+                        
+                        TabButton(title: "Distance Run", image: "figure.run")
+                            .padding(.top, 30)
+                        
+                        Spacer()
+                        
+                    }
+                } label: {
+                    Text("Leaderboard")
+                    .onTapGesture {
+                        withAnimation {
+                            self.leaderboardsDiscloureGroupIsExapnded.toggle()
+                            }
+                        }
+                    }
+                .accentColor(.white)
+                .font(.title3)
+                .padding(.all)
+                .background(Color(red: 4/255, green: 130/255, blue: 0/255))
+                .cornerRadius(8)
+                .padding(.top)
+
                 
                 DisclosureGroup(isExpanded: $goalsDisclosureGroupIsExpanded) {
                         
@@ -396,7 +431,16 @@ struct MainMenuView: View {
             } else if (title == "Roster") {
                 RosterManagementView()
                     .environmentObject(roster)
-            } else {
+            } else if(title == "PR Leaders") {
+                PRLeaderboardView()
+            } else if(title == "SB Leaders") {
+                SBLeaderboardView()
+            } else if (title == "Race Split Consistency") {
+                RaceSplitConsistencyLeaderboardView()
+            } else if (title == "Distance Run") {
+                TrainingDistanceRunLeaderboardView()
+            }
+            else {
                 HomePageView(showMenu: $showMenu)
             }
     

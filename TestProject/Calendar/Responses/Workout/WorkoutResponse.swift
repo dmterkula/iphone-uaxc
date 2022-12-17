@@ -116,6 +116,12 @@ struct Workout: Codable, Identifiable {
     var uuid: UUID
     var components: [WorkoutComponent]
    
+    func getComponentFromId(uuid: String) -> WorkoutComponent {
+        
+        return components.filter { workoutComponent in
+            workoutComponent.uuid.uuidString.caseInsensitiveCompare(uuid) == .orderedSame
+        }.first!
+    }
     
     var dateComponents: DateComponents {
         var dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
