@@ -14,13 +14,22 @@ struct RunnerWorkoutComponentResultView: View {
     
     var body: some View {
         
-        VStack {
-            Text(result.runner.name)
-            ForEach(result.splits) { split in
-                SplitRow(number: split.number, time: split.time)
+        Form() {
+            Section(header:
+                Text(result.runner.name).foregroundColor(GlobalFunctions.uaGreen())
+                .font(.system(size: 15))
+            ) {
+                VStack {
+                    ForEach(result.splits) { split in
+                        SplitRow(number: split.number, time: split.time)
+                    }
+                    Text("Avg: " + result.average)
+                }
             }
-            Text("Avg: " + result.average)
         }
+        .textCase(nil)
+        .frame(height: 150)
+        
     }
 }
 

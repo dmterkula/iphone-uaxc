@@ -64,12 +64,13 @@ struct IndividualComponentResultsView: View {
                     
                     
                     if (componentResults != nil) {
-                        List {
+                        Form {
                             ForEach(componentResults!.results) { result in
                                 RunnerWorkoutComponentResultView(component: component, result: result)
                                 .listRowBackground(Color(red: 196/255, green: 207/255, blue: 209/255))
                             }
                         }.frame(maxWidth: geometry.size.width * 0.90)
+                        .textCase(nil)
                        
                     }
                 }

@@ -23,7 +23,6 @@ struct AddSplitsRunnersView: View {
     
     @State var viewModel = RunnerWorkoutFormViewModel()
     
-    
     func closeEditSheet() {
         showEditSheet = false
     }
@@ -68,12 +67,9 @@ struct AddSplitsRunnersView: View {
                             .foregroundColor(GlobalFunctions.gold())
                     }
                     .sheet(isPresented: $showEditSheet, onDismiss: closeEditSheet) {
-                        RunnerWorkoutEditFormView(workout: workout, viewModel: $viewModel, showEditSheet: $showEditSheet)
+                        RunnerWorkoutEditFormView(workout: workout, runner: authentication.runner!, viewModel: $viewModel, showEditSheet: $showEditSheet)
                             .preferredColorScheme(.light)
                     }
-                    
-                    
-               
                 }
                 
             }

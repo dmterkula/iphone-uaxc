@@ -179,6 +179,7 @@
 		68B68DED294BC47D00C558DC /* ARunnersWorkoutResultsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B68DEC294BC47D00C558DC /* ARunnersWorkoutResultsResponse.swift */; };
 		68B68DEF294BC8AB00C558DC /* RunnerWorkoutFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B68DEE294BC8AB00C558DC /* RunnerWorkoutFormViewModel.swift */; };
 		68B68DF1294BF41500C558DC /* EditingRunnerWorkoutFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B68DF0294BF41500C558DC /* EditingRunnerWorkoutFormViewModel.swift */; };
+		68B68DF3294E52BC00C558DC /* AddSplitsCoachesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B68DF2294E52BC00C558DC /* AddSplitsCoachesView.swift */; };
 		68B719CE28F45F810035A727 /* CustomBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B719CD28F45F810035A727 /* CustomBindings.swift */; };
 		68B719D028F890C30035A727 /* RunnerWorkoutPlanRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B719CF28F890C30035A727 /* RunnerWorkoutPlanRow.swift */; };
 		68B719D228FC711C0035A727 /* RunnerComponentPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B719D128FC711C0035A727 /* RunnerComponentPlanView.swift */; };
@@ -403,6 +404,7 @@
 		68B68DEC294BC47D00C558DC /* ARunnersWorkoutResultsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARunnersWorkoutResultsResponse.swift; sourceTree = "<group>"; };
 		68B68DEE294BC8AB00C558DC /* RunnerWorkoutFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerWorkoutFormViewModel.swift; sourceTree = "<group>"; };
 		68B68DF0294BF41500C558DC /* EditingRunnerWorkoutFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingRunnerWorkoutFormViewModel.swift; sourceTree = "<group>"; };
+		68B68DF2294E52BC00C558DC /* AddSplitsCoachesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSplitsCoachesView.swift; sourceTree = "<group>"; };
 		68B719CD28F45F810035A727 /* CustomBindings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBindings.swift; sourceTree = "<group>"; };
 		68B719CF28F890C30035A727 /* RunnerWorkoutPlanRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerWorkoutPlanRow.swift; sourceTree = "<group>"; };
 		68B719D128FC711C0035A727 /* RunnerComponentPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerComponentPlanView.swift; sourceTree = "<group>"; };
@@ -1410,6 +1412,7 @@
 				68B719E729118D140035A727 /* SplitsListView.swift */,
 				68B68DE4294B6E1600C558DC /* AddSplitsRunnersView.swift */,
 				68B68DE8294B804100C558DC /* RunnerWorkoutEditFormView.swift */,
+				68B68DF2294E52BC00C558DC /* AddSplitsCoachesView.swift */,
 			);
 			path = WorkoutAddSplits;
 			sourceTree = "<group>";
@@ -1812,6 +1815,7 @@
 				680C196328D3B23C006D1CD2 /* RunnersGoalsView.swift in Sources */,
 				68C605C928EDF91500F2FF79 /* RunnerRequestBody.swift in Sources */,
 				68B68DA72932570D00C558DC /* TrainingRunEventFormViewModel.swift in Sources */,
+				68B68DF3294E52BC00C558DC /* AddSplitsCoachesView.swift in Sources */,
 				68B71A0C29211E140035A727 /* EventFormType.swift in Sources */,
 				68B68DD129494AE500C558DC /* SBLeaderboardRow.swift in Sources */,
 				689734E128B83F7E00744B2E /* MeetPerformance.swift in Sources */,

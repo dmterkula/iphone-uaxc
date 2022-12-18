@@ -34,18 +34,25 @@ struct WorkoutLandingPageView: View {
             
             TabView {
                 
-                WorkoutPlanView(workout: workout)
+                WorkoutPlanViewV2(workout: workout)
                     .tabItem {
                         Label("Workout Plan", systemImage: "book.circle")
                            Text("Workout Plan")
                     }
                 
                 if (authentication.user!.role == "coach") {
-                    AddSplitsView(workout: workout)
+//                    AddSplitsView(workout: workout)
+//                        .tabItem {
+//                            Label("Add Splits", systemImage: "pencil.circle")
+//                               Text("Splits")
+//                        }
+//
+                    AddSplitsCoachesView(workout: workout)
                         .tabItem {
                             Label("Add Splits", systemImage: "pencil.circle")
                                Text("Splits")
                         }
+                    
                 } else {
                     AddSplitsRunnersView(workout: workout)
                         .tabItem {
@@ -54,7 +61,7 @@ struct WorkoutLandingPageView: View {
                         }
                 }
 
-                ComponentsResultsView(workout: workout)
+                ComponentsResultsViewV2(workout: workout)
                     .tabItem {
                         Label("Team Results", systemImage: "figure.run.circle")
                            Text("Team Results")

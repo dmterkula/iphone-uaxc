@@ -15,6 +15,8 @@ struct RunnerWorkoutEditFormView: View {
     
     @EnvironmentObject var authentication: Authentication
     
+    var runner: Runner
+    
     @Binding var viewModel: RunnerWorkoutFormViewModel
     
     @StateObject var editingViewModel: EditingRunnerWorkoutFormViewModel = EditingRunnerWorkoutFormViewModel()
@@ -30,8 +32,18 @@ struct RunnerWorkoutEditFormView: View {
         
     }
     
+    func getDecription() -> String {
+        var label = "Your Workout Details"
+        
+        if (authentication.user!.role == "coach") {
+            label = runner.name + "'s Workout Details"
+        }
+        
+        return label
+    }
+    
     func updateDB() {
-        dataService.logRunnersWorkoutResults(runnerId: authentication.runner!.runnerId, workoutUuid: workout.uuid.uuidString, totalDistance: viewModel.totalDistance, componentUuidToSplits: getUuidStringToSplits()) { (result) in
+        dataService.logRunnersWorkoutResults(runnerId: runner.runnerId, workoutUuid: workout.uuid.uuidString, totalDistance: viewModel.totalDistance, componentUuidToSplits: getUuidStringToSplits()) { (result) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let results):
@@ -47,7 +59,7 @@ struct RunnerWorkoutEditFormView: View {
         
         NavigationStack() {
             
-            Text("Your Workout Details")
+            Text(getDecription())
                 .toolbar {
                     ToolbarItemGroup() {
                         Button("Cancel") {
