@@ -27,6 +27,14 @@ struct TrainingRunLandingPageCoachesView: View {
     @State
     var sortByPace: Bool = false
     
+    @State var runners: [Runner] = []
+    
+    @EnvironmentObject var runnerStore: RunnerStore
+    
+    @State var addTrainingRunData = false
+    
+    @State var runnerName = ""
+    
     
     func refreshTrainingRun() {
         dataService.getAllTrainingRunResultsForGivenPractice(trainingRunUUID: trainingRunEvent.uuid) { (result) in
@@ -43,6 +51,24 @@ struct TrainingRunLandingPageCoachesView: View {
             }
     }
     
+    func toggleSheet() {
+        addTrainingRunData .toggle()
+    }
+    
+    func getRunners() {
+        dataService.fetchPossibleRunners(season: trainingRunEvent.date.getYear(), filterForIsActive: true) { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let runnersResponse):
+                    self.runners = runnersResponse
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             
@@ -51,6 +77,7 @@ struct TrainingRunLandingPageCoachesView: View {
                 Background().edgesIgnoringSafeArea(.all)
                     .onAppear {
                         refreshTrainingRun()
+                        getRunners()
                     }
                 
                 VStack {
@@ -172,16 +199,38 @@ struct TrainingRunLandingPageCoachesView: View {
                    
                     
                     if (trainingRunResponse != nil && !trainingRunResponse!.runnerTrainingRuns.isEmpty) {
-                        List {
+                        Form {
+                            
+                            Section(header:
+                                        HStack {
+                                Spacer()
+                                Button() {
+                                    addTrainingRunData.toggle()
+                                } label : {
+                                    Image(systemName: "plus.circle.fill").imageScale(.large)
+                                }
+                                }
+                            
+                            ) {
+                                
+                            }
+                            
                             ForEach(trainingRunResponse!.runnerTrainingRuns) { runnersloggedRun in
-                                RunnersLoggedTrainingRunRow(runnersLoggedTrainingRun: runnersloggedRun)
+                                RunnersLoggedTrainingRunRow(runnersLoggedTrainingRun: runnersloggedRun, trainingRunEvent: trainingRunEvent)
                             }
                         }
+                        
                         .frame(width: geometry.size.width * 0.95)
                     }
                     
                     
                 } // end vstack
+                .sheet(isPresented: $addTrainingRunData, onDismiss: refreshTrainingRun) {
+                    CoachAddRunnersTrainingRunView(trainingRunEvent: trainingRunEvent, runners: $runners, runnerName: $runnerName).environment(\.colorScheme, .light)
+                }
+                
+                
+                
             } // end zstack
             
         } // end geometry
