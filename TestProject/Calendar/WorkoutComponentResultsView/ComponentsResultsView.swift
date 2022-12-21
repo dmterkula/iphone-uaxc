@@ -38,13 +38,14 @@ struct ComponentsResultsView: View {
                         .font(.largeTitle).padding(.bottom, 10)
                         .foregroundColor(.white)
                     
-                    List {
+                    Form {
                         ForEach(workout.components) { component in
                             WorkoutComponentRowView(component: component)
                                 .listRowBackground(Color(red: 196/255, green: 207/255, blue: 209/255))
                                 .preferredColorScheme(.light)
                         }
                     }
+                    .textCase(nil)
                     .frame(width: geometry.size.width * 0.90)
                     .frame(maxHeight: geometry.size.height * calcListHeight())
                     
@@ -53,6 +54,7 @@ struct ComponentsResultsView: View {
         }
     }
 }
+
 
 //struct ComponentsResultsView_Previews: PreviewProvider {
 //    static var previews: some View {

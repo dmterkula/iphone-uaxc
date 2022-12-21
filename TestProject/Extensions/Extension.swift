@@ -139,6 +139,28 @@ extension String {
         }
     }
     
+    func getMinutesFrom() -> Int {
+        
+        let splitTime: [String] = self.components(separatedBy: ":")
+        
+        if (splitTime.isEmpty || splitTime.count == 1) {
+            return 0
+        }
+        
+        return (Int(splitTime[0]) ?? 0)
+        
+    }
+    
+    func getSecondsFrom() -> Int {
+        let splitTime: [String] = self.components(separatedBy: ":")
+        
+        if (splitTime.isEmpty) {
+            return 0
+        }
+        
+        return (Int(Double(splitTime[1]) ?? 00) )
+    }
+    
     func matches(_ regex: String) -> Bool {
         return self.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
     }
@@ -158,6 +180,38 @@ extension Int {
     
     func convertToMilesString() -> String {
         return String((Double(self) / 1609.0).rounded(toPlaces: 2))
+    }
+    
+}
+
+extension [SplitElement] {
+    
+    func toSplits() -> [Split] {
+        if self.isEmpty {
+            return []
+        } else {
+            return self.map{Split(uuid: $0.uuid, number: $0.number, value: $0.time)}
+        }
+    }
+    
+    func toSplitsViewModel() -> [DoubleSplitViewModel] {
+        if self.isEmpty {
+            return []
+        } else {
+            return self.map{DoubleSplitViewModel(Split(uuid: $0.uuid, number: $0.number, value: $0.time))}
+        }
+    }
+    
+}
+
+extension [DoubleSplitViewModel] {
+    
+    func toSplits() -> [Split] {
+        if self.isEmpty {
+            return []
+        } else {
+            return self.map{Split(uuid: $0.uuid, number: $0.number, value: $0.getMinuteSecondString())}
+        }
     }
     
 }

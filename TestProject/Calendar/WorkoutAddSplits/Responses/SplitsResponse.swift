@@ -28,13 +28,3 @@ struct SplitElement: Codable, Identifiable {
     
 }
 
-struct DeletedSplit: Codable {
-    
-    var runnerId: Int
-    var componentUUID: String
-    var uuid: String
-    var number: Int
-    var value: String
-    
-}
-

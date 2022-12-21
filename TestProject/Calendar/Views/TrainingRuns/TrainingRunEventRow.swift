@@ -50,7 +50,7 @@ struct TrainingRunEventRow: View {
                     .opacity(0.0)
                     .buttonStyle(PlainButtonStyle())
                 } else if (authentication.user != nil && authentication.user!.role == "runner") {
-                    NavigationLink(destination: TrainingRunLandingPageAthletesView(trainingRunEvent: trainingRunEvent).environment(\.colorScheme, .light)) {
+                    NavigationLink(destination: TrainingRunLandingPageAthletesView(trainingRunEvent: trainingRunEvent, runner: authentication.runner!).environment(\.colorScheme, .light)) {
                         EmptyView()
                     }
                     .opacity(0.0)

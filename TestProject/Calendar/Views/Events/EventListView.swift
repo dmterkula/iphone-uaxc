@@ -93,6 +93,6 @@ struct EventListView: View {
 struct WorkoutListView_Previews: PreviewProvider {
     static var previews: some View {
         EventListView()
-            .environmentObject(WorkoutStore(preview: true))
+            .environmentObject(EventStore(preview: true))
     }
 }

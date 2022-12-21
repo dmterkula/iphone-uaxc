@@ -94,7 +94,8 @@ struct MilesPicker: View {
     
     @Binding var miles: Int
     @Binding var fractionOfMiles: Int
-  
+    var label: String
+    
     let possibleMiles = [Int](0..<11)
     let possibleFraction = [Int](0..<100)
     
@@ -103,8 +104,7 @@ struct MilesPicker: View {
         GeometryReader { geometry in
             VStack {
                 HStack {
-                    Spacer()
-                    Text("Select distance: ")
+                    Text(label)
                         .padding(.trailing, 10)
                     
                     Picker(selection: $miles, label: Text("")) {
@@ -154,8 +154,7 @@ struct TrainingRunTimePicker: View {
         GeometryReader { geometry in
             VStack {
                 HStack {
-                    Spacer()
-                    Text("Select time: ")
+                    Text("Time: ")
                         .padding(.trailing, 10)
                     
                     Picker(selection: $minutes, label: Text("")) {
@@ -164,7 +163,49 @@ struct TrainingRunTimePicker: View {
                                 .foregroundColor(.black)
                         }
                     }
-                    .frame(width: geometry.size.width / 5 , height: 20, alignment: .center)
+                    .frame(width: geometry.size.width / 3 , height: 20, alignment: .center)
+                    .accentColor(.black)
+                    .font(.title3)
+                    
+                    
+                    Picker(selection: $seconds, label: Text("")) {
+                        ForEach(possibleSeconds, id: \.self) { fractionValue in
+                            Text("\(fractionValue)" + "s")
+                                .foregroundColor(.black)
+                        }
+                    }
+                    .frame(width: geometry.size.width / 3 , height: 20, alignment: .center)
+                    .accentColor(.black)
+                    .font(.title3)
+                    
+                }
+            }
+        }// end geometry
+        .frame(height: 30)
+    }
+}
+
+
+struct WorkoutSplitTimePicker: View {
+    
+    @Binding var minutes: Int
+    @Binding var seconds: Int
+  
+    let possibleMinutes = [Int](0..<91)
+    let possibleSeconds = [Int](0..<60)
+    
+    var body: some View {
+        
+        GeometryReader { geometry in
+            VStack {
+                HStack {
+                    Picker(selection: $minutes, label: Text("")) {
+                        ForEach(possibleMinutes, id: \.self) { minutesValue in
+                            Text("\(minutesValue)m")
+                                .foregroundColor(.black)
+                        }
+                    }
+                    .frame(width: geometry.size.width / 3 , height: 20, alignment: .center)
                     .accentColor(.black)
                     .font(.title3)
                     

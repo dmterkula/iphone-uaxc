@@ -12,10 +12,6 @@ struct RunnerWorkoutPlanRow: View {
     var runnerWorkoutPlan: RunnerWorkoutPlan
     
     var body: some View {
-        
-//        HStack {
-//            
-//            Spacer()
             
             VStack {
                 
@@ -31,18 +27,11 @@ struct RunnerWorkoutPlanRow: View {
                     
                     Spacer()
                 }
-                
-                
+                  
                 ForEach(runnerWorkoutPlan.componentPlans) { compPlan in
                     RunnerComponentPlanView(compPlan: compPlan)
                 }
             }
-            
-//            Spacer()
-//
-//        }
-        
-
     }
 }
 

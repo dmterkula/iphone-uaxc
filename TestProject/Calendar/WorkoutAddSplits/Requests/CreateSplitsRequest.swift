@@ -14,8 +14,15 @@ struct CreateSplitsRequest: Codable {
 }
 
 
-struct Split: Codable {
+struct Split: Codable, Identifiable {
+    
+    var id = UUID()
+    
     var uuid: String
     var number: Int
     var value: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case uuid, number, value
+    }
 }

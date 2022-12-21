@@ -16,21 +16,42 @@ struct TrainingRunLandingPageAthletesView: View {
     
     let dataService = DataService()
     
-    @State var cantAddData = false
-    @State var showAlert = false
-    @State var showingSheet = false
+    @State var showEditSheet = false
+    @State var retrievingTrainingRunData = false
+    
+    @State var viewModel = RunnersTrainingRunFormViewModel()
+    
+    var runner: Runner
     
     @EnvironmentObject var authentication: Authentication
     
+    
+    func getTitle() -> String {
+        if(authentication.user!.role == "coach") {
+            if(viewModel.runner.name.last! == "s") {
+                return "Edit " + viewModel.runner.name + "' run"
+            } else {
+                return "Edit " + viewModel.runner.name + "'s run"
+            }
+           
+        } else {
+            return "Log your run"
+        }
+    }
+    
     func refreshTrainingRun() {
-        dataService.getRunnersTrainingRun(runnerId: authentication.runner!.runnerId, trainingRunUUID: trainingRunEvent.uuid) { (result) in
+        dataService.getRunnersTrainingRun(runnerId: runner.runnerId, trainingRunUUID: trainingRunEvent.uuid) { (result) in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let response):
+                        retrievingTrainingRunData = false
                         trainingRunResponse = response
-                        if (Date() < trainingRunEvent.date || !trainingRunResponse!.runnerTrainingRuns.isEmpty) {
-                            cantAddData = true
+                        if (response.runnerTrainingRuns.isEmpty) {
+                            viewModel = RunnersTrainingRunFormViewModel(runner: runner, trainingRunUuid: trainingRunEvent.uuid)
+                        } else {
+                            viewModel = RunnersTrainingRunFormViewModel(response.runnerTrainingRuns.first!)
                         }
+                        
                         print(response)
                         
                     case .failure(let error):
@@ -48,6 +69,7 @@ struct TrainingRunLandingPageAthletesView: View {
                 ZStack(alignment: .center) {
                     Background().edgesIgnoringSafeArea(.all)
                         .onAppear {
+                            retrievingTrainingRunData = true
                             refreshTrainingRun()
                         }
                     
@@ -55,11 +77,13 @@ struct TrainingRunLandingPageAthletesView: View {
                         Text(trainingRunEvent.title)
                             .foregroundColor(.white)
                             .font(.title)
+                            .padding(.bottom, 5)
                         
                         Text(trainingRunEvent.date.formatted(date: .abbreviated,
                                                              time: .omitted))
                         .foregroundColor(.white)
                         .font(.title)
+                        .padding(.bottom, 5)
                         
                         VStack {
                             if (trainingRunEvent.distance != nil) {
@@ -85,66 +109,63 @@ struct TrainingRunLandingPageAthletesView: View {
                             }
                         }
                         
-                        //                Button() {
-                        //
-                        //                } label: {
-                        //                    Text("Log Run")
-                        //                        .font(.title3)
-                        //                        .fontWeight(.bold)
-                        //                        .accentColor(Color(red: 249/255, green: 229/255, blue: 0/255))
-                        //                }
-                        //                .padding()
-                        //                .overlay(
-                        //                    RoundedRectangle(cornerRadius: 20)
-                        //                        .stroke(Color(red: 249/255, green: 229/255, blue: 0/255), lineWidth: 5)
-                        //                        )
-                        
-                        
-                        if (trainingRunResponse != nil && !trainingRunResponse!.runnerTrainingRuns.isEmpty) {
-                            Button {
-                                showingSheet.toggle()
-                            } label: {
-                                LoggedTrainingRunView(loggedRun: trainingRunResponse!.runnerTrainingRuns.first!, geometry: geometry)
-                                    .padding(.top, 30)
-                            }.accentColor(.white)
+                        if (!viewModel.isComplete()) {
                             
+                            Button {
+                                showEditSheet.toggle()
+                            } label: {
+                                Text(getTitle())
+                                    .foregroundColor(GlobalFunctions.gold())
+                            }
+                            .padding(.top, 20)
+                            .disabled(retrievingTrainingRunData)
+                        } else {
+                            Form {
+                                
+                                Section(header:
+                                            HStack {
+                                    Button {
+                                        showEditSheet.toggle()
+                                    } label: {
+                                        Text("Edit")
+                                    }
+                                    .padding(.top, 20)
+                                    .disabled(retrievingTrainingRunData)
+                                }
+                                
+                                ) {
+                                    
+                                }
+                                
+                                Section(header: Text("Distance")) {
+                                    Text(String(viewModel.calcDistance()))
+                                }
+                                
+                                Section(header: Text("Time")) {
+                                    Text(viewModel.getTimeString())
+                                }
+                                
+                                Section(header: Text("Avg. Pace Per Mi")) {
+                                    Text(viewModel.calcAveragePace())
+                                }
+                            }
+                            .frame(width: geometry.size.width * 0.95)
                             
                         }
+
                         
                         Spacer()
-                        
-                        
-                        
+                             
                     } // end VStack
-                    .toolbar {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            Button {
-                                if (!cantAddData) {
-                                    showAlert = false
-                                    showingSheet.toggle()
-                                } else {
-                                    showAlert = true
-                                }
-                            } label: {
-                                Image(systemName: "plus.circle.fill")
-                                    .imageScale(.large)
-                            }
-                            .alert("Cannot add training run data. either this training run occurs in future or you have already logged the maximum number of runs for this practice", isPresented: $showAlert) {
-                                Button("OK", role: .cancel) {
-                                }
-                            }
-                            .sheet(isPresented: $showingSheet, onDismiss: refreshTrainingRun) {
-                                
-                                if (trainingRunResponse == nil || trainingRunResponse!.runnerTrainingRuns.isEmpty) {
-                                    LogTrainingRunFormView(viewModel: RunnersTrainingRunFormViewModel(runner: authentication.runner!, trainingRunUuid: trainingRunEvent.uuid)).preferredColorScheme(.light)
-                                } else {
-                                    LogTrainingRunFormView(viewModel: RunnersTrainingRunFormViewModel(trainingRunResponse!.runnerTrainingRuns.first!)).preferredColorScheme(.light)
-                                }
-                                
-                               
-                            }
-                            
+                    .sheet(isPresented: $showEditSheet) {
+                        
+                        if (trainingRunResponse == nil || trainingRunResponse!.runnerTrainingRuns.isEmpty) {
+                            LogTrainingRunFormView(viewModel: $viewModel, showEditSheet: $showEditSheet).preferredColorScheme(.light)
+                        } else {
+                            LogTrainingRunFormView(viewModel: $viewModel, showEditSheet: $showEditSheet).preferredColorScheme(.light)
                         }
+                        
+                       
                     }
                 }
             } // end navigation stack

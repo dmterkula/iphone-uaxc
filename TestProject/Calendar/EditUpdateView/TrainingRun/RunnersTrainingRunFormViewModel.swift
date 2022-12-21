@@ -34,6 +34,11 @@ class RunnersTrainingRunFormViewModel: ObservableObject, Identifiable {
     var seconds: Int = 0
     
     
+    init() {
+        self.runner = Runner(name: "test", graduatingClass: "test", isActive: false)
+        self.trainingRunUuid = ""
+    }
+    
     init(runner: Runner, trainingRunUuid: String) {
         self.runner = runner
         self.trainingRunUuid = trainingRunUuid
@@ -81,6 +86,10 @@ class RunnersTrainingRunFormViewModel: ObservableObject, Identifiable {
     
     func calcDistance() -> Double {
         return Double(Double(wholeMiles) + Double(Double(fractionMiles)/100.0))
+    }
+    
+    func isComplete() -> Bool {
+        return (wholeMiles != 0 || fractionMiles != 0) && (minutes != 00 || seconds != 0)
     }
     
     func calcAveragePace() -> String {

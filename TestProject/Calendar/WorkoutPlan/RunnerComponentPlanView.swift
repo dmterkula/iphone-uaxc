@@ -17,31 +17,41 @@ struct RunnerComponentPlanView: View {
         
     }
     
-    var body: some View {
-        VStack(alignment: .leading) {
-            if (compPlan.duration == nil) {
-                let miles: String = convert(meters: compPlan.distance)
-                HStack {
-                    Text("Target Distance: " + miles + " mi")
-                }.padding(.leading, 5)
-            } else {
-                HStack {
-                    Text("Target Duration: ")
-                    Text(compPlan.duration!)
-                }.padding(.leading, 5)
-            }
-            
+    @ViewBuilder
+    var sectionHeader: some View {
+        if (compPlan.duration == nil) {
+            let miles: String = convert(meters: compPlan.distance)
             HStack {
-                Text("Target Pace: " + compPlan.targetedPace[0].pace)
+                Text("Target Distance: " + miles + " mi")
             }.padding(.leading, 5)
-            
+        } else {
             HStack {
-                Text("Base Time: " + compPlan.baseTime)
-            }
-            .padding(.leading, 5)
-            .padding(.bottom, 8)
+                Text("Target Duration: ")
+                Text(compPlan.duration!)
+            }.padding(.leading, 5)
         }
     }
+
+    
+    var body: some View {
+       
+            Form {
+                Section(header: sectionHeader) {
+                    VStack(alignment: .leading) {
+                    
+                        HStack {
+                            Text("Target Pace: " + compPlan.targetedPace[0].pace)
+                        }.padding(.leading, 5)
+                        
+                        HStack {
+                            Text("Base Time: " + compPlan.baseTime)
+                        }
+                        .padding(.leading, 5)
+                        .padding(.bottom, 8)
+                    }
+                }
+            }.frame(height: 120)
+        }
 }
 //
 //struct RunnerComponentPlanView_Previews: PreviewProvider {

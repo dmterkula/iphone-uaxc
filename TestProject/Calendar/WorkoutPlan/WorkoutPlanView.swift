@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WorkoutPlanView: View {
-    
+
     var workout: Workout
     let dataService = DataService()
     
@@ -83,10 +83,14 @@ struct WorkoutPlanView: View {
                                 Spacer()
                                 
                                 if (showRunnerPlans) {
-                                    List {
+                                    
+                                    
+                                    Form {
                                         ForEach(workoutPlanResponse!.runnerWorkoutPlans) { runnerPlan in
-                                            RunnerWorkoutPlanRow(runnerWorkoutPlan: runnerPlan)
-                                                .listRowBackground(Color(red: 196/255, green: 207/255, blue: 209/255))
+                                            Section() {
+                                                    RunnerWorkoutPlanRow(runnerWorkoutPlan: runnerPlan)
+                                                        .listRowBackground(Color(red: 196/255, green: 207/255, blue: 209/255))
+                                                }
                                         }
                                     }
                                     .frame(width: geometry.size.width * 0.90)
@@ -108,13 +112,13 @@ struct WorkoutPlanView: View {
                         }
                         
                     }
-            }
-            // end zstack
+            }// end zstack
 
-            }// end geometry
+        }// end geometry
     }
-        
+
 }
+
 
 struct WorkoutPlanView_Previews: PreviewProvider {
     static var previews: some View {

@@ -1,109 +1,15 @@
 //
-//  WorkoutPlanResponse.swift
+//  Workout.swift
 //  UAXC
 //
-//  Created by David  Terkula on 9/27/22.
+//  Created by David  Terkula on 12/18/22.
 //
 
 import Foundation
 
-
-
 struct WorkoutResponse: Codable {
     var workout: Workout
     var components: [WorkoutComponent]
-}
-
-struct WorkoutPlanResponse: Codable {
-    var runnerWorkoutPlans: [RunnerWorkoutPlan]
-    var componentsToWorkoutPlans: [WorkoutComponentToRunnerPlans]
-    
-    private enum CodingKeys: String, CodingKey {
-        case runnerWorkoutPlans = "runnerWorkoutPlanDTOV2"
-        case componentsToWorkoutPlans = "componentsToRunnerWorkoutPlans"
-        
-    }
-}
-
-struct RunnerWorkoutPlan: Codable, Identifiable {
- 
-    var id = UUID()
-    
-    var runner: Runner
-    var componentPlans: [ComponentPlans]
-    
-    private enum CodingKeys: String, CodingKey {
-        case runner, componentPlans
-    }
-}
-
-struct ComponentPlans: Codable, Identifiable {
-    
-    var id = UUID()
-    
-    var distance: Int
-    var duration: String?
-    var baseTime: String
-    var targetedPace: [WorkoutPaceElement]
-    
-    private enum CodingKeys: String, CodingKey {
-        case distance, duration, baseTime, targetedPace
-    }
-}
-
-struct WorkoutComponentToRunnerPlans: Codable, Identifiable {
-    
-    var id = UUID()
-    var component: WorkoutComponent
-    var runnerWorkoutPlans: [RunnerWorkoutPlan]
-    
-    private enum CodingKeys: String, CodingKey {
-        case component, runnerWorkoutPlans
-    }
-}
-
-struct WorkoutPaceElement: Codable, Identifiable {
-    
-    var id = UUID()
-    
-    var type: String
-    var pace: String
-    
-    private enum CodingKeys: String, CodingKey {
-        case type, pace
-    }
-    
-}
-
-struct WorkoutComponent: Codable, Identifiable, Hashable {
-    
-    var id = UUID()
-   
-    var description: String
-    var type: String
-    var pace: String
-    var targetDistance: Int
-    var targetCount: Int
-    var duration: String?
-    var targetPaceAdjustment: String
-    var uuid: UUID
-    
-    private enum CodingKeys: String, CodingKey {
-        case description, type, pace, targetDistance, targetCount, duration, uuid, targetPaceAdjustment
-    }
-    
-    func isPaceAdjustmentFaster() -> Bool {
-        return targetPaceAdjustment.contains("-")
-    }
-    
-    func isPaceAdjustment0() -> Bool {
-        return targetPaceAdjustment == "0:00.0"
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(uuid)
-    }
-    
 }
 
 struct Workout: Codable, Identifiable {
@@ -116,6 +22,12 @@ struct Workout: Codable, Identifiable {
     var uuid: UUID
     var components: [WorkoutComponent]
    
+    func getComponentFromId(uuid: String) -> WorkoutComponent {
+        
+        return components.filter { workoutComponent in
+            workoutComponent.uuid.uuidString.caseInsensitiveCompare(uuid) == .orderedSame
+        }.first!
+    }
     
     var dateComponents: DateComponents {
         var dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
@@ -196,6 +108,38 @@ struct Workout: Codable, Identifiable {
     
     static func getTextFromIcon(icon: String) -> String {
         return Workout.iconsToText[icon] == nil ? "default" : Workout.iconsToText[icon]!
+    }
+    
+}
+
+
+struct WorkoutComponent: Codable, Identifiable, Hashable {
+    
+    var id = UUID()
+   
+    var description: String
+    var type: String
+    var pace: String
+    var targetDistance: Int
+    var targetCount: Int
+    var duration: String?
+    var targetPaceAdjustment: String
+    var uuid: UUID
+    
+    private enum CodingKeys: String, CodingKey {
+        case description, type, pace, targetDistance, targetCount, duration, uuid, targetPaceAdjustment
+    }
+    
+    func isPaceAdjustmentFaster() -> Bool {
+        return targetPaceAdjustment.contains("-")
+    }
+    
+    func isPaceAdjustment0() -> Bool {
+        return targetPaceAdjustment == "0:00.0"
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
     }
     
 }
