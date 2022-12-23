@@ -205,7 +205,7 @@ struct WorkoutSplitTimePicker: View {
                                 .foregroundColor(.black)
                         }
                     }
-                    .frame(width: geometry.size.width / 3 , height: 20, alignment: .center)
+                    .frame(width: geometry.size.width / 2.5 , height: 20, alignment: .center)
                     .accentColor(.black)
                     .font(.title3)
                     
@@ -216,7 +216,7 @@ struct WorkoutSplitTimePicker: View {
                                 .foregroundColor(.black)
                         }
                     }
-                    .frame(width: geometry.size.width / 3 , height: 20, alignment: .center)
+                    .frame(width: geometry.size.width / 2.5 , height: 20, alignment: .center)
                     .accentColor(.black)
                     .font(.title3)
                     

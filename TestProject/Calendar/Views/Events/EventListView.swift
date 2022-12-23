@@ -11,7 +11,32 @@ struct EventListView: View {
     @EnvironmentObject var myEvents: EventStore
     @EnvironmentObject var authentication: Authentication
     
+    @State var filterForMeets = false
+    @State var filterForTraining = false
+    @State var filterForWorkouts = false
+    
     @State private var formType: EventFormType?
+    
+    
+    func filterEvents() -> [Event] {
+        // if no filters or all filters, return all
+        if ((!filterForMeets && !filterForTraining && !filterForWorkouts) || (filterForMeets && filterForWorkouts && filterForTraining)) {
+            return myEvents.events
+        } else {
+           
+            if (filterForMeets) {
+                return myEvents.events.filter {$0.type.description == EventType.meet.description}
+            }
+            else if (filterForWorkouts) {
+                return myEvents.events.filter {$0.type.description == EventType.workout.description}
+            } else {
+                // filter for training
+                return myEvents.events.filter {$0.type.description == EventType.training.description}
+            }
+            
+        }
+    }
+    
     var body: some View {
         
         GeometryReader { geometry in
@@ -38,9 +63,14 @@ struct EventListView: View {
                         }
                     }
                     
+                    EventFilter(filterForMeets: $filterForMeets, filterForWorkouts: $filterForWorkouts, filterForTraining: $filterForTraining)
+                        .padding(.top, 6)
+                        .padding(.bottom, 6)
+                    
+                    
                     
                     List {
-                        ForEach(myEvents.events.sorted {$0.date < $1.date }) { event in
+                        ForEach(filterEvents().sorted {$0.date < $1.date }) { event in
                             
                             if (event.type == EventType.workout) {
                                 WorkoutViewRow(workout: (event as? WorkoutEvent)!.toWorkout(), formType: $formType)
