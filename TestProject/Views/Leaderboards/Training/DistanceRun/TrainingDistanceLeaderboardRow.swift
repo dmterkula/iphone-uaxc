@@ -21,7 +21,7 @@ struct TrainingDistanceLeaderboardRow: View {
                 .foregroundColor(.primary)
                 .font(.headline)
             
-            Text(String(rankedRunnerDistanceRunDTO.distance))
+            Text(String(rankedRunnerDistanceRunDTO.distance.rounded(toPlaces: 2)))
                 .foregroundColor(.primary)
                 .font(.headline)
         }

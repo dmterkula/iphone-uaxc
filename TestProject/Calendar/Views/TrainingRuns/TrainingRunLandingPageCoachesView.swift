@@ -198,30 +198,31 @@ struct TrainingRunLandingPageCoachesView: View {
                     .padding(.bottom, 10)
                    
                     
-                    if (trainingRunResponse != nil && !trainingRunResponse!.runnerTrainingRuns.isEmpty) {
-                        Form {
-                            
-                            Section(header:
-                                        HStack {
-                                Spacer()
-                                Button() {
-                                    addTrainingRunData.toggle()
-                                } label : {
-                                    Image(systemName: "plus.circle.fill").imageScale(.large)
-                                }
-                                }
-                            
-                            ) {
-                                
+                    Form {
+                        
+                        Section(header:
+                                    HStack {
+                            Spacer()
+                            Button() {
+                                addTrainingRunData.toggle()
+                            } label : {
+                                Image(systemName: "plus.circle.fill").imageScale(.large)
                             }
+                            }
+                        
+                        ) {
                             
+                        }
+                        
+                        if (trainingRunResponse != nil) {
                             ForEach(trainingRunResponse!.runnerTrainingRuns) { runnersloggedRun in
                                 RunnersLoggedTrainingRunRow(runnersLoggedTrainingRun: runnersloggedRun, trainingRunEvent: trainingRunEvent)
                             }
                         }
-                        
-                        .frame(width: geometry.size.width * 0.95)
                     }
+                    
+                    .frame(width: geometry.size.width * 0.95)
+                    
                     
                     
                 } // end vstack

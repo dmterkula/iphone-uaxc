@@ -125,7 +125,7 @@ struct WorkoutComponentSplitsView: View {
             } label: {
                 Image(systemName: "plus.circle.fill").imageScale(.large)
             })
-            .navigationTitle(Text("Add Splits"))
+            .navigationTitle(Text(key.description))
         }
        
     }

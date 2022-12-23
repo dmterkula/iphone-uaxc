@@ -56,7 +56,7 @@ struct TrainingDistanceRunLeaderboardView: View {
                 VStack {
                     Text("Distance Run Leaderboard")
                         .foregroundColor(.white)
-                        .font(.largeTitle)
+                        .font(.title)
                         .padding(.top, 20)
                         .fixedSize(horizontal: false, vertical: true)
                     
@@ -69,6 +69,7 @@ struct TrainingDistanceRunLeaderboardView: View {
                             fetchLeaderboard(season: season)
                         } label : {
                             Text("Get Leaderboard")
+                                .font(.system(size: 20))
                         }.padding(.bottom, 30)
                             .foregroundColor(GlobalFunctions.gold())
                     }
@@ -82,7 +83,7 @@ struct TrainingDistanceRunLeaderboardView: View {
                     }
                     
                     if (!leaderboard.isEmpty) {
-                        Text("Values shown is total miles run")
+                        Text("* Values shown is total miles run")
                             .foregroundColor(.white)
                             .padding(.bottom, 10)
                     }
