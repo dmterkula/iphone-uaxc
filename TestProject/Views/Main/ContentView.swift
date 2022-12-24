@@ -163,6 +163,9 @@ struct MainMenuView: View {
                         TabButton(title: "View Calendar", image: "figure.run")
                             .padding(.top, 30)
                         
+                        TabButton(title: "Training Summary", image: "chart.xyaxis.line")
+                            .padding(.top, 30)
+                        
                         Spacer()
                         
                     }
@@ -439,6 +442,8 @@ struct MainMenuView: View {
                 RaceSplitConsistencyLeaderboardView()
             } else if (title == "Distance Run") {
                 TrainingDistanceRunLeaderboardView()
+            } else if (title == "Training Summary") {
+                TrainingSummaryView()
             }
             else {
                 HomePageView(showMenu: $showMenu)

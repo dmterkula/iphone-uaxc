@@ -12,7 +12,7 @@ struct EventTabView: View {
     @EnvironmentObject var authentication: Authentication
     
     var body: some View {
-        TabView{
+        TabView {
             EventListView()
                 .tabItem {
                     Label("List", systemImage: "list.triangle")

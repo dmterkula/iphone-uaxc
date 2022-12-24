@@ -44,8 +44,8 @@
             filePath = "TestProject/Views/Main/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "420"
-            endingLineNumber = "420"
+            startingLineNumber = "423"
+            endingLineNumber = "423"
             landmarkName = "TabButton(title:image:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1893,6 +1893,102 @@
                   startingLineNumber = "34"
                   endingLineNumber = "34"
                   offsetFromSymbolStart = "29">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E549BF3B-E583-4CF5-A3ED-B9C339DE36A8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TestProject/Views/Training/WeeklyTrainingSummaryView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "findElement(selectedElement:trainingWeeklySummaryDTOs:location:proxy:geometry:)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AB328745-E38A-4721-B6D3-D1D950017ABF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TestProject/Views/Training/WeeklyTrainingSummaryView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
+            landmarkName = "findElement(selectedElement:trainingWeeklySummaryDTOs:location:proxy:geometry:)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E942E440-364E-42C8-B493-88A2BE6B86D3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TestProject/Views/Training/WeeklyTrainingSummaryView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "findElement(selectedElement:trainingWeeklySummaryDTOs:location:proxy:geometry:)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7839E2B3-E638-4ACB-8D5D-CD658D90CB07"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TestProject/Client/DataService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2595"
+            endingLineNumber = "2595"
+            landmarkName = "getRunnersTrainingSummary(season:runnerId:timeFrame:completition:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7839E2B3-E638-4ACB-8D5D-CD658D90CB07 - e66cba4a4ffe714a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "UAXC.DataService.getRunnersTrainingSummary(season: Swift.String, runnerId: Swift.Int, byWeek: Swift.Bool, completition: (Swift.Result&lt;Swift.Array&lt;UAXC.TrainingSummaryDTO&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "UAXC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/davidterkula/Desktop/XCode/TestProject/TestProject/Client/DataService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2600"
+                  endingLineNumber = "2600"
+                  offsetFromSymbolStart = "1818">
+               </Location>
+               <Location
+                  uuid = "7839E2B3-E638-4ACB-8D5D-CD658D90CB07 - 64d565568e051169"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in UAXC.DataService.getRunnersTrainingSummary(season: Swift.String, runnerId: Swift.Int, byWeek: Swift.Bool, completition: (Swift.Result&lt;Swift.Array&lt;UAXC.TrainingSummaryDTO&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "UAXC"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/davidterkula/Desktop/XCode/TestProject/TestProject/Client/DataService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "2601"
+                  endingLineNumber = "2601"
+                  offsetFromSymbolStart = "292">
                </Location>
             </Locations>
          </BreakpointContent>
