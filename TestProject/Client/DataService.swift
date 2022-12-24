@@ -2565,4 +2565,59 @@ class DataService {
             
     }
     
+    func getRunnersTrainingSummary(
+        season: String,
+        runnerId: Int,
+        timeFrame: String,
+        completition: @escaping (Result<[TrainingSummaryDTO], Error>) -> Void
+    ) {
+        
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/training-run/runner-summary"
+        
+        
+        let seasonQueryItem = URLQueryItem(name: "season", value: season)
+        let runnerIdQueryItem = URLQueryItem(name: "runnerId", value: String(runnerId))
+        let timeFrameQueryItem = URLQueryItem(name: "timeFrame", value: timeFrame)
+        
+        
+        componentUrl.queryItems = [seasonQueryItem, runnerIdQueryItem, timeFrameQueryItem]
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let decoder = JSONDecoder()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let response = try decoder.decode([TrainingSummaryDTO].self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+            
+    }
+    
 }
