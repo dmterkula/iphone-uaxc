@@ -17,14 +17,93 @@ struct ContentView: View {
     
     var body: some View {
         if (authentication.isValdiated) {
-            BaseView()
-                .environmentObject(authentication)
+            if (authentication.user?.role == "runner") {
+                if (authentication.runnerProfile == nil) {
+                    LoadingPageView(authentication: authentication)
+                } else { // have profile, load it
+                    RunnerBaseView()
+                        .environmentObject(authentication)
+                }
+                
+            } else {
+                BaseView()
+                    .environmentObject(authentication)
+            }
         } else {
             LoginView()
                 .environmentObject(authentication)
                 .environmentObject(appInfo)
         }
         
+        
+    }
+    
+}
+
+struct LoadingPageView: View {
+    @ObservedObject var authentication: Authentication
+    @State var showProgressView = true
+    let dataService = DataService()
+    
+    let facts = ["fact 1", "fact 2", "fact 3"]
+    
+    var body: some View {
+            
+        ZStack {
+            Background().edgesIgnoringSafeArea(.all).onAppear() {
+                
+                if (authentication.runner != nil) {
+                    dataService.fetchRunnerProfileV2(runnerId: authentication.runner!.runnerId, season: GlobalFunctions.getRelevantYear()) { (result) in
+                        DispatchQueue.main.async {
+                            switch result {
+                            case .success(let response):
+                                authentication.runnerProfile = response
+                                showProgressView = false
+                            case .failure(let error):
+                                print(error)
+                                authentication.runnerProfile = nil
+                            }
+                        }
+                    }
+                }
+                
+            }
+            
+            VStack {
+                Text("Loading your profile...")
+                    .foregroundColor(.white)
+                    .font(.title)
+                    .padding(.bottom, 40)
+                
+                Image("lion-loading")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxHeight: 450)
+                    .padding(.bottom, 40)
+                
+                if (showProgressView) {
+                    ProgressView()
+                        .scaleEffect(3)
+                        .padding(.bottom, 20)
+                }
+                    
+                
+                // todo
+                
+                // make the facts backend driven so you can change them without a release.
+                
+                // read from a table and itialize that way, or have your back-end service generate it
+                
+                // for even more fun, allow the coaches to manage the log in view messages
+                
+//                let randomInt = Int.random(in: 0..<facts.count)
+//
+//                Text(facts[randomInt])
+//                    .foregroundColor(.white)
+//                    .font(.title3)
+                
+            }
+        }
         
     }
     
@@ -50,6 +129,73 @@ struct Background : View {
     }
 }
 
+
+struct RunnerBaseView: View {
+    
+    @State var showMenu = false
+    @EnvironmentObject var authentication: Authentication
+    
+    var body: some View {
+        
+        let drag = DragGesture()
+        .onEnded {
+            if $0.translation.width < -100 {
+                withAnimation {
+                    self.showMenu = false
+                }
+            }
+        }
+        
+        return NavigationView {
+            GeometryReader { geometry in
+                ZStack(alignment: .leading) {
+                    
+                    Background().edgesIgnoringSafeArea(.all)
+
+                    RunnerProfileV2View(runner: authentication.runner, runnerProfileResponse: authentication.runnerProfile, trainingRunSummary: authentication.runnerProfile?.trainingRunSummary ?? [], season: GlobalFunctions.getRelevantYear())
+                        .preferredColorScheme(.dark)
+                        .environment(\.colorScheme, .light)
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .offset(x: self.showMenu ? geometry.size.width/2 : 0)
+                        .disabled(self.showMenu ? true : false)
+                        .environmentObject(authentication)
+              
+                    
+                    if self.showMenu {
+                        MainMenuView(showMenu: $showMenu)
+                            .frame(width: geometry.size.width / 1.33)
+                            .transition(.move(edge: .leading))
+                            .environmentObject(authentication)
+                    }
+                }
+                .gesture(drag)
+                
+            }.navigationBarItems(leading: (
+                    Button(action: {
+                        withAnimation {
+                            self.showMenu.toggle()
+                        }
+                    }) {
+                        Image(systemName: "line.horizontal.3")
+                            .imageScale(.large)
+                            .foregroundColor(.white)
+                    }
+                ))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Log Out") {
+                        authentication.runnerProfile = nil
+                        authentication.updateValidation(success: AuthenticationResponse(authenticated: false))
+                    }
+                    .buttonStyle(.bordered)
+                    .foregroundColor(.white)
+                }
+            }
+        }
+    }
+}
+
+
 struct BaseView: View {
     
     @State var showMenu = false
@@ -71,12 +217,25 @@ struct BaseView: View {
                 ZStack(alignment: .leading) {
                     
                     Background().edgesIgnoringSafeArea(.all)
-                    HomePageView(showMenu: self.$showMenu)
-                        .preferredColorScheme(.dark)
-                        .frame(width: geometry.size.width, height: geometry.size.height)
-                        .offset(x: self.showMenu ? geometry.size.width/2 : 0)
-                        .disabled(self.showMenu ? true : false)
-                        .environmentObject(authentication)
+                    
+                    // todo profile for athletes with menu, or base view for coaches with menu
+                    
+                    if (authentication.user?.role == "coach") {
+                        HomePageView(showMenu: self.$showMenu)
+                            .preferredColorScheme(.dark)
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .offset(x: self.showMenu ? geometry.size.width/2 : 0)
+                            .disabled(self.showMenu ? true : false)
+                            .environmentObject(authentication)
+                    } else if (authentication.user?.role == "runner") {
+                        HomePageView(showMenu: self.$showMenu)
+                            .preferredColorScheme(.dark)
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .offset(x: self.showMenu ? geometry.size.width/2 : 0)
+                            .disabled(self.showMenu ? true : false)
+                            .environmentObject(authentication)
+                    }
+                    
                     
                     if self.showMenu {
                         MainMenuView(showMenu: $showMenu)
@@ -411,7 +570,9 @@ struct MainMenuView: View {
             } else if (title == "Meet Summary") {
                 GetMeetSummaryView()
             } else if (title == "Runner Profile") {
-                GetRunnerProfileView()
+                RunnerProfileV2View()
+                    .environmentObject(authentication)
+                    .environment(\.colorScheme, .light)
             } else if (title == "Historical Meet Comparisons") {
                 GetHistoricalMeetComparisonView()
             }
@@ -424,7 +585,7 @@ struct MainMenuView: View {
             } else if (title == "Meet Splits Comparisons") {
                 MeetSplitsComparisonView()
             } else if (title == "Goal Management") {
-                RunnersGoalsView()
+                RunnersGoalsViewV2()
                     .environmentObject(authentication)
             } else if (title == "View All Goals") {
                 ViewAllGoals()

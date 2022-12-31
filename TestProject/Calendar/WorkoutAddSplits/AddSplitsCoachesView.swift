@@ -39,21 +39,27 @@ struct AddSplitsCoachesView: View {
             runnerName = runner!.name
         } else {
             
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy"
-            let yearString = dateFormatter.string(from: workout.date)
-            
-            dataService.fetchPossibleRunners(season: yearString, filterForIsActive: true) { (result) in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let runnersResponse):
-                        runners = runnersResponse
-                        case .failure(let error):
-                            print(error)
+            if (runner != nil) { // coming from profile as a coach, preload the selected runner
+                runnerName = runner!.name
+                getRunnersDataInitialLoad(selectedRunner: runner!)
+                retrievingViewModel = true
+            }
+            else {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy"
+                let yearString = dateFormatter.string(from: workout.date)
+                
+                dataService.fetchPossibleRunners(season: yearString, filterForIsActive: true) { (result) in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success(let runnersResponse):
+                            runners = runnersResponse
+                            case .failure(let error):
+                                print(error)
+                        }
                     }
                 }
             }
-
         }
 
     }
@@ -69,6 +75,25 @@ struct AddSplitsCoachesView: View {
                     viewModel = RunnerWorkoutFormViewModel(distance: response.totalDistance, compToSplits: Dictionary(uniqueKeysWithValues: response.componentResults.map { (workout.getComponentFromId(uuid: $0.componentUUID), $0.splits.toSplitsViewModel()) })
                     )
                     retrievingViewModel = false
+                case .failure(let error):
+                    print(error)
+                }
+               
+            }
+        }
+    }
+    
+    func getRunnersDataInitialLoad(selectedRunner: Runner) {
+        runner = selectedRunner
+        dataService.getARunnersWorkoutResults(workoutUuid: workout.uuid.uuidString, runnerId: selectedRunner.runnerId) { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    self.workoutResultsResponse = response
+                    viewModel = RunnerWorkoutFormViewModel(distance: response.totalDistance, compToSplits: Dictionary(uniqueKeysWithValues: response.componentResults.map { (workout.getComponentFromId(uuid: $0.componentUUID), $0.splits.toSplitsViewModel()) })
+                    )
+                    retrievingViewModel = false
+                    showEditSheet = true
                 case .failure(let error):
                     print(error)
                 }
@@ -106,7 +131,15 @@ struct AddSplitsCoachesView: View {
                         .padding(.bottom, 5)
                         .onChange(of: runnerName) { [runnerName] newValue in
                             retrievingViewModel = true
-                            getRunnersData(selectedRunner: runners.first(where: {$0.name == newValue.components(separatedBy: ":")[0]})!)
+                            
+                            if (newValue.contains(":")) {
+                                // then chance came from runnerPicker
+                                getRunnersData(selectedRunner: runners.first(where: {$0.name == newValue.components(separatedBy: ":")[0]})!)
+                            } else {
+                                // noop as page is loading from profile page as coach and runner is already assigned
+                            }
+                            
+                           
                         }
                     
                     if (!runnerName.isEmpty) {

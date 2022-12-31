@@ -13,9 +13,8 @@ struct PRRunnerProfileView: View {
     
     var body: some View {
         VStack {
-                HStack(spacing: 10) {
+                HStack(spacing: 20) {
                     Text("PR: ")
-                        .foregroundColor(.white)
                         .font(.title3)
                         .bold()
                     

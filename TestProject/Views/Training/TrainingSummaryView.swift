@@ -23,6 +23,7 @@ struct TrainingSummaryView: View, AXChartDescriptorRepresentable {
     @State var season: String = ""
     @State var seasons: [String] = []
     @State var runners: [Runner] = []
+    @State var runner: Runner?
     @State var byWeek = true
     @State var byDay = false
     @State var byMonth = false
@@ -53,6 +54,10 @@ struct TrainingSummaryView: View, AXChartDescriptorRepresentable {
         } else {
            return "weekly"
         }
+    }
+    
+    func getRunner() {
+        runner = runners.first{$0.name == runnerName.components(separatedBy: ":")[0]}!
     }
     
     func fetchSeasons() {
@@ -119,6 +124,7 @@ struct TrainingSummaryView: View, AXChartDescriptorRepresentable {
                 self.fetchSeasons()
                 if (authentication.user!.role == "runner") {
                     runners = [authentication.runner!]
+                    runner = runners[0]
                     runnerName = runners[0].name
                 }
             }
@@ -138,43 +144,15 @@ struct TrainingSummaryView: View, AXChartDescriptorRepresentable {
                 
                 if (authentication.user?.role == "coach") {
                     RunnerPickerView(runners: $runners, runnerLabel: $runnerName)
+                        .onChange(of: runnerName) { newValue in
+                            getRunner()
+                        }
                 }
                 
                 
-                if (!trainingSummaryDTOs.isEmpty) {
+                if (!trainingSummaryDTOs.isEmpty && runner != nil && !season.isEmpty) {
                     
-                    HStack {
-                        Text("Daily")
-                        CheckBoxView(checked: $byDay)
-                            .onChange(of: byDay) { newValue in
-                                if (newValue == true) {
-                                   byWeek = false
-                                   byMonth = false
-                                   refreshGraph()
-                                }
-                            }
-                        
-                        Text("Weekly")
-                        CheckBoxView(checked: $byWeek)
-                            .onChange(of: byWeek) { newValue in
-                                if (newValue == true) {
-                                   byDay = false
-                                   byMonth = false
-                                   refreshGraph()
-                                }
-                            }
-                        
-                        
-                        Text("Monthly")
-                        CheckBoxView(checked: $byMonth)
-                            .onChange(of: byMonth) { newValue in
-                                if (newValue == true) {
-                                   byDay = false
-                                   byWeek = false
-                                   refreshGraph()
-                                }
-                            }
-                    }
+                    TrainingSummaryGraphView(trainingSummaryDTOs: $trainingSummaryDTOs, runner: $runner, season: $season)
                     
                 }
  
@@ -196,12 +174,6 @@ struct TrainingSummaryView: View, AXChartDescriptorRepresentable {
                        
                     }
                 }
-                
-                if (!trainingSummaryDTOs.isEmpty) {
-                    
-                    TrainingSumaryTimeSeries(trainingWeeklySummaryDTOs: $trainingSummaryDTOs, selectedElement: trainingSummaryDTOs.first!, chartFrequency: getChartFrequency())
-                }
-                
             }
         }
     }

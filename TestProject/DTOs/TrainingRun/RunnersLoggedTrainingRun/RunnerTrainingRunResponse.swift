@@ -29,3 +29,17 @@ struct TrainingRunResultDTO: Codable, Identifiable {
     }
     
 }
+
+struct TrainingRunResult: Codable, Identifiable {
+    
+    var id = UUID()
+    
+    var trainingRun: TrainingRun
+    var results: [TrainingRunResultDTO]
+    
+    private enum CodingKeys: String, CodingKey {
+        case trainingRun, results
+    }
+    
+}
+

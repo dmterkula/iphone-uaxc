@@ -14,15 +14,14 @@ struct MeetResultView: View {
 
         HStack(spacing: 20) {
             Text(result.time)
-                .foregroundColor(.white)
                 .font(.headline)
             VStack(alignment: .leading) {
                 Label(result.meetName, systemImage: "person.3")
-                    .foregroundColor(.white)
+       
                 Label(result.meetDate, systemImage: "calendar")
-                    .foregroundColor(.white)
+                
                 Label("place: \(result.place)", systemImage: "person")
-                    .foregroundColor(.white)
+  
             }
             .foregroundColor(.secondary)
             .font(.subheadline)
