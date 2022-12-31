@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct GetMeetResultsForRunnerView: View {
-    var runnerMeetPerformanceDTO: RunnerMeetPerformanceDTO
+    var results: [MeetResult]
     var body: some View {
         
-        ForEach(runnerMeetPerformanceDTO.performance) { result in 
-            HStack(spacing: 10) {
+        ForEach(results) { result in
+            VStack {
                 MeetResultView(result: result)
-            }.padding(.vertical, 10.0)
+                CustomDivider(color: GlobalFunctions.uaGreen(), height: 1.0)
+            }
+                
         }
     }
 }

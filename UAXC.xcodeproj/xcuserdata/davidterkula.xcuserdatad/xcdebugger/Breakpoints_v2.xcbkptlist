@@ -44,8 +44,8 @@
             filePath = "TestProject/Views/Main/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "423"
-            endingLineNumber = "423"
+            startingLineNumber = "584"
+            endingLineNumber = "584"
             landmarkName = "TabButton(title:image:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -60,8 +60,8 @@
             filePath = "TestProject/Views/Runner Profile/PRRunnerProfileView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "22"
-            endingLineNumber = "22"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -373,22 +373,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BEFA69FB-90FF-47F0-8813-27409FCF64D9"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TestProject/Client/DataService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "717"
-            endingLineNumber = "717"
-            landmarkName = "createGoalForRunner(runner:season:goalElements:completition:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "98147AA9-D952-4CD6-A05F-7FB925AE24FF"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -448,86 +432,6 @@
             endingLineNumber = "120"
             landmarkName = "body"
             landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "70C523C6-950D-4427-A8B1-308259B0D5A2"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TestProject/Client/DataService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1331"
-            endingLineNumber = "1331"
-            landmarkName = "updateRunner(name:runnerId:graduatingClass:isActive:completition:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B1061850-B951-4E9D-9D37-36A788FC0DA1"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TestProject/Client/DataService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1360"
-            endingLineNumber = "1360"
-            landmarkName = "updateRunner(name:runnerId:graduatingClass:isActive:completition:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B1061850-B951-4E9D-9D37-36A788FC0DA1 - 6f6143bafc386590"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "UAXC.DataService.updateRunner(name: Swift.String, runnerId: Swift.Int, graduatingClass: Swift.String, isActive: Swift.Bool, completition: (Swift.Result&lt;Swift.Optional&lt;UAXC.Runner&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "UAXC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/davidterkula/Desktop/XCode/TestProject/TestProject/Client/DataService.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1334"
-                  endingLineNumber = "1334"
-                  offsetFromSymbolStart = "2286">
-               </Location>
-               <Location
-                  uuid = "B1061850-B951-4E9D-9D37-36A788FC0DA1 - ef170ab8d5b108ab"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in UAXC.DataService.updateRunner(name: Swift.String, runnerId: Swift.Int, graduatingClass: Swift.String, isActive: Swift.Bool, completition: (Swift.Result&lt;Swift.Optional&lt;UAXC.Runner&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "UAXC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/davidterkula/Desktop/XCode/TestProject/TestProject/Client/DataService.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1335"
-                  endingLineNumber = "1335"
-                  offsetFromSymbolStart = "363">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C12295E4-9219-403F-8AC1-D1C051281604"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TestProject/Client/DataService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "487"
-            endingLineNumber = "487"
-            landmarkName = "fetchPossibleRunners(season:filterForIsActive:completition:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -719,22 +623,6 @@
             startingLineNumber = "121"
             endingLineNumber = "121"
             landmarkName = "update(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "31E5FDBD-DA9A-4677-95BB-F47948CBBAA5"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TestProject/Client/DataService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1070"
-            endingLineNumber = "1070"
-            landmarkName = "updateWorkout(workout:completition:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -940,22 +828,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "02BB5DAD-D374-4FAB-A015-7D90C7ECF160"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TestProject/Client/DataService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1071"
-            endingLineNumber = "1071"
-            landmarkName = "updateWorkout(workout:completition:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "D9BD1246-91F8-4CF0-B335-3B66DA3018FF"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -1132,54 +1004,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0013AF7C-81EF-4F39-9AF8-3EF6A3FD37B5"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TestProject/Client/DataService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1829"
-            endingLineNumber = "1829"
-            landmarkName = "getMeetsBetweenDates(startDate:endDate:completition:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "0013AF7C-81EF-4F39-9AF8-3EF6A3FD37B5 - 2d5f1691716af43f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "UAXC.DataService.getMeetsBetweenDates(startDate: Foundation.Date, endDate: Foundation.Date, completition: (Swift.Result&lt;Swift.Array&lt;UAXC.Meet&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "UAXC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/davidterkula/Desktop/XCode/TestProject/TestProject/Client/DataService.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1714"
-                  endingLineNumber = "1714"
-                  offsetFromSymbolStart = "2001">
-               </Location>
-               <Location
-                  uuid = "0013AF7C-81EF-4F39-9AF8-3EF6A3FD37B5 - fba418a713ff8e34"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in UAXC.DataService.getMeetsBetweenDates(startDate: Foundation.Date, endDate: Foundation.Date, completition: (Swift.Result&lt;Swift.Array&lt;UAXC.Meet&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "UAXC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/davidterkula/Desktop/XCode/TestProject/TestProject/Client/DataService.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1715"
-                  endingLineNumber = "1715"
-                  offsetFromSymbolStart = "292">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "DD89FEDA-C184-4632-B837-30BD634DB8C4"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -1260,22 +1084,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "74001D38-FA2E-4BBF-A950-71F816453C3E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TestProject/Client/DataService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1069"
-            endingLineNumber = "1069"
-            landmarkName = "updateWorkout(workout:completition:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "9ED4EBAB-8042-4874-B565-21611227ED08"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -1319,22 +1127,6 @@
             endingLineNumber = "22"
             landmarkName = "body"
             landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "01BFE54C-7282-465E-8AEB-A53AD7037D75"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TestProject/Client/DataService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2017"
-            endingLineNumber = "2017"
-            landmarkName = "getTrainingRunsBetweenDates(startDate:endDate:completition:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1427,8 +1219,8 @@
             filePath = "TestProject/GlobalFunctions/GlobalFunctions.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "convertSecondsToMinuteSecondString(seconds:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1443,8 +1235,8 @@
             filePath = "TestProject/GlobalFunctions/GlobalFunctions.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "getPacePerMile(time:distance:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1603,42 +1395,10 @@
             filePath = "TestProject/Calendar/WorkoutAddSplits/AddSplitsCoachesView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "body"
             landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "BF7E31DD-AB99-4E7D-ADEA-A792D8940D89"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TestProject/Client/DataService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2321"
-            endingLineNumber = "2321"
-            landmarkName = "logTrainingRun(viewModel:completition:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "FE20B472-6D83-4DFE-ABE6-A9D3155670F5"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "TestProject/Client/DataService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2362"
-            endingLineNumber = "2362"
-            landmarkName = "logTrainingRun(viewModel:completition:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1948,49 +1708,161 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7839E2B3-E638-4ACB-8D5D-CD658D90CB07"
+            uuid = "12AF4DCF-126C-442C-B40C-8E5CC0A5E867"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TestProject/Client/DataService.swift"
+            filePath = "TestProject/Views/Runner Profile/RunnerProfileSplitsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2595"
-            endingLineNumber = "2595"
-            landmarkName = "getRunnersTrainingSummary(season:runnerId:timeFrame:completition:)"
+            startingLineNumber = "5"
+            endingLineNumber = "5"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "46ECD4B8-57E8-48AA-BBEC-0FA691EEE608"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TestProject/Views/Runner Profile/V2/RunnerProfileV2View.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2A812784-200D-43CE-9CCB-3C625BC48BD0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TestProject/Views/Runner Profile/V2/ProfileRanksView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "313"
+            endingLineNumber = "313"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1BF866A9-C7B2-43C9-BA4A-740156586F97"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TestProject/Calendar/WorkoutAddSplits/AddSplitsCoachesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "fetchRunners()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "7839E2B3-E638-4ACB-8D5D-CD658D90CB07 - e66cba4a4ffe714a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "UAXC.DataService.getRunnersTrainingSummary(season: Swift.String, runnerId: Swift.Int, byWeek: Swift.Bool, completition: (Swift.Result&lt;Swift.Array&lt;UAXC.TrainingSummaryDTO&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "UAXC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/davidterkula/Desktop/XCode/TestProject/TestProject/Client/DataService.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "2600"
-                  endingLineNumber = "2600"
-                  offsetFromSymbolStart = "1818">
-               </Location>
-               <Location
-                  uuid = "7839E2B3-E638-4ACB-8D5D-CD658D90CB07 - 64d565568e051169"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in UAXC.DataService.getRunnersTrainingSummary(season: Swift.String, runnerId: Swift.Int, byWeek: Swift.Bool, completition: (Swift.Result&lt;Swift.Array&lt;UAXC.TrainingSummaryDTO&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "UAXC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/davidterkula/Desktop/XCode/TestProject/TestProject/Client/DataService.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "2601"
-                  endingLineNumber = "2601"
-                  offsetFromSymbolStart = "292">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3C92EC44-1E7C-461D-B2C8-4DCB2D16C558"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TestProject/Calendar/WorkoutAddSplits/AddSplitsCoachesView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "getRunnersData(selectedRunner:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A243D25C-5B54-4A53-B68E-34842C229898"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TestProject/GlobalFunctions/GlobalFunctions.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "getRelevantYear()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9CFED218-E6A7-4E2B-BF3F-08A211BDCA1F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TestProject/GlobalFunctions/GlobalFunctions.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "getRelevantYear()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9EC54B0F-0838-487A-A7C3-2D833735B602"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TestProject/Views/Runner Profile/V2/RunnerProfileV2View.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0EAAF59A-9A21-4B90-933C-09B7373F475F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TestProject/Views/Training/TrainingSummaryView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3F21E4AA-B24D-4E33-A184-DDFCDBAE7BA4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TestProject/Views/Training/TrainingSummaryView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "body"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

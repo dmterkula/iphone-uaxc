@@ -1,16 +1,18 @@
 //
-//  GoalsView.swift
+//  RunnersGoalsViewV2.swift
 //  UAXC
 //
-//  Created by David  Terkula on 9/15/22.
+//  Created by David  Terkula on 12/28/22.
 //
 
 import SwiftUI
 
-struct RunnersGoalsView: View {
+struct RunnersGoalsViewV2: View {
+    
     @State var season = ""
     @State var seasons: [String] = ["Select Season"]
     @State var runners: [Runner] = []
+    @State var runner: Runner?
     @State var runnerName = ""
     @State var goalsResponse: RunnersGoals?
     @State var goalsViewModel = GoalsViewModel()
@@ -35,6 +37,7 @@ struct RunnersGoalsView: View {
         
         if (authentication.user?.role == "runner" && authentication.runner != nil) {
             runners = [ authentication.runner! ]
+            runner = authentication.runner!
             runnerName = authentication.runner!.name
         } else {
             if (!season.isEmpty) {
@@ -55,13 +58,16 @@ struct RunnersGoalsView: View {
     }
     
     var body: some View {
-        
         GeometryReader { geometry in
             ZStack(alignment: .center) {
                 Background().edgesIgnoringSafeArea(.all)
                     .onAppear{
                         self.fetchSeasons()
                         self.fetchRunners()
+                        if (goalsResponse != nil) {
+                            goalsViewModel.goals.removeAll()
+                            goalsViewModel.goals.append(contentsOf: goalsResponse!.goals)
+                        }
                     }
             
                 VStack() {
@@ -90,6 +96,9 @@ struct RunnersGoalsView: View {
                         if (!season.isEmpty) {
                             HStack {
                                 RunnerPickerView(runners: $runners, runnerLabel: $runnerName)
+                                    .onChange(of: runnerName) { newValue in
+                                        runner = runners.first{$0.name == runnerName.components(separatedBy: ":")[0]}!
+                                    }
                                 
                             }.padding(.bottom, 15)
                         }
@@ -97,12 +106,11 @@ struct RunnersGoalsView: View {
                     
                     
                     
-                    if (!runnerName.isEmpty && !season.isEmpty) {
+                    if (runner != nil && !season.isEmpty) {
                         Button("Get Goals") {
                            
                             let dataService = DataService()
-                            let name = runnerName.components(separatedBy: ":")[0]
-                            dataService.fetchGoalsForRunners(runner: name, season: season) { (result) in
+                            dataService.fetchGoalsForRunnersV2(runnerId: runner!.runnerId, season: season) { (result) in
                                 DispatchQueue.main.async {
                                     switch result {
                                     case .success(let goals):
@@ -122,13 +130,14 @@ struct RunnersGoalsView: View {
                             .font(.title2)
                     }
                     
-                    if (goalsResponse != nil) {
+                    if (goalsResponse != nil && runner != nil) {
                         ScrollView {
                             HStack {
                                 Spacer()
-                                GoalsListView(runnerName: $runnerName, season: $season, goalsViewModel: goalsViewModel)
+                                GoalsListView(runner: $runner, season: $season, goalsViewModel: goalsViewModel)
                                     .frame(width: geometry.size.width * 0.95, height: geometry.size.height, alignment: .center)
-                                    .background(.thinMaterial)
+                                    .environment(\.colorScheme, .light)
+                                
                                 Spacer()
                             }
                            
@@ -144,11 +153,12 @@ struct RunnersGoalsView: View {
             } // end zstack
             .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
         } // end top geometry
+
     }
 }
 
-//struct GoalsView_Previews: PreviewProvider {
+//struct RunnersGoalsViewV2_Previews: PreviewProvider {
 //    static var previews: some View {
-//        GoalsView()
+//        RunnersGoalsViewV2()
 //    }
 //}

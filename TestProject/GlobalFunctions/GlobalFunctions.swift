@@ -18,6 +18,20 @@ struct GlobalFunctions {
         return Color(red: 5/255, green: 112/255, blue: 0/255)
     }
     
+    static func getRelevantYear() -> String {
+        
+        var currentDate = Date()
+        
+        let calendarDate = Calendar.current.dateComponents([.day, .year, .month], from: currentDate)
+        
+        if (calendarDate.month! <= 5) {
+            return String(Int(currentDate.getYear())! - 1)
+        } else {
+            return currentDate.getYear()
+        }
+        
+    }
+    
     static func convertMinuteSecondStringToSeconds(time: String) -> Int {
         
         let components: [String] = time.components(separatedBy: " ")

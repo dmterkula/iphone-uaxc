@@ -58,7 +58,7 @@ struct GoalRow: View {
 
 struct GoalsListView: View {
     
-    @Binding var runnerName: String
+    @Binding var runner: Runner?
     @Binding var season: String
     @State var goalType: String = ""
     @State var goalValue: String = ""
@@ -67,12 +67,13 @@ struct GoalsListView: View {
     @State var secondsValue: Int = 0
     @State var expandAddGoal: Bool = false
     @ObservedObject var goalsViewModel: GoalsViewModel
+    @State var showSheet = false
     
     let dataService = DataService()
     let goalTypeOptions = ["Time", "Text"]
     
-    func refreshGoalsForRunner(name: String, season: String) {
-        dataService.fetchGoalsForRunners(runner: name, season: season) { (result) in
+    func refreshGoalsForRunner(runnerId: Int, season: String) {
+        dataService.fetchGoalsForRunnersV2(runnerId: runnerId, season: season) { (result) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let goals):
@@ -90,11 +91,11 @@ struct GoalsListView: View {
     func deleteGoal(offsets: IndexSet) {
         
         let goalToBeDeleted: GoalsDTO = goalsViewModel.goals[offsets.first!]
-        dataService.deleteGoalForRunner(runner: runnerName.components(separatedBy: ":")[0], season: goalToBeDeleted.season, goalElements: [GoalElement(type: goalToBeDeleted.type, value: goalToBeDeleted.value, met: goalToBeDeleted.met)]) { (result) in
+        dataService.deleteGoalForRunnerV2(runnerId: runner!.runnerId, season: goalToBeDeleted.season, goalElements: [GoalElement(type: goalToBeDeleted.type, value: goalToBeDeleted.value, met: goalToBeDeleted.met)]) { (result) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let goals):
-                    self.refreshGoalsForRunner(name: runnerName.components(separatedBy: ":")[0], season: season)
+                    self.refreshGoalsForRunner(runnerId: runner!.runnerId, season: season)
                 
                     case .failure(let error):
                         print(error)
@@ -111,116 +112,42 @@ struct GoalsListView: View {
     
     var body: some View {
     
-        VStack (alignment: .leading) {
+        VStack(alignment: .leading) {
+
+            NavigationView {
+                List {
+                    ForEach(goalsViewModel.goals) { goal in
+                        GoalRow(runner: runner!.name, season: season, goalType: goal.type, goal: goal.value, goalIsMet: goal.met)
+                            
+                    }
+                    .onDelete(perform: deleteGoal)
+                    .onMove(perform: moveGoal)
+                }
+                .environment(\.editMode, Binding.constant(EditMode.active))
+                .listStyle(.plain)
+            }
+            .toolbar {
             
-            DisclosureGroup(isExpanded: $expandAddGoal) {
-                
-                Menu {
-                    Picker("Selected Goal Type: " + goalType, selection: $goalType, content: {
-                        ForEach(goalTypeOptions, id: \.self, content: { goalType in
-                            Text(goalType).foregroundColor(.white)
-                        })
-                    })
-                    .pickerStyle(MenuPickerStyle())
-                    .accentColor(.white)
-                    .labelsHidden()
-                } label: {
-                    Text("Select goal type: " + goalType)
-                        .foregroundColor(.white)
-                }
-                
-                if (goalType == "Time") {
-                    RaceTimePicker(minutesValue: $minutesValue, secondsValue: $secondsValue)
-                        .frame(height: 20)
-                } else {
-                    TextField("Goal: ", text: $goalValue)
-                }
-                
-                Toggle("Goal is met: ", isOn: $goalIsMet)
-                    .padding(.bottom, 10)
-                    .onTapGesture {
-                        hideKeyboard()
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showSheet.toggle()
+                    } label: {
+                        Image(systemName: "plus.circle.fill")
+                            .imageScale(.large)
                     }
+                    .sheet(isPresented: $showSheet) {
+                        RunnerGoalFormView(showSheet: $showSheet, runner: $runner, season: $season)
+                            .preferredColorScheme(.light)
                     
-                Button(action: {
-                    hideKeyboard()
-                    var goalString = goalValue
-                    
-                    if (goalType == "Time") {
-                        if (secondsValue < 10) {
-                            goalString = String(minutesValue) + ":0" + String(secondsValue)
-                        } else {
-                            goalString = String(minutesValue) + ":" + String(secondsValue)
-                        }
-                        
-                    }
-                    
-                    if (!runnerName.isEmpty && !season.isEmpty && !goalType.isEmpty && goalString != "0:0") {
-                        
-                        
-                        dataService.createGoalForRunner(runner: runnerName.components(separatedBy: ":")[0], season: season, goalElements: [GoalElement(type: goalType, value: goalString, met: goalIsMet)]) { (result) in
-                            DispatchQueue.main.async {
-                                switch result {
-                                case .success(let response):
-                                    print(response)
-                                    self.refreshGoalsForRunner(name: runnerName.components(separatedBy: ":")[0], season: season)
-                                    case .failure(let error):
-                                        print(error)
-                                }
-                            }
-                        }
-                    } else {
-                        print("not all values provided")
-                    }
-                   
-                }, label: {
-                    Text("Add Goal")
-                        .bold()
-                        .frame(width: 200, height: 50, alignment: .center)
-                        .background(.green)
-                        .cornerRadius(8)
-                        .foregroundColor(.white)
-                    
-                })
-            } label: {
-                Text("Add Goal")
-                .onTapGesture {
-                    withAnimation {
-                        self.expandAddGoal.toggle()
-                        }
                     }
                 }
-            .accentColor(.white)
-            .font(.title3)
-            .padding(.all)
-            .background(.thinMaterial)
-            .cornerRadius(8)
-            
+    
+ 
+            }
 
             
-            GeometryReader {geometry in
-                HStack {
-                    Spacer()
-                    List {
-                        ForEach(goalsViewModel.goals) { goal in
-                            GoalRow(runner: runnerName.components(separatedBy: ":")[0], season: season, goalType: goal.type, goal: goal.value, goalIsMet: goal.met)
-                                
-                        }
-                        .onDelete(perform: deleteGoal)
-                        .onMove(perform: moveGoal)
-                    }
-                    .environment(\.editMode, Binding.constant(EditMode.active))
-                    .frame(width: geometry.size.width * 0.95)
-                    .listStyle(.plain)
-                    
-                    
-                    Spacer()
-                }
-               
-            }
+        }// end top vstack
             
-        
-        } // end top vstack
     }
 }
 

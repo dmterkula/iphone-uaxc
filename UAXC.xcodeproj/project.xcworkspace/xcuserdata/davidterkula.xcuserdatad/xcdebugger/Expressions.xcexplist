@@ -87,6 +87,20 @@
          contextName = "closure #1 in DataService.getMeetsBetweenDates(startDate:endDate:completition:):DataService.swift">
       </ContextState>
       <ContextState
+         contextName = "closure #3 in closure #1 in TrainingSummaryView.body.getter:TrainingSummaryView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "season">
+            </PersistentString>
+            <PersistentString
+               value = "trainingSummaryDTOs">
+            </PersistentString>
+            <PersistentString
+               value = "runner">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #3 in closure #1 in closure #1 in TrainingRunLandingPageAthletesView.body.getter:TrainingRunLandingPageAthletesView.swift">
       </ContextState>
       <ContextState
@@ -241,6 +255,9 @@
          <PersistentStrings>
             <PersistentString
                value = "runners">
+            </PersistentString>
+            <PersistentString
+               value = "runnerName">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -418,6 +435,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "static GlobalFunctions.getRelevantYear():GlobalFunctions.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "calendarDate.month!">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #3 in closure #2 in closure #1 in GetMeetResultsView.body.getter:GetMeetResultsView.swift">
          <PersistentStrings>
             <PersistentString
@@ -440,6 +465,9 @@
                value = "overallViewModel">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AddSplitsCoachesView.fetchRunners():AddSplitsCoachesView.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in MeetSummaryPerformanceList.body.getter:MeetSummaryPerformanceList.swift">

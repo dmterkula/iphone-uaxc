@@ -229,15 +229,17 @@ class DataService {
         
     }
     
-    func fetchRunnerProfile(runnerName: String, completition: @escaping (Result<RunnerProfileResponse, Error>) -> Void) {
+    func fetchRunnerProfileV2(runnerId: Int, season: String, completition: @escaping (Result<RunnerProfileDTOV2, Error>) -> Void) {
         var componentUrl = URLComponents()
         componentUrl.scheme = "https"
         componentUrl.host = baseUrlString
-        componentUrl.path = "/xc/runnerProfile/"
+        componentUrl.path = "/xc/runnerProfileV2/"
         
-        let runnerQueryItem = URLQueryItem(name: "filter.name", value: runnerName)
         
-        componentUrl.queryItems = [runnerQueryItem]
+        let runnerQueryItem = URLQueryItem(name: "runnerId", value: String(runnerId))
+        let seasonQueryItem = URLQueryItem(name: "season", value: season)
+        
+        componentUrl.queryItems = [runnerQueryItem, seasonQueryItem]
         
         guard let validURL = componentUrl.url else {
             print("failed to create url")
@@ -260,7 +262,11 @@ class DataService {
             
             do {
                 //let json = try JSONSerialization.jsonObject(with: validData, options: [])
-                let runnerProfileResponse = try JSONDecoder().decode(RunnerProfileResponse.self, from: validData)
+                let decoder = JSONDecoder()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let runnerProfileResponse = try decoder.decode(RunnerProfileDTOV2.self, from: validData)
                 print(runnerProfileResponse)
                 completition(.success(runnerProfileResponse))
             } catch let serializationError {
@@ -649,15 +655,15 @@ class DataService {
         }.resume()
     }
     
-    func fetchGoalsForRunners(runner: String, season: String, completition: @escaping (Result<RunnersGoals, Error>) -> Void) {
+    func fetchGoalsForRunnersV2(runnerId: Int, season: String, completition: @escaping (Result<RunnersGoals, Error>) -> Void) {
         var componentUrl = URLComponents()
         componentUrl.scheme = "https"
         componentUrl.host = baseUrlString
-        componentUrl.path = "/xc/goals/forRunner"
+        componentUrl.path = "/xc/goals/getV2"
         
         
         let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
-        let runnerQueryItem = URLQueryItem(name: "filter.runner", value: runner)
+        let runnerQueryItem = URLQueryItem(name: "filter.runnerId", value: String(runnerId))
         
         componentUrl.queryItems = [seasonQueryItem, runnerQueryItem]
         
@@ -691,16 +697,16 @@ class DataService {
         }.resume()
     }
     
-    func createGoalForRunner(runner: String, season: String, goalElements: [GoalElement], completition: @escaping (Result<RunnersGoals, Error>) -> Void) {
+    func createGoalForRunnerV2(runnerId: Int, season: String, goalElements: [GoalElement], completition: @escaping (Result<RunnersGoals, Error>) -> Void) {
         
         var componentUrl = URLComponents()
         componentUrl.scheme = "https"
         componentUrl.host = baseUrlString
-        componentUrl.path = "/xc/goals/create"
+        componentUrl.path = "/xc/goals/createV2"
         
         
         let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
-        let runnerQueryItem = URLQueryItem(name: "filter.runner", value: runner)
+        let runnerQueryItem = URLQueryItem(name: "filter.runnerId", value: String(runnerId))
         
         componentUrl.queryItems = [seasonQueryItem, runnerQueryItem]
         
@@ -746,16 +752,16 @@ class DataService {
         }.resume()
     }
     
-    func deleteGoalForRunner(runner: String, season: String, goalElements: [GoalElement], completition: @escaping (Result<RunnersGoals, Error>) -> Void) {
+    func deleteGoalForRunnerV2(runnerId: Int, season: String, goalElements: [GoalElement], completition: @escaping (Result<RunnersGoals, Error>) -> Void) {
         
         var componentUrl = URLComponents()
         componentUrl.scheme = "https"
         componentUrl.host = baseUrlString
-        componentUrl.path = "/xc/goals/delete"
+        componentUrl.path = "/xc/goals/deleteV2"
         
         
         let seasonQueryItem = URLQueryItem(name: "filter.season", value: season)
-        let runnerQueryItem = URLQueryItem(name: "filter.runner", value: runner)
+        let runnerQueryItem = URLQueryItem(name: "filter.runnerId", value: String(runnerId))
         
         componentUrl.queryItems = [seasonQueryItem, runnerQueryItem]
         

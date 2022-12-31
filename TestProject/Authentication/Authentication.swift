@@ -11,6 +11,7 @@ class Authentication: ObservableObject {
     @Published var isValdiated = false
     @Published var user: AppUser? = nil
     @Published var runner: Runner? = nil
+    @Published var runnerProfile: RunnerProfileDTOV2?
     
     
     enum AuthenticationError: Error, LocalizedError, Identifiable {

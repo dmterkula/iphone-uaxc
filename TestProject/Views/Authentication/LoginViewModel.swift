@@ -19,6 +19,7 @@ class LoginViewModel: ObservableObject {
         credentials.username.isEmpty || credentials.password.isEmpty
     }
     
+    
     func login(completion: @escaping (AuthenticationResponse) -> Void) {
         showProgressView = true
         dataService.authenticateUser(credentials: credentials) { [unowned self] (result: Result<AuthenticationResponse, Authentication.AuthenticationError>) in
