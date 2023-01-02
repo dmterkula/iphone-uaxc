@@ -18,7 +18,7 @@ struct PRRunnerProfileView: View {
                         .font(.title3)
                         .bold()
                     
-                    MeetResultView(result: pr)
+                    MeetResultViewV2(result: pr)
                 
                 }.padding(.vertical, 10.0)
         }

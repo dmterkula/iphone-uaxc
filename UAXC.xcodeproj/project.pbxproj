@@ -76,10 +76,7 @@
 		6895852628B7C6D000AA4209 /* PerformanceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6895852528B7C6D000AA4209 /* PerformanceList.swift */; };
 		6895852A28B7F70700AA4209 /* GetPRsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6895852928B7F70700AA4209 /* GetPRsView.swift */; };
 		6895853328B7FFFA00AA4209 /* MeetPerformanceResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6895853228B7FFFA00AA4209 /* MeetPerformanceResponse.swift */; };
-		689734DF28B8073E00744B2E /* GetMeetResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689734DE28B8073E00744B2E /* GetMeetResultsView.swift */; };
 		689734E128B83F7E00744B2E /* MeetPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689734E028B83F7E00744B2E /* MeetPerformance.swift */; };
-		689734E328B8400300744B2E /* MeetPerformanceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689734E228B8400300744B2E /* MeetPerformanceList.swift */; };
-		689734E528B8404300744B2E /* MeetPerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689734E428B8404300744B2E /* MeetPerformanceView.swift */; };
 		689734E828B8492000744B2E /* MeetSplitsForRunnerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689734E728B8492000744B2E /* MeetSplitsForRunnerResponse.swift */; };
 		689734EA28B84A0800744B2E /* MeetSplit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689734E928B84A0800744B2E /* MeetSplit.swift */; };
 		689734EC28B84A8B00744B2E /* Splits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689734EB28B84A8B00744B2E /* Splits.swift */; };
@@ -119,7 +116,6 @@
 		6897354A28BEE41D00744B2E /* RaceConsistencyRankDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6897354928BEE41D00744B2E /* RaceConsistencyRankDTO.swift */; };
 		6897354C28BEE50300744B2E /* ProgressionRankDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6897354B28BEE50300744B2E /* ProgressionRankDTO.swift */; };
 		6897354E28BEE78F00744B2E /* RunnerProfilePR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6897354D28BEE78F00744B2E /* RunnerProfilePR.swift */; };
-		6897355028BF752600744B2E /* MeetResultList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6897354F28BF752600744B2E /* MeetResultList.swift */; };
 		6897355228BF755F00744B2E /* MeetResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6897355128BF755F00744B2E /* MeetResultView.swift */; };
 		6897355428BF876E00744B2E /* SeasonBestProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6897355328BF876E00744B2E /* SeasonBestProfileView.swift */; };
 		6897355628BF890500744B2E /* RunnerProfileSplitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6897355528BF890500744B2E /* RunnerProfileSplitsView.swift */; };
@@ -193,6 +189,11 @@
 		68B68E26295CE7E100C558DC /* RunnersGoalsViewV2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B68E25295CE7E100C558DC /* RunnersGoalsViewV2.swift */; };
 		68B68E28295F30D900C558DC /* RunnerGoalFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B68E27295F30D900C558DC /* RunnerGoalFormViewModel.swift */; };
 		68B68E2A295F319500C558DC /* RunnerGoalFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B68E29295F319500C558DC /* RunnerGoalFormView.swift */; };
+		68B68E2D2960DF2700C558DC /* AddRunnerMeetResultFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B68E2C2960DF2700C558DC /* AddRunnerMeetResultFormViewModel.swift */; };
+		68B68E302960E08D00C558DC /* TotalMeetPerformanceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B68E2F2960E08D00C558DC /* TotalMeetPerformanceDTO.swift */; };
+		68B68E322960E4B700C558DC /* AddRunnerMeetResultsFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B68E312960E4B700C558DC /* AddRunnerMeetResultsFormView.swift */; };
+		68B68E342960EE9700C558DC /* AddMeetResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B68E332960EE9700C558DC /* AddMeetResultsView.swift */; };
+		68B68E372960F5BD00C558DC /* CreateRunnersTotalMeetResultsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B68E362960F5BD00C558DC /* CreateRunnersTotalMeetResultsRequest.swift */; };
 		68B719CE28F45F810035A727 /* CustomBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B719CD28F45F810035A727 /* CustomBindings.swift */; };
 		68B719D028F890C30035A727 /* RunnerWorkoutPlanRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B719CF28F890C30035A727 /* RunnerWorkoutPlanRow.swift */; };
 		68B719D228FC711C0035A727 /* RunnerComponentPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B719D128FC711C0035A727 /* RunnerComponentPlanView.swift */; };
@@ -312,10 +313,7 @@
 		6895852528B7C6D000AA4209 /* PerformanceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceList.swift; sourceTree = "<group>"; };
 		6895852928B7F70700AA4209 /* GetPRsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPRsView.swift; sourceTree = "<group>"; };
 		6895853228B7FFFA00AA4209 /* MeetPerformanceResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetPerformanceResponse.swift; sourceTree = "<group>"; };
-		689734DE28B8073E00744B2E /* GetMeetResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMeetResultsView.swift; sourceTree = "<group>"; };
 		689734E028B83F7E00744B2E /* MeetPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetPerformance.swift; sourceTree = "<group>"; };
-		689734E228B8400300744B2E /* MeetPerformanceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetPerformanceList.swift; sourceTree = "<group>"; };
-		689734E428B8404300744B2E /* MeetPerformanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetPerformanceView.swift; sourceTree = "<group>"; };
 		689734E728B8492000744B2E /* MeetSplitsForRunnerResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetSplitsForRunnerResponse.swift; sourceTree = "<group>"; };
 		689734E928B84A0800744B2E /* MeetSplit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetSplit.swift; sourceTree = "<group>"; };
 		689734EB28B84A8B00744B2E /* Splits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Splits.swift; sourceTree = "<group>"; };
@@ -355,7 +353,6 @@
 		6897354928BEE41D00744B2E /* RaceConsistencyRankDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceConsistencyRankDTO.swift; sourceTree = "<group>"; };
 		6897354B28BEE50300744B2E /* ProgressionRankDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressionRankDTO.swift; sourceTree = "<group>"; };
 		6897354D28BEE78F00744B2E /* RunnerProfilePR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerProfilePR.swift; sourceTree = "<group>"; };
-		6897354F28BF752600744B2E /* MeetResultList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetResultList.swift; sourceTree = "<group>"; };
 		6897355128BF755F00744B2E /* MeetResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetResultView.swift; sourceTree = "<group>"; };
 		6897355328BF876E00744B2E /* SeasonBestProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonBestProfileView.swift; sourceTree = "<group>"; };
 		6897355528BF890500744B2E /* RunnerProfileSplitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerProfileSplitsView.swift; sourceTree = "<group>"; };
@@ -429,6 +426,11 @@
 		68B68E25295CE7E100C558DC /* RunnersGoalsViewV2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnersGoalsViewV2.swift; sourceTree = "<group>"; };
 		68B68E27295F30D900C558DC /* RunnerGoalFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerGoalFormViewModel.swift; sourceTree = "<group>"; };
 		68B68E29295F319500C558DC /* RunnerGoalFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerGoalFormView.swift; sourceTree = "<group>"; };
+		68B68E2C2960DF2700C558DC /* AddRunnerMeetResultFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRunnerMeetResultFormViewModel.swift; sourceTree = "<group>"; };
+		68B68E2F2960E08D00C558DC /* TotalMeetPerformanceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalMeetPerformanceDTO.swift; sourceTree = "<group>"; };
+		68B68E312960E4B700C558DC /* AddRunnerMeetResultsFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRunnerMeetResultsFormView.swift; sourceTree = "<group>"; };
+		68B68E332960EE9700C558DC /* AddMeetResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMeetResultsView.swift; sourceTree = "<group>"; };
+		68B68E362960F5BD00C558DC /* CreateRunnersTotalMeetResultsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRunnersTotalMeetResultsRequest.swift; sourceTree = "<group>"; };
 		68B719CD28F45F810035A727 /* CustomBindings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBindings.swift; sourceTree = "<group>"; };
 		68B719CF28F890C30035A727 /* RunnerWorkoutPlanRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerWorkoutPlanRow.swift; sourceTree = "<group>"; };
 		68B719D128FC711C0035A727 /* RunnerComponentPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerComponentPlanView.swift; sourceTree = "<group>"; };
@@ -928,6 +930,7 @@
 		6895853128B7FFDA00AA4209 /* MeetPerformance */ = {
 			isa = PBXGroup;
 			children = (
+				68B68E2E2960E06500C558DC /* RunnerCompleteResults */,
 				6895853228B7FFFA00AA4209 /* MeetPerformanceResponse.swift */,
 				689734E028B83F7E00744B2E /* MeetPerformance.swift */,
 				68B4C42728C0C43C00C38553 /* MeetResultsForRunnerResponse.swift */,
@@ -939,10 +942,7 @@
 		689734DD28B8071E00744B2E /* MeetResults */ = {
 			isa = PBXGroup;
 			children = (
-				689734DE28B8073E00744B2E /* GetMeetResultsView.swift */,
-				689734E228B8400300744B2E /* MeetPerformanceList.swift */,
-				689734E428B8404300744B2E /* MeetPerformanceView.swift */,
-				6897354F28BF752600744B2E /* MeetResultList.swift */,
+				68B68E2B2960DF0D00C558DC /* AddMeetResults */,
 				6897355128BF755F00744B2E /* MeetResultView.swift */,
 			);
 			path = MeetResults;
@@ -1404,6 +1404,7 @@
 		68B68E00294F9A0B00C558DC /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				68B68E352960F5A200C558DC /* TotalMeetResults */,
 				68B68D972931076600C558DC /* TrainingRunRequests */,
 				6890440028F2E732009B2781 /* WorkoutRequests */,
 			);
@@ -1473,6 +1474,32 @@
 				68B68E21295C738700C558DC /* WorkoutsProfileView.swift */,
 			);
 			path = V2;
+			sourceTree = "<group>";
+		};
+		68B68E2B2960DF0D00C558DC /* AddMeetResults */ = {
+			isa = PBXGroup;
+			children = (
+				68B68E2C2960DF2700C558DC /* AddRunnerMeetResultFormViewModel.swift */,
+				68B68E312960E4B700C558DC /* AddRunnerMeetResultsFormView.swift */,
+				68B68E332960EE9700C558DC /* AddMeetResultsView.swift */,
+			);
+			path = AddMeetResults;
+			sourceTree = "<group>";
+		};
+		68B68E2E2960E06500C558DC /* RunnerCompleteResults */ = {
+			isa = PBXGroup;
+			children = (
+				68B68E2F2960E08D00C558DC /* TotalMeetPerformanceDTO.swift */,
+			);
+			path = RunnerCompleteResults;
+			sourceTree = "<group>";
+		};
+		68B68E352960F5A200C558DC /* TotalMeetResults */ = {
+			isa = PBXGroup;
+			children = (
+				68B68E362960F5BD00C558DC /* CreateRunnersTotalMeetResultsRequest.swift */,
+			);
+			path = TotalMeetResults;
 			sourceTree = "<group>";
 		};
 		68B719CC28F45F6D0035A727 /* CustomBindings */ = {
@@ -1779,9 +1806,7 @@
 				68F93FB028D4B89300CEA645 /* RaceTimePicker.swift in Sources */,
 				688DA4E628C9286B0056C1B8 /* TimeTrialProgressions.swift in Sources */,
 				68B68E1E295B803900C558DC /* GoalViewRunnerProfile.swift in Sources */,
-				689734DF28B8073E00744B2E /* GetMeetResultsView.swift in Sources */,
 				688DA4D028C7A3BF0056C1B8 /* SeasonPickerView.swift in Sources */,
-				689734E328B8400300744B2E /* MeetPerformanceList.swift in Sources */,
 				6897354428BEDE6900744B2E /* RunnerProfile.swift in Sources */,
 				682255F728C180BB0080B935 /* AggregateStatsResponse.swift in Sources */,
 				6897354E28BEE78F00744B2E /* RunnerProfilePR.swift in Sources */,
@@ -1818,6 +1843,7 @@
 				68B719E829118D140035A727 /* SplitsListView.swift in Sources */,
 				680C194328CD49D4006D1CD2 /* TTestDTO.swift in Sources */,
 				6897350228BA63EA00744B2E /* MeetSummaryPRsView.swift in Sources */,
+				68B68E2D2960DF2700C558DC /* AddRunnerMeetResultFormViewModel.swift in Sources */,
 				68B719E2291083E80035A727 /* CreateSplitsRequest.swift in Sources */,
 				6897353E28BED56C00744B2E /* RunnerProfileResponse.swift in Sources */,
 				6815F2C928E3BA7C00E0482A /* WorkoutViewRow.swift in Sources */,
@@ -1864,14 +1890,17 @@
 				68C605B228EA2EEA00F2FF79 /* Authentication.swift in Sources */,
 				688DA4C928C520770056C1B8 /* MeetInfoResponse.swift in Sources */,
 				688DA4DC28C91D610056C1B8 /* TimeTrialProgression.swift in Sources */,
+				68B68E372960F5BD00C558DC /* CreateRunnersTotalMeetResultsRequest.swift in Sources */,
 				68B719EA291847770035A727 /* WorkoutComponentResultsResponse.swift in Sources */,
 				68B71A10292129CA0035A727 /* EventFormViewModel.swift in Sources */,
 				6890440428F2FDE5009B2781 /* WorkoutComponentsListView.swift in Sources */,
 				68B68E1C295B726D00C558DC /* TrainingRunResultsProfileView.swift in Sources */,
 				6897350F28BAA28500744B2E /* FasterProgression.swift in Sources */,
 				680C195528CE94EF006D1CD2 /* BarComparison.swift in Sources */,
+				68B68E302960E08D00C558DC /* TotalMeetPerformanceDTO.swift in Sources */,
 				688DA4CD28C542FB0056C1B8 /* MeetsDTO.swift in Sources */,
 				6815F2DB28E3C45000E0482A /* EventCalendarView.swift in Sources */,
+				68B68E322960E4B700C558DC /* AddRunnerMeetResultsFormView.swift in Sources */,
 				680C194E28CD4F0B006D1CD2 /* MeetSplitsComparisonView.swift in Sources */,
 				68B71A142921698B0035A727 /* MeetEventFormViewModel.swift in Sources */,
 				6895853328B7FFFA00AA4209 /* MeetPerformanceResponse.swift in Sources */,
@@ -1924,8 +1953,8 @@
 				6822560C28C2715C0080B935 /* TimeTrialResultsView.swift in Sources */,
 				68B719F129184DFB0035A727 /* WorkoutComponentRowView.swift in Sources */,
 				68F93FAC28D4982800CEA645 /* GoalElement.swift in Sources */,
-				689734E528B8404300744B2E /* MeetPerformanceView.swift in Sources */,
 				68B719F3291850750035A727 /* IndividualComponentResultsView.swift in Sources */,
+				68B68E342960EE9700C558DC /* AddMeetResultsView.swift in Sources */,
 				68B719DD290F31590035A727 /* WorkoutComponentSplitView.swift in Sources */,
 				682BF4F328B79ED300A72AE1 /* Runner.swift in Sources */,
 				68B4FC3828DC7AC5002DC811 /* RunnerToUnmetGoal.swift in Sources */,
@@ -1970,7 +1999,6 @@
 				68B719FE292033F70035A727 /* Meet.swift in Sources */,
 				68B68DB4293D0A1100C558DC /* CreateRunnersTrainingRun.swift in Sources */,
 				689734FB28BA5F2800744B2E /* PRsCount.swift in Sources */,
-				6897355028BF752600744B2E /* MeetResultList.swift in Sources */,
 				68B68E082953423D00C558DC /* CoachAddRunnersTrainingRunView.swift in Sources */,
 				6815F2D728E3C3D000E0482A /* WorkoutFormView.swift in Sources */,
 				6897352728BBE96200744B2E /* MeetToMeetProgressions.swift in Sources */,

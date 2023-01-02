@@ -444,6 +444,11 @@ struct MainMenuView: View {
                         TabButton(title: "Meet Results", image: "stopwatch")
                             .padding(.top, 30)
                         
+//                        if (authentication.user?.role == "coach") {
+//                            TabButton(title: "Add Meet Results", image: "gearshape.2")
+//                                .padding(.top, 30)
+//                        }
+                        
                         TabButton(title: "Meet Summary", image: "book")
                             .padding(.top, 30)
                         
@@ -564,8 +569,12 @@ struct MainMenuView: View {
             if (title == "PRs") {
                 GetPRsView()
             } else if (title == "Meet Results") {
-                GetMeetResultsView()
-            } else if (title == "Meet Splits") {
+                AddMeetResultsView()
+            }
+//            else if (title == "Add Meet Results") {
+//                AddMeetResultsView()
+//            }
+            else if (title == "Meet Splits") {
                 GetMeetSplitsView()
             } else if (title == "Meet Summary") {
                 GetMeetSummaryView()
