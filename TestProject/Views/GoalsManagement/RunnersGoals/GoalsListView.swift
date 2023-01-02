@@ -72,6 +72,12 @@ struct GoalsListView: View {
     let dataService = DataService()
     let goalTypeOptions = ["Time", "Text"]
     
+    func refreshOnDismiss() {
+        if (runner != nil) {
+            refreshGoalsForRunner(runnerId: runner!.runnerId, season: season)
+        }
+    }
+    
     func refreshGoalsForRunner(runnerId: Int, season: String) {
         dataService.fetchGoalsForRunnersV2(runnerId: runnerId, season: season) { (result) in
             DispatchQueue.main.async {
@@ -135,7 +141,7 @@ struct GoalsListView: View {
                         Image(systemName: "plus.circle.fill")
                             .imageScale(.large)
                     }
-                    .sheet(isPresented: $showSheet) {
+                    .sheet(isPresented: $showSheet, onDismiss: refreshOnDismiss) {
                         RunnerGoalFormView(showSheet: $showSheet, runner: $runner, season: $season)
                             .preferredColorScheme(.light)
                     

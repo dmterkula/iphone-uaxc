@@ -30,6 +30,29 @@ struct RunnerPickerView: View {
     }
 }
 
+struct RunnerPickerViewLight: View {
+    @Binding var runners: [Runner]
+    @Binding var runnerLabel: String
+    
+    var body: some View {
+        Menu {
+            Picker("Runner: " + (runnerLabel.components(separatedBy: ":").first ?? ""), selection: $runnerLabel, content: {
+                ForEach(runners.map { $0.name + ": " + $0.graduatingClass }, id: \.self, content: { runnerLabel in
+                    Text(runnerLabel).foregroundColor(.black)
+                })
+            })
+            .pickerStyle(MenuPickerStyle())
+            .accentColor(.black)
+        } label : {
+            Text("Runner: " + (runnerLabel.components(separatedBy: ":").first ?? ""))
+                .foregroundColor(.black)
+        }
+        
+        
+    }
+}
+
+
 struct FilterRunnerPickerView: View {
     @Binding var runners: [Runner]
     @State var filterName: String = ""

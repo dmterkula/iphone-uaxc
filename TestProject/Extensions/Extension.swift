@@ -161,6 +161,20 @@ extension String {
         return (Int(Double(splitTime[1]) ?? 00) )
     }
     
+    func getMillisecondsFrom() -> Int {
+        let splitTime: [String] = self.components(separatedBy: ".")
+        
+        if (splitTime.isEmpty) {
+            return 0
+        }
+        
+        if (splitTime.count == 1) {
+            return 0
+        }
+        
+        return (Int(Double(splitTime[1]) ?? 00) )
+    }
+    
     func matches(_ regex: String) -> Bool {
         return self.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
     }

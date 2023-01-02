@@ -27,7 +27,6 @@ struct SeasonAndMeetPickerView: View {
                 HStack {
                     MeetPickerView(meets: $meets, meetName: $meetName, season: $season)
                 }
-                .padding(.top, 20)
                 .onTapGesture {
                     hideKeyboard()
                 }

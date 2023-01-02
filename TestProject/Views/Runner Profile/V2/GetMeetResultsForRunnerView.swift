@@ -13,7 +13,7 @@ struct GetMeetResultsForRunnerView: View {
         
         ForEach(results) { result in
             VStack {
-                MeetResultView(result: result)
+                MeetResultViewV2(result: result)
                 CustomDivider(color: GlobalFunctions.uaGreen(), height: 1.0)
             }
                 

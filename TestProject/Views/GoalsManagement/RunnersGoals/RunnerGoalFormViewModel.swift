@@ -9,7 +9,7 @@ import Foundation
 
 class RunnerGoalFormViewModel: ObservableObject {
     
-    @Published var goalType: String = "Time"
+    @Published var goalType: String = "General"
     @Published var goalValue: String = ""
     @Published var goalIsMet = false
     @Published var minutesValue: Int = 0

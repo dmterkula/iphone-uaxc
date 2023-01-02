@@ -15,7 +15,7 @@ struct SeasonBestProfileView: View {
                 .font(.title3)
                 .bold()
             
-            MeetResultView(result: sb.result)
+            MeetResultViewV2(result: sb.result)
         
         }
     }
