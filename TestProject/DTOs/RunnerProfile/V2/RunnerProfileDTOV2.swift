@@ -20,10 +20,11 @@ struct RunnerProfileDTOV2: Codable {
     var workoutResults: [ARunnersWorkoutResultsResponse]
     var meetResults: [MeetResult]
     var trainingRunSummary: [TrainingSummaryDTO]
+    var achievements: RunnerAchievements
     
     
     private enum CodingKeys: String, CodingKey {
-        case runner, goals, trainingRuns, meetResults, trainingRunSummary
+        case runner, goals, trainingRuns, meetResults, trainingRunSummary, achievements
         case rankedPR = "rankedPRDTO"
         case rankedSB = "rankedSBDTO"
         case consistencyRank = "raceConsistencyDTO"

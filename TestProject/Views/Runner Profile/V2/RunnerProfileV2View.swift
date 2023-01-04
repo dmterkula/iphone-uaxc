@@ -117,6 +117,116 @@ struct RunnerProfileV2View: View {
         }
     }
     
+    
+    
+    @ViewBuilder
+    func buildMetAchievementsView() -> some View {
+        
+        if (runnerProfileResponse != nil) {
+        
+            let metAchievments = getMetAchievementsToDisplay(runnerAchievements: runnerProfileResponse!.achievements)
+            
+            if (!metAchievments.isEmpty) {
+                 let achievementPairs = metAchievments.chunked(into: 2)
+                
+                ForEach(Array(achievementPairs.enumerated()), id: \.offset) { index, element in
+                    if (element.count == 1) {
+                        AchievementRow(achievement1: element[0])
+                    } else {
+                        AchievementRow(achievement1: element[0], achievement2: element[1])
+                    }
+                }
+            }
+
+        } else {
+            Text("N/A")
+        }
+        
+    }
+    
+    @ViewBuilder
+    func buildUnmetAchievementsView() -> some View {
+        
+        if (runnerProfileResponse != nil) {
+        
+            let unMetAchievments = getUnmetAchievementsToDisplay(runnerAchievements: runnerProfileResponse!.achievements)
+            
+            if (!unMetAchievments.isEmpty) {
+                 let achievementPairs = unMetAchievments.chunked(into: 2)
+                
+                ForEach(Array(achievementPairs.enumerated()), id: \.offset) { index, element in
+                    if (element.count == 1) {
+                        UnMetAchievementRow(achievement1: element[0])
+                    } else {
+                        UnMetAchievementRow(achievement1: element[0], achievement2: element[1])
+                    }
+                }
+            }
+
+        } else {
+            Text("N/A")
+        }
+        
+    }
+    
+    func getMetAchievementsToDisplay(runnerAchievements: RunnerAchievements) -> [Achievement] {
+
+        var achievements: [Achievement?] = []
+        
+        achievements.append(getMetAchievement(achievementsInCategory: runnerAchievements.prAchievements))
+        achievements.append(getMetAchievement(achievementsInCategory: runnerAchievements.loggedRunAchievement))
+        
+        achievements.append(getMetAchievement(achievementsInCategory: runnerAchievements.totalTrainingDistanceAchievements))
+        achievements.append(getMetAchievement(achievementsInCategory: runnerAchievements.consistentRaceAchievements))
+        
+        achievements.append(getMetAchievement(achievementsInCategory: runnerAchievements.wonRaceAchievements))
+        achievements.append(getMetAchievement(achievementsInCategory: runnerAchievements.passesLastMileAchievements))
+        
+        achievements.append(getMetAchievement(achievementsInCategory: runnerAchievements.skullStreakAchievement))
+        achievements.append(getMetAchievement(achievementsInCategory: runnerAchievements.totalSkullsEarnedAchievement))
+        
+        return achievements.filter { $0 != nil }.map { $0! }
+        
+    }
+    
+    func getUnmetAchievementsToDisplay(runnerAchievements: RunnerAchievements) -> [Achievement] {
+
+        var achievements: [Achievement?] = []
+        
+        achievements.append(getUnMetAchievement(achievementsInCategory: runnerAchievements.prAchievements))
+        achievements.append(getUnMetAchievement(achievementsInCategory: runnerAchievements.loggedRunAchievement))
+        
+        achievements.append(getUnMetAchievement(achievementsInCategory: runnerAchievements.totalTrainingDistanceAchievements))
+        achievements.append(getUnMetAchievement(achievementsInCategory: runnerAchievements.consistentRaceAchievements))
+        
+        achievements.append(getUnMetAchievement(achievementsInCategory: runnerAchievements.wonRaceAchievements))
+        achievements.append(getUnMetAchievement(achievementsInCategory: runnerAchievements.passesLastMileAchievements))
+        
+        achievements.append(getUnMetAchievement(achievementsInCategory: runnerAchievements.skullStreakAchievement))
+        achievements.append(getUnMetAchievement(achievementsInCategory: runnerAchievements.totalSkullsEarnedAchievement))
+        
+        return achievements.filter { $0 != nil }.map { $0! }
+        
+    }
+    
+    func getMetAchievement(achievementsInCategory: [Achievement]) -> Achievement? {
+        
+        // return the highest met achievement in the provided category, or null if none met.
+        
+        var achievements = achievementsInCategory.sorted(by: { $0.threshold >= $1.threshold })
+        return achievements.first(where: {$0.met })
+    }
+    
+    func getUnMetAchievement(achievementsInCategory: [Achievement]) -> Achievement? {
+        
+        // return the next achievement that can be meet in the provided category, or null if all have been achieved in this category.
+        
+        var achievements = achievementsInCategory.sorted(by: { $0.threshold <= $1.threshold })
+        return achievements.first(where: {!$0.met })
+    }
+    
+  
+    
     var body: some View {
         
         ZStack {
@@ -284,6 +394,38 @@ struct RunnerProfileV2View: View {
                            
                         }
                     } // end group
+                    
+                    Group {
+                        Section(header: Text("Met Achievements")) {
+                            
+                            if (runnerProfileResponse != nil) {
+                               
+                                VStack {
+                                    buildMetAchievementsView()
+                                }
+                            
+                               
+                            } else {
+                                Text("N/A")
+                            }
+                            
+                           
+                            
+                        }.frame(maxHeight: .infinity)
+                        
+                        Section(header: Text("Unmet Achievements")) {
+                           
+                            if (runnerProfileResponse != nil) {
+                                VStack {
+                                    buildUnmetAchievementsView()
+                                }
+                               
+                            } else {
+                                Text("N/A")
+                            }
+                            
+                        }
+                    }
                 
                 } // end form
                 .refreshable{

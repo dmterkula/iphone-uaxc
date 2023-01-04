@@ -80,6 +80,7 @@ struct LoadingPageView: View {
                     .scaledToFit()
                     .frame(maxHeight: 450)
                     .padding(.bottom, 40)
+//                    .grayscale(0.9995)
                 
                 if (showProgressView) {
                     ProgressView()
