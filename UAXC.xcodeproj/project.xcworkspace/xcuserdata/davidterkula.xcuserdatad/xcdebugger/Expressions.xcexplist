@@ -520,6 +520,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in closure #1 in ChangeCredentialsView.body.getter:ChangeCredentialsView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "newUsername == newUsernameConfirmed">
+            </PersistentString>
+            <PersistentString
+               value = "showUsernameAlert">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DataService.updateWorkout(workout:completition:):DataService.swift">
       </ContextState>
       <ContextState

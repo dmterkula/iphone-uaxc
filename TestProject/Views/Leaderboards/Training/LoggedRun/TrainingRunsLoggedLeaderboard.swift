@@ -1,14 +1,14 @@
 //
-//  TrainingDistanceRunLeaderboardView.swift
+//  TrainingRunsLoggedLeaderboard.swift
 //  UAXC
 //
-//  Created by David  Terkula on 12/14/22.
+//  Created by David  Terkula on 1/5/23.
 //
 
 import SwiftUI
 
-struct TrainingDistanceRunLeaderboardView: View {
-    @State var leaderboard: [RankedRunnerDistanceRunDTO] = []
+struct TrainingRunsLoggedLeaderboard: View {
+    @State var leaderboard: [RankedAchievementDTO] = []
     @State var seasons: [String] = []
     @State var season: String = ""
     @State var showProgressView = false
@@ -41,11 +41,11 @@ struct TrainingDistanceRunLeaderboardView: View {
             pageValue = 25
         }
         
-        dataService.getTrainingDistanceLeaderboard(season: season, page: pageValue) { (result) in
+        dataService.getLoggedRunCountAchievementLeaderboard(season: season, page: pageValue) { (result) in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let rankedRunnerDistanceRunDTO):
-                    leaderboard = rankedRunnerDistanceRunDTO
+                case .success(let leaderboardResponse):
+                    leaderboard = leaderboardResponse
                     showProgressView = false
                     case .failure(let error):
                         print(error)
@@ -64,7 +64,7 @@ struct TrainingDistanceRunLeaderboardView: View {
                     }
                 
                 VStack {
-                    Text("Distance Run Leaderboard")
+                    Text("Logged Run Leaderboard")
                         .foregroundColor(.white)
                         .font(.title)
                         .fixedSize(horizontal: false, vertical: true)
@@ -117,15 +117,9 @@ struct TrainingDistanceRunLeaderboardView: View {
                             
                     }
                     
-                    if (!leaderboard.isEmpty) {
-                        Text("* Values shown is total miles run")
-                            .foregroundColor(.white)
-                            .padding(.bottom, 10)
-                    }
-                    
                     List {
-                        ForEach(leaderboard) { rankedRunnerDistanceRunDTO in
-                          TrainingDistanceLeaderboardRow(rankedRunnerDistanceRunDTO: rankedRunnerDistanceRunDTO)
+                        ForEach(leaderboard) { rankedAchievementDTO in
+                            RankedAchievementRowView(rankedAchievementDTO: rankedAchievementDTO)
                         }
                     }.frame(width: geometry.size.width * 0.95, height: geometry.size.height * 0.60)
                     
@@ -137,8 +131,8 @@ struct TrainingDistanceRunLeaderboardView: View {
     }
 }
 
-//struct TrainingDistanceRunLeaderboardView_Previews: PreviewProvider {
+//struct TrainingRunsLoggedLeaderboard_Previews: PreviewProvider {
 //    static var previews: some View {
-//        TrainingDistanceRunLeaderboardView()
+//        TrainingRunsLoggedLeaderboard()
 //    }
 //}

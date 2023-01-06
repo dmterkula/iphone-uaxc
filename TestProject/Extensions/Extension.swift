@@ -125,6 +125,41 @@ extension Int {
 
 extension String {
     
+    func textToImage(size: CGFloat) -> UIImage {
+        let nsString = (self as NSString)
+        let font = UIFont.systemFont(ofSize: size) // you can change your font size here
+        let stringAttributes = [NSAttributedString.Key.font: font]
+        let imageSize = nsString.size(withAttributes: stringAttributes)
+
+        UIGraphicsBeginImageContextWithOptions(imageSize, false, 0) //  begin image context
+        UIColor.clear.set() // clear background
+        UIRectFill(CGRect(origin: CGPoint(), size: imageSize)) // set rect size
+        nsString.draw(at: CGPoint.zero, withAttributes: stringAttributes) // draw text within rect
+        let image = UIGraphicsGetImageFromCurrentImageContext() // create image from context
+        UIGraphicsEndImageContext() //  end image context
+
+        return image ?? UIImage()
+    }
+    
+    var containsEmoji: Bool {
+            for scalar in unicodeScalars {
+                switch scalar.value {
+                case 0x1F600...0x1F64F, // Emoticons
+                     0x1F300...0x1F5FF, // Misc Symbols and Pictographs
+                     0x1F680...0x1F6FF, // Transport and Map
+                     0x2600...0x26FF,   // Misc symbols
+                     0x2700...0x27BF,   // Dingbats
+                     0xFE00...0xFE0F,   // Variation Selectors
+                     0x1F900...0x1F9FF, // Supplemental Symbols and Pictographs
+                     0x1F1E6...0x1F1FF: // Flags
+                    return true
+                default:
+                    continue
+                }
+            }
+            return false
+        }
+    
     func calculateSecondsFrom() -> Double {
         
         if (self.isEmpty) {

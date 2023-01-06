@@ -1,14 +1,14 @@
 //
-//  TrainingDistanceRunLeaderboardView.swift
+//  ConsistentRacesAchievedLeaderboardView.swift
 //  UAXC
 //
-//  Created by David  Terkula on 12/14/22.
+//  Created by David  Terkula on 1/5/23.
 //
 
 import SwiftUI
 
-struct TrainingDistanceRunLeaderboardView: View {
-    @State var leaderboard: [RankedRunnerDistanceRunDTO] = []
+struct ConsistentRacesAchievedLeaderboardView: View {
+    @State var leaderboard: [RankedAchievementDTO] = []
     @State var seasons: [String] = []
     @State var season: String = ""
     @State var showProgressView = false
@@ -33,7 +33,7 @@ struct TrainingDistanceRunLeaderboardView: View {
         }
     }
     
-    func fetchLeaderboard(season: String?) {
+    func fetchConsistentRacesRunLeaderboard(season: String?) {
         
         var pageValue: Int? = nil
         
@@ -41,18 +41,17 @@ struct TrainingDistanceRunLeaderboardView: View {
             pageValue = 25
         }
         
-        dataService.getTrainingDistanceLeaderboard(season: season, page: pageValue) { (result) in
+        dataService.getRaceSplitConsistencyAchievementLeaderboard(season: season, page: pageValue) { (result) in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let rankedRunnerDistanceRunDTO):
-                    leaderboard = rankedRunnerDistanceRunDTO
+                case .success(let leaderboardResponse):
+                    leaderboard = leaderboardResponse
                     showProgressView = false
                     case .failure(let error):
                         print(error)
                 }
             }
         }
-        
     }
     
     var body: some View {
@@ -64,14 +63,14 @@ struct TrainingDistanceRunLeaderboardView: View {
                     }
                 
                 VStack {
-                    Text("Distance Run Leaderboard")
+                    Text("Number of Consistent Races Run")
                         .foregroundColor(.white)
                         .font(.title)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.bottom, 20)
                     
                     HStack {
-                      
+                        
                         CheckBoxView(checked: $forSeason)
                             .onChange(of: forSeason) { newValue in
                                 if (newValue) {
@@ -86,9 +85,11 @@ struct TrainingDistanceRunLeaderboardView: View {
                             }
                         }
                         Text("For Career")
+   
                     }
                     .padding(.bottom, 10)
                     
+
                     if (forSeason) {
                         SeasonPickerView(seasons: $seasons, season: $season, label: "Select Season: ")
                             .padding(.bottom, 30)
@@ -97,11 +98,13 @@ struct TrainingDistanceRunLeaderboardView: View {
                     if (forSeason || forCareer) {
                         Button () {
                             showProgressView = true
+                          
                             if (forSeason) {
-                                fetchLeaderboard(season: season)
+                                fetchConsistentRacesRunLeaderboard(season: season)
                             } else {
-                                fetchLeaderboard(season: nil)
+                                fetchConsistentRacesRunLeaderboard(season: nil)
                             }
+                           
                         } label : {
                             Text("Get Leaderboard")
                                 .font(.system(size: 20))
@@ -113,32 +116,30 @@ struct TrainingDistanceRunLeaderboardView: View {
                         ProgressView()
                             .progressViewStyle(CircularProgressViewStyle(tint: .black))
                             .scaleEffect(3)
-                            .padding(.top, 50)
+                            .padding(.top, 30)
                             
                     }
                     
                     if (!leaderboard.isEmpty) {
-                        Text("* Values shown is total miles run")
-                            .foregroundColor(.white)
-                            .padding(.bottom, 10)
+                        Text("Races where all splits within 20s")
                     }
-                    
+
+                
                     List {
-                        ForEach(leaderboard) { rankedRunnerDistanceRunDTO in
-                          TrainingDistanceLeaderboardRow(rankedRunnerDistanceRunDTO: rankedRunnerDistanceRunDTO)
+                        ForEach(leaderboard) { rankedAchievementDTO in
+                            RankedAchievementRowView(rankedAchievementDTO: rankedAchievementDTO)
                         }
                     }.frame(width: geometry.size.width * 0.95, height: geometry.size.height * 0.60)
                     
                 }
-                
                 
             }
         }
     }
 }
 
-//struct TrainingDistanceRunLeaderboardView_Previews: PreviewProvider {
+//struct ConsistentRacesAchievedLeaderboardView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        TrainingDistanceRunLeaderboardView()
+//        ConsistentRacesAchievedLeaderboardView()
 //    }
 //}
