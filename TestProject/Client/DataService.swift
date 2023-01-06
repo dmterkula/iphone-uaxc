@@ -2522,7 +2522,8 @@ class DataService {
     }
     
     func getTrainingDistanceLeaderboard(
-        season: String,
+        season: String?,
+        page: Int?,
         completition: @escaping (Result<[RankedRunnerDistanceRunDTO], Error>) -> Void
     ) {
         
@@ -2531,9 +2532,18 @@ class DataService {
         componentUrl.host = baseUrlString
         componentUrl.path = "/xc/leaderboard/distance-run"
         
-        let seasonQueryItem = URLQueryItem(name: "season", value: season)
+        var queryItems: [URLQueryItem] = []
         
-        componentUrl.queryItems = [seasonQueryItem]
+        if (page != nil) {
+            queryItems.append(URLQueryItem(name: "page.size", value: String(page!)))
+        }
+        
+        if (season != nil) {
+            queryItems.append(URLQueryItem(name: "season", value: season))
+        }
+        
+        componentUrl.queryItems = queryItems
+      
         
         
         guard let validURL = componentUrl.url else {
@@ -2733,5 +2743,414 @@ class DataService {
             
         }.resume()
     }
+    
+    func getTotalSkullsLeaderboard(
+        season: String?,
+        page: Int?,
+        completition: @escaping (Result<[RankedAchievementDTO], Error>) -> Void
+    ) {
+        
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/leaderboard/total-skulls"
+        
+        
+        var queryItems: [URLQueryItem] = []
+        
+        if (page != nil) {
+            queryItems.append(URLQueryItem(name: "page.size", value: String(page!)))
+        }
+        
+        if (season != nil) {
+            queryItems.append(URLQueryItem(name: "season", value: season))
+        }
+        
+        componentUrl.queryItems = queryItems
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let decoder = JSONDecoder()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let response = try decoder.decode([RankedAchievementDTO].self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+            
+    }
+    
+    func getSkullsStreakLeaderboard(
+        season: String?,
+        page: Int?,
+        active: Bool?,
+        completition: @escaping (Result<[RankedAchievementDTO], Error>) -> Void
+    ) {
+        
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/leaderboard/skull-streak"
+        
+        
+        var queryItems: [URLQueryItem] = []
+        
+        if (page != nil) {
+            queryItems.append(URLQueryItem(name: "page.size", value: String(page!)))
+        }
+        
+        if (active != nil) {
+            queryItems.append(URLQueryItem(name: "active", value: String(active!)))
+        }
+        
+        if (season != nil) {
+            queryItems.append(URLQueryItem(name: "season", value: season))
+        }
+        
+        componentUrl.queryItems = queryItems
+      
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let decoder = JSONDecoder()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let response = try decoder.decode([RankedAchievementDTO].self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+            
+    }
+    
+    func getTotalPassesThirdMileLeaderboard(
+            season: String?,
+            page: Int?,
+            completition: @escaping (Result<[RankedAchievementDTO], Error>) -> Void
+        ) {
+            
+            var componentUrl = URLComponents()
+            componentUrl.scheme = "https"
+            componentUrl.host = baseUrlString
+            componentUrl.path = "/xc/leaderboard/passes-last-mile"
+            
+            
+            var queryItems: [URLQueryItem] = []
+            
+            if (page != nil) {
+                queryItems.append(URLQueryItem(name: "page.size", value: String(page!)))
+            }
+            
+            if (season != nil) {
+                queryItems.append(URLQueryItem(name: "season", value: season))
+            }
+            
+            componentUrl.queryItems = queryItems
+          
+            
+            guard let validURL = componentUrl.url else {
+                print("failed to create url")
+                return
+            }
+            
+            print(validURL)
+            
+            URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+                if let httpResponse = response as? HTTPURLResponse {
+                    print("API status: \(httpResponse.statusCode)")
+                }
+                
+                guard let validData = data, error == nil else {
+                    completition(.failure(error!))
+                    return
+                }
+                
+                print(validData)
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "yyyy-MM-dd"
+                    decoder.dateDecodingStrategy = .formatted(formatter)
+                    let response = try decoder.decode([RankedAchievementDTO].self, from: validData)
+                    print(response)
+                    completition(.success(response))
+                } catch let serializationError {
+                    completition(.failure(serializationError))
+                }
+                
+            }.resume()
+                
+        }
+    
+    func getRaceSplitConsistencyAchievementLeaderboard(
+            season: String?,
+            page: Int?,
+            completition: @escaping (Result<[RankedAchievementDTO], Error>) -> Void
+        ) {
+            
+            var componentUrl = URLComponents()
+            componentUrl.scheme = "https"
+            componentUrl.host = baseUrlString
+            componentUrl.path = "/xc/leaderboard/consistent-race-splits-achievement"
+            
+            
+            var queryItems: [URLQueryItem] = []
+            
+            if (page != nil) {
+                queryItems.append(URLQueryItem(name: "page.size", value: String(page!)))
+            }
+            
+            if (season != nil) {
+                queryItems.append(URLQueryItem(name: "season", value: season))
+            }
+            
+            componentUrl.queryItems = queryItems
+          
+            
+            guard let validURL = componentUrl.url else {
+                print("failed to create url")
+                return
+            }
+            
+            print(validURL)
+            
+            URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+                if let httpResponse = response as? HTTPURLResponse {
+                    print("API status: \(httpResponse.statusCode)")
+                }
+                
+                guard let validData = data, error == nil else {
+                    completition(.failure(error!))
+                    return
+                }
+                
+                print(validData)
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "yyyy-MM-dd"
+                    decoder.dateDecodingStrategy = .formatted(formatter)
+                    let response = try decoder.decode([RankedAchievementDTO].self, from: validData)
+                    print(response)
+                    completition(.success(response))
+                } catch let serializationError {
+                    completition(.failure(serializationError))
+                }
+                
+            }.resume()
+                
+        }
+    
+    func getLoggedRunCountAchievementLeaderboard(
+            season: String?,
+            page: Int?,
+            completition: @escaping (Result<[RankedAchievementDTO], Error>) -> Void
+        ) {
+            
+            var componentUrl = URLComponents()
+            componentUrl.scheme = "https"
+            componentUrl.host = baseUrlString
+            componentUrl.path = "/xc/leaderboard/logged-run-count"
+            
+            
+            var queryItems: [URLQueryItem] = []
+            
+            if (page != nil) {
+                queryItems.append(URLQueryItem(name: "page.size", value: String(page!)))
+            }
+            
+            if (season != nil) {
+                queryItems.append(URLQueryItem(name: "season", value: season))
+            }
+            
+            componentUrl.queryItems = queryItems
+          
+            
+            guard let validURL = componentUrl.url else {
+                print("failed to create url")
+                return
+            }
+            
+            print(validURL)
+            
+            URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+                if let httpResponse = response as? HTTPURLResponse {
+                    print("API status: \(httpResponse.statusCode)")
+                }
+                
+                guard let validData = data, error == nil else {
+                    completition(.failure(error!))
+                    return
+                }
+                
+                print(validData)
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "yyyy-MM-dd"
+                    decoder.dateDecodingStrategy = .formatted(formatter)
+                    let response = try decoder.decode([RankedAchievementDTO].self, from: validData)
+                    print(response)
+                    completition(.success(response))
+                } catch let serializationError {
+                    completition(.failure(serializationError))
+                }
+                
+            }.resume()
+                
+        }
+    
+    func updateCredentials(
+            username: String,
+            newUsername: String,
+            password: String,
+            completition: @escaping (Result<ChangeLoginResponse, Error>) -> Void
+        ) {
+            
+            var componentUrl = URLComponents()
+            componentUrl.scheme = "https"
+            componentUrl.host = baseUrlString
+            componentUrl.path = "/xc/authenticate/change-credentials"
+            
+            
+            var queryItems: [URLQueryItem] = []
+            
+            
+            queryItems.append(URLQueryItem(name: "username", value: username))
+            queryItems.append(URLQueryItem(name: "newUsername", value: newUsername))
+            queryItems.append(URLQueryItem(name: "password", value: password))
+            
+            
+            componentUrl.queryItems = queryItems
+          
+            
+            guard let validURL = componentUrl.url else {
+                print("failed to create url")
+                return
+            }
+            
+            print(validURL)
+            
+            var request = URLRequest(url: validURL)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Accept")
+            
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let httpResponse = response as? HTTPURLResponse {
+                    print("API status: \(httpResponse.statusCode)")
+                }
+                
+                guard let validData = data, error == nil else {
+                    completition(.failure(error!))
+                    return
+                }
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "yyyy-MM-dd"
+                    decoder.dateDecodingStrategy = .formatted(formatter)
+                    let response = try decoder.decode(ChangeLoginResponse.self, from: validData)
+                    print(response)
+                    completition(.success(response))
+                } catch let serializationError {
+                    completition(.failure(serializationError))
+                }
+                
+            }.resume()
+                
+        }
+    
+    func getAllExistingUserNames(
+            completition: @escaping (Result<[String], Error>) -> Void
+        ) {
+            
+            var componentUrl = URLComponents()
+            componentUrl.scheme = "https"
+            componentUrl.host = baseUrlString
+            componentUrl.path = "/xc/authenticate/get-all-usernames"
+            
+            guard let validURL = componentUrl.url else {
+                print("failed to create url")
+                return
+            }
+            
+            print(validURL)
+            
+            URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+                if let httpResponse = response as? HTTPURLResponse {
+                    print("API status: \(httpResponse.statusCode)")
+                }
+                
+                guard let validData = data, error == nil else {
+                    completition(.failure(error!))
+                    return
+                }
+                
+                print(validData)
+                
+                do {
+                    let decoder = JSONDecoder()
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "yyyy-MM-dd"
+                    decoder.dateDecodingStrategy = .formatted(formatter)
+                    let response = try decoder.decode([String].self, from: validData)
+                    print(response)
+                    completition(.success(response))
+                } catch let serializationError {
+                    completition(.failure(serializationError))
+                }
+                
+            }.resume()
+                
+        }
     
 }

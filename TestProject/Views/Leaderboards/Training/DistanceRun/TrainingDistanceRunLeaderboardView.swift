@@ -12,6 +12,10 @@ struct TrainingDistanceRunLeaderboardView: View {
     @State var seasons: [String] = []
     @State var season: String = ""
     @State var showProgressView = false
+    @EnvironmentObject var authentication: Authentication
+    
+    @State var forSeason: Bool = false
+    @State var forCareer: Bool = false
     
     let dataService = DataService()
     
@@ -29,9 +33,15 @@ struct TrainingDistanceRunLeaderboardView: View {
         }
     }
     
-    func fetchLeaderboard(season: String) {
+    func fetchLeaderboard(season: String?) {
         
-        dataService.getTrainingDistanceLeaderboard(season: season) { (result) in
+        var pageValue: Int? = nil
+        
+        if (authentication.user?.role == "runner") {
+            pageValue = 25
+        }
+        
+        dataService.getTrainingDistanceLeaderboard(season: season, page: pageValue) { (result) in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let rankedRunnerDistanceRunDTO):
@@ -57,16 +67,41 @@ struct TrainingDistanceRunLeaderboardView: View {
                     Text("Distance Run Leaderboard")
                         .foregroundColor(.white)
                         .font(.title)
-                        .padding(.top, 20)
                         .fixedSize(horizontal: false, vertical: true)
+                        .padding(.bottom, 20)
                     
-                    SeasonPickerView(seasons: $seasons, season: $season, label: "Select Season: ")
-                        .padding(.bottom, 30)
+                    HStack {
+                      
+                        CheckBoxView(checked: $forSeason)
+                            .onChange(of: forSeason) { newValue in
+                                if (newValue) {
+                                    forCareer = false
+                                }
+                            }
+                        Text("For Season")
+                        
+                        CheckBoxView(checked: $forCareer).onChange(of: forCareer) { newValue in
+                            if (newValue) {
+                                forSeason = false
+                            }
+                        }
+                        Text("For Career")
+                    }
+                    .padding(.bottom, 10)
                     
-                    if (!seasons.isEmpty) {
+                    if (forSeason) {
+                        SeasonPickerView(seasons: $seasons, season: $season, label: "Select Season: ")
+                            .padding(.bottom, 30)
+                    }
+                    
+                    if (forSeason || forCareer) {
                         Button () {
                             showProgressView = true
-                            fetchLeaderboard(season: season)
+                            if (forSeason) {
+                                fetchLeaderboard(season: season)
+                            } else {
+                                fetchLeaderboard(season: nil)
+                            }
                         } label : {
                             Text("Get Leaderboard")
                                 .font(.system(size: 20))
@@ -102,8 +137,8 @@ struct TrainingDistanceRunLeaderboardView: View {
     }
 }
 
-struct TrainingDistanceRunLeaderboardView_Previews: PreviewProvider {
-    static var previews: some View {
-        TrainingDistanceRunLeaderboardView()
-    }
-}
+//struct TrainingDistanceRunLeaderboardView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TrainingDistanceRunLeaderboardView()
+//    }
+//}

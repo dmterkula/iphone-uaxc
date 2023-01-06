@@ -80,6 +80,7 @@ struct LoadingPageView: View {
                     .scaledToFit()
                     .frame(maxHeight: 450)
                     .padding(.bottom, 40)
+//                    .grayscale(0.9995)
                 
                 if (showProgressView) {
                     ProgressView()
@@ -306,6 +307,7 @@ struct MainMenuView: View {
     @State var seasonComparisonDisclosureIsExpanded: Bool = false
     @State var rosterDisclosureGroupIsExpanded: Bool = false
     @State var leaderboardsDiscloureGroupIsExapnded: Bool = false
+    @State var settingsIsExapnded: Bool = false
     
     @EnvironmentObject var authentication: Authentication
     
@@ -316,97 +318,111 @@ struct MainMenuView: View {
         ScrollView {
             VStack(alignment: .leading) {
                 
-                DisclosureGroup(isExpanded: $calendarDisclosureGroupIsExpanded) {
-                        
-                    VStack(alignment: .leading) {
-                        TabButton(title: "View Calendar", image: "figure.run")
-                            .padding(.top, 30)
-                        
-                        TabButton(title: "Training Summary", image: "chart.xyaxis.line")
-                            .padding(.top, 30)
-                        
-                        Spacer()
-                        
-                    }
-                } label: {
-                    Text("Calendar and Training")
-                    .onTapGesture {
-                        withAnimation {
-                            self.calendarDisclosureGroupIsExpanded.toggle()
+                Group {
+                    DisclosureGroup(isExpanded: $calendarDisclosureGroupIsExpanded) {
+                            
+                        VStack(alignment: .leading) {
+                            TabButton(title: "View Calendar", image: "figure.run")
+                                .padding(.top, 30)
+                            
+                            TabButton(title: "Training Summary", image: "chart.xyaxis.line")
+                                .padding(.top, 30)
+                            
+                            Spacer()
+                            
+                        }
+                    } label: {
+                        Text("Calendar and Training")
+                        .onTapGesture {
+                            withAnimation {
+                                self.calendarDisclosureGroupIsExpanded.toggle()
+                                }
                             }
                         }
-                    }
-                .accentColor(.white)
-                .font(.title3)
-                .padding(.all)
-                .background(Color(red: 4/255, green: 130/255, blue: 0/255))
-                .cornerRadius(8)
-                .padding(.top, 200)
-                
-                DisclosureGroup(isExpanded: $runnerDisclosureIsExpanded) {
-                        
-                    VStack(alignment: .leading) {
-                        TabButton(title: "PRs", image: "stopwatch")
-                            .padding(.top, 30)
-                        
-                        TabButton(title: "Meet Splits", image: "list.number")
-                            .padding(.top, 30)
-                        
-                        TabButton(title: "Runner Profile", image: "person")
-                            .padding(.top, 30)
-                        
-                        Spacer()
-                        
-                    }
-                } label: {
-                    Text("Runner Stats")
-                    .onTapGesture {
-                        withAnimation {
-                            self.runnerDisclosureIsExpanded.toggle()
+                    .accentColor(.white)
+                    .font(.title3)
+                    .padding(.all)
+                    .background(Color(red: 4/255, green: 130/255, blue: 0/255))
+                    .cornerRadius(8)
+                    .padding(.top, 200)
+                    
+                    DisclosureGroup(isExpanded: $runnerDisclosureIsExpanded) {
+                            
+                        VStack(alignment: .leading) {
+                            TabButton(title: "PRs", image: "stopwatch")
+                                .padding(.top, 30)
+                            
+                            TabButton(title: "Meet Splits", image: "list.number")
+                                .padding(.top, 30)
+                            
+                            TabButton(title: "Runner Profile", image: "person")
+                                .padding(.top, 30)
+                            
+                            Spacer()
+                            
+                        }
+                    } label: {
+                        Text("Runner Stats")
+                        .onTapGesture {
+                            withAnimation {
+                                self.runnerDisclosureIsExpanded.toggle()
+                                }
                             }
                         }
-                    }
-                .accentColor(.white)
-                .font(.title3)
-                .padding(.all)
-                .background(Color(red: 4/255, green: 130/255, blue: 0/255))
-                .cornerRadius(8)
-                .padding(.top)
-                
-                
-                DisclosureGroup(isExpanded: $leaderboardsDiscloureGroupIsExapnded) {
+                    .accentColor(.white)
+                    .font(.title3)
+                    .padding(.all)
+                    .background(Color(red: 4/255, green: 130/255, blue: 0/255))
+                    .cornerRadius(8)
+                    .padding(.top)
+                    
+                    
+                    DisclosureGroup(isExpanded: $leaderboardsDiscloureGroupIsExapnded) {
+                            
+                        VStack(alignment: .leading) {
+                            TabButton(title: "PR Leaders", image: "medal")
+                                .padding(.top, 30)
+                            
+                            TabButton(title: "SB Leaders", image: "star")
+                                .padding(.top, 30)
+                            
+                            TabButton(title: "Race Split Consistency Avg", image: "stopwatch")
+                                .padding(.top, 30)
+                            
+                            TabButton(title: "Consistent Races Run", image: "stopwatch.fill")
+                                .padding(.top, 30)
+                            
+                            TabButton(title: "Distance Run", image: "figure.run")
+                                .padding(.top, 30)
+                            
+                            TabButton(title: "Logged Run Count", image: "calendar.badge.plus")
+                                .padding(.top, 30)
+                            
+                            TabButton(title: "Skulls", image: "☠️")
+                                .padding(.top, 30)
+                            
+                            TabButton(title: "Passes 3rd Mile", image: "person.3.fill")
+                                .padding(.top, 30)
                         
-                    VStack(alignment: .leading) {
-                        TabButton(title: "PR Leaders", image: "medal")
-                            .padding(.top, 30)
-                        
-                        TabButton(title: "SB Leaders", image: "star")
-                            .padding(.top, 30)
-                        
-                        TabButton(title: "Race Split Consistency", image: "stopwatch")
-                            .padding(.top, 30)
-                        
-                        TabButton(title: "Distance Run", image: "figure.run")
-                            .padding(.top, 30)
-                        
-                        Spacer()
-                        
-                    }
-                } label: {
-                    Text("Leaderboard")
-                    .onTapGesture {
-                        withAnimation {
-                            self.leaderboardsDiscloureGroupIsExapnded.toggle()
+                            
+                            Spacer()
+                            
+                        }
+                    } label: {
+                        Text("Leaderboard")
+                        .onTapGesture {
+                            withAnimation {
+                                self.leaderboardsDiscloureGroupIsExapnded.toggle()
+                                }
                             }
                         }
-                    }
-                .accentColor(.white)
-                .font(.title3)
-                .padding(.all)
-                .background(Color(red: 4/255, green: 130/255, blue: 0/255))
-                .cornerRadius(8)
-                .padding(.top)
-
+                    .accentColor(.white)
+                    .font(.title3)
+                    .padding(.all)
+                    .background(Color(red: 4/255, green: 130/255, blue: 0/255))
+                    .cornerRadius(8)
+                    .padding(.top)
+                }
                 
                 DisclosureGroup(isExpanded: $goalsDisclosureGroupIsExpanded) {
                         
@@ -505,19 +521,18 @@ struct MainMenuView: View {
                     .cornerRadius(8)
                     .padding(.top)
                 
-                
-                if (authentication.user != nil && authentication.user!.role == "coach") {
-                    DisclosureGroup(isExpanded: $rosterDisclosureGroupIsExpanded) {
+                if (authentication.user?.role == "runner") {
+                    DisclosureGroup(isExpanded: $settingsIsExapnded) {
                             
                         VStack(alignment: .leading) {
-                            TabButton(title: "Roster", image: "person.3")
+                            TabButton(title: "Update Credentials", image: "gear")
                                 .padding(.top, 30)
                         }
                     } label: {
-                        Text("Roster")
+                        Text("Settings")
                         .onTapGesture {
                             withAnimation {
-                                self.rosterDisclosureGroupIsExpanded.toggle()
+                                self.settingsIsExapnded.toggle()
                                 }
                             }
                         }.accentColor(.white)
@@ -528,29 +543,54 @@ struct MainMenuView: View {
                         .padding(.top)
                 }
                 
-                if (authentication.user != nil && authentication.user!.role == "coach") {
-                    DisclosureGroup(isExpanded: $seasonComparisonDisclosureIsExpanded) {
-                            
-                        VStack(alignment: .leading) {
-                            TabButton(title: "Meet Splits Comparisons", image: "stopwatch")
-                                .padding(.top, 30)
-                        }
-                    } label: {
-                        Text("Season Comparison")
-                        .onTapGesture {
-                            withAnimation {
-                                self.seasonComparisonDisclosureIsExpanded.toggle()
-                                }
+                Group {
+                    if (authentication.user != nil && authentication.user!.role == "coach") {
+                        DisclosureGroup(isExpanded: $rosterDisclosureGroupIsExpanded) {
+                                
+                            VStack(alignment: .leading) {
+                                TabButton(title: "Roster", image: "person.3")
+                                    .padding(.top, 30)
                             }
-                        }.accentColor(.white)
-                        .font(.title3)
-                        .padding(.all)
-                        .background(Color(red: 4/255, green: 130/255, blue: 0/255))
-                        .cornerRadius(8)
-                        .padding(.top)
+                        } label: {
+                            Text("Roster")
+                            .onTapGesture {
+                                withAnimation {
+                                    self.rosterDisclosureGroupIsExpanded.toggle()
+                                    }
+                                }
+                            }.accentColor(.white)
+                            .font(.title3)
+                            .padding(.all)
+                            .background(Color(red: 4/255, green: 130/255, blue: 0/255))
+                            .cornerRadius(8)
+                            .padding(.top)
+                    }
+                    
+                    if (authentication.user != nil && authentication.user!.role == "coach") {
+                        DisclosureGroup(isExpanded: $seasonComparisonDisclosureIsExpanded) {
+                                
+                            VStack(alignment: .leading) {
+                                TabButton(title: "Meet Splits Comparisons", image: "stopwatch")
+                                    .padding(.top, 30)
+                            }
+                        } label: {
+                            Text("Season Comparison")
+                            .onTapGesture {
+                                withAnimation {
+                                    self.seasonComparisonDisclosureIsExpanded.toggle()
+                                    }
+                                }
+                            }.accentColor(.white)
+                            .font(.title3)
+                            .padding(.all)
+                            .background(Color(red: 4/255, green: 130/255, blue: 0/255))
+                            .cornerRadius(8)
+                            .padding(.top)
+                    }
+                    
+                    Spacer()
                 }
                 
-                Spacer()
             }
             .padding(.all)
         
@@ -608,12 +648,26 @@ struct MainMenuView: View {
                 PRLeaderboardView()
             } else if(title == "SB Leaders") {
                 SBLeaderboardView()
-            } else if (title == "Race Split Consistency") {
+            } else if (title == "Race Split Consistency Avg") {
                 RaceSplitConsistencyLeaderboardView()
+            } else if(title == "Consistent Races Run") {
+                ConsistentRacesAchievedLeaderboardView()
             } else if (title == "Distance Run") {
                 TrainingDistanceRunLeaderboardView()
-            } else if (title == "Training Summary") {
+            } else if(title == "Logged Run Count") {
+                TrainingRunsLoggedLeaderboard()
+            }
+            else if (title == "Skulls") {
+                SkullsLeaderBoardView()
+            }
+            else if (title == "Passes 3rd Mile") {
+                PassesLastMileLeaderboardview()
+            }
+            else if (title == "Training Summary") {
                 TrainingSummaryView()
+            } else if (title == "Update Credentials") {
+                ChangeCredentialsView()
+                    .environment(\.colorScheme, .light)
             }
             else {
                 HomePageView(showMenu: $showMenu)
@@ -621,9 +675,14 @@ struct MainMenuView: View {
     
         } label: {
             HStack(spacing: 14) {
-                Image(systemName: image)
-                    .foregroundColor(.white)
-                    .imageScale(.large)
+                
+                if (image.containsEmoji) {
+                    Image(uiImage: image.textToImage(size: 20))
+                } else {
+                    Image(systemName: image)
+                        .foregroundColor(.white)
+                        .imageScale(.large)
+                }
                 
                 Text(title)
                     .foregroundColor(.white)
