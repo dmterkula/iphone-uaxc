@@ -438,6 +438,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in RunnerAccountEditFormView.body.getter:RunnerAccountFormView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "viewModel">
+            </PersistentString>
+            <PersistentString
+               value = "viewModel.username">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #1 in closure #1 in closure #3 in closure #3 in closure #1 in WeeklyTrainingSummaryView.body.getter:WeeklyTrainingSummaryView.swift">
          <PersistentStrings>
             <PersistentString

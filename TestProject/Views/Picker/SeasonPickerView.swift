@@ -33,6 +33,32 @@ struct SeasonPickerView: View {
     }
 }
 
+struct SeasonPickerViewLight: View {
+    
+    @Binding var seasons: [String]
+    @Binding var season: String
+    var label: String = "Selected Season: "
+    
+    var body: some View {
+        Menu {
+            Picker(label + season, selection: $season, content: {
+                ForEach(seasons, id: \.self, content: { season in
+                    Text(season).foregroundColor(.black)
+                })
+            })
+            .pickerStyle(MenuPickerStyle())
+            .accentColor(.white)
+            .labelsHidden()
+        } label: {
+            Text(label + season)
+                .foregroundColor(.black)
+                .font(.title3)
+        }
+        
+        
+    }
+}
+
 //struct SeasonPickerView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        SeasonPickerView()
