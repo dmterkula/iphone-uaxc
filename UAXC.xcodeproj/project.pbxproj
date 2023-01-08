@@ -209,6 +209,8 @@
 		68B68E5F2968B8A800C558DC /* RunnerAccountRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B68E5E2968B8A800C558DC /* RunnerAccountRowView.swift */; };
 		68B68E622968BFBD00C558DC /* RunnerAccountFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B68E612968BFBD00C558DC /* RunnerAccountFormView.swift */; };
 		68B68E642968C0EF00C558DC /* RunnerAccountFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B68E632968C0EF00C558DC /* RunnerAccountFormViewModel.swift */; };
+		68B68E67296B367400C558DC /* SplitCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B68E66296B367400C558DC /* SplitCalculatorView.swift */; };
+		68B68E6A296B39A000C558DC /* PersonalizedSplitDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B68E69296B39A000C558DC /* PersonalizedSplitDTO.swift */; };
 		68B719CE28F45F810035A727 /* CustomBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B719CD28F45F810035A727 /* CustomBindings.swift */; };
 		68B719D028F890C30035A727 /* RunnerWorkoutPlanRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B719CF28F890C30035A727 /* RunnerWorkoutPlanRow.swift */; };
 		68B719D228FC711C0035A727 /* RunnerComponentPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68B719D128FC711C0035A727 /* RunnerComponentPlanView.swift */; };
@@ -461,6 +463,8 @@
 		68B68E5E2968B8A800C558DC /* RunnerAccountRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerAccountRowView.swift; sourceTree = "<group>"; };
 		68B68E612968BFBD00C558DC /* RunnerAccountFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerAccountFormView.swift; sourceTree = "<group>"; };
 		68B68E632968C0EF00C558DC /* RunnerAccountFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerAccountFormViewModel.swift; sourceTree = "<group>"; };
+		68B68E66296B367400C558DC /* SplitCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitCalculatorView.swift; sourceTree = "<group>"; };
+		68B68E69296B39A000C558DC /* PersonalizedSplitDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalizedSplitDTO.swift; sourceTree = "<group>"; };
 		68B719CD28F45F810035A727 /* CustomBindings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBindings.swift; sourceTree = "<group>"; };
 		68B719CF28F890C30035A727 /* RunnerWorkoutPlanRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerWorkoutPlanRow.swift; sourceTree = "<group>"; };
 		68B719D128FC711C0035A727 /* RunnerComponentPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerComponentPlanView.swift; sourceTree = "<group>"; };
@@ -868,6 +872,7 @@
 		6895852B28B7FE5300AA4209 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				68B68E65296B363900C558DC /* SplitCalculator */,
 				68B68E592968B2F100C558DC /* AccountManagement */,
 				68B68E502967596E00C558DC /* ChangeCredentialsView */,
 				68B68E112955FB6400C558DC /* Training */,
@@ -916,6 +921,7 @@
 		6895852E28B7FE9D00AA4209 /* DTOs */ = {
 			isa = PBXGroup;
 			children = (
+				68B68E68296B398400C558DC /* SplitCalculator */,
 				68B68DF6294F97C900C558DC /* TrainingRun */,
 				68B68DF4294F97B900C558DC /* Workout */,
 				68B68DC32946A80E00C558DC /* Leaderboard */,
@@ -1609,6 +1615,22 @@
 			path = AccountManagement;
 			sourceTree = "<group>";
 		};
+		68B68E65296B363900C558DC /* SplitCalculator */ = {
+			isa = PBXGroup;
+			children = (
+				68B68E66296B367400C558DC /* SplitCalculatorView.swift */,
+			);
+			path = SplitCalculator;
+			sourceTree = "<group>";
+		};
+		68B68E68296B398400C558DC /* SplitCalculator */ = {
+			isa = PBXGroup;
+			children = (
+				68B68E69296B39A000C558DC /* PersonalizedSplitDTO.swift */,
+			);
+			path = SplitCalculator;
+			sourceTree = "<group>";
+		};
 		68B719CC28F45F6D0035A727 /* CustomBindings */ = {
 			isa = PBXGroup;
 			children = (
@@ -1989,6 +2011,7 @@
 				682BF4EF28B79EA200A72AE1 /* Performance.swift in Sources */,
 				68B71A12292169170035A727 /* MeetEventFormView.swift in Sources */,
 				682BF4ED28B79E7100A72AE1 /* PRDTO.swift in Sources */,
+				68B68E6A296B39A000C558DC /* PersonalizedSplitDTO.swift in Sources */,
 				68F93FBC28D9350700CEA645 /* MetGoalsView.swift in Sources */,
 				68B719D428FC727C0035A727 /* WorkoutComponentPlanRowView.swift in Sources */,
 				6897355A28BFA37800744B2E /* PRRunnerProfileView.swift in Sources */,
@@ -2060,6 +2083,7 @@
 				68B68E4D2967262200C558DC /* TrainingRunsLoggedLeaderboard.swift in Sources */,
 				68C605BC28EC53FB00F2FF79 /* RosterManagementView.swift in Sources */,
 				68B68D9E29311F6700C558DC /* TrainingRunEventRow.swift in Sources */,
+				68B68E67296B367400C558DC /* SplitCalculatorView.swift in Sources */,
 				6815F2C728E3BA0F00E0482A /* EventListView.swift in Sources */,
 				68B68E0E2955F4F400C558DC /* TrainingWeeklySummaryDTOs.swift in Sources */,
 				68B719D028F890C30035A727 /* RunnerWorkoutPlanRow.swift in Sources */,
@@ -2269,7 +2293,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TestProject/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = UAXC;
+				INFOPLIST_KEY_CFBundleDisplayName = UAXCTF;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -2281,12 +2305,15 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.uaxc.uaxc-stats";
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.uaxctf.uaxctf-stats";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -2302,7 +2329,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TestProject/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = UAXC;
+				INFOPLIST_KEY_CFBundleDisplayName = UAXCTF;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -2314,12 +2341,15 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.uaxc.uaxc-stats";
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.uaxctf.uaxctf-stats";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

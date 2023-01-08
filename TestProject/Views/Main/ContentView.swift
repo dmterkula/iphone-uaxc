@@ -355,6 +355,9 @@ struct MainMenuView: View {
                             TabButton(title: "Meet Splits", image: "list.number")
                                 .padding(.top, 30)
                             
+                            TabButton(title: "Split Calculator", image: "person.badge.clock")
+                                .padding(.top, 30)
+                            
                             TabButton(title: "Runner Profile", image: "person")
                                 .padding(.top, 30)
                             
@@ -620,6 +623,9 @@ struct MainMenuView: View {
 //            }
             else if (title == "Meet Splits") {
                 GetMeetSplitsView()
+            } else if(title == "Split Calculator") {
+                SplitCalculatorView()
+                    .environment(\.colorScheme, .light)
             } else if (title == "Meet Summary") {
                 GetMeetSummaryView()
             } else if (title == "Runner Profile") {
