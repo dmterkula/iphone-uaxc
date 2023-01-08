@@ -37,6 +37,29 @@ struct AccountManagementView: View {
         }
     }
     
+    
+    func removeRows(at offsets: IndexSet) {
+        var account: RunnerAccount = allRunnerAccounts[offsets.first!]
+       
+        allRunnerAccounts.remove(atOffsets: offsets)
+    
+        var createAppUserRequest = CreateAppUserRequest(username: account.appUser.username, password: account.appUser.password, runnerId: account.appUser.runnerId!, role: account.appUser.role)
+       
+        
+        dataService.deleteAppUser(createAppUserRequest: createAppUserRequest) { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let appUsersResponse):
+                   print(appUsersResponse)
+                    case .failure(let error):
+                        print(error)
+                }
+            }
+        }
+        
+    }
+    
+    
     var body: some View {
         
         ZStack {
@@ -59,6 +82,7 @@ struct AccountManagementView: View {
                                 RunnerAccountRowView(runnerAccount: runnerAccount, refreshNeeded: $refreshNeeded, existingUsernames: $existingUsernames)
                                 CustomDivider(color: GlobalFunctions.uaGreen(), height: 2)
                             }
+                            .onDelete(perform: removeRows)
                         }
                         .onChange(of: refreshNeeded) { newValue in
                             if (newValue == true) {

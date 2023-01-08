@@ -3365,4 +3365,62 @@ class DataService {
                 
         }
     
+    func getPersonalizedSplitsDTO(
+        runnerId: Int,
+        lastNRaces: Int?,
+        inputTime: String,
+        completition: @escaping (Result<PersonalizedSplitDTO, Error>) -> Void
+    ) {
+            
+        var componentUrl = URLComponents()
+        componentUrl.scheme = "https"
+        componentUrl.host = baseUrlString
+        componentUrl.path = "/xc/meetSplit/personalized"
+    
+        var queryItems: [URLQueryItem] = []
+        
+        queryItems.append(URLQueryItem(name: "runnerId", value: String(runnerId)))
+        queryItems.append(URLQueryItem(name: "time", value: inputTime))
+  
+        if (lastNRaces != nil) {
+            queryItems.append(URLQueryItem(name: "lastNRaces", value: String(lastNRaces!)))
+        }
+        
+        componentUrl.queryItems = queryItems
+        
+        guard let validURL = componentUrl.url else {
+            print("failed to create url")
+            return
+        }
+        
+        print(validURL)
+        
+        URLSession.shared.dataTask(with: validURL) { (data, response, error) in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("API status: \(httpResponse.statusCode)")
+            }
+            
+            guard let validData = data, error == nil else {
+                completition(.failure(error!))
+                return
+            }
+            
+            print(validData)
+            
+            do {
+                let decoder = JSONDecoder()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                decoder.dateDecodingStrategy = .formatted(formatter)
+                let response = try decoder.decode(PersonalizedSplitDTO.self, from: validData)
+                print(response)
+                completition(.success(response))
+            } catch let serializationError {
+                completition(.failure(serializationError))
+            }
+            
+        }.resume()
+            
+    }
+    
 }
