@@ -30,19 +30,19 @@ struct RosterManagementView: View {
                     
                     seasons = seasons.sorted().reversed()
                     
-                    season = seasons[1]
+                    season = seasons[0]
 
+                    let nextYearString: String = String(Int(seasons[0])! + 1)
+                    print(nextYearString)
+                    seasons.append(nextYearString)
+                    
                     case .failure(let error):
                         print(error)
                 }
             }
         }
         
-        let currentYearString: String = String(Date().formatted(date: .abbreviated,
-                                                                time: .omitted).suffix(4))
-        let nextYearString: String = String(Int(currentYearString)! + 1)
-        print(nextYearString)
-        seasons.append(nextYearString)
+       
         
     }
     
@@ -89,6 +89,9 @@ struct RosterManagementView: View {
                             .accentColor(.white)
                             .labelsHidden()
                             .font(.title3)
+                            .onChange(of: season) { newValue in
+                                fetchRoster(givenSeason: newValue, getActiveOnly: getActiveRunners)
+                            }
                         }
                         
                     }
@@ -109,6 +112,9 @@ struct RosterManagementView: View {
                         Spacer()
                         Toggle("Active member of team: ", isOn: $getActiveRunners)
                             .frame(width: 250)
+                            .onChange(of: getActiveRunners) {newValue in
+                                fetchRoster(givenSeason: season, getActiveOnly: newValue)
+                            }
                         Spacer()
                     }
                     

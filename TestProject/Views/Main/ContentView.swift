@@ -550,9 +550,13 @@ struct MainMenuView: View {
                             VStack(alignment: .leading) {
                                 TabButton(title: "Roster", image: "person.3")
                                     .padding(.top, 30)
+                                
+                               TabButton(title: "Account Management", image: "gear")
+                                    .padding(.top, 30)
+                                
                             }
                         } label: {
-                            Text("Roster")
+                            Text("Roster and Account Management")
                             .onTapGesture {
                                 withAnimation {
                                     self.rosterDisclosureGroupIsExpanded.toggle()
@@ -644,6 +648,9 @@ struct MainMenuView: View {
             } else if (title == "Roster") {
                 RosterManagementView()
                     .environmentObject(roster)
+            } else if(title == "Account Management") {
+                AccountManagementView()
+                    .environment(\.colorScheme, .light)
             } else if(title == "PR Leaders") {
                 PRLeaderboardView()
             } else if(title == "SB Leaders") {

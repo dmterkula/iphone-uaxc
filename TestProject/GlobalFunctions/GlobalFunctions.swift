@@ -31,7 +31,7 @@ struct GlobalFunctions {
         }
         
     }
-    
+        
     static func convertMinuteSecondStringToSeconds(time: String) -> Int {
         
         let components: [String] = time.components(separatedBy: " ")
